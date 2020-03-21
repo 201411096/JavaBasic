@@ -14,7 +14,7 @@ public class Ex08_회문15927 {
 		{
 			if(str.charAt(0)!=str.charAt(i))
 				allSame=false;
-		}
+		}																						
 		if(allSame==false)
 		{
 			HERE:
@@ -37,9 +37,5 @@ public class Ex08_회문15927 {
 		}else {
 			System.out.println(answer);
 		}
-			
-		
-		
-		
 	}
 }
