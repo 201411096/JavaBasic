@@ -18,3 +18,10 @@ public class Ex04_변수의범위 {
 //		System.out.println("합 : " + sum);
 	}
 }
+//1. i=4
+//3. i=6 j=2
+//	 i=4 j=2
+//4. i=안녕자바 j=자바
+//	  i=안녕 j=자바
+//5. sum=6
+//	 sum=0
