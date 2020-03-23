@@ -10,23 +10,26 @@ public class Ex02_연습 {
 		else
 			return false;
 	}
-	static boolean checkUpper(char c)
+	static char checkUpper(char c) 
 	{
 		if(c>='A' && c<='Z')
-			return true;
+			return c;
+		else if(c>='a' && c<='z') // 소문자일 경우 대문자로 변환
+			return (char)(c+('A'-'a'));
 		else
-			return false;
+			return c;
 	}
 	
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
 		char ch = scanner.nextLine().charAt(0);
 		boolean isLower =checkLower(ch);
-		boolean isUpper =checkUpper(ch);
+		
 		
 		if(isLower==true)
 			System.out.println("소문자");
-		if(isUpper==true)
-			System.out.println("대문자");
+		ch =checkUpper(ch);
+		System.out.println(ch);
+		
 	}
 }
