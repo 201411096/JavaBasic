@@ -32,8 +32,7 @@ public class Ex1316 {
 			}
 		}
 		
-		
-		
+			
 		System.out.println(answer);
 	}
 

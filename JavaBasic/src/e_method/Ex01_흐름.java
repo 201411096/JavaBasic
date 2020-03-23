@@ -1,7 +1,6 @@
 package e_method;
 
 public class Ex01_흐름 {
-
 	static void method(){
 		System.out.println("method 실행");
 	}

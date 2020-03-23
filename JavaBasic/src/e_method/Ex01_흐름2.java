@@ -4,8 +4,7 @@ public class Ex01_흐름2 {
 
 	void method(){
 		System.out.println("method 실행");
-	}
-	
+	}	
 	public static void main(String[] args) {
 		Ex01_흐름2 ex = new Ex01_흐름2();
 		System.out.println("메인 함수 시작");
