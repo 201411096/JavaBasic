@@ -20,17 +20,10 @@ public class Ex1011 {
 			{
 				speed_down_criteria-=speed; // 속도를 감소 시키기 전 기준 거리 감소
 				speed--; // 감속
-				length-=speed; //감소한 속도만큼 거리 감소
-				number++; // 횟수 증가
-			}else
-			{
-				length-=speed; // 속도만큼 거리 감소
-				number++; // 횟수 증가
 			}
+			length-=speed; //감소한 속도만큼 거리 감소
+			number++; // 횟수 증가
 		}
-		
-
-		
 		return number;
 	}
 	
@@ -38,19 +31,16 @@ public class Ex1011 {
 		Scanner scanner = new Scanner(System.in);
 		int testCase = scanner.nextInt();
 		int answer [] = new int [testCase];
-		for(int i=0; i<testCase; i++)
+		for(int i=0; i<testCase; i++) //테스트 케이스 수만큼 입력 받고 실행
 		{
 			int x = scanner.nextInt(); // 시작 지점
 			int y = scanner.nextInt(); // 끝 지점
 			int length = y-x; // 길이
-			answer[i] = func(length); 
+			answer[i] = func(length); // 횟수 계산
 			
 		}
-		for(int i=0; i<testCase; i++)
-		{
+		for(int i=0; i<testCase; i++)  //답안 출력
 			System.out.println(answer[i]);
-		}
-
 	}
 }
 /* 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
