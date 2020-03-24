@@ -7,7 +7,6 @@ public class Ex1011 {
 	static int func(int length) {
 		int speed=1; // 현재 속도
 		int number=0; // 작동 횟수
-		int temp_length=length; // 현재 거리
 		number=(int)Math.sqrt(length); // 작동 횟수를 처음 거리의 제곱근 만큼으로 초기화
 		speed=number; // 최고 속도를 처음 거리의 제곱근만큼으로 초기화
 		int speed_down_criteria=0; // 속도를 줄이는 기준 거리
@@ -15,17 +14,17 @@ public class Ex1011 {
 		{
 			speed_down_criteria+=i;
 		}
-		temp_length-=speed_down_criteria; // 최고 속도를 낼 때까지의 거리를 뺌
-		while(temp_length>0) {			
-			if(temp_length<speed_down_criteria) // 현재 거리가 최고 속도의 기준 거리보다 작다면 속도 감소
+		length-=speed_down_criteria; // 최고 속도를 낼 때까지의 거리를 뺌
+		while(length>0) {			
+			if(length<speed_down_criteria) // 현재 거리가 최고 속도의 기준 거리보다 작다면 속도 감소
 			{
 				speed_down_criteria-=speed; // 속도를 감소 시키기 전 기준 거리 감소
 				speed--; // 감속
-				temp_length-=speed; //감소한 속도만큼 거리 감소
+				length-=speed; //감소한 속도만큼 거리 감소
 				number++; // 횟수 증가
 			}else
 			{
-				temp_length-=speed; // 속도만큼 거리 감소
+				length-=speed; // 속도만큼 거리 감소
 				number++; // 횟수 증가
 			}
 		}
