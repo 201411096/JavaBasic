@@ -21,7 +21,7 @@ public class Ex1011 {
 				speed_down_criteria-=speed; // 속도를 감소 시키기 전 기준 거리 감소
 				speed--; // 감속
 			}
-			length-=speed; //감소한 속도만큼 거리 감소
+			length-=speed; //속도만큼 거리 감소
 			number++; // 횟수 증가
 		}
 		return number;
