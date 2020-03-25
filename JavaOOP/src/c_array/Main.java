@@ -12,17 +12,17 @@ public class Main {
 		
 		Student [] s = new Student[3];		// 학생 수 3은 배열의 갯수를 의미한다.
 		
-		for(int i=0; i<s.length; i++)
+		for(int i=0; i<s.length; i++) // 배열의 크기만큼 반복해서 입력을 받ㄷ음
 		{
-			System.out.println((i+1)+ "번쨰 학생 이름 입력");
-			s[i] = new Student();
+			s[i] = new Student(); // 배열의 크기만큼 개체 생성
+			System.out.println((i+1)+ "번쨰 학생 이름 입력"); 
 			s[i].setName(scanner.next());
 			System.out.println((i+1)+"번쨰 학생 국어 영어 수학 점수 입력");
 			s[i].setKor(scanner.nextInt());
 			s[i].setEng(scanner.nextInt());
 			s[i].setMath(scanner.nextInt());
 		}
-		for(int i=0; i<s.length; i++)
+		for(int i=0; i<s.length; i++) // 학생 수만큼 이름과 총점 평균을 출력
 		{
 			System.out.println(s[i].getName());
 			System.out.println(s[i].calTotal());

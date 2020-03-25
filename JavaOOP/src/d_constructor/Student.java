@@ -16,24 +16,22 @@ public class Student {
 			클래스를 초기화 하고자 할 때
 
 		-	클래스가 인스턴스화 될 때 (객체로 될 때) 실행되는 함수
-		-	생성자이름과 동일해야만 함
+		-	클래스이름과 동일해야만 함
 		-	리턴 형이 없음 ( void 도 있음 안됨 )
 		-	오버로딩 가능 (overloading) 
 				:	 매개변수의 타입과 개수가 다르게 여러 개 생성자 함수 가능
 
 */
 	public Student() {
-		name = "홍길동";
-		kor = 50;
-		eng = 50;
-		math = 50;
+		this("홍길동", 50, 50, 50); // this함수는 제일 첫번째 줄에 와야만 함
+		System.out.println("인자없는 생성자");
 	}
-	
 	public Student(String name, int kor, int eng, int math) {
 		this.name = name;
 		this.kor = kor;
 		this.eng = eng;
 		this.math = math;
+		System.out.println("인자있는 생성자");
 	}	
 	
 	/*
@@ -51,21 +49,39 @@ public class Student {
 		return avg;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-	public void setKor(int kor) {
-		this.kor = kor;
-	}
-	public void setEng(int eng) {
-		this.eng = eng;
-	}
-	public void setMath(int math) {
-		this.math = math;
-	}
 	public String getName() {
 		return name;
 	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getKor() {
+		return kor;
+	}
+
+	public void setKor(int kor) {
+		this.kor = kor;
+	}
+
+	public int getEng() {
+		return eng;
+	}
+
+	public void setEng(int eng) {
+		this.eng = eng;
+	}
+
+	public int getMath() {
+		return math;
+	}
+
+	public void setMath(int math) {
+		this.math = math;
+	}
+
+
 	
 	
 }

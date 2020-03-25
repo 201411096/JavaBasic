@@ -17,6 +17,13 @@ public class Main {
 		int e = in.nextInt();
 		System.out.println("수학점수->");
 		int m = in.nextInt();
+		Student stu = new Student();
+		System.out.println("총점: " + stu.calTotal());
+		System.out.println("평균: " + stu.calAverage());
+		
+		Student s = new Student(name, k, e, m);
+		System.out.println("총점: " + s.calTotal());
+		System.out.println("평균: " + s.calAverage());
 		
 
 	}
