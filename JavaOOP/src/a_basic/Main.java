@@ -11,6 +11,8 @@ public class Main {
 		s.eng = 88;
 		s.math = 99;
 		System.out.println("총점: " + s.calTotal());
+		
+//		s.total=100;
 		System.out.println("평균: " + s.calAverage());
 	}
 }
