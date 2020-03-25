@@ -40,16 +40,11 @@ public class GradeExpr {
 		}
 		return jumsu[min_idx];
 	}
-	
-	
-
 	public int[] getJumsu() {
 		return jumsu;
 	}
 
 	public void setJumsu(int[] jumsu) {
 		this.jumsu = jumsu;
-	}
-	
-	
+	}	
 }
