@@ -9,7 +9,6 @@ public class GradeExpr {
 		super();
 		this.jumsu = jumsu;
 	}
-	
 	public int getTotal() {
 		int sum=0;
 		for(int i=0; i<jumsu.length; i++)
