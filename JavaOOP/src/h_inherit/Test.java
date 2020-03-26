@@ -9,7 +9,6 @@ package h_inherit;
  */
 
 public class Test {
-
 	public static void main(String[] args) {
 //		Umma u = new Umma();
 //		u.gene();
@@ -61,9 +60,6 @@ public class Test {
 //		        Animal a2 = d; // OK, since Dog IS-A Animal // 부모 변수에 자식 객체를 넣는 것은 가능 (동물 변수에 강아지 객체)
 //		        Dog d2 = a; // not OK; what if a is a Cat? // 자식 변수에 부모 변수를 넣는 것은 안됨 (강아지 객체를 동물 변수에는 안됨)
 //		    }
-//		}
-
-		
+//		}	
 	}
-
 }
