@@ -7,8 +7,10 @@ public class Dvd extends Item{
 	public Dvd() {}
 	public Dvd(String number, String title, String actor, String director)
 	{
-		setNumber(number);
-		setTitle(title);
+//		setNumber(number);
+//		setTitle(title);
+		super.number=number; // 부모 멤버 변수에는 super 사용
+		super.title=title;
 		this.actor=actor;
 		this.director=director;
 	}

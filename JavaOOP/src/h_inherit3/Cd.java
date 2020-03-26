@@ -6,8 +6,10 @@ public class Cd extends Item{
 	public Cd() {}
 	public Cd(String number, String title, String singer)
 	{
-		setNumber(number);
-		setTitle(title);
+//		setNumber(number);
+//		setTitle(title);
+		super.number=number; // 부모 멤버 변수에는 super 사용
+		super.title=title;
 		this.singer=singer;
 	}
 	public void output() {
