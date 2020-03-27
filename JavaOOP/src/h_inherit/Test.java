@@ -5,6 +5,11 @@ package h_inherit;
  * 
  * overriding : 상속관계에서 인자와 반환값까지 동일한 함수들..
  *
+ * 
+ *
+ *
+ *
+ *
 
  */
 
@@ -23,7 +28,7 @@ public class Test {
 		
 //		//2. 부모 변수에 자식 객체 생성
 //		Umma dal = new Ddal();
-//		//dal.study(); 변수가 부모 변수면 자식 함수는 사용하지 못함
+////	dal.study(); 변수가 부모 변수면 자식 함수는 사용하지 못함
 //		dal.job();
 //		dal.gene(); // 부모 변수여도 같은 이름의 자식 함수가 있다면 자식 함수 사용
 		
