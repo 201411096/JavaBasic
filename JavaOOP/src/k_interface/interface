@@ -1,0 +1,13 @@
+Interface
+
+class A{
+	int A;
+	A(){}
+	void A(){}
+}
+interface B{
+	[public static final] int B; // 객체 생성이 안되기 때문에 기본으로 static이 붙어있음
+	[public abstract] void B();
+}
+- 추상메소드만 있음
+- 생성자 X = 객체 생성 X

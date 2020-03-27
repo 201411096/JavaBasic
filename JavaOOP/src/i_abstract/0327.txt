@@ -1,0 +1,15 @@
+0327
+
+1. abstract : 미완성
+	- method : 선언만 있는 메소드 (구현이 없음)
+		* overriding 강제성
+	- class : 추상메소드를 가지고 있는 클래스
+		* 객체생성이 안됨
+		* 부모클래스 역할만 가능
+2. final : 변경불가
+	- field : 값 변경 불가
+	- method : overriding 안됨 // abstract랑 같이 사용 불가
+	- class : 부모 클래스가 될 수 없음 (is-a 방식 안됨)
+		* 객체 생성으로만 사용 (has-a 방식으로만 사용)
+
+3. interface

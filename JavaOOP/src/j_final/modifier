@@ -1,0 +1,13 @@
+modifier
+
+__1__ class A{
+		__2__ int A;
+		__3__ A(){}
+		__4__void A(){}
+}
+		*modifier
+		1 - default, public, abstract, final
+		2 - private, default, protected, public, static, final
+		3 - private, default, protected, public
+		4 - private, default, protected, public, abstract, final, static
+
