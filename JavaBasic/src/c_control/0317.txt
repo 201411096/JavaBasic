@@ -1,7 +1,7 @@
-¼±ÅÃºĞ±â¹® - switch
-	**º¯¼ö ½ÄÀÇ °á°ú: ¹®ÀÚÇü(char) / Á¤¼öÇü(int, long, byte, short) / String
-	switch(º¯¼ö/½Ä){
-	 case °ª1: A; break;
-	 case °ª2: B; break;
+ì„ íƒë¶„ê¸°ë¬¸ - switch
+	**ë³€ìˆ˜ ì‹ì˜ ê²°ê³¼: ë¬¸ìí˜•(char) / ì •ìˆ˜í˜•(int, long, byte, short) / String
+	switch(ë³€ìˆ˜/ì‹){
+	 case ê°’1: A; break;
+	 case ê°’2: B; break;
 	 default: Z; break;
 	}
