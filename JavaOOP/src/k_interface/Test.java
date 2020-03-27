@@ -18,9 +18,5 @@ public class Test {
 		}
 		ps.setOrderList(orderList);
 		System.out.println("총합 : " + ps.getTotalPrice());
-			
-		
-
 	}
-
 }
