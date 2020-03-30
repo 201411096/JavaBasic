@@ -5,19 +5,20 @@ import java.util.Scanner;
 
 public class aArrayListEx3 {
 	
-	static void method() {
+	static ArrayList method() {
 		Scanner scanner = new Scanner(System.in);
 		ArrayList<Student> list = new ArrayList<Student>();
 		
 		for(int i=0; i<3; i++)
 			list.add(new Student(scanner.next(), scanner.nextInt()));
-		for(Student data : list)
-			System.out.println(data);
 		
+		return list;
 	}
 	
 	public static void main(String[] args) {
-		method();
+		ArrayList<Student> list = method();
+		for(Student data : list)
+			System.out.println(data); // toString을 하지 않아도 자동으로 실행
 		//여기서 출력
 	
 	}

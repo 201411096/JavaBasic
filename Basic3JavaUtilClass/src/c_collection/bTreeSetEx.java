@@ -16,7 +16,8 @@ public class bTreeSetEx
 		set.add("snack");
 		set.add("zebra");
 		set.add("bee");
-
+		set.add("lion");
+		
 		System.out.println( set );
 		
 
