@@ -1,0 +1,10 @@
+java motto : Write Once Run Anywhere
+
+자바 GUI
+	- 1.1 : AWT
+	- 1.2 : Swing
+
+Swing
+	- OS 구별 없이 모양 동일
+	- 화면에 관한 클래스와 메소드가 다양함
+	- 일반적으로 클래스명 앞에 J만 붙이면 됨
