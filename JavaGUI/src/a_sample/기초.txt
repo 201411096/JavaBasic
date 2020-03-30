@@ -1,10 +1,25 @@
 java motto : Write Once Run Anywhere
 
 자바 GUI
-	- 1.1 : AWT
+	- 1.1 : AWT // 리눅스에서도 똑같이 돌아가지만 모양이 바뀜
 	- 1.2 : Swing
 
 Swing
 	- OS 구별 없이 모양 동일
 	- 화면에 관한 클래스와 메소드가 다양함
 	- 일반적으로 클래스명 앞에 J만 붙이면 됨
+	
+화면 요소 : Component
+	- 붙을 수 있는 요소 : Container
+					(Frame, Window, Panel)
+	
+Layout (배치 : Container에 붙이는 방식)
+	- FlowLayout
+		` 윗줄 상단에 한줄로 배치
+		` 컴포넌트의 크기가 고정
+	- GridLayout
+		` 행과 열에 맞춰서 배치
+		` 컴포넌트의 크기가 변경
+	- BorderLayout
+		` CENTER, NORTH, SOUTH, WEST, EAST 영역에 배치
+		` 컴포넌트의 크기가 변경

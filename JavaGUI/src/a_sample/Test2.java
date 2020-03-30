@@ -3,6 +3,8 @@ package a_sample;
 import java.awt.Button;
 import java.awt.Frame;
 
+// is-a 방식 (frame을 제외하고는 대부분 has-a)
+
 public class Test2 extends Frame{
 	//멤버 변수 선언
 	Button b;
