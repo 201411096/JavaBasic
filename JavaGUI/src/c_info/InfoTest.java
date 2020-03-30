@@ -30,6 +30,12 @@ public class InfoTest extends JFrame{
 		
 		ta = new JTextArea();
 		bAdd = new JButton("Add", i1);
+		bAdd.setMnemonic('i'); // alt+@;
+		bAdd.setToolTipText("aaaaaaaaaaaaa");
+		bAdd.setVerticalTextPosition(JButton.BOTTOM);
+		bAdd.setHorizontalTextPosition(JButton.CENTER);
+		bAdd.setRolloverIcon(i5);
+		bAdd.setPressedIcon(i3);
 		bShow = new JButton("Show", i2);
 		bSearch = new JButton("Search", i3);
 		bDelete = new JButton("Delete", i4);
