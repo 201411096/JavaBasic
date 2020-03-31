@@ -2,8 +2,10 @@ package d_cal;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.Panel;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -50,8 +52,89 @@ public class CalculatorTest extends JFrame{
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
+	public void eventConn() { // 이벤트 연결
+		for(int i=0; i<15; i++)
+		{
+			if(i!=11)
+				b[i].addMouseListener(new writeEvent());
+		}
+		b[11].addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				String remain = tf.getText();
+				String args1=""; // 피연산자1
+				String args2=""; // 피연산자2
+				String operator = ""; // 연산자
+				int result =0; // 결과값
+				for(int i=0; i<remain.length(); i++)
+				{
+					if(remain.charAt(i) == '+' || remain.charAt(i) == '-' || remain.charAt(i) == '*' || remain.charAt(i) == '/')
+					{
+						operator= Character.toString(remain.charAt(i));
+						args1 = remain.substring(0, i);
+						args2 = remain.substring(i+1, remain.length());
+					}else if(i==remain.length()-1){
+						tf.setText(null);
+					}
+				}
+				switch(operator) {
+				case "+": result= Integer.parseInt(args1) + Integer.parseInt(args2);break;
+				case "-": result= Integer.parseInt(args1) - Integer.parseInt(args2);break;
+				case "*": result= Integer.parseInt(args1) * Integer.parseInt(args2);break;
+				case "/": result= Integer.parseInt(args1) / Integer.parseInt(args2);break;
+				}
+				tf.setText(Integer.toString(result));
+			}
+		});
+		tf.addKeyListener(new keyEvent());
+	}
+	class writeEvent extends MouseAdapter{
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			JButton b = (JButton)e.getSource();
+			String remain = tf.getText();
+			String s = b.getText();
+			if(!remain.equals("0"))
+				tf.setText(remain+s);
+			else
+				tf.setText(s);
+		}
+	}
+	class keyEvent extends KeyAdapter{
+
+		@Override
+		public void keyPressed(KeyEvent e) {
+			char c = e.getKeyChar();
+			String remain = tf.getText();
+			String args1=""; // 피연산자1
+			String args2=""; // 피연산자2
+			String operator = ""; // 연산자
+			int result =0; // 결과값
+			if(c=='\n') {
+				for(int i=0; i<remain.length(); i++)
+				{
+					if(remain.charAt(i) == '+' || remain.charAt(i) == '-' || remain.charAt(i) == '*' || remain.charAt(i) == '/')
+					{
+						operator= Character.toString(remain.charAt(i));
+						args1 = remain.substring(0, i);
+						args2 = remain.substring(i+1, remain.length());
+					}else if(i==remain.length()-1){
+						tf.setText(null);
+					}
+				}
+				switch(operator) {
+				case "+": result= Integer.parseInt(args1) + Integer.parseInt(args2);break;
+				case "-": result= Integer.parseInt(args1) - Integer.parseInt(args2);break;
+				case "*": result= Integer.parseInt(args1) * Integer.parseInt(args2);break;
+				case "/": result= Integer.parseInt(args1) / Integer.parseInt(args2);break;
+				}
+				tf.setText(Integer.toString(result));
+			}
+		}
+		
+	}
 	public static void main(String[] args) {
 		CalculatorTest cal = new CalculatorTest();
 		cal.display();
+		cal.eventConn();
 	}
 }
