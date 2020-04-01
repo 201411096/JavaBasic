@@ -2,14 +2,17 @@ package y_teamproject;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.JLabel;
 import javax.swing.JTabbedPane;
+import javax.swing.JTextArea;
 
 public class MainFrame extends JFrame implements ActionListener{
 	MenuPanel menuPanel[] = new MenuPanel[4];
@@ -19,7 +22,10 @@ public class MainFrame extends JFrame implements ActionListener{
 	ImageIcon imageIconArray[] = new ImageIcon[16];
 	OrderPanel orderPanel;
 	Menu menu = new Menu();
-	OrderList orderList = new OrderList();
+	int menuCount [] = new int[menu.menuNameList.length];
+	//orderPanel에 추가할 내용
+	JTextArea orderTextArea = new JTextArea("메뉴\t수량\t가격\n");
+	JButton orderButton = new JButton("주문");
 
 	public MainFrame() {
 		for(int i=0; i<imageIconArray.length; i++)
@@ -30,7 +36,9 @@ public class MainFrame extends JFrame implements ActionListener{
 		}
 		for(int i=0; i<menuPanel.length; i++)
 			menuPanel[i] = new MenuPanel(buttonArray[i*4], buttonArray[i*4+1], buttonArray[i*4+2], buttonArray[i*4+3]);
-		orderPanel = new OrderPanel();
+		
+		orderTextArea.setSize(new Dimension(420, 540));
+		orderPanel = new OrderPanel(orderTextArea, orderButton);
 	}
 	public void display() {
 		setLayout(new BorderLayout());
@@ -46,6 +54,34 @@ public class MainFrame extends JFrame implements ActionListener{
 	public void eventConn() {
 		for(int i=0; i<buttonArray.length; i++)
 			buttonArray[i].addActionListener(this);
+ 
+		orderButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				String ms [] = menu.makeMenuString(menuCount);
+				StringBuffer temp = new StringBuffer("메뉴\t수량\t가격\n");
+				for(int i=0; i<ms.length; i++)
+				{
+					if(ms[i]!=null)
+					{
+						temp.append(ms[i]);
+						temp.append("\n");
+					}	
+				}
+//				다이얼로그 생성해야됨
+				JFrame frame = new JFrame();
+				frame.add(new JTextArea(temp.toString()));
+				frame.setVisible(true);
+				frame.setSize(400, 300);
+				frame.setLocation(800, 400);
+				
+				for(int i=0; i<menuCount.length; i++)
+					menuCount[i]=0;
+				orderTextArea.setText(null);
+				orderTextArea.setText("메뉴\t수량\t가격\n");
+			}
+		});
 	}
 
 	@Override
@@ -56,10 +92,21 @@ public class MainFrame extends JFrame implements ActionListener{
 		{
 			if(jb == buttonArray[i])
 			{
-				System.out.println(menu.menuNameList[i] + menu.menuCostList[i]);
+				menuCount[i]++;
+				System.out.println(menu.menuNameList[i] + " " + menu.menuCostList[i]);
 			}
-				
 		}
+		// 주문 정보에 입력
+		String ms [] = menu.makeMenuString(menuCount);
+		StringBuffer temp = new StringBuffer("메뉴\t수량\t가격\n");
+		for(int i=0; i<ms.length; i++)
+		{
+			if(ms[i]!=null)
+			{
+				temp.append(ms[i]);
+				temp.append("\n");
+			}	
+		}
+		orderTextArea.setText((temp).toString());
 	}
-
 }
