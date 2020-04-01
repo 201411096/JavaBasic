@@ -8,6 +8,7 @@ public class Main {
 		
 		MainFrame m = new MainFrame();
 		m.display();
+		m.eventConn();
 	}
 
 }

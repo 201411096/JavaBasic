@@ -18,6 +18,8 @@ public class MainFrame extends JFrame implements ActionListener{
 	JButton buttonArray [] = new JButton[16];
 	ImageIcon imageIconArray[] = new ImageIcon[16];
 	OrderPanel orderPanel;
+	Menu menu = new Menu();
+	OrderList orderList = new OrderList();
 
 	public MainFrame() {
 		for(int i=0; i<imageIconArray.length; i++)
@@ -41,12 +43,23 @@ public class MainFrame extends JFrame implements ActionListener{
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
+	public void eventConn() {
+		for(int i=0; i<buttonArray.length; i++)
+			buttonArray[i].addActionListener(this);
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JButton jb = (JButton)e.getSource();
-
-		System.out.println(jb.getText());
+		String s = "";
+		for(int i=0; i<buttonArray.length; i++)
+		{
+			if(jb == buttonArray[i])
+			{
+				System.out.println(menu.menuNameList[i] + menu.menuCostList[i]);
+			}
+				
+		}
 	}
 
 }
