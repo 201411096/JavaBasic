@@ -3,6 +3,7 @@ package y_teamproject;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -10,8 +11,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
+import javax.swing.SwingConstants;
 
 public class MainFrame extends JFrame implements ActionListener{
 	JTabbedPane tabbedPane = new JTabbedPane();
@@ -25,6 +28,7 @@ public class MainFrame extends JFrame implements ActionListener{
 	//orderPanel에 추가할 내용
 	JTextArea orderTextArea = new JTextArea();
 	JButton orderButton = new JButton("주문");
+	JButton totalCancelButton = new JButton("전체취소");
 
 	public MainFrame() {
 		for(int i=0; i<imageIconArray.length; i++) // 이미지 로딩 &버튼에 연결
@@ -36,8 +40,8 @@ public class MainFrame extends JFrame implements ActionListener{
 		for(int i=0; i<menuPanel.length; i++) //tabbedPane에 붙이는 메뉴패널들에 버튼 추가
 			menuPanel[i] = new MenuPanel(buttonArray[i*4], buttonArray[i*4+1], buttonArray[i*4+2], buttonArray[i*4+3]);
 		
-		orderTextArea.setPreferredSize(new Dimension(400, 540));
-		orderPanel = new OrderPanel(orderTextArea, orderButton);
+		orderTextArea.setPreferredSize(new Dimension(420, 540));
+		orderPanel = new OrderPanel(orderTextArea, orderButton, totalCancelButton);
 	}
 	public void display() {
 		setLayout(new BorderLayout());
@@ -49,7 +53,9 @@ public class MainFrame extends JFrame implements ActionListener{
 		setSize(1920, 1080);
 		setBackground(new Color(255, 255, 255));
 		setVisible(true);
+		setExtendedState(JFrame.MAXIMIZED_BOTH); // 프로그램 시작시 최대화
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 	}
 	public void eventConn() {
 		for(int i=0; i<buttonArray.length; i++)
@@ -74,15 +80,30 @@ public class MainFrame extends JFrame implements ActionListener{
 				temp.append("-------------------------------------------------------\n");
 				temp.append("합계 : \t\t" + total);
 				
-//				다이얼로그 생성해야됨
 				JFrame frame = new JFrame();
-				JLabel label = new JLabel("      메뉴                                         수량                                가격         ");
-				frame.add(label, BorderLayout.NORTH);
+				JLabel label1 = new JLabel("메뉴",SwingConstants.CENTER);
+				JLabel label2 = new JLabel("수량",SwingConstants.CENTER);
+				JLabel label3 = new JLabel("가격",SwingConstants.CENTER);
+				JPanel panel = new JPanel();
+				panel.setLayout(new GridLayout(1, 3));
+				panel.add(label1);
+				panel.add(label2);
+				panel.add(label3);
+
+				frame.add(panel, BorderLayout.NORTH);
 				frame.add(new JTextArea(temp.toString()));
 				frame.setVisible(true);
 				frame.setSize(400, 400);
 				frame.setLocation(800, 400);
-				
+				frame.setTitle("주문내역");
+				for(int i=0; i<menuCount.length; i++)
+					menuCount[i]=0;
+				orderTextArea.setText(null);
+			}
+		});
+		totalCancelButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
 				for(int i=0; i<menuCount.length; i++)
 					menuCount[i]=0;
 				orderTextArea.setText(null);
