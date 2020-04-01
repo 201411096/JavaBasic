@@ -58,7 +58,7 @@ public class MainFrame extends JFrame implements ActionListener{
 		orderButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				int total =0;
 				String ms [] = menu.makeMenuString(menuCount);
 				StringBuffer temp = new StringBuffer("메뉴\t수량\t가격\n");
 				for(int i=0; i<ms.length; i++)
@@ -69,11 +69,16 @@ public class MainFrame extends JFrame implements ActionListener{
 						temp.append("\n");
 					}	
 				}
+				for(int i=0; i<menuCount.length; i++)
+					total+= menu.menuCostList[i]*menuCount[i];
+				temp.append("-------------------------------------------------------\n");
+				temp.append("합계 : \t\t" + total);
+				
 //				다이얼로그 생성해야됨
 				JFrame frame = new JFrame();
 				frame.add(new JTextArea(temp.toString()));
 				frame.setVisible(true);
-				frame.setSize(400, 300);
+				frame.setSize(400, 400);
 				frame.setLocation(800, 400);
 				
 				for(int i=0; i<menuCount.length; i++)
@@ -93,7 +98,6 @@ public class MainFrame extends JFrame implements ActionListener{
 			if(jb == buttonArray[i])
 			{
 				menuCount[i]++;
-				System.out.println(menu.menuNameList[i] + " " + menu.menuCostList[i]);
 			}
 		}
 		// 주문 정보에 입력

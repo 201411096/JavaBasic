@@ -7,7 +7,7 @@ public class Menu {
 	int cost;
 	int count;
 //	ArrayList<Menu> menuList = new ArrayList<Menu>();
-	String menuNameList [] = {"main1", "main2", "main3", "main4", "side1", "side2", "side3", "side4", "topping1", "topping2", "topping3", "topping4", "setA", "setB", "setC", "setD"};
+	String menuNameList [] = {"엽기떡볶이", "엽기닭볶음탕", "뼈없는 닭발", "국물닭발", "주먹김밥", "계란찜", "공기밥", "음료", "떡추가", "오뎅추가", "치즈추가", "햄추가", "A set", "B set", "C set", "Family set"};
 	int menuCostList [] = {14000, 24000, 15000, 15000, 2000, 2000, 1000, 1000, 1000, 1000, 3000, 1000, 17000, 19000, 21000, 28000};
 	public Menu(){
 	}
