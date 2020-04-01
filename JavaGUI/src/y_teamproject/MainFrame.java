@@ -11,6 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
@@ -69,49 +70,58 @@ public class MainFrame extends JFrame implements ActionListener{
 		orderButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int total =0;
-				String ms [] = menu.makeMenuString(menuCount);
-				StringBuffer temp = new StringBuffer();
-				for(int i=0; i<ms.length; i++)
+				int result = JOptionPane.showConfirmDialog(null, "주문하시겠습니까?", null, JOptionPane.YES_NO_OPTION);
+				if(result==JOptionPane.YES_OPTION)
 				{
-					if(ms[i]!=null)
+					int total =0;
+					String ms [] = menu.makeMenuString(menuCount);
+					StringBuffer temp = new StringBuffer();
+					for(int i=0; i<ms.length; i++)
 					{
-						temp.append(ms[i]);
-						temp.append("\n");
-					}	
-				}
-				for(int i=0; i<menuCount.length; i++)
-					total+= menu.menuCostList[i]*menuCount[i];
-				
-				JFrame frame = new JFrame();
-				JLabel label1 = new JLabel("메뉴",SwingConstants.CENTER);
-				JLabel label2 = new JLabel("수량",SwingConstants.CENTER);
-				JLabel label3 = new JLabel("가격",SwingConstants.CENTER);
-				JPanel panel = new JPanel();
-				JLabel label4 = new JLabel("합계: " + total, SwingConstants.CENTER);
-				panel.setLayout(new GridLayout(1, 3));
-				panel.add(label1);
-				panel.add(label2);
-				panel.add(label3);
+						if(ms[i]!=null)
+						{
+							temp.append(ms[i]);
+							temp.append("\n");
+						}	
+					}
+					for(int i=0; i<menuCount.length; i++)
+						total+= menu.menuCostList[i]*menuCount[i];
+					
+					JFrame frame = new JFrame();
+					JLabel label1 = new JLabel("메뉴",SwingConstants.CENTER);
+					JLabel label2 = new JLabel("수량",SwingConstants.CENTER);
+					JLabel label3 = new JLabel("가격",SwingConstants.CENTER);
+					JPanel panel = new JPanel();
+					JLabel label4 = new JLabel("합계: " + total, SwingConstants.CENTER);
+					panel.setLayout(new GridLayout(1, 3));
+					panel.add(label1);
+					panel.add(label2);
+					panel.add(label3);
 
-				frame.add(panel, BorderLayout.NORTH);
-				frame.add(label4, BorderLayout.SOUTH);
-				frame.add(new JTextArea(temp.toString()));
-				frame.setVisible(true);
-				frame.setSize(400, 400);
-				frame.setLocation(800, 400);
-				frame.setTitle("주문내역");
-				for(int i=0; i<menuCount.length; i++)
-					menuCount[i]=0;
-				orderTextArea.setText(null);
+					frame.add(panel, BorderLayout.NORTH);
+					frame.add(label4, BorderLayout.SOUTH);
+					frame.add(new JTextArea(temp.toString()));
+					frame.setVisible(true);
+					frame.setSize(400, 400);
+					frame.setLocation(800, 400);
+					frame.setTitle("주문내역");
+					for(int i=0; i<menuCount.length; i++)
+						menuCount[i]=0;
+					orderTextArea.setText(null);
+				}
+				
 			}
 		});
 		totalCancelButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				for(int i=0; i<menuCount.length; i++)
-					menuCount[i]=0;
-				orderTextArea.setText(null);
+				int result = JOptionPane.showConfirmDialog(null, "전부 취소하시겠습니까?", null, JOptionPane.YES_NO_OPTION);
+				if(result==JOptionPane.YES_OPTION)
+				{
+					for(int i=0; i<menuCount.length; i++)
+						menuCount[i]=0;
+					orderTextArea.setText(null);
+				}
 			}
 		});
 	}
