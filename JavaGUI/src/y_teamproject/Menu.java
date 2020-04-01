@@ -5,8 +5,6 @@ import java.util.ArrayList;
 public class Menu {
 	String name;
 	int cost;
-	int count;
-//	ArrayList<Menu> menuList = new ArrayList<Menu>();
 	String menuNameList [] = {"엽기떡볶이", "엽기닭볶음탕", "뼈없는 닭발", "국물닭발", "주먹김밥", "계란찜", "공기밥", "음료", "떡추가", "오뎅추가", "치즈추가", "햄추가", "A set", "B set", "C set", "Family set"};
 	int menuCostList [] = {14000, 24000, 15000, 15000, 2000, 2000, 1000, 1000, 1000, 1000, 3000, 1000, 17000, 19000, 21000, 28000};
 	public Menu(){
@@ -15,25 +13,14 @@ public class Menu {
 		this.name=name;
 		this.cost=cost;
 	}
-	public Menu(String name, int cost, int count){
-		this.name=name;
-		this.cost=cost;
-		this.count=count;
-	}
 	public String[] makeMenuString(int [] cnt) {
 		String s[] = new String[16];
 		int stringCnt=0;
 		for(int i=0; i<cnt.length; i++) {
 			if(cnt[i]!=0)
-				s[stringCnt++]= menuNameList[i] + "\t" + cnt[i] + "\t" + menuCostList[i]*cnt[i];
+				s[stringCnt++]= menuNameList[i] + "\t\t" + cnt[i] + "\t       " + menuCostList[i]*cnt[i];
 		}
 		
 		return s;
 	}
-	
-	
-//	public void makeMenuList() {
-//		for(int i=0; i<menuNameList.length; i++)
-//			menuList.add(new Menu(menuNameList[i], menuCostList[i]));
-//	}
 }
