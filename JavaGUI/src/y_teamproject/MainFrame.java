@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -32,6 +34,9 @@ public class MainFrame extends JFrame implements ActionListener{
 	JButton orderButton = new JButton("주문");
 	JButton totalCancelButton = new JButton("전체취소");
 	LineBorder lineBorder = new LineBorder(new Color(165,165,165), 3); // 테두리
+	//이전 버튼에 대한 내용
+	JButton prevButton;
+	int prevButton_idx;
 
 	public MainFrame() {
 		for(int i=0; i<imageIconArray.length; i++) // 이미지 로딩 &버튼에 연결
@@ -65,7 +70,24 @@ public class MainFrame extends JFrame implements ActionListener{
 	}
 	public void eventConn() {
 		for(int i=0; i<buttonArray.length; i++)
+		{
+			Color prevColor = null;
 			buttonArray[i].addActionListener(this);
+			buttonArray[i].addMouseListener(new MouseAdapter() { // 버튼으로 들어갈 때 메뉴 배경색 바뀜
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					JButton jb = (JButton)e.getSource();
+					if(jb.getBackground()==Color.white) // 기본색(하얀색)일때만 변화
+						jb.setBackground(new Color(120, 120, 120));
+				}
+				@Override
+				public void mouseExited(MouseEvent e) {
+					JButton jb = (JButton)e.getSource();
+					jb.setBackground(null);
+				}
+			});
+		}
+			
  
 		orderButton.addActionListener(new ActionListener() {
 			@Override
@@ -135,6 +157,19 @@ public class MainFrame extends JFrame implements ActionListener{
 			if(jb == buttonArray[i])
 			{
 				menuCount[i]++;
+				//이전 버튼에 대한 내용으로 저장하는 부분
+				if(prevButton ==null)
+				{
+					prevButton = jb;
+					prevButton_idx = i;
+					jb.setBorder(new LineBorder((Color.blue), 5));
+				}else
+				{
+					prevButton.setBorder(null); // 이전 버튼이었던 곳의 테두리를 없애고 나머지는 동일
+					prevButton = jb;
+					prevButton_idx = i;
+					jb.setBorder(new LineBorder((Color.blue), 5));
+				}
 			}
 		}
 		// 주문 정보에 입력
