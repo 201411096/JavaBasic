@@ -44,7 +44,8 @@ public class OrderPanel extends JPanel {
 		panel.setPreferredSize(new Dimension(420, 40));
 		b1.setPreferredSize(new Dimension(210, 60));
 		b2.setPreferredSize(new Dimension(210, 60));
-		panel.setBackground(Color.white);
+//		panel.setBackground(new Color(165,165,165));
+//		panel.setBackground(Color.gray);
 		panel.setLayout(new GridLayout(1, 3));
 		panel.add(label1);
 		panel.add(label2);

@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
 
 public class MainFrame extends JFrame implements ActionListener{
 	JTabbedPane tabbedPane = new JTabbedPane();
@@ -29,6 +30,7 @@ public class MainFrame extends JFrame implements ActionListener{
 	JTextArea orderTextArea = new JTextArea();
 	JButton orderButton = new JButton("주문");
 	JButton totalCancelButton = new JButton("전체취소");
+	LineBorder lineBorder = new LineBorder(new Color(165,165,165), 3); // 테두리
 
 	public MainFrame() {
 		for(int i=0; i<imageIconArray.length; i++) // 이미지 로딩 &버튼에 연결
@@ -38,10 +40,12 @@ public class MainFrame extends JFrame implements ActionListener{
 			buttonArray[i].setBackground(Color.white);
 		}
 		for(int i=0; i<menuPanel.length; i++) //tabbedPane에 붙이는 메뉴패널들에 버튼 추가
+		{
 			menuPanel[i] = new MenuPanel(buttonArray[i*4], buttonArray[i*4+1], buttonArray[i*4+2], buttonArray[i*4+3]);
-		
+		}
 		orderTextArea.setPreferredSize(new Dimension(420, 540));
 		orderPanel = new OrderPanel(orderTextArea, orderButton, totalCancelButton);
+		orderPanel.setBorder(lineBorder);
 	}
 	public void display() {
 		setLayout(new BorderLayout());
@@ -51,6 +55,7 @@ public class MainFrame extends JFrame implements ActionListener{
 		add(orderPanel, BorderLayout.EAST);
 		setTitle("엽기떡볶이");
 		setSize(1920, 1080);
+
 		setBackground(new Color(255, 255, 255));
 		setVisible(true);
 		setExtendedState(JFrame.MAXIMIZED_BOTH); // 프로그램 시작시 최대화
@@ -77,20 +82,20 @@ public class MainFrame extends JFrame implements ActionListener{
 				}
 				for(int i=0; i<menuCount.length; i++)
 					total+= menu.menuCostList[i]*menuCount[i];
-				temp.append("-------------------------------------------------------\n");
-				temp.append("합계 : \t\t" + total);
 				
 				JFrame frame = new JFrame();
 				JLabel label1 = new JLabel("메뉴",SwingConstants.CENTER);
 				JLabel label2 = new JLabel("수량",SwingConstants.CENTER);
 				JLabel label3 = new JLabel("가격",SwingConstants.CENTER);
 				JPanel panel = new JPanel();
+				JLabel label4 = new JLabel("합계: " + total, SwingConstants.CENTER);
 				panel.setLayout(new GridLayout(1, 3));
 				panel.add(label1);
 				panel.add(label2);
 				panel.add(label3);
 
 				frame.add(panel, BorderLayout.NORTH);
+				frame.add(label4, BorderLayout.SOUTH);
 				frame.add(new JTextArea(temp.toString()));
 				frame.setVisible(true);
 				frame.setSize(400, 400);
