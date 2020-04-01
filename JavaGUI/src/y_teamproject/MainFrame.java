@@ -71,7 +71,6 @@ public class MainFrame extends JFrame implements ActionListener{
 	public void eventConn() {
 		for(int i=0; i<buttonArray.length; i++)
 		{
-			Color prevColor = null;
 			buttonArray[i].addActionListener(this);
 			buttonArray[i].addMouseListener(new MouseAdapter() { // 버튼으로 들어갈 때 메뉴 배경색 바뀜
 				@Override
@@ -130,6 +129,9 @@ public class MainFrame extends JFrame implements ActionListener{
 					for(int i=0; i<menuCount.length; i++)
 						menuCount[i]=0;
 					orderTextArea.setText(null);
+					prevButton.setBorder(null); // 주문완료 이후에 이전 버튼이었던 곳의 테두리를 없애고 나머지는 동일
+					prevButton = null;
+					prevButton_idx = -1;
 				}
 				
 			}
