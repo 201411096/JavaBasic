@@ -11,7 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class SalesSummaryFrame extends JFrame{
-	final int size = 16;
+	int size = 16;
 	JLabel labelList[] = new JLabel[size];
 	JPanel panelLineList[] = new JPanel[size]; // 5줄로 표시
 	JPanel panelList[] = new JPanel[size]; //라벨과 같이 panelLineList 에 같이 들어가는 패널

@@ -61,4 +61,5 @@ public class OrderPanel extends JPanel {
 		add(jt, BorderLayout.CENTER);
 		setPreferredSize(new Dimension(420, 1080));
 	}
+
 }
