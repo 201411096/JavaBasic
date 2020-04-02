@@ -23,161 +23,153 @@ import javax.swing.border.LineBorder;
 public class MainFrame extends JFrame implements ActionListener{
 	JTabbedPane tabbedPane = new JTabbedPane();
 	String tabbedPaneName [] = {"메인메뉴", "사이드/음료", "토핑", "세트메뉴"}; // tabbedPane에 사용하는 문자열
-	MenuPanel menuPanel[] = new MenuPanel[4];
-	OrderPanel orderPanel;
+	MenuPanel menuPanel[] = new MenuPanel[4]; // tabbedPane에 들어가는 패널들
+	OrderPanel orderPanel;					   // 우측에 붙는 패널
 	JButton buttonArray [] = new JButton[16]; // 메뉴틀 버튼
 	ImageIcon imageIconArray[] = new ImageIcon[16]; // 메뉴 버튼들에 들어가는 이미지
 	Menu menu = new Menu();
-	int menuCount [] = new int[menu.menuNameList.length];
-	int totalmenuCount [] = new int[menu.menuNameList.length]; //하루? 판매 갯수 세는 배열
+	int menuCount [] = new int[menu.menuNameList.length]; // 판매 갯수 세는 배열
+	int totalmenuCount [] = new int[menu.menuNameList.length]; // 총 판매 갯수 세는 배열
 	//orderPanel에 추가할 내용
-	JTextArea orderTextArea = new JTextArea();
-	JButton orderButton = new JButton("주문");
-	JButton totalCancelButton = new JButton("전체취소");
+	JTextArea orderTextArea = new JTextArea(); // 주문 내역이 나오는 textArea
+	JButton orderButton = new JButton("주문"); // 주문 버튼
+	JButton totalCancelButton = new JButton("전체취소"); // 주문 전체 취소 버튼
 	LineBorder lineBorder = new LineBorder(new Color(165,165,165), 3); // 테두리 효과에 사용하는 테두리
+	JButton salesSummaryButton = new JButton("매출 순위"); // 매출 순위 버튼
 	//이전 버튼에 대한 내용
 	JButton prevButton;
 	int prevButton_idx;
-	//매출 요약 버튼
-	JButton salesSummaryButton = new JButton("매출 순위");
 	
 	public MainFrame() {
 		for(int i=0; i<imageIconArray.length; i++) // 이미지 로딩 &버튼에 연결
 		{
-			imageIconArray[i] = new ImageIcon("src/y_teamproject/imgs/" + i +".png");
-			buttonArray[i] = new JButton(imageIconArray[i]);
-			buttonArray[i].setBackground(Color.white);
+			imageIconArray[i] = new ImageIcon("src/y_teamproject/imgs/" + i +".png"); // 각 이미지들을 불러옴
+			buttonArray[i] = new JButton(imageIconArray[i]);					      // 각 버튼들에 이미지 아이콘 추가
+			buttonArray[i].setBackground(Color.white);								  // 버튼들의 색 변경
 		}
 		for(int i=0; i<menuPanel.length; i++) //tabbedPane에 붙이는 메뉴패널들에 버튼 추가
 		{
-			menuPanel[i] = new MenuPanel(buttonArray[i*4], buttonArray[i*4+1], buttonArray[i*4+2], buttonArray[i*4+3]);
+			menuPanel[i] = new MenuPanel(buttonArray[i*4], buttonArray[i*4+1], buttonArray[i*4+2], buttonArray[i*4+3]); // 메뉴 패널마다 4개의 버튼들을 붙임
 		}
-		orderTextArea.setPreferredSize(new Dimension(420, 540));
-		orderPanel = new OrderPanel(orderTextArea, orderButton, totalCancelButton, salesSummaryButton);
-		orderPanel.setBorder(lineBorder);
+		orderTextArea.setPreferredSize(new Dimension(420, 540));														// 주문 내역이 나오는 영역 크기 설정
+		orderPanel = new OrderPanel(orderTextArea, orderButton, totalCancelButton, salesSummaryButton);					// 주문 패널 생성(주문 내역 textArea, 주문 버튼, 주문취소 버튼, 판매순위버튼)
+		orderPanel.setBorder(lineBorder);																				// 주문 패널의 테두리 설정
 	}
 	public void display() {
-		setLayout(new BorderLayout());
-		for(int i=0; i<menuPanel.length; i++)
-			tabbedPane.add(menuPanel[i], tabbedPaneName[i]);
-		add(tabbedPane);
-		add(orderPanel, BorderLayout.EAST);
-		setTitle("엽기떡볶이");
-		setSize(1920, 1080);
+		setLayout(new BorderLayout());						// mainFrame의 layout 설정
+		for(int i=0; i<menuPanel.length; i++)				
+			tabbedPane.add(menuPanel[i], tabbedPaneName[i]);// 메뉴 패널 4개와 그 이름들을 담은 배열들을 tabbedPane에 추가 
+		add(tabbedPane); //tabbedPane을 mainFrame에 부착
+		add(orderPanel, BorderLayout.EAST);					// order패널을 mainFrame 동쪽에 부착
+		setTitle("엽기떡볶이");									// mainFrame의 title 지정
+		setSize(1920, 1080);								// mainFrame의 size 지정
 
-		setBackground(new Color(255, 255, 255));
-		setVisible(true);
-		setExtendedState(JFrame.MAXIMIZED_BOTH); // 프로그램 시작시 최대화
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBackground(new Color(255, 255, 255));			// mainFrame의 color 변경
+		setVisible(true);									// mainFrame이 눈에 보이도록..
+		setExtendedState(JFrame.MAXIMIZED_BOTH); 			// 프로그램 시작시 mainFrame 최대화
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);		// mainFrame의 창을 닫으면 프로그램 종료
 		
 	}
-	public void eventConn() {
-		for(int i=0; i<buttonArray.length; i++)
+	public void eventConn() {								// 이벤트들을 연결해주는 메소드
+		for(int i=0; i<buttonArray.length; i++)				// 버튼 16개 크기 만큼 반복
 		{
-			buttonArray[i].addActionListener(this);
+			buttonArray[i].addActionListener(this);			// 버튼 16개에 MainFrame에서 구현한 이벤트를 추가
 			buttonArray[i].addMouseListener(new MouseAdapter() { // 버튼으로 들어갈 때 메뉴 배경색 바뀜
 				@Override
-				public void mouseEntered(MouseEvent e) {
+				public void mouseEntered(MouseEvent e) {			// 마우스가 버튼의 범위에 들어올 경우
 					JButton jb = (JButton)e.getSource();
-					if(jb.getBackground()==Color.white) // 기본색(하얀색)일때만 변화
-						jb.setBackground(new Color(120, 120, 120));
+					if(jb.getBackground()==Color.white) 			// 버튼이 기본색(하얀색)일 경우
+						jb.setBackground(new Color(120, 120, 120)); // 버튼 색깔 변경
 				}
 				@Override
-				public void mouseExited(MouseEvent e) {
+				public void mouseExited(MouseEvent e) {				// 마우스가 버튼의 범위에서 벗어날 경우
 					JButton jb = (JButton)e.getSource();
-					jb.setBackground(null);
+					jb.setBackground(Color.white);					// 버튼의 색깔을 원래의 색깔(하얀색)로 변경
 				}
 			});
 		}
-		orderButton.addActionListener(new ActionListener() { // 주문 버튼 이벤트 리스너
+		orderButton.addActionListener(new ActionListener() { 		// 주문 버튼 이벤트 리스너
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				int result = JOptionPane.showConfirmDialog(null, "주문하시겠습니까?", null, JOptionPane.YES_NO_OPTION);
-				if(result==JOptionPane.YES_OPTION)
+			public void actionPerformed(ActionEvent e) {	
+				int result = JOptionPane.showConfirmDialog(null, "주문하시겠습니까?", null, JOptionPane.YES_NO_OPTION);	//주문 버튼을 누르면 yes/no option만을 가진 confirm다이얼로그를 띄움
+				if(result==JOptionPane.YES_OPTION) // yes버튼을 누를경우만 실행
 				{
-					int total =0;
-					String ms [] = menu.makeMenuString(menuCount);
-					StringBuffer temp = new StringBuffer();
-					for(int i=0; i<ms.length; i++)
+					int total =0;				// 합계 계산에 사용할 변수
+					String ms [] = menu.makeMenuString(menuCount);	// 각 메뉴별 메뉴의 이름, 개수, 개수*가격을 string 배열로 받아오는 함수
+					StringBuffer temp = new StringBuffer();			// String 배열로 받아온 값을 하나로 합칠 StringBuffer
+					for(int i=0; i<ms.length; i++)					// String 배열의 크기만큼 반복
 					{
-						if(ms[i]!=null)
+						if(ms[i]!=null)								// String 배열의 요소값이 널이 아닐 경우만 실행
 						{
-							temp.append(ms[i]);
-							temp.append("\n");
+							temp.append(ms[i]);						// null이 아닌 String배열 요소의 값들을 Stringbuffer인 temp에 합침
+							temp.append("\n");						// 각 요소별 개행
 						}	
 					}
 					for(int i=0; i<menuCount.length; i++)
 					{
-						total+= menu.menuCostList[i]*menuCount[i]; //주문 총액 계산
-						totalmenuCount[i]+=menuCount[i]; //하루? 판매 갯수 추가
+						total+= menu.menuCostList[i]*menuCount[i]; //주문 총합 계산
+						totalmenuCount[i]+=menuCount[i]; 		   //메뉴별 하루? 판매 갯수 추가
+						menuCount[i]=0;							   //메뉴별 개수 초기화
 					}
-					OrderListFrame orderListFrame = new OrderListFrame(total, temp.toString());
+					OrderListFrame orderListFrame = new OrderListFrame(total, temp.toString()); //주문 내역과 주문 가격의 총합을 담는 프레임을 생성해서 띄움
 					
-					for(int i=0; i<menuCount.length; i++)
-						menuCount[i]=0;
-					orderTextArea.setText(null);
-					prevButton.setBorder(null); // 주문완료 이후에 이전 버튼이었던 곳의 테두리를 없애고 나머지는 동일
-					prevButton = null;
-					prevButton_idx = -1;
+					orderTextArea.setText(null); // orderTextArea 영역을 초기화
+					prevButton.setBorder(null); // 이전 버튼의 테두리 초기화
+					prevButton = null;			// 이전 버튼을 담는 변수 초기화
+					prevButton_idx = -1;		// 이전 버튼의 인덱스를 담는 변수를 의미없는 값으로 초기화
 				}
-				
 			}
 		});
 		totalCancelButton.addActionListener(new ActionListener() { //주문 취소 버튼 이벤트 리스너
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int result = JOptionPane.showConfirmDialog(null, "전부 취소하시겠습니까?", null, JOptionPane.YES_NO_OPTION);
-				if(result==JOptionPane.YES_OPTION)
+				int result = JOptionPane.showConfirmDialog(null, "전부 취소하시겠습니까?", null, JOptionPane.YES_NO_OPTION); //주문 취소 버튼을 누를 시 yes_no option만을 가지고 있는 confirmDialog를 띄움
+				if(result==JOptionPane.YES_OPTION)// yes버튼을 눌렀으면
 				{
 					for(int i=0; i<menuCount.length; i++)
-						menuCount[i]=0;
-					orderTextArea.setText(null);
+						menuCount[i]=0;				// 각 메뉴별 개수를 담는 배열을 전부 초기화
+					orderTextArea.setText(null);	// 주문 내역 창을 초기화
 				}
 			}
 		});
-		salesSummaryButton.addActionListener(new ActionListener() {
+		salesSummaryButton.addActionListener(new ActionListener() {	//매출 요약 버튼을 클리했을 경우 리스너
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				SalesSummaryFrame salesSummaryFrame = new SalesSummaryFrame(totalmenuCount);
+				SalesSummaryFrame salesSummaryFrame = new SalesSummaryFrame(totalmenuCount); // 매출 요약창을 만들어서 띄움(메뉴별 하루? 판매 갯수를 담는 배열을 같이 보냄) 
 			}
 		});
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) { //메뉴 버튼들 리스너 
+	public void actionPerformed(ActionEvent e) { //음식 아이콘에 붙는 리스너(메인프레임의 리스너)
 		JButton jb = (JButton)e.getSource();
 		String s = "";
 		for(int i=0; i<buttonArray.length; i++)
 		{
-			if(jb == buttonArray[i])
+			if(jb == buttonArray[i])			//이벤트가 발생한 버튼과 같은 버튼을 찾기
 			{
-				menuCount[i]++;
+				menuCount[i]++;					//메뉴별 개수를 담는 배열에 저장
 				//이전 버튼에 대한 내용으로 저장하는 부분
-				if(prevButton ==null)
+				if(prevButton !=null)			
 				{
-					prevButton = jb;
-					prevButton_idx = i;
-					jb.setBorder(new LineBorder((Color.blue), 5));
-				}else
-				{
-					prevButton.setBorder(null); // 이전 버튼이었던 곳의 테두리를 없애고 나머지는 동일
-					prevButton = jb;
-					prevButton_idx = i;
-					jb.setBorder(new LineBorder((Color.blue), 5));
+					prevButton.setBorder(null); // 이전 버튼이었던 곳의 테두리를 없앰
 				}
+				prevButton = jb;				// 이전 버튼에 이벤트 발생한 버튼의 내용을 넣음
+				prevButton_idx = i;				// 이전 버튼을 담는 인덱스 변수에 이벤트가 발생한 인덱스를 담음
+				jb.setBorder(new LineBorder((Color.blue), 5)); //이벤트가 발생한 버튼의 테두리 색깔을 변경
 			}
 		}
 		// 주문 정보에 입력
-		String ms [] = menu.makeMenuString(menuCount);
-		StringBuffer temp = new StringBuffer();
-		for(int i=0; i<ms.length; i++)
+		String ms [] = menu.makeMenuString(menuCount);  // 각 메뉴별 메뉴의 이름, 개수, 개수*가격을 string 배열로 받아오는 함수
+		StringBuffer temp = new StringBuffer();   		// String 배열로 받아온 값을 하나로 합칠 StringBuffer
+		for(int i=0; i<ms.length; i++)					// String 배열의 크기만큼 반복
 		{
-			if(ms[i]!=null)
+			if(ms[i]!=null)								// String 배열의 요소값이 널이 아닐 경우만 실행
 			{
-				temp.append(ms[i]);
-				temp.append("\n");
+				temp.append(ms[i]);						// null이 아닌 String배열 요소의 값들을 Stringbuffer인 temp에 합침
+				temp.append("\n");						// 각 요소별 개행
 			}	
 		}
-		orderTextArea.setText((temp).toString());
+		orderTextArea.setText((temp).toString());		//메뉴의 이름과 갯수 가격을 주문 내역 창에 갱신
 	}
 }

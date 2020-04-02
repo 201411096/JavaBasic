@@ -19,7 +19,7 @@ public class OrderListFrame extends JFrame{
 		labelList[3] = new JLabel(labelListName[3] + total, SwingConstants.CENTER);
 
 		panel.setLayout(new GridLayout(1, 3));
-		for(int i=0; i<2; i++)
+		for(int i=0; i<3; i++)
 			panel.add(labelList[i]);
 		add(panel, BorderLayout.NORTH);
 		add(labelList[3], BorderLayout.SOUTH);
