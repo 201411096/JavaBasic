@@ -4,11 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Iterator;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -16,10 +13,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 class MyFrame extends JFrame
 {
@@ -103,7 +98,17 @@ class MyFrame extends JFrame
 	void saveData() {		
 	
 		try {
- 
+			JSONObject obj = new JSONObject();
+			obj.put("name", tfName.getText());
+			obj.put("tel", tfTel.getText());
+			obj.put("jumin", tfJumin.getText());
+			obj.put("gender", tfGender.getText());
+			obj.put("age", tfAge.getText());
+			obj.put("home", tfHome.getText());
+			
+			FileWriter fw = new FileWriter("src\\io\\json\\test.json"); // 윈도우에선 역슬래시 두개
+			fw.write(obj.toJSONString());
+			fw.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -113,7 +118,18 @@ class MyFrame extends JFrame
 	void readData() {		
 		 
 		try {
-
+			FileReader fr = new FileReader("src\\io\\json\\test.json");
+			JSONParser parser = new JSONParser();
+			JSONObject obj = (JSONObject)parser.parse(fr); // fr.read를 안 씀
+			tfName.setText(obj.get("name").toString());
+			tfTel.setText(obj.get("tel").toString());
+			tfJumin.setText(obj.get("jumin").toString());
+			tfGender.setText(obj.get("gender").toString());
+			tfAge.setText(obj.get("age").toString());
+			tfHome.setText(obj.get("home").toString());
+			
+			
+			fr.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 

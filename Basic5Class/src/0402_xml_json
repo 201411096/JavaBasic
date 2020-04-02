@@ -1,0 +1,17 @@
+xml 방식
+
+<person>
+	<name>홍길동</name>
+	<age>40</age>
+	<tel>002-333-4444</tel>
+</person>
+
+json 방식
+{
+	person:{
+		name:홍길동,
+		age:40,
+		tel:055-555-555
+	}
+		
+}

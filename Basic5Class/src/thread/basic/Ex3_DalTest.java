@@ -18,6 +18,9 @@ public class Ex3_DalTest extends Frame {
 		
 		// # 
 		// 각 객체의 쓰레드 메소드(run) 호출한다 
+		new Thread(a).start();
+		new Thread(b).start();
+		new Thread(c).start();
 
 		
 	}	
@@ -55,7 +58,7 @@ public class Ex3_DalTest extends Frame {
 	- 임의의 수만큼 잠시 쓰레드를 블럭한다
 	# 위의 작업을 반복한다
 */
-class Dal 
+class Dal implements Runnable
 {
 	int x, y;
 	int speed;
@@ -70,7 +73,16 @@ class Dal
 	
 	public void run()
 	{
-		
-
+		while(true) {
+			speed=(int)(Math.random()*100);
+			x+=speed;
+			app.repaint();
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}	
 }
