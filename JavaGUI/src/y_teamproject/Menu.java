@@ -1,6 +1,7 @@
 package y_teamproject;
 
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 
 public class Menu {
 	String name;
@@ -9,6 +10,7 @@ public class Menu {
 	int percent; 	// 매출의 몇%인지..
 	String menuNameList [] = {"엽기떡볶이", "엽기닭볶음탕", "뼈없는닭발", "국물닭발", "주먹김밥", "계란찜", "공기밥", "음료", "떡추가", "오뎅추가", "치즈추가", "햄추가", "Aset", "Bset", "Cset", "Familyset"};
 	int menuCostList [] = {14000, 24000, 15000, 15000, 2000, 2000, 1000, 1000, 1000, 1000, 3000, 1000, 17000, 19000, 21000, 28000};
+	HashSet<Integer> notMainMenu_idxSet = new HashSet<Integer>(Arrays.asList(4,5,6,7,8,9,10,11)); //mostMenu에 선택될 수 없는 인덱스들
 	public Menu(){
 	}
 	public Menu(String name, int cost){
@@ -75,7 +77,7 @@ public class Menu {
 		int max_idx=0;
 		for(int i=0; i<cnt.length; i++)
 		{
-			if(cnt[max_idx]<cnt[i])
+			if(cnt[max_idx]<cnt[i] && !notMainMenu_idxSet.contains(i)) // 사이드메뉴는 mostMenu에 올라갈 수 없도록 조건 추가
 				max_idx=i;
 		}
 		return max_idx;
