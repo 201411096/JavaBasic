@@ -20,16 +20,16 @@ public class Menu {
 		this.cost=cost;
 		this.count=count;
 	}
-	public String[] makeMenuString(int [] cnt) {
+	public String[] makeMenuString(int [] cnt) { // 각 메뉴별 개수를 담은 배열들을 담아와서 주문 내역에 사용할 string 배열 반환
 		String s[] = new String[16];
 		int stringCnt=0;
-		for(int i=0; i<cnt.length; i++) {
-			if(cnt[i]!=0)
+		for(int i=0; i<cnt.length; i++) {		
+			if(cnt[i]!=0)						//메뉴의 갯수가 0이 아닐경우 메뉴의 이름과 개수 가격을 string 배열에 추가
 				s[stringCnt++]= menuNameList[i] + "\t\t" + cnt[i] + "\t       " + menuCostList[i]*cnt[i];
 		}
 		return s;
 	}
-	public Menu[] getRankArray(int [] cnt){ // 매출 갯수가 순서대로 담긴 배열을 받아서 매출순이 큰 순서대로 메뉴 배열을 보냄
+	public Menu[] getRankArray(int [] cnt){ 		// 매출 갯수가 순서대로 담긴 배열을 받아서 매출순이 큰 순서대로 메뉴 배열을 보냄
 		Menu menuArray [] = new Menu[cnt.length];
 		for(int i=0; i<cnt.length; i++)
 			menuArray[i] = new Menu(menuNameList[i], menuCostList[i], cnt[i]);
