@@ -11,10 +11,8 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class MenuPanel extends JPanel{
-	ImageIcon imageIconArray [] = new ImageIcon[4];
-	JButton buttonArray [] =new JButton[4];
 
-	public MenuPanel(JButton b1, JButton b2, JButton b3, JButton b4) {
+	public MenuPanel(JButton b1, JButton b2, JButton b3, JButton b4) { //tabbedPane에 붙이는 JPanel
 		setLayout(new GridLayout(2,2));
 		setBackground(Color.white);
 		add(b1);
