@@ -41,8 +41,6 @@ public class MainFrame extends JFrame implements ActionListener{
 	//매출 요약 버튼
 	JButton salesSummaryButton = new JButton("매출 요약");
 	
-	
-
 	public MainFrame() {
 		for(int i=0; i<imageIconArray.length; i++) // 이미지 로딩 &버튼에 연결
 		{
@@ -91,9 +89,7 @@ public class MainFrame extends JFrame implements ActionListener{
 				}
 			});
 		}
-			
- 
-		orderButton.addActionListener(new ActionListener() {
+		orderButton.addActionListener(new ActionListener() { // 주문 버튼 이벤트 리스너
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int result = JOptionPane.showConfirmDialog(null, "주문하시겠습니까?", null, JOptionPane.YES_NO_OPTION);
@@ -144,7 +140,7 @@ public class MainFrame extends JFrame implements ActionListener{
 				
 			}
 		});
-		totalCancelButton.addActionListener(new ActionListener() {
+		totalCancelButton.addActionListener(new ActionListener() { //주문 취소 버튼 이벤트 리스너
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int result = JOptionPane.showConfirmDialog(null, "전부 취소하시겠습니까?", null, JOptionPane.YES_NO_OPTION);
@@ -156,10 +152,21 @@ public class MainFrame extends JFrame implements ActionListener{
 				}
 			}
 		});
+		salesSummaryButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JFrame frame = new JFrame();
+				
+				frame.setVisible(true);
+				frame.setSize(800, 400);
+				frame.setLocation(600, 400);
+				frame.setTitle("매출 요약");
+			}
+		});
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e) { //메뉴 버튼들 리스너 
 		JButton jb = (JButton)e.getSource();
 		String s = "";
 		for(int i=0; i<buttonArray.length; i++)
