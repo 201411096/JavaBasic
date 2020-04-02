@@ -34,7 +34,7 @@ public class MainFrame extends JFrame implements ActionListener{
 	JTextArea orderTextArea = new JTextArea();
 	JButton orderButton = new JButton("주문");
 	JButton totalCancelButton = new JButton("전체취소");
-	LineBorder lineBorder = new LineBorder(new Color(165,165,165), 3); // 테두리
+	LineBorder lineBorder = new LineBorder(new Color(165,165,165), 3); // 테두리 효과에 사용하는 테두리
 	//이전 버튼에 대한 내용
 	JButton prevButton;
 	int prevButton_idx;
@@ -111,25 +111,26 @@ public class MainFrame extends JFrame implements ActionListener{
 						total+= menu.menuCostList[i]*menuCount[i]; //주문 총액 계산
 						totalmenuCount[i]+=menuCount[i]; //하루? 판매 갯수 추가
 					}
-
-					JFrame frame = new JFrame();
-					JLabel label1 = new JLabel("메뉴",SwingConstants.CENTER);
-					JLabel label2 = new JLabel("수량",SwingConstants.CENTER);
-					JLabel label3 = new JLabel("가격",SwingConstants.CENTER);
-					JPanel panel = new JPanel();
-					JLabel label4 = new JLabel("합계: " + total, SwingConstants.CENTER);
-					panel.setLayout(new GridLayout(1, 3));
-					panel.add(label1);
-					panel.add(label2);
-					panel.add(label3);
-
-					frame.add(panel, BorderLayout.NORTH);
-					frame.add(label4, BorderLayout.SOUTH);
-					frame.add(new JTextArea(temp.toString()));
-					frame.setVisible(true);
-					frame.setSize(400, 400);
-					frame.setLocation(800, 400);
-					frame.setTitle("주문내역");
+					OrderListFrame orderListFrame = new OrderListFrame(total, temp.toString());
+//					JFrame frame = new JFrame();
+//					JLabel label1 = new JLabel("메뉴",SwingConstants.CENTER);
+//					JLabel label2 = new JLabel("수량",SwingConstants.CENTER);
+//					JLabel label3 = new JLabel("가격",SwingConstants.CENTER);
+//					JLabel label4 = new JLabel("합계: " + total, SwingConstants.CENTER);
+//					JPanel panel = new JPanel();
+//					panel.setLayout(new GridLayout(1, 3));
+//					panel.add(label1);
+//					panel.add(label2);
+//					panel.add(label3);
+//
+//					frame.add(panel, BorderLayout.NORTH);
+//					frame.add(label4, BorderLayout.SOUTH);
+//					frame.add(new JTextArea(temp.toString()));
+//					frame.setVisible(true);
+//					frame.setSize(400, 400);
+//					frame.setLocation(800, 400);
+//					frame.setTitle("주문내역");
+					
 					for(int i=0; i<menuCount.length; i++)
 						menuCount[i]=0;
 					orderTextArea.setText(null);
