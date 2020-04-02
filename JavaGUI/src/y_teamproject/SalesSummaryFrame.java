@@ -11,16 +11,17 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class SalesSummaryFrame extends JFrame{
-	JLabel labelList[] = new JLabel[6];
-	JPanel panelLineList[] = new JPanel[6]; // 6줄로 표시
-	JPanel panelList[] = new JPanel[6]; //라벨과 같이 panelLineList 에 같이 들어가는 패널
+	final int size = 16;
+	JLabel labelList[] = new JLabel[size];
+	JPanel panelLineList[] = new JPanel[size]; // 5줄로 표시
+	JPanel panelList[] = new JPanel[size]; //라벨과 같이 panelLineList 에 같이 들어가는 패널
 	Menu menu = new Menu();
 	public SalesSummaryFrame(int totalmenuCount[]) {
 		Menu sortedMenuList [] = menu.getRankArray(totalmenuCount); // 매출 숫자가 담긴 배열을 받아서 높은 순서대로 배치
 		int countSoldProduct = menu.countSoldProduct(sortedMenuList); // 매출 순위에 표시할 갯수를 받음
 		menu.getPercentage(sortedMenuList); // 메뉴 배열의 각 요소마다의 %를 구해줌
 		System.out.println(countSoldProduct);
-		setLayout(new GridLayout(6,1));
+		setLayout(new GridLayout(size,1));
 		
 		for(int i=0; i<panelLineList.length; i++)
 		{
@@ -40,10 +41,9 @@ public class SalesSummaryFrame extends JFrame{
 			JPanel panelPercent[] = new JPanel[100];
 			for(int j=0; j<sortedMenuList[i].percent; j++)
 			{
-				System.out.println(sortedMenuList[i].percent);
 				panelPercent[j] = new JPanel();
-				panelPercent[j].setPreferredSize(new Dimension(6, 40));
-				panelPercent[j].setBackground(new Color(j*1, j*1, j*1));
+				panelPercent[j].setPreferredSize(new Dimension(18, 40));
+				panelPercent[j].setBackground(new Color(j*2, 0, 0));
 				panelList[i].add(panelPercent[j]);
 			}
 			panelLineList[i].add(labelList[i]); // 각 줄에 라벨 부착
@@ -51,8 +51,8 @@ public class SalesSummaryFrame extends JFrame{
 			add(panelLineList[i]); // 프레임에 줄마다 부착
 		}
 		setVisible(true);
-		setSize(800, 400);
-		setLocation(600, 400);
+		setSize(1920, 1080);
+		setExtendedState(JFrame.MAXIMIZED_BOTH); // 프로그램 시작시 최대화
 		setTitle("매출 순위");
 	}
 }

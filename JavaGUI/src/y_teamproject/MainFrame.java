@@ -39,7 +39,7 @@ public class MainFrame extends JFrame implements ActionListener{
 	JButton prevButton;
 	int prevButton_idx;
 	//매출 요약 버튼
-	JButton salesSummaryButton = new JButton("매출 요약");
+	JButton salesSummaryButton = new JButton("매출 순위");
 	
 	public MainFrame() {
 		for(int i=0; i<imageIconArray.length; i++) // 이미지 로딩 &버튼에 연결

@@ -7,5 +7,4 @@ public class Main {
 		m.display();
 		m.eventConn();
 	}
-
 }

@@ -50,17 +50,14 @@ public class Menu {
 			}
 		}
 	}
-	public int countSoldProduct(Menu [] menu) { // 하나라도 팔린 메뉴의 개수를 셈 // 5개보다 크면 5개로 출력
+	public int countSoldProduct(Menu [] menu) { // 하나라도 팔린 메뉴의 개수를 셈 
 		int cnt=0;
 		for(int i=0; i<menu.length; i++)
 		{
 			if(menu[i].count!=0)
 				cnt++;
 		}
-		if(cnt>=5)
-			return 5;
-		else
-			return cnt;
+		return cnt;
 	}
 	public void getPercentage(Menu [] menu) { // 메뉴 배열의 요소마다 매출의 %를 계산
 		int total =0;
