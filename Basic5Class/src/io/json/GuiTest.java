@@ -39,12 +39,10 @@ class MyFrame extends JFrame
 		
 		bSave = new JButton("저장하기");
 		bOpen = new JButton("읽어오기");
-		
 	}
 	
 	// 화면구성 및 보여주기
 	public void addLayout(){
-		
 		JPanel p_center = new JPanel();
 		p_center.setLayout( new GridLayout( 6, 2 ));
 		p_center.add( new JLabel("이름"));
@@ -57,7 +55,7 @@ class MyFrame extends JFrame
 		p_center.add( tfGender );
 		p_center.add( new JLabel("나이"));
 		p_center.add( tfAge );
-		p_center.add( new JLabel("이름"));
+		p_center.add( new JLabel("출신지"));
 		p_center.add( tfHome );
 		
 		JPanel p_south = new JPanel();
@@ -69,7 +67,6 @@ class MyFrame extends JFrame
 		setSize(400, 300);
 		setVisible(true);
 		setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE);
-		
 	}
 	
 	// 이벤트 연결
@@ -77,14 +74,10 @@ class MyFrame extends JFrame
 	{
 		/* 이벤트 핸들러 객체 생성*/
 		BtnHandler bHandler = new BtnHandler();
-		
 		/* 컴포넌트와 이벤트핸들러 연결 */
 		bSave.addActionListener(bHandler);
 		bOpen.addActionListener(bHandler);
-		
-	
 	}
-	
 	/* 이벤트 핸들러 선언 */
 	class BtnHandler implements ActionListener
 	{

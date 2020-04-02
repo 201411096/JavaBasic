@@ -105,9 +105,15 @@ class UIForm extends JFrame
 				 * @@@@@@@@@@@@@@@@@@@@@@@@@
 				 * */
 				try{
-
+//					FileOutputStream fos = new FileOutputStream("data.txt"); // 통로 역할
+//					DataOutputStream dos = new DataOutputStream(fos); // 필터링 역할
+					DataOutputStream dos = new DataOutputStream(new FileOutputStream("data.txt"));
+					dos.writeUTF(name);
+					dos.writeInt(age);
+					dos.writeDouble(height);
+					dos.writeChar(bloodType);
 					
-					
+					dos.close();
 					
 				}catch( Exception ex ){ 
 					System.out.println("쓰기 실패");
@@ -134,21 +140,21 @@ class UIForm extends JFrame
 			4. 스트림 닫기 			
 			*/
 				try{
+					DataInputStream dis = new DataInputStream(new FileInputStream("data.txt"));
+					name = dis.readUTF();
+					age = dis.readInt();
+					height = dis.readDouble();
+					bloodType = dis.readChar();
 					
-					
-					
+					dis.close();
 				}catch( Exception ex ){
 					System.out.println("읽기 실패");
 				}
-
 					tfName.setText(		name );
 					tfAge.setText(		String.valueOf( age ));
 					tfHeight.setText(	String.valueOf( height ));
 					tfBloodType.setText(String.valueOf( bloodType ));				
-				
-
 				}	
-
 		}
 	}
 }

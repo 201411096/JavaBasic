@@ -35,7 +35,7 @@ class UIForm3 extends JFrame
 	{
 		JPanel pCenter 	= new JPanel();
 		pCenter.setLayout( new BorderLayout() );
-		pCenter.add("Center", ta );
+		pCenter.add("Center", new JScrollPane(ta));
 	
 		JPanel pSouth	= new JPanel();
 		pSouth.add( bSave );
@@ -57,6 +57,7 @@ class UIForm3 extends JFrame
 		
 		bSave.addActionListener(hdlr);
 		bLoad.addActionListener(hdlr);
+		bClear.addActionListener(hdlr);
 		
 	}
 	
@@ -72,25 +73,34 @@ class UIForm3 extends JFrame
 				{
 					File f = fd.getSelectedFile();
 					try{
-						/** 
-						 * @@@@@@@@@@@@@@@@@@@@@@@@@
-						 * */
-						
-						
-						
-						
+						String msg = ta.getText();
+						FileWriter fw = new FileWriter(f);
+						fw.write(msg);
+						fw.close();
 					}catch(Exception ex){
 						System.out.println("저장 실패");
 					}	
 				}
+			}else if(evt==bLoad) {			// "화일읽기" 버튼이 눌렸을 때 
+				JFileChooser fd = new JFileChooser();
+				int returnValue = fd.showOpenDialog( null );
+				if( returnValue == JFileChooser.APPROVE_OPTION )
+				{
+					File f = fd.getSelectedFile();
+					try{
+						FileReader fr = new FileReader(f);
+						char msg [] = new char [1024];
+						fr.read(msg);
+						ta.setText(String.valueOf(msg));
+						fr.close();
+					}catch(Exception ex){
+						System.out.println("불러오기 실패");
+					}	
+				}
+			}else if(evt==bClear) {
+				ta.setText(null);
 			}
-			
-			// "화일읽기" 버튼이 눌렸을 때 
-			bLoad.addActionListener( new ActionListener() {
-				public void actionPerformed(ActionEvent ev){
-	
-				}	
-			});
+				
 		}
 	}
 }

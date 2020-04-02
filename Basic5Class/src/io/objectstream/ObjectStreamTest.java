@@ -1,10 +1,21 @@
 package io.objectstream;
 
 
-import java.io.*;
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class ObjectStreamTest
 {
@@ -105,12 +116,19 @@ class UIForm extends JFrame
 				 * @@@@@@@@@@@@@@@@@@@@@@@@@
 				 * */
 				try{
-
+					ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("data2.txt"));
+					Person p = new Person();
+					p.setName(name);
+					p.setAge(age);
+					p.setHeight(height);
+					p.setBloodType(bloodType);
 					
+					oos.writeObject(p); // person 객체를 한번에 보냄
 					
-					
+					oos.close();
 				}catch( Exception ex ){ 
-					System.out.println("쓰기 실패");
+					System.out.println("쓰기 실패: " + ex.getMessage());
+					ex.printStackTrace();
 				}
 				
 				tfName.setText("");
@@ -131,18 +149,24 @@ class UIForm extends JFrame
 			4. 스트림 닫기 			
 			*/
 				try{
-					DataInputStream in = new DataInputStream(
-						new FileInputStream("data.txt"));
-					
-					name	= in.readUTF();
-					age		= in.readInt();
-					height	= in.readDouble();
-					bloodType = in.readChar();
-					
-					in.close();
+					ObjectInputStream ois = new ObjectInputStream(new FileInputStream("data2.txt"));
+					Person p = new Person();
+					try {
+						p = (Person)ois.readObject();
+						name=p.getName();
+						age=p.getAge();
+						height=p.getHeight();
+						bloodType=p.getBloodType();
+						
+					} catch (ClassNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					ois.close();
 					
 				}catch( IOException ex ){
 					System.out.println("읽기 실패");
+					ex.printStackTrace();
 				}
 
 					tfName.setText(		name );

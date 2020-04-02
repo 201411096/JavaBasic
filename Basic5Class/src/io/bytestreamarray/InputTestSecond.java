@@ -55,7 +55,13 @@ public class InputTestSecond
 	{
 		try
 		{
-	
+			FileInputStream fis = new FileInputStream("b.txt");
+			byte [] data = new byte[1024]; // 배열의 단점 : 얼마나 들어올지 모르기 떄문에 넉넉히 잡아둠
+			int count = fis.read(data); // data에 읽은 값들을 저장하고 얼마나 읽어왔는지를 int형으로 반환
+			for(int i=0; i<count; i++)
+				System.out.print((char)data[i]);
+			
+			//byteStream과 characterStream을 같이 사용하는 이유는 byteStream이 필터링 하는 역할을 함
 			
 			
 		}catch( Exception ex ){
