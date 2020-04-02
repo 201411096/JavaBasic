@@ -36,7 +36,6 @@ public class OrderPanel extends JPanel {		// 주문 내역을 보여주는 jtext
 			labelList[i] = new JLabel(labelName[i], SwingConstants.CENTER);
 			panelList[1].add(labelList[i]);
 		}
-
 		panelList[0].setLayout(new GridLayout(2,1));
 		panelList[0].add(b3);
 		panelList[0].add(panelList[1]);

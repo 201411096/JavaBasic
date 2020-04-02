@@ -16,9 +16,6 @@ import javax.swing.JPanel;
  *  그래프를 표기하는 부분인 panelList[]에는 메뉴별 퍼센트(인트)값만큼 label을 색칠해서 추가하는 식으로 색이 변하는 그래프 표현 
  */
 
-
-
-
 public class SalesSummaryFrame extends JFrame{
 	int size = 16;
 	JLabel labelList[] = new JLabel[size]; 							// panelList와 같이 panelLineList에 같이 들어가는 라벨

@@ -129,6 +129,9 @@ public class MainFrame extends JFrame implements ActionListener{
 					for(int i=0; i<menuCount.length; i++)
 						menuCount[i]=0;				// 각 메뉴별 개수를 담는 배열을 전부 초기화
 					orderTextArea.setText(null);	// 주문 내역 창을 초기화
+					prevButton.setBorder(null); // 이전 버튼의 테두리 초기화
+					prevButton = null;			// 이전 버튼을 담는 변수 초기화
+					prevButton_idx = -1;		// 이전 버튼의 인덱스를 담는 변수를 의미없는 값으로 초기화
 				}
 			}
 		});
