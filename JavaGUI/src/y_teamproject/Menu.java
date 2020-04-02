@@ -70,4 +70,14 @@ public class Menu {
 				menu[i].percent=menu[i].count*100/total;
 		}
 	}
+	public int getMaxIdx(int cnt [])
+	{
+		int max_idx=0;
+		for(int i=0; i<cnt.length; i++)
+		{
+			if(cnt[max_idx]<cnt[i])
+				max_idx=i;
+		}
+		return max_idx;
+	}
 }

@@ -39,6 +39,9 @@ public class MainFrame extends JFrame implements ActionListener{
 	//이전 버튼에 대한 내용
 	JButton prevButton;
 	int prevButton_idx;
+	//오늘 가장 많이 팔린 메뉴
+	JButton mostButton;
+	
 	
 	public MainFrame() {
 		for(int i=0; i<imageIconArray.length; i++) // 이미지 로딩 &버튼에 연결
@@ -78,13 +81,15 @@ public class MainFrame extends JFrame implements ActionListener{
 				@Override
 				public void mouseEntered(MouseEvent e) {			// 마우스가 버튼의 범위에 들어올 경우
 					JButton jb = (JButton)e.getSource();
-					if(jb.getBackground()==Color.white) 			// 버튼이 기본색(하얀색)일 경우
-						jb.setBackground(new Color(120, 120, 120)); // 버튼 색깔 변경
+					jb.setBackground(new Color(120, 120, 120)); // 버튼 색깔 변경
 				}
 				@Override
 				public void mouseExited(MouseEvent e) {				// 마우스가 버튼의 범위에서 벗어날 경우
 					JButton jb = (JButton)e.getSource();
-					jb.setBackground(Color.white);					// 버튼의 색깔을 원래의 색깔(하얀색)로 변경
+					if(jb!=mostButton)
+						jb.setBackground(Color.white);					// 버튼의 색깔을 원래의 색깔(하얀색)로 변경
+					else
+						jb.setBackground(Color.red);
 				}
 			});
 		}
@@ -117,6 +122,11 @@ public class MainFrame extends JFrame implements ActionListener{
 					prevButton.setBorder(null); // 이전 버튼의 테두리 초기화
 					prevButton = null;			// 이전 버튼을 담는 변수 초기화
 					prevButton_idx = -1;		// 이전 버튼의 인덱스를 담는 변수를 의미없는 값으로 초기화
+					if(mostButton!=null)
+						mostButton.setBackground(Color.white); // 이전의 가장 잘 팔렸었던 메뉴는 원래 색으로
+					mostButton = buttonArray[menu.getMaxIdx(totalmenuCount)]; //
+					mostButton.setBackground(Color.red); // 가장 잘 팔리고 있는 메뉴 색깔 변경
+					
 				}
 			}
 		});
