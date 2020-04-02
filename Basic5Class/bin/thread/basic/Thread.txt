@@ -1,0 +1,5 @@
+멀티쓰레드 프로그래밍
+
+Thread 상속 또는 Runnable 구현
+run() 오버라이딩
+run() 호출하는법 : start()사용 <내부적으로 run()을 부름>
