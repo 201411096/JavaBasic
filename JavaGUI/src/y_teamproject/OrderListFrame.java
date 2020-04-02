@@ -6,6 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.StringTokenizer;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -45,22 +48,42 @@ public class OrderListFrame extends JFrame{ // 주문 내역을 보여주는 화
 		setLocation(800, 400);
 		setTitle("주문내역");
 		
-		receiptbutton.addActionListener(new ActionListener() {
+		receiptbutton.addActionListener(new ActionListener() { // 영수증 파일을 생성하고 주문내역 창을 종료함
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String fileName = "receipt_" +"1";
+				SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss"); 
+				Date time = new Date();
+				String timeStr = format.format(time);
+				String fileName = "receipt_" +timeStr.substring(2, 14); // 파일의 이름을 현재 날짜와 시간을 포함해서 출력
 				try {
 					FileWriter fw = new FileWriter(fileName);
-					fw.write(temp);
-					
+					StringTokenizer st = new StringTokenizer(temp);
+					StringBuilder sb = new StringBuilder();
+					sb.append("----------------------\n");
+					sb.append(fileName+"\n");
+					sb.append("----------------------\n");
+					sb.append("메뉴/수량/가격\n");
+					sb.append("----------------------\n");
+					int cnt =0;
+					while(st.hasMoreTokens()) //temp로 넘겨받은 내용의 공백들을 없애고 "/"로 구분
+					{
+						sb.append(st.nextToken());
+						sb.append("/"); // 각 토큰을 "/"로 구분
+						cnt++;
+						if(cnt==3) //토큰 3개마다 개행
+						{
+							sb.append("\n");
+							cnt=0;
+						}	
+					}
+					sb.append("----------------------\n");
+					fw.write(sb.toString());
+					fw.write("합계 : " + total);
 					fw.close();
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
-				
 				dispose(); // 주문내역 프레임을 종료
 			}
 		});
