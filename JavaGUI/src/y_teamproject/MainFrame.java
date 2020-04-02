@@ -29,6 +29,7 @@ public class MainFrame extends JFrame implements ActionListener{
 	ImageIcon imageIconArray[] = new ImageIcon[16]; // 메뉴 버튼들에 들어가는 이미지
 	Menu menu = new Menu();
 	int menuCount [] = new int[menu.menuNameList.length];
+	int totalmenuCount [] = new int[menu.menuNameList.length]; //하루? 판매 갯수 세는 배열
 	//orderPanel에 추가할 내용
 	JTextArea orderTextArea = new JTextArea();
 	JButton orderButton = new JButton("주문");
@@ -37,6 +38,10 @@ public class MainFrame extends JFrame implements ActionListener{
 	//이전 버튼에 대한 내용
 	JButton prevButton;
 	int prevButton_idx;
+	//매출 요약 버튼
+	JButton salesSummaryButton = new JButton("매출 요약");
+	
+	
 
 	public MainFrame() {
 		for(int i=0; i<imageIconArray.length; i++) // 이미지 로딩 &버튼에 연결
@@ -50,7 +55,7 @@ public class MainFrame extends JFrame implements ActionListener{
 			menuPanel[i] = new MenuPanel(buttonArray[i*4], buttonArray[i*4+1], buttonArray[i*4+2], buttonArray[i*4+3]);
 		}
 		orderTextArea.setPreferredSize(new Dimension(420, 540));
-		orderPanel = new OrderPanel(orderTextArea, orderButton, totalCancelButton);
+		orderPanel = new OrderPanel(orderTextArea, orderButton, totalCancelButton, salesSummaryButton);
 		orderPanel.setBorder(lineBorder);
 	}
 	public void display() {
@@ -106,8 +111,11 @@ public class MainFrame extends JFrame implements ActionListener{
 						}	
 					}
 					for(int i=0; i<menuCount.length; i++)
-						total+= menu.menuCostList[i]*menuCount[i];
-					
+					{
+						total+= menu.menuCostList[i]*menuCount[i]; //주문 총액 계산
+						totalmenuCount[i]+=menuCount[i]; //하루? 판매 갯수 추가
+					}
+
 					JFrame frame = new JFrame();
 					JLabel label1 = new JLabel("메뉴",SwingConstants.CENTER);
 					JLabel label2 = new JLabel("수량",SwingConstants.CENTER);
