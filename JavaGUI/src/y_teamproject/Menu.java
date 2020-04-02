@@ -70,7 +70,7 @@ public class Menu {
 		}
 		for(int i=0; i<menu.length; i++) {
 			if(menu[i].count!=0)
-				menu[i].percent=total/menu[i].count*100;
+				menu[i].percent=menu[i].count*100/total;
 		}
 	}
 }
