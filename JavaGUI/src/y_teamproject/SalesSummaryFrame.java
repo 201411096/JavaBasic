@@ -13,8 +13,8 @@ public class SalesSummaryFrame extends JFrame{
 	JLabel labelList[] = new JLabel[6];
 	JPanel panelLineList[] = new JPanel[6]; // 6줄로 표시
 	JPanel panelList[] = new JPanel[6]; //라벨과 같이 panelLineList 에 같이 들어가는 패널
-	
-	public SalesSummaryFrame() {
+	Menu menu = new Menu();
+	public SalesSummaryFrame(int totalmenuCount[]) {
 		setLayout(new GridLayout(6,1));
 		for(int i=0; i<panelLineList.length; i++)
 		{

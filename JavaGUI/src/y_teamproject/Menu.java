@@ -23,4 +23,16 @@ public class Menu {
 		
 		return s;
 	}
+	public ArrayList<Integer> getRankArray(int [] cnt){
+		ArrayList<Integer> rankArrayList = new ArrayList<Integer>(); // 많은 순서대로 인덱스 저장
+		for(int i=0; i<cnt.length-1; i++)
+		{
+			int max_idx=i;
+			for(int j=0; j<cnt.length-1-i; j++)
+			{
+				
+			}
+		}
+		return rankArrayList;
+	}
 }

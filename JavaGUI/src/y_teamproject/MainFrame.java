@@ -112,24 +112,6 @@ public class MainFrame extends JFrame implements ActionListener{
 						totalmenuCount[i]+=menuCount[i]; //하루? 판매 갯수 추가
 					}
 					OrderListFrame orderListFrame = new OrderListFrame(total, temp.toString());
-//					JFrame frame = new JFrame();
-//					JLabel label1 = new JLabel("메뉴",SwingConstants.CENTER);
-//					JLabel label2 = new JLabel("수량",SwingConstants.CENTER);
-//					JLabel label3 = new JLabel("가격",SwingConstants.CENTER);
-//					JLabel label4 = new JLabel("합계: " + total, SwingConstants.CENTER);
-//					JPanel panel = new JPanel();
-//					panel.setLayout(new GridLayout(1, 3));
-//					panel.add(label1);
-//					panel.add(label2);
-//					panel.add(label3);
-//
-//					frame.add(panel, BorderLayout.NORTH);
-//					frame.add(label4, BorderLayout.SOUTH);
-//					frame.add(new JTextArea(temp.toString()));
-//					frame.setVisible(true);
-//					frame.setSize(400, 400);
-//					frame.setLocation(800, 400);
-//					frame.setTitle("주문내역");
 					
 					for(int i=0; i<menuCount.length; i++)
 						menuCount[i]=0;
@@ -156,13 +138,7 @@ public class MainFrame extends JFrame implements ActionListener{
 		salesSummaryButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				SalesSummaryFrame salesSummaryFrame = new SalesSummaryFrame();
-//				JFrame frame = new JFrame();
-//				
-//				frame.setVisible(true);
-//				frame.setSize(800, 400);
-//				frame.setLocation(600, 400);
-//				frame.setTitle("매출 요약");
+				SalesSummaryFrame salesSummaryFrame = new SalesSummaryFrame(totalmenuCount);
 			}
 		});
 	}
