@@ -156,12 +156,13 @@ public class MainFrame extends JFrame implements ActionListener{
 		salesSummaryButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JFrame frame = new JFrame();
-				
-				frame.setVisible(true);
-				frame.setSize(800, 400);
-				frame.setLocation(600, 400);
-				frame.setTitle("매출 요약");
+				SalesSummaryFrame salesSummaryFrame = new SalesSummaryFrame();
+//				JFrame frame = new JFrame();
+//				
+//				frame.setVisible(true);
+//				frame.setSize(800, 400);
+//				frame.setLocation(600, 400);
+//				frame.setTitle("매출 요약");
 			}
 		});
 	}
