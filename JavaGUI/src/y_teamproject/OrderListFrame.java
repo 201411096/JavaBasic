@@ -14,8 +14,9 @@ public class OrderListFrame extends JFrame{
 	String labelListName [] = {"메뉴", "수량", "가격", "합계: "};
 	JPanel panel = new JPanel();
 	public OrderListFrame(int total, String temp) {
-		for(int i=0; i<labelList.length; i++)
+		for(int i=0; i<labelList.length-1; i++)
 			labelList[i] = new JLabel(labelListName[i], SwingConstants.CENTER);
+		labelList[3] = new JLabel(labelListName[3] + total, SwingConstants.CENTER);
 
 		panel.setLayout(new GridLayout(1, 3));
 		for(int i=0; i<2; i++)
