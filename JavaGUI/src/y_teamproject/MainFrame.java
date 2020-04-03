@@ -24,6 +24,12 @@ public class MainFrame extends JFrame implements ActionListener{
 	private JTabbedPane tabbedPane = new JTabbedPane();
 	private String tabbedPaneName [] = {"메인메뉴", "사이드/음료", "토핑", "세트메뉴"}; // tabbedPane에 사용하는 문자열
 	private MenuPanel menuPanel[] = new MenuPanel[4]; // tabbedPane에 들어가는 패널들
+	
+	private ImageIcon mainScreen = new ImageIcon("src/y_teamproject/imgs/main.jpg");
+	private JButton mainScreenButton = new JButton();
+
+	private MainScreenPanel m;
+	
 	private OrderPanel orderPanel;					   // 우측에 붙는 패널
 	private JButton buttonArray [] = new JButton[16]; // 메뉴틀 버튼
 	private ImageIcon imageIconArray[] = new ImageIcon[16]; // 메뉴 버튼들에 들어가는 이미지
@@ -61,6 +67,10 @@ public class MainFrame extends JFrame implements ActionListener{
 	}
 	public void display() {
 		setLayout(new BorderLayout());						// mainFrame의 layout 설정
+		mainScreenButton.setIcon(mainScreen); 				//메인화면 버튼에 이미지 세팅
+		m = new MainScreenPanel(mainScreenButton, mainScreen);//
+		tabbedPane.add(m, "메인화면");	
+		
 		for(int i=0; i<menuPanel.length; i++)				
 			tabbedPane.add(menuPanel[i], tabbedPaneName[i]);// 메뉴 패널 4개와 그 이름들을 담은 배열들을 tabbedPane에 추가 
 		add(tabbedPane); //tabbedPane을 mainFrame에 부착
@@ -131,7 +141,7 @@ public class MainFrame extends JFrame implements ActionListener{
 					mostButton = buttonArray[menu.getMaxIdx(totalmenuCount)]; //가장 잘팔린 버튼 저장
 //					mostButton.setBackground(Color.red); // 가장 잘 팔리고 있는 메뉴 색깔 변경
 					mostButton.setIcon(mostImageIconArray[menu.getMaxIdx(totalmenuCount)]);
-					
+					tabbedPane.setSelectedIndex(0); // 주문 버튼 완료 시 메인 화면으로 돌아감
 				}
 			}
 		});
@@ -146,6 +156,7 @@ public class MainFrame extends JFrame implements ActionListener{
 					orderTextArea.setText(null);	// 주문 내역 창을 초기화
 					prevButton.setBorder(null); // 이전 버튼의 테두리 초기화
 					prevButton = null;			// 이전 버튼을 담는 변수 초기화
+					tabbedPane.setSelectedIndex(0); // 주문 버튼 완료 시 메인 화면으로 돌아감
 				}
 			}
 		});
