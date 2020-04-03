@@ -14,9 +14,9 @@ import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
 public class OrderPanel extends JPanel {		// 주문 내역을 보여주는 jtextarea를 포함한 패널
-	String labelName [] = {"메뉴", "수량", "가격"};
-	JLabel labelList [] = new JLabel[3];
-	JPanel panelList [] = new JPanel[3];
+	private String labelName [] = {"메뉴", "수량", "가격"};
+	private JLabel labelList [] = new JLabel[3];
+	private JPanel panelList [] = new JPanel[3];
 	
 	//주문 내역 부분을 포함한 패널 화면을 구성
 	public OrderPanel(JTextArea jt, JButton b1, JButton b2, JButton b3) { // textarea // 주문버튼 // 취소버튼 // 매출요약버튼

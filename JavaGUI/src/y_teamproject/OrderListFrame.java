@@ -18,10 +18,10 @@ import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
 public class OrderListFrame extends JFrame{ // 주문 내역을 보여주는 화면
-	JLabel labelList [] = new JLabel[4];
-	String labelListName [] = {"메뉴", "수량", "가격", "합계: "};
-	JPanel panelList [] = new JPanel[2]; // 0번 panel이 상단 1번 panel이 하단
-	JButton receiptbutton = new JButton("영수증 출력");
+	private JLabel labelList [] = new JLabel[4];
+	private String labelListName [] = {"메뉴", "수량", "가격", "합계: "};
+	private JPanel panelList [] = new JPanel[2]; // 0번 panel이 상단 1번 panel이 하단
+	private JButton receiptbutton = new JButton("영수증 출력");
 	public OrderListFrame(int total, String temp) {
 		for(int i=0; i<labelList.length-1; i++)
 			labelList[i] = new JLabel(labelListName[i], SwingConstants.CENTER);		//레이블에 메뉴, 수량 가격을 적은 후 가운데 정렬

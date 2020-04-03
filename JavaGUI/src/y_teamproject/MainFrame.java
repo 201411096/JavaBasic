@@ -30,21 +30,16 @@ public class MainFrame extends JFrame implements ActionListener{
 	private Menu menu = new Menu();
 	private int menuCount [] = new int[menu.getMenuNameList().length]; // 판매 갯수 세는 배열
 	private int totalmenuCount [] = new int[menu.getMenuNameList().length]; // 총 판매 갯수 세는 배열
-//	private int menuCount [] = new int[menu.menuNameList.length]; // 판매 갯수 세는 배열
-//	private int totalmenuCount [] = new int[menu.menuNameList.length]; // 총 판매 갯수 세는 배열
 	
 	//orderPanel에 추가할 내용
 	private JTextArea orderTextArea = new JTextArea(); // 주문 내역이 나오는 textArea
 	private JButton orderButton = new JButton("주문"); // 주문 버튼
 	private JButton totalCancelButton = new JButton("전체취소"); // 주문 전체 취소 버튼
 	private LineBorder lineBorder = new LineBorder(new Color(165,165,165), 3); // 테두리 효과에 사용하는 테두리
-	private JButton salesSummaryButton = new JButton("매출 순위"); // 매출 순위 버튼
-	//이전 버튼에 대한 내용
-	private JButton prevButton;
-	int prevButton_idx;
-	//오늘 가장 많이 팔린 메뉴
-	private JButton mostButton;
-	
+	private JButton salesSummaryButton = new JButton("판매 순위"); // 판매 순위 버튼
+
+	private JButton prevButton;	//이전 버튼에 대한 내용
+	private JButton mostButton;	//오늘 가장 많이 팔린 메뉴
 	
 	public MainFrame() {
 		for(int i=0; i<imageIconArray.length; i++) // 이미지 로딩 &버튼에 연결
@@ -116,7 +111,6 @@ public class MainFrame extends JFrame implements ActionListener{
 					for(int i=0; i<menuCount.length; i++)
 					{
 						total+=menu.getMenuCostList()[i]*menuCount[i]; //주문 총합 계산
-//						total+= menu.menuCostList[i]*menuCount[i]; //주문 총합 계산
 						totalmenuCount[i]+=menuCount[i]; 		   //메뉴별 하루? 판매 갯수 추가
 						menuCount[i]=0;							   //메뉴별 개수 초기화
 					}
@@ -125,7 +119,6 @@ public class MainFrame extends JFrame implements ActionListener{
 					orderTextArea.setText(null); // orderTextArea 영역을 초기화
 					prevButton.setBorder(null); // 이전 버튼의 테두리 초기화
 					prevButton = null;			// 이전 버튼을 담는 변수 초기화
-					prevButton_idx = -1;		// 이전 버튼의 인덱스를 담는 변수를 의미없는 값으로 초기화
 					if(mostButton!=null)
 						mostButton.setBackground(Color.white); // 이전의 가장 잘 팔렸었던 메뉴는 원래 색으로
 					mostButton = buttonArray[menu.getMaxIdx(totalmenuCount)]; //
@@ -145,7 +138,6 @@ public class MainFrame extends JFrame implements ActionListener{
 					orderTextArea.setText(null);	// 주문 내역 창을 초기화
 					prevButton.setBorder(null); // 이전 버튼의 테두리 초기화
 					prevButton = null;			// 이전 버튼을 담는 변수 초기화
-					prevButton_idx = -1;		// 이전 버튼의 인덱스를 담는 변수를 의미없는 값으로 초기화
 				}
 			}
 		});
@@ -172,7 +164,6 @@ public class MainFrame extends JFrame implements ActionListener{
 					prevButton.setBorder(null); // 이전 버튼이었던 곳의 테두리를 없앰
 				}
 				prevButton = jb;				// 이전 버튼에 이벤트 발생한 버튼의 내용을 넣음
-				prevButton_idx = i;				// 이전 버튼을 담는 인덱스 변수에 이벤트가 발생한 인덱스를 담음
 				jb.setBorder(new LineBorder((Color.blue), 5)); //이벤트가 발생한 버튼의 테두리 색깔을 변경
 			}
 		}

@@ -17,11 +17,11 @@ import javax.swing.JPanel;
  */
 
 public class SalesSummaryFrame extends JFrame{
-	int size = 16;
-	JLabel labelList[] = new JLabel[size]; 							// panelList와 같이 panelLineList에 같이 들어가는 라벨
-	JPanel panelLineList[] = new JPanel[size]; 						//하나의 줄을 구성하는 패널 배열
-	JPanel panelList[] = new JPanel[size];							 //labelList과 같이 panelLineList 에 같이 들어가는 패널
-	Menu menu = new Menu();
+	private int size = 16;
+	private JLabel labelList[] = new JLabel[size]; 							// panelList와 같이 panelLineList에 같이 들어가는 라벨
+	private JPanel panelLineList[] = new JPanel[size]; 						//하나의 줄을 구성하는 패널 배열
+	private JPanel panelList[] = new JPanel[size];							 //labelList과 같이 panelLineList 에 같이 들어가는 패널
+	private Menu menu = new Menu();
 	public SalesSummaryFrame(int totalmenuCount[]) {
 		Menu sortedMenuList [] = menu.getRankArray(totalmenuCount); // 매출 숫자가 담긴 배열을 받아서 높은 순서대로 배치
 		menu.getPercentage(sortedMenuList); 						// 메뉴 배열의 각 요소마다의 %를 구해줌
@@ -37,8 +37,6 @@ public class SalesSummaryFrame extends JFrame{
 			panelList[i] = new JPanel(); 							// 각 줄에 있는 큰 패널에 들어가는 작은 패널들
 			panelList[i].setLayout(flowLayout); 					// 그래프를 표현할 패널
 				
-//			if(sortedMenuList[i].count!=0) 							// 매출이 0이 아닐경우에만 라벨 이름 표시
-//				labelList[i] = new JLabel(sortedMenuList[i].name);
 			if(sortedMenuList[i].getCount()!=0)						// 매출이 0이 아닐경우에만 라벨 이름 표시
 				labelList[i] = new JLabel(sortedMenuList[i].getName());
 			else
@@ -46,7 +44,6 @@ public class SalesSummaryFrame extends JFrame{
 			labelList[i].setPreferredSize(new Dimension(100, 40));	// 라벨 크기 고정
 			
 			JPanel panelPercent[] = new JPanel[100];
-//			for(int j=0; j<sortedMenuList[i].percent; j++)			// 메뉴의 매출 퍼센트만큼 패널을 만들어서 그래프 패널에 부착
 			for(int j=0; j<sortedMenuList[i].getPercent(); j++)		// 메뉴의 매출 퍼센트만큼 패널을 만들어서 그래프 패널에 부착
 			{
 				panelPercent[j] = new JPanel();
@@ -61,6 +58,6 @@ public class SalesSummaryFrame extends JFrame{
 		setVisible(true);
 		setSize(1920, 1080);
 		setExtendedState(JFrame.MAXIMIZED_BOTH); // 프로그램 시작시 최대화
-		setTitle("매출 순위");
-	}
+		setTitle("판매 순위");
+	}	
 }
