@@ -166,6 +166,14 @@ public class MainFrame extends JFrame implements ActionListener{
 				SalesSummaryFrame salesSummaryFrame = new SalesSummaryFrame(totalmenuCount); // 매출 요약창을 만들어서 띄움(메뉴별 하루? 판매 갯수를 담는 배열을 같이 보냄) 
 			}
 		});
+		mainScreenButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				tabbedPane.setSelectedIndex(1); // 메인 화면 버튼 클릭 시 메인 메뉴 탭으로 넘어감
+				
+			}
+		});
 	}
 
 	@Override
