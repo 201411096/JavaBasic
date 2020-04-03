@@ -7,7 +7,7 @@ import java.io.*;
 import javax.swing.*;
 import java.util.*;
 
-class ChatClient implements ActionListener {
+class ChatClient implements ActionListener, Runnable {
 	JFrame f;
 
 	JTextField connTF, sendTF;
@@ -69,8 +69,6 @@ class ChatClient implements ActionListener {
 		p_east.setLayout( new BorderLayout());
 		p_east.add("North", new JLabel("   우 리 방 멤 버   "));
 		p_east.add("Center", memberList );
-		
-
 
 		f.getContentPane().add("North", p_north);
 		f.getContentPane().add("Center", new JScrollPane(ta));
@@ -109,17 +107,56 @@ class ChatClient implements ActionListener {
 	
 
 	void changeNameProc(){
-		JOptionPane.showMessageDialog(null, "대화명을 바꿉니다");
+		String nickname = "/name	"+changeNameTF.getText() +"\n";
+		try {
+			out.write(nickname.getBytes());
+		} catch (IOException e) {
+			ta.append("이름 변경 실패 : " + e.toString());
+		}
 	}
 
 	void connProc() {
-		JOptionPane.showMessageDialog(null, "서버에 접속합니다");
+		String ip = connTF.getText();
+		try {
+			s = new Socket(ip, 1234);
+			out = s.getOutputStream();
+			in = new BufferedReader(new InputStreamReader(s.getInputStream())); // reader는 문자형 stream은 byte
+			
+			new Thread(this).start(); //쓰레드 시작 (입력 받아온 것들)
+		} catch (Exception e) {
+			ta.setText("접속 실패 :" + e.toString());
+			e.printStackTrace();
+		}
+		
 	} // connProc ends
 	
+	public void run() {			 // eventProc에서 실행
+		while(s.isConnected()) { // 소켓이 열려있는 동안 계속 반복
+			String msg=null; 
+			
+			try {
+				msg = in.readLine();
+			} catch (IOException e) {
+				e.printStackTrace();
+			} //한줄씩 읽어들임 (\n전까지 읽어냄)
+			
+			ta.append(msg+"\n");
+		}
+	}
 
 
-	void sendProc() {
-		JOptionPane.showMessageDialog(null, "메세지를 전송합니다");
+	void sendProc() { 
+		String msg = sendTF.getText() + "\n";
+		try {												// try-catch 단축키 alt+shift+z
+			out.write(msg.getBytes()); 
+		} catch (IOException e) {
+			ta.append("쓰기실패:" + e.toString());
+			e.printStackTrace();
+		} // getBytes -> string을 byte 배열로 바꿔줌
+		sendTF.setText(null);
+		
+		ta.setCaretPosition(ta.getText().length()); //scroll 밑으로..? 확인 x
+		ta.requestFocus();
 	}// sendProc ends
 	
 	
@@ -129,8 +166,3 @@ class ChatClient implements ActionListener {
 	}
 	
 }// ChatClient ends
-			
-			
-
-	
-		
