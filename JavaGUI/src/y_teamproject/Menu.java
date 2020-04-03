@@ -4,13 +4,13 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 public class Menu {
-	String name;
-	int cost;
-	int count; 		// 메뉴 간 매출 정렬에 사용
-	int percent; 	// 매출의 몇%인지..
-	String menuNameList [] = {"엽기떡볶이", "엽기닭볶음탕", "뼈없는닭발", "국물닭발", "주먹김밥", "계란찜", "공기밥", "음료", "떡추가", "오뎅추가", "치즈추가", "햄추가", "Aset", "Bset", "Cset", "Familyset"};
-	int menuCostList [] = {14000, 24000, 15000, 15000, 2000, 2000, 1000, 1000, 1000, 1000, 3000, 1000, 17000, 19000, 21000, 28000};
-	HashSet<Integer> notMainMenu_idxSet = new HashSet<Integer>(Arrays.asList(4,5,6,7,8,9,10,11)); //mostMenu에 선택될 수 없는 인덱스들
+	private String name;
+	private int cost;
+	private int count; 		// 메뉴 간 매출 정렬에 사용
+	private int percent; 	// 매출의 몇%인지..
+	private String menuNameList [] = {"엽기떡볶이", "엽기닭볶음탕", "뼈없는닭발", "국물닭발", "주먹김밥", "계란찜", "공기밥", "음료", "떡추가", "오뎅추가", "치즈추가", "햄추가", "Aset", "Bset", "Cset", "Familyset"};
+	private int menuCostList [] = {14000, 24000, 15000, 15000, 2000, 2000, 1000, 1000, 1000, 1000, 3000, 1000, 17000, 19000, 21000, 28000};
+	private HashSet<Integer> notMainMenu_idxSet = new HashSet<Integer>(Arrays.asList(4,5,6,7,8,9,10,11)); //mostMenu에 선택될 수 없는 인덱스들
 	public Menu(){
 	}
 	public Menu(String name, int cost){
@@ -82,4 +82,48 @@ public class Menu {
 		}
 		return max_idx;
 	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getCost() {
+		return cost;
+	}
+	public void setCost(int cost) {
+		this.cost = cost;
+	}
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
+	public int getPercent() {
+		return percent;
+	}
+	public void setPercent(int percent) {
+		this.percent = percent;
+	}
+	public String[] getMenuNameList() {
+		return menuNameList;
+	}
+	public void setMenuNameList(String[] menuNameList) {
+		this.menuNameList = menuNameList;
+	}
+	public int[] getMenuCostList() {
+		return menuCostList;
+	}
+	public void setMenuCostList(int[] menuCostList) {
+		this.menuCostList = menuCostList;
+	}
+	public HashSet<Integer> getNotMainMenu_idxSet() {
+		return notMainMenu_idxSet;
+	}
+	public void setNotMainMenu_idxSet(HashSet<Integer> notMainMenu_idxSet) {
+		this.notMainMenu_idxSet = notMainMenu_idxSet;
+	}
+	
+	
 }

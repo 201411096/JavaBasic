@@ -21,26 +21,29 @@ import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 public class MainFrame extends JFrame implements ActionListener{
-	JTabbedPane tabbedPane = new JTabbedPane();
-	String tabbedPaneName [] = {"메인메뉴", "사이드/음료", "토핑", "세트메뉴"}; // tabbedPane에 사용하는 문자열
-	MenuPanel menuPanel[] = new MenuPanel[4]; // tabbedPane에 들어가는 패널들
-	OrderPanel orderPanel;					   // 우측에 붙는 패널
-	JButton buttonArray [] = new JButton[16]; // 메뉴틀 버튼
-	ImageIcon imageIconArray[] = new ImageIcon[16]; // 메뉴 버튼들에 들어가는 이미지
-	Menu menu = new Menu();
-	int menuCount [] = new int[menu.menuNameList.length]; // 판매 갯수 세는 배열
-	int totalmenuCount [] = new int[menu.menuNameList.length]; // 총 판매 갯수 세는 배열
+	private JTabbedPane tabbedPane = new JTabbedPane();
+	private String tabbedPaneName [] = {"메인메뉴", "사이드/음료", "토핑", "세트메뉴"}; // tabbedPane에 사용하는 문자열
+	private MenuPanel menuPanel[] = new MenuPanel[4]; // tabbedPane에 들어가는 패널들
+	private OrderPanel orderPanel;					   // 우측에 붙는 패널
+	private JButton buttonArray [] = new JButton[16]; // 메뉴틀 버튼
+	private ImageIcon imageIconArray[] = new ImageIcon[16]; // 메뉴 버튼들에 들어가는 이미지
+	private Menu menu = new Menu();
+	private int menuCount [] = new int[menu.getMenuNameList().length]; // 판매 갯수 세는 배열
+	private int totalmenuCount [] = new int[menu.getMenuNameList().length]; // 총 판매 갯수 세는 배열
+//	private int menuCount [] = new int[menu.menuNameList.length]; // 판매 갯수 세는 배열
+//	private int totalmenuCount [] = new int[menu.menuNameList.length]; // 총 판매 갯수 세는 배열
+	
 	//orderPanel에 추가할 내용
-	JTextArea orderTextArea = new JTextArea(); // 주문 내역이 나오는 textArea
-	JButton orderButton = new JButton("주문"); // 주문 버튼
-	JButton totalCancelButton = new JButton("전체취소"); // 주문 전체 취소 버튼
-	LineBorder lineBorder = new LineBorder(new Color(165,165,165), 3); // 테두리 효과에 사용하는 테두리
-	JButton salesSummaryButton = new JButton("매출 순위"); // 매출 순위 버튼
+	private JTextArea orderTextArea = new JTextArea(); // 주문 내역이 나오는 textArea
+	private JButton orderButton = new JButton("주문"); // 주문 버튼
+	private JButton totalCancelButton = new JButton("전체취소"); // 주문 전체 취소 버튼
+	private LineBorder lineBorder = new LineBorder(new Color(165,165,165), 3); // 테두리 효과에 사용하는 테두리
+	private JButton salesSummaryButton = new JButton("매출 순위"); // 매출 순위 버튼
 	//이전 버튼에 대한 내용
-	JButton prevButton;
+	private JButton prevButton;
 	int prevButton_idx;
 	//오늘 가장 많이 팔린 메뉴
-	JButton mostButton;
+	private JButton mostButton;
 	
 	
 	public MainFrame() {
@@ -112,7 +115,8 @@ public class MainFrame extends JFrame implements ActionListener{
 					}
 					for(int i=0; i<menuCount.length; i++)
 					{
-						total+= menu.menuCostList[i]*menuCount[i]; //주문 총합 계산
+						total+=menu.getMenuCostList()[i]*menuCount[i]; //주문 총합 계산
+//						total+= menu.menuCostList[i]*menuCount[i]; //주문 총합 계산
 						totalmenuCount[i]+=menuCount[i]; 		   //메뉴별 하루? 판매 갯수 추가
 						menuCount[i]=0;							   //메뉴별 개수 초기화
 					}

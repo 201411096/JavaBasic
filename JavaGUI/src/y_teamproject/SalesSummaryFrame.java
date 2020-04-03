@@ -37,14 +37,17 @@ public class SalesSummaryFrame extends JFrame{
 			panelList[i] = new JPanel(); 							// 각 줄에 있는 큰 패널에 들어가는 작은 패널들
 			panelList[i].setLayout(flowLayout); 					// 그래프를 표현할 패널
 				
-			if(sortedMenuList[i].count!=0) 							// 매출이 0이 아닐경우에만 라벨 이름 표시
-				labelList[i] = new JLabel(sortedMenuList[i].name);
+//			if(sortedMenuList[i].count!=0) 							// 매출이 0이 아닐경우에만 라벨 이름 표시
+//				labelList[i] = new JLabel(sortedMenuList[i].name);
+			if(sortedMenuList[i].getCount()!=0)						// 매출이 0이 아닐경우에만 라벨 이름 표시
+				labelList[i] = new JLabel(sortedMenuList[i].getName());
 			else
 				labelList[i] = new JLabel();			
 			labelList[i].setPreferredSize(new Dimension(100, 40));	// 라벨 크기 고정
 			
 			JPanel panelPercent[] = new JPanel[100];
-			for(int j=0; j<sortedMenuList[i].percent; j++)			// 메뉴의 매출 퍼센트만큼 패널을 만들어서 그래프 패널에 부착
+//			for(int j=0; j<sortedMenuList[i].percent; j++)			// 메뉴의 매출 퍼센트만큼 패널을 만들어서 그래프 패널에 부착
+			for(int j=0; j<sortedMenuList[i].getPercent(); j++)		// 메뉴의 매출 퍼센트만큼 패널을 만들어서 그래프 패널에 부착
 			{
 				panelPercent[j] = new JPanel();
 				panelPercent[j].setPreferredSize(new Dimension(18, 40));
