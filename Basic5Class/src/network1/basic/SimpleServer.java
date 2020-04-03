@@ -20,8 +20,8 @@ public class SimpleServer {
 			System.out.println("SimpleServer started..");
 		
 			// 2. 클라이언트 접속시 소켓 생성
+			clientSocket = server.accept();							// c언어에서의 bind listen을 소켓 생성과 accept 사이에서 같이 해주는듯
 			// 3. 소켓의 입출력 스트림 얻기
-			clientSocket = server.accept();
 			in = new DataInputStream( clientSocket.getInputStream());
 			out = new DataOutputStream( clientSocket.getOutputStream() );
 		

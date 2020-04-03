@@ -78,7 +78,7 @@ class JuryThread extends Thread{
 		*/
 		int result[] = new int [10];
 		for( int i=0 ; i<result.length ; i++ )
-			result[i] = a[i] + b[i];
+			result[i] = a[i] + b[i] * (int)Math.random()*100;
 		
 		/*******************************************
 		* 계산 결과를 다시 클라이언트로 보냄
