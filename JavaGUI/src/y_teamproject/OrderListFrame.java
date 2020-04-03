@@ -42,7 +42,7 @@ public class OrderListFrame extends JFrame{ // 주문 내역을 보여주는 화
 		setSize(400, 400);
 		setLocation(800, 400);
 		setTitle("주문내역");
-		
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		receiptbutton.addActionListener(new ActionListener() { // 영수증 파일을 생성하고 주문내역 창을 종료함
 			
 			@Override
@@ -81,6 +81,6 @@ public class OrderListFrame extends JFrame{ // 주문 내역을 보여주는 화
 				}
 				dispose(); // 주문내역 프레임을 종료
 			}
-		});	
+		});
 	}
 }

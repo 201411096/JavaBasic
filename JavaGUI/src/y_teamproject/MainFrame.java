@@ -27,6 +27,7 @@ public class MainFrame extends JFrame implements ActionListener{
 	private OrderPanel orderPanel;					   // 우측에 붙는 패널
 	private JButton buttonArray [] = new JButton[16]; // 메뉴틀 버튼
 	private ImageIcon imageIconArray[] = new ImageIcon[16]; // 메뉴 버튼들에 들어가는 이미지
+	private ImageIcon mostImageIconArray[] = new ImageIcon[16]; // 가장 많이 팔린 메뉴에 들어가는 이미지
 	private Menu menu = new Menu();
 	private int menuCount [] = new int[menu.getMenuNameList().length]; // 판매 갯수 세는 배열
 	private int totalmenuCount [] = new int[menu.getMenuNameList().length]; // 총 판매 갯수 세는 배열
@@ -40,11 +41,13 @@ public class MainFrame extends JFrame implements ActionListener{
 
 	private JButton prevButton;	//이전 버튼에 대한 내용
 	private JButton mostButton;	//오늘 가장 많이 팔린 메뉴
+	private int most_idx = -1;
 	
 	public MainFrame() {
 		for(int i=0; i<imageIconArray.length; i++) // 이미지 로딩 &버튼에 연결
 		{
 			imageIconArray[i] = new ImageIcon("src/y_teamproject/imgs/" + i +".png"); // 각 이미지들을 불러옴
+			mostImageIconArray[i] = new ImageIcon("src/y_teamproject/imgs/0_" +i+".jpg" ); // 가장 많이 팔린 메뉴의 이미지들
 			buttonArray[i] = new JButton(imageIconArray[i]);					      // 각 버튼들에 이미지 아이콘 추가
 			buttonArray[i].setBackground(Color.white);								  // 버튼들의 색 변경
 		}
@@ -84,10 +87,10 @@ public class MainFrame extends JFrame implements ActionListener{
 				@Override
 				public void mouseExited(MouseEvent e) {				// 마우스가 버튼의 범위에서 벗어날 경우
 					JButton jb = (JButton)e.getSource();
-					if(jb!=mostButton)
+//					if(jb!=mostButton)
 						jb.setBackground(Color.white);					// 버튼의 색깔을 원래의 색깔(하얀색)로 변경
-					else
-						jb.setBackground(Color.red);
+//					else
+//						jb.setBackground(Color.red);
 				}
 			});
 		}
@@ -119,10 +122,15 @@ public class MainFrame extends JFrame implements ActionListener{
 					orderTextArea.setText(null); // orderTextArea 영역을 초기화
 					prevButton.setBorder(null); // 이전 버튼의 테두리 초기화
 					prevButton = null;			// 이전 버튼을 담는 변수 초기화
+//					if(mostButton!=null)
+//						mostButton.setBackground(Color.white); // 이전의 가장 잘 팔렸었던 메뉴는 원래 색으로
 					if(mostButton!=null)
-						mostButton.setBackground(Color.white); // 이전의 가장 잘 팔렸었던 메뉴는 원래 색으로
-					mostButton = buttonArray[menu.getMaxIdx(totalmenuCount)]; //
-					mostButton.setBackground(Color.red); // 가장 잘 팔리고 있는 메뉴 색깔 변경
+						mostButton.setIcon(imageIconArray[most_idx]); // 이전의 가장 잘 팔렸었던 메뉴는 원래 이미지로
+					most_idx = menu.getMaxIdx(totalmenuCount); // 가장 잘팔린 메뉴의 인덱스를 받아옴
+					
+					mostButton = buttonArray[menu.getMaxIdx(totalmenuCount)]; //가장 잘팔린 버튼 저장
+//					mostButton.setBackground(Color.red); // 가장 잘 팔리고 있는 메뉴 색깔 변경
+					mostButton.setIcon(mostImageIconArray[menu.getMaxIdx(totalmenuCount)]);
 					
 				}
 			}
