@@ -4,57 +4,57 @@ import java.io.*;
 import java.util.*;
 import java.net.*;
 
-public class ChatServer implements Runnable {
+public class ChatServer implements Runnable { 							//  server 구현
 	ArrayList vc = new ArrayList();
 
 	public void run() {
-		ServerSocket ss = null;
+		ServerSocket ss = null; 
 		try{
-			ss = new ServerSocket(1234);
+			ss = new ServerSocket(1234);								// serverSocket 생성을 한 후에
 		}catch( Exception e ) {
 			System.out.println(e);
 		}
 
 		while(true) {
 			try{
-				Socket s = ss.accept();
-				System.out.println("Client 가 접속시도 :" + s );
+				Socket s = ss.accept();									//클라이언트가 접근할 떄마다 소켓 생성
+				System.out.println("Client 가 접속시도 :" + s );				//client의 정보가 같이 출력됨 ip / port localport
 				ChatService cs = new ChatService(s);
-				cs.start();
-				vc.add(cs);
+				cs.start();												//chatService를 시작한 후...
+				vc.add(cs);												//chatService들을 arraylist에 저장
 
 			} catch( Exception e ) { }
 		}
 	}  // run ends
 
-	public static void main( String [] arg ) {
-		ChatServer cs = new ChatServer();
-		new Thread(cs).start();
+	public static void main( String [] arg ) {							// 메인함수
+		ChatServer cs = new ChatServer();								// 서버 객체 생성
+		new Thread(cs).start();											// 서버 쓰레드 실행
 	}
 
 	class ChatService extends Thread {
-		String myname = "quest";
+		String myname = "guest";														//chatservice의 
 		BufferedReader in;
 		OutputStream out;
-		ChatService( Socket s ) {
+		ChatService( Socket s ) {														//chatservice 생성시 client socket을 받음
 			try{
-				in = new BufferedReader( new InputStreamReader(s.getInputStream()));
+				in = new BufferedReader( new InputStreamReader(s.getInputStream()));	//client socket에서 inputstream과 outputstream을 하나씩 받아옴
 				out = s.getOutputStream();
 			}catch( Exception e ) { }
 		}// 생성자 종료
 
-		public void run() {
+		public void run() {																//chatService의 run함수
 			while(true) {
 				try{
-					String msg = in.readLine();
+					String msg = in.readLine();											//msg를 한줄씩 받아옴
 					if( msg == null ) return;
-					StringTokenizer st = new StringTokenizer(msg);
-					if( st.countTokens() > 1 ) {
-						String temp = st.nextToken();
+					StringTokenizer st = new StringTokenizer(msg);						//msg를 토큰으로 받아옴
+					if( st.countTokens() > 1 ) {										//토큰 개수가 하나보다 많으면 계속 반복
+						String temp = st.nextToken();									//토큰이 "/name"이면 이름 변경 
 
-						if( temp.equalsIgnoreCase("/name" )) {
-							temp = st.nextToken();
-							putMessageAll(myname + "님의 이름이 " + temp + "으로 바뀌었습니다.");
+						if( temp.equalsIgnoreCase("/name" )) {							
+							temp = st.nextToken();										//temp가 "/name"일 경우 바로 다음 토큰을 받고
+							putMessageAll(myname + "님의 이름이 " + temp + "으로 바뀌었습니다.");	//이름을 바꿔줌
 							myname = temp;
 
 							// 추가2: 멤버 목록 추가
