@@ -25,9 +25,9 @@ public class MainFrame extends JFrame implements ActionListener{
 	private String tabbedPaneName [] = {"메인메뉴", "사이드/음료", "토핑", "세트메뉴"}; // tabbedPane에 사용하는 문자열
 	private MenuPanel menuPanel[] = new MenuPanel[4]; // tabbedPane에 들어가는 패널들
 	
+	//메인화면으로 사용할  
 	private ImageIcon mainScreen = new ImageIcon("src/y_teamproject/imgs/main.jpg");
 	private JButton mainScreenButton = new JButton();
-
 	private MainScreenPanel m;
 	
 	private OrderPanel orderPanel;					   // 우측에 붙는 패널
