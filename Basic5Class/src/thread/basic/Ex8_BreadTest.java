@@ -14,7 +14,6 @@ package thread.basic;
 class Bread 
 {
 	String bread;
-
 	//##  	
 	boolean isCheck = false;
 	public void setBread( String bread )

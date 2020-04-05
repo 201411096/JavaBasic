@@ -10,8 +10,7 @@ public class SimpleClient {
 //	public final static String HOST = "192.168.0.13";
 	public final static String HOST = "192.168.0.20";
 	
-	public static void main( String args[] ) {
-		
+	public static void main( String args[] ) {		
 		Socket client = null;
 		DataInputStream in = null;
 		DataOutputStream out = null;

@@ -8,7 +8,6 @@ public class Ex1_ThreadTest {
 		work2.start();
 	}
 }
-
 class MakeCar1 extends Thread{
 	String work;
 	

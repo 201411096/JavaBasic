@@ -14,7 +14,6 @@ public class ChatServer implements Runnable { 							//  server 구현
 		}catch( Exception e ) {
 			System.out.println(e);
 		}
-
 		while(true) {
 			try{
 				Socket s = ss.accept();									//클라이언트가 접근할 떄마다 소켓 생성

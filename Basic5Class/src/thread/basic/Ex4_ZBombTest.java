@@ -16,7 +16,7 @@ public class Ex4_ZBombTest extends JFrame{
 	private JButton btn;
 	private JLabel lb, image;
 	private boolean inputChk;
-
+	
 	Ex4_ZBombTest(){
 		setTitle("폭탄 테스트!");
 		p1 = new JPanel();

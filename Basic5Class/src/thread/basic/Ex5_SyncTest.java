@@ -22,7 +22,6 @@ class ThreadCount extends Thread
 		}
 	}
 }
-
 public class Ex5_SyncTest {
 	public static void main(String[] args) {
 		Count cnt = new Count();

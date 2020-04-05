@@ -13,6 +13,7 @@ public class Ex2_RunnableTest {
 		new Thread(new MakeCar2("엔진 부착착착착")).start();
 	}
 }
+
 class MakeCar2 implements Runnable{
 	String work;
 	MakeCar2(String work){

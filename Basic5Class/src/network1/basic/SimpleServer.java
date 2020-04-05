@@ -12,8 +12,7 @@ public class SimpleServer {
 		ServerSocket 		server = null;
 		DataInputStream 	in = null;
 		DataOutputStream out = null;
-		Socket clientSocket = null;
-		
+		Socket clientSocket = null;		
 		try{
 			// 1. 서버 소켓 생성
 			server = new ServerSocket( PORT );

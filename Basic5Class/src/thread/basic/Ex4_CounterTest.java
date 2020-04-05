@@ -32,8 +32,7 @@ public class Ex4_CounterTest extends JFrame{
         setBounds(200, 200, 600, 400); // location과 size를 같이 지정하는 메소드
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-        
+               
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

@@ -3,8 +3,7 @@ package network2.thread;
 import java.io.*;
 import java.net.*;
 
-public class Client{
-	
+public class Client{	
 	public final static int PORT = 3333;
 	public final static String HOST = "192.168.0.17";
 	static int a[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};

@@ -24,8 +24,6 @@ public class Ex3_DalTest extends Frame {
 
 		
 	}	
-	
-
 
 	public void paint( Graphics g )
 	{

@@ -21,7 +21,6 @@ class ChatClient implements ActionListener, Runnable {
 	// 추가0 : 대화명을 바꾸기
 	JTextField changeNameTF;
 	JButton    changeNameB;
-
 	// 추가2 : 방인원의 대명 보여주기
 	// 변수 선언
 	JList  memberList;

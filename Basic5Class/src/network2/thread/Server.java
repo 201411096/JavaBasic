@@ -3,8 +3,7 @@ package network2.thread;
 import java.io.*;
 import java.net.*;
 
-public  class Server extends Thread {
-	
+public  class Server extends Thread {	
 	public static final int PORT = 3333;
 	protected ServerSocket listen;
 	
