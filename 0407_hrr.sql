@@ -185,4 +185,22 @@ WHERE regexp_like(text, '^[^a-zA-Z0-9]');
 -- 10. 데이터 중 'gg'나 'GG'가 들어있는 데이터 검색
 SELECT *
 FROM reg_tab
-WHERE regexp_like(text, '*gg*');
+WHERE regexp_like(text, '((gg)|(GG))');
+
+---------------------------------------------------
+/*
+[ 계정 만드시고 그 계정에서 작업하기 ]
+
+1. 사용자명 JAVA 비밀번호가 1234인 사용자를 생성하여라
+sqlplus "/as sysdba"
+create user JAVA identified by 1234;
+
+2. 1번에서 생성한 사용자에게 오라클에 접속할 수 있는 역할,테이블 생성할 수 있는
+역할,뷰를 생성할수 있는 권한을 부여하여라
+grant connect, create table, create view to JAVA;
+
+3. JAVA 의 비밀번호를 java1234로 변경하여라
+alter user JAVA identified by java1234;
+4. JAVA 의 권한 중 뷰를 생성할 수 있는 권한을 회수 하여라?
+revoke create view from JAVA;
+*/
