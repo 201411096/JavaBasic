@@ -149,10 +149,16 @@ commit;
 SELECT *
 FROM reg_tab
 WHERE text LIKE 't%';
+SELECT *
+FROM reg_TAB
+WHERE REGEXP_LIKE(text, '^(t)');
 -- 2. text 컬럼의 문자열에서 't'로 끝나는 데이터 검색
 SELECT *
 FROM reg_tab
 WHERE text LIKE '%t';
+SELECT *
+FROM reg_TAB
+WHERE REGEXP_LIKE(text, '(t)$');
 -- 3. 첫번째 't'로시작하여 5번째 'r'이 있는 데이터 검색
 SELECT *
 FROM reg_tab
