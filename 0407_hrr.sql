@@ -5,6 +5,8 @@ CREATE TABLE gogek(
     tel varchar(15),
     CONSTRAINT gogek_id_pk PRIMARY KEY(id)
 );
+ALTER TABLE gogek ADD CONSTRAINT gogek_tel_uq UNIQUE(tel); --0408
+
 CREATE TABLE sangpum(
     no varchar(6),
     title varchar(50) not null,
@@ -29,7 +31,7 @@ commit;
 INSERT INTO gogek ( id, name, tel ) VALUES('babo1234','홍길동', '031-333-3333' );
 INSERT INTO gogek ( id, name, tel ) VALUES('babo1111','김길동', '031-111-1111' );
 INSERT INTO gogek ( id, name, tel ) VALUES('babo2222','홍길동', '031-222-2222' );
-INSERT INTO gogek ( id, name, tel ) VALUES('babo9999','박길동', '031-333-3333' );
+INSERT INTO gogek ( id, name, tel ) VALUES('babo9999','박길동', '031-333-3333' ); -- 전화번호 중복
 INSERT INTO gogek ( id, name, tel ) VALUES('babo1234','맹길동', '031-999-9999' ); -- 기본키 제약조건 위배
 INSERT INTO gogek ( id, name, tel ) VALUES('babo12345','이길동', '031-333-1234' ); -- 아이디 메모리 범위 초과
 INSERT INTO gogek ( id, name, tel ) VALUES('123','최길동', '031-999-9999' );
@@ -52,61 +54,57 @@ INSERT INTO jumun(no, gogek, sangpum,count, jumunil) VALUES ( 1005, 'babo1234', 
 INSERT INTO jumun(no, gogek, sangpum,count, jumunil) VALUES ( 1006, 'babo1234', 'B00009', 1, '2016/12/12' );
 
 
---전화번호가 없는 고객은 누구인지 고객명을 검색하세요
+--1. 전화번호가 없는 고객은 누구인지 고객명을 검색하세요
 SELECT name
 FROM gogek
 WHERE tel IS NULL;
---홍씨 성을 가진 고객들의 정보를 검색하세요
+--2. 홍씨 성을 가진 고객들의 정보를 검색하세요
 SELECT *
 FROM gogek
 WHERE name LIKE '홍%';
---babo2222 고객명을 박길동으로 변경하세요
+--3. babo2222 고객명을 박길동으로 변경하세요
 UPDATE gogek
 SET name='박길동'
 WHERE id='babo2222';
---아이디 123 고객의 아이디를 babo123 으로 변경하세요
+--4. 아이디 123 고객의 아이디를 babo123 으로 변경하세요
 UPDATE gogek
 SET id='babo123'
 WHERE id='123';
---봉길동씨의 전화번호 02-555-5555를 추가하세요
+--5. 봉길동씨의 전화번호 02-555-5555를 추가하세요
 UPDATE gogek
 SET tel='02-555-5555'
 WHERE name='봉길동';
-
---상품번호 B00009 에 가격 1200원 그리고 “겁나 쌕시한 옷입니다”라는 상품설명을 추가하세요
+--6. 상품번호 B00009 에 가격 1200원 그리고 “겁나 쌕시한 옷입니다”라는 상품설명을 추가하세요
 UPDATE sangpum
 SET detail='겁나 쌕시한 옷입니다', price=1200
 WHERE no='B00009';
---이쁜바지 상품이 10개가 팔렸습니다.
+--7. 이쁜바지 상품이 10개가 팔렸습니다.
 UPDATE sangpum
 SET count=count-10
 WHERE title='이쁜바지';
---Z00001 상품이 3개가 더 입고 되었습니다.
+--8. Z00001 상품이 3개가 더 입고 되었습니다.
 UPDATE sangpum
 SET count=count+3
 WHERE no='Z00001';
---상품 가격이 1000원을 넘는 상품들을 검색하세요
+--9. 상품 가격이 1000원을 넘는 상품들을 검색하세요
 SELECT *
 FROM sangpum
 WHERE price>1000;
 
 SELECT * FROM jumun;
---11월 이후에 주문한 상품 번호를 검색하세요
+--10. 11월 이후에 주문한 상품 번호를 검색하세요
 SELECT *
 FROM jumun
 WHERE TO_CHAR(jumunil, 'MM') > 11;
-
-
---babo 고객이 주문한 상품을 A00002로 변경하고 수량을 2개로 수정하세요
+--11. babo 고객이 주문한 상품을 A00002로 변경하고 수량을 2개로 수정하세요
 UPDATE jumun
 SET sangpum='A00002', count=2
 WHERE gogek='babo';
-
---babo1234 고객이 11월에 주문한 상품 번호을 검색하세요
+--12. babo1234 고객이 11월에 주문한 상품 번호을 검색하세요
 SELECT sangpum
 FROM jumun
 WHERE gogek='babo1234' AND TO_CHAR(jumunil, 'MM')='11';
---B00009 상품을 주문한 고객 아이디를 검색하세요
+--13. B00009 상품을 주문한 고객 아이디를 검색하세요
 SELECT DISTINCT gogek
 FROM jumun
 WHERE sangpum='B00009';
