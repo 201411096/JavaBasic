@@ -95,6 +95,8 @@ SELECT * FROM jumun;
 SELECT *
 FROM jumun
 WHERE TO_CHAR(jumunil, 'MM') > 11;
+
+
 --babo 고객이 주문한 상품을 A00002로 변경하고 수량을 2개로 수정하세요
 UPDATE jumun
 SET sangpum='A00002', count=2
@@ -151,18 +153,21 @@ FROM reg_tab
 WHERE text LIKE 't%';
 SELECT *
 FROM reg_TAB
-WHERE REGEXP_LIKE(text, '^(t)');
+WHERE REGEXP_LIKE(text, '^t(*)');
 -- 2. text 컬럼의 문자열에서 't'로 끝나는 데이터 검색
 SELECT *
 FROM reg_tab
 WHERE text LIKE '%t';
 SELECT *
 FROM reg_TAB
-WHERE REGEXP_LIKE(text, '(t)$');
+WHERE REGEXP_LIKE(text, '*t$');
 -- 3. 첫번째 't'로시작하여 5번째 'r'이 있는 데이터 검색
 SELECT *
 FROM reg_tab
 WHERE text LIKE 't___r%';
+SELECT *
+FROM reg_tab
+WHERE REGEXP_LIKE(text, 't...r');
 -- 4. 숫자로 끝나는 데이터 검색
 SELECT *
 FROM reg_tab
@@ -191,8 +196,8 @@ WHERE regexp_like(text, '^[^a-zA-Z0-9]');
 -- 10. 데이터 중 'gg'나 'GG'가 들어있는 데이터 검색
 SELECT *
 FROM reg_tab
-WHERE regexp_like(text, '((gg)|(GG))');
-
+WHERE regexp_like(text, '(*)((gg)|(GG))(*)');
+commit;
 ---------------------------------------------------
 /*
 [ 계정 및 권한 ]
