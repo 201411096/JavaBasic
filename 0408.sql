@@ -99,3 +99,65 @@ FROM employees;
 SELECT count(*) as count, avg(nvl(comm,0)) as avg, sum(nvl(comm,0)) as sum, min(nvl(comm,0)) as min, max(nvl(comm,0)) as max
 FROM emp
 WHERE JOB='CLERK';
+
+SELECT count(*)
+FROM emp
+WHERE comm IS NOT NULL AND comm!=0;
+
+-- 부서별로인원수, 평균급여, 최저급여, 최고급여, 급여의 합을 구하기
+SELECT deptno, count(*), avg(sal), min(sal), max(sal), sum(sal)
+FROM emp
+GROUP BY deptno;
+-- 부서별로인원수, 평균급여, 최저급여, 최고급여, 급여의 합을 구하기 (부서별 급여의 합이 높은 순으로
+SELECT deptno, count(*), avg(sal), min(sal), max(sal), sum(sal) as sum_sal
+FROM emp
+GROUP BY deptno
+ORDER BY sum_sal desc nulls last;
+ 
+-- 부서별업무별 그룹하여 부서번호, 업무, 인원수, 급여의 평균, 급여의 합을 구하기
+SELECT deptno, job, count(*), avg(sal), sum(sal)
+FROM emp
+GROUP BY deptno, job;
+ 
+-- 최대 급여가 2900 이상인부서에 대해 부서번호, 평균 급여, 급여의 합을 출력
+SELECT deptno, count(*) , round(avg(sal)), sum(sal)
+FROM emp
+GROUP BY deptno
+HAVING max(sal)>=2900;
+
+-- 업무별 급여의 평균이 3000이상인 업무에 대해 업무명, 평균 급여, 급여의 합을 출력
+SELECT job, avg(sal), sum(sal)
+FROM emp
+GROUP BY job
+HAVING avg(sal)>=3000;
+
+-- 전체 합계 급여가 5000를초과하는 각 업무에 대해서 업무와 급여 합계를 출력 단, SALESMAN은제외하고 급여 합계가 높은 순으로 정렬
+SELECT job, sum(sal)
+FROM emp
+WHERE job!='SALESMAN'
+GROUP BY job
+HAVING sum(sal)>5000
+ORDER BY sum(sal) desc;
+
+--  업무별최고 급여와 최소 급여의 차이를 구하라
+SELECT (max(sal)-min(sal)) as diff
+FROM emp
+GROUP BY job;
+
+-- 부서 인원이 4명보다 많은 부서의 부서번호, 인원수, 급여의 합을 출력
+SELECT deptno, count(*), sum(sal)
+FROM emp
+GROUP BY deptno
+HAVING count(*)>4;
+
+/*
+[ GROUP BY 절에 사용하는 함수 ]
+
+- ROLLUP : 결과에 그룹별 합계 정보를 추가 -- 마지막 부분에...
+
+- CUBE : 그룹핑 된 컬럼의 합계 정보를 추가 -- 맨 위 부분에...
+*/
+select job, sum( sal ) from emp group by job;
+select job, sum( sal ) from emp group by rollup(job); -- 마지막에 총합 추가
+select job, sum( sal ) from emp group by cube(job); -- 맨위에 총합 추가
+
