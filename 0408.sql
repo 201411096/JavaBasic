@@ -161,3 +161,65 @@ select job, sum( sal ) from emp group by job;
 select job, sum( sal ) from emp group by rollup(job); -- 마지막에 총합 추가
 select job, sum( sal ) from emp group by cube(job); -- 맨위에 총합 추가
 
+------------------------------------------------------------------------------
+/*
+1. 교재 chapter 4 / 5
+2. grouping 문제 풀이
+3. 오라클 IP 접속
+    - sql developer 변경 : localhost -> ip
+    - ex ERD 변경 : localhost -> ip
+*/
+------------------------------------------------------------------------------
+-- grouping 문제
+--1. 업무별, 부서별 급여 합계와 인원수를 출력하되, 10번 부서를 제외하고 업무가 ‘SALESMAN’과 ‘MANAGER’만 출력한다.
+SELECT job, deptno, count(*), sum(sal)
+FROM emp
+WHERE job='SALESMAN' OR job='MANAGER'
+GROUP BY job, deptno
+HAVING deptno!=10;
+
+--2. 업무별로 평균급여와 최대급여를 출력하되, 평균급여가 2000이상인 것만 출력하고 평균급여가 높은 순으로 정렬
+SELECT ROUND(avg(sal)), max(sal)
+FROM emp
+GROUP BY job
+HAVING avg(sal)>=2000
+ORDER BY avg(sal) desc;
+
+--3. 5개씩 급여합계와 인원수를 출력 (rownum이용)
+SELECT ceil(rownum/5), sum(sal), count(*)
+FROM emp
+GROUP BY ceil(rownum/5);
+
+
+--4. 같은 입사년도 별로 인원수를 출력
+SELECT TO_CHAR(hiredate,'YYYY'), count(*)
+FROM emp
+GROUP BY TO_CHAR(hiredate,'YYYY');
+
+--5. 다음과 같이 출력
+--   CLERK     SALESMAN MANAGER       (업무명)
+-----------------------------------------------------------------------
+--     4           4       3           (인원수)
+SELECT COUNT(DECODE(job, 'CLERK', 1)) as CLERK, COUNT(DECODE(job, 'SALESMAN', 1)) as SALESMAN, COUNT(DECODE(job, 'MANAGER', 1)) as MANAGER
+FROM emp;
+
+-- count는 널 속성을 세지 않음, decode함수에 default를 지정하지 않으면 default값으로 null을 줌
+-- DECODE(job, 'CLERK', __) __부분이 1이 아닌 아무 숫자나 들어가면 카운트가 정상적으로 돌아감
+-- DECODE(job, 'CLERK', 1, __) __부분이 default값을 지정해주는 곳, 적어두지 않으면 자동으로 null이 들어가 정상적으로 실행됨
+
+--6. 다음과 같이 출력
+--업무명  10번부서 20번부서 30번부서 급여합계
+----------------------------------------------------------------------------------------
+--CLERK  1300  1900     950  4150
+--SALESMAN 0     0    5600   5600
+--PRESIDENT 5000     0       0  5000
+--MANAGER    2450  2975    2850  8275
+--ANALYST     0  6000       0  6000
+SELECT job as "업무명", sum(decode(deptno, 10, sal, 0)) as "10번부서", sum(decode(deptno, 20, sal, 0))as "20번부서", sum(decode(deptno, 30, sal, 0))as "30번부서", sum(sal) as "급여합계"
+FROM emp
+GROUP BY job;
+
+
+
+
+
