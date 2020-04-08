@@ -215,11 +215,6 @@ FROM emp;
 --PRESIDENT 5000     0       0  5000
 --MANAGER    2450  2975    2850  8275
 --ANALYST     0  6000       0  6000
-SELECT job as "업무명", sum(decode(deptno, 10, sal, 0)) as "10번부서", sum(decode(deptno, 20, sal, 0))as "20번부서", sum(decode(deptno, 30, sal, 0))as "30번부서", sum(sal) as "급여합계"
+SELECT job as 업무명, sum(decode(deptno, 10, sal, 0)) as "10번부서", sum(decode(deptno, 20, sal, 0))as "20번부서", sum(decode(deptno, 30, sal, 0))as "30번부서", sum(sal) as "급여합계"
 FROM emp
 GROUP BY job;
-
-
-
-
-
