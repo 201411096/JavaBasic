@@ -13,9 +13,9 @@ public class Ex2751{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		StringBuffer answer= new StringBuffer();
-		int intputCase = Integer.parseInt(br.readLine());
+		int inputCase = Integer.parseInt(br.readLine());
 		ArrayList<Integer> inputNum = new ArrayList<Integer>();
-		for(int i=0; i<intputCase; i++)
+		for(int i=0; i<inputCase; i++)
 		{
 			inputNum.add(Integer.parseInt(br.readLine()));
 		}
