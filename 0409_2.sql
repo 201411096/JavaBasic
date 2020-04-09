@@ -66,11 +66,12 @@ WHERE TO_CHAR(e.hire_date,'YYYYMM')>='200701' AND TO_CHAR(e.hire_date,'YYYYMM')<
 --4. 'Executive' 부서에서 사원과 해당 사원의 관리자 이름을 출력 (*) 관리자가 없는 사원인 'King'이 출력되려면
 SELECT e1.first_name||' '||e1.last_name AS employee_name, e2.first_name||' '||e2.last_name AS manager_name
 FROM employees e1, employees e2, departments d
-WHERE e1.department_id=d.department_id AND e1.manager_id=e2.employee_id(+);
+WHERE e1.department_id=d.department_id AND e1.manager_id=e2.employee_id(+) AND d.department_name='Executive';
 --ANSI
 SELECT e1.first_name||' '||e1.last_name AS employee_name, e2.first_name||' '||e2.last_name AS manager_name
 FROM employees e1 
 INNER JOIN departments d
 ON e1.department_id=d.department_id
 LEFT OUTER JOIN employees e2
-ON e1.manager_id=e2.employee_id;
+ON e1.manager_id=e2.employee_id
+WHERE d.department_name='Executive';
