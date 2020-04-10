@@ -178,6 +178,10 @@ WHERE job='SALESMAN' OR job='MANAGER'
 GROUP BY job, deptno
 HAVING deptno!=10;
 
+select sum(sal), count(*)
+from emp
+group by job, deptno
+having job IN ('SALESMAN', 'MANAGER') AND deptno!=10;
 --2. 업무별로 평균급여와 최대급여를 출력하되, 평균급여가 2000이상인 것만 출력하고 평균급여가 높은 순으로 정렬
 SELECT ROUND(avg(sal)), max(sal)
 FROM emp
@@ -190,7 +194,6 @@ SELECT ceil(rownum/5), sum(sal), count(*)
 FROM emp
 GROUP BY ceil(rownum/5);
 
-
 --4. 같은 입사년도 별로 인원수를 출력
 SELECT TO_CHAR(hiredate,'YYYY'), count(*)
 FROM emp
@@ -201,6 +204,20 @@ GROUP BY TO_CHAR(hiredate,'YYYY');
 -----------------------------------------------------------------------
 --     4           4       3           (인원수)
 SELECT COUNT(DECODE(job, 'CLERK', 1)) as CLERK, COUNT(DECODE(job, 'SALESMAN', 1)) as SALESMAN, COUNT(DECODE(job, 'MANAGER', 1)) as MANAGER
+FROM emp;
+
+SELECT COUNT( CASE job
+                WHEN 'CLERK' THEN 1
+                ELSE NULL
+                END) AS CLERK,
+       COUNT ( CASE job
+                WHEN 'SALESMAN' THEN 1
+                ELSE NULL
+                END) AS SALESMAN,
+       COUNT ( CASE job
+                WHEN 'MANAGER' THEN 1
+                ELSE NULL
+                END) AS MANAGER
 FROM emp;
 
 -- count는 널 속성을 세지 않음, decode함수에 default를 지정하지 않으면 default값으로 null을 줌
@@ -216,5 +233,21 @@ FROM emp;
 --MANAGER    2450  2975    2850  8275
 --ANALYST     0  6000       0  6000
 SELECT job as 업무명, sum(decode(deptno, 10, sal, 0)) as "10번부서", sum(decode(deptno, 20, sal, 0))as "20번부서", sum(decode(deptno, 30, sal, 0))as "30번부서", sum(sal) as "급여합계"
+FROM emp
+GROUP BY job;
+
+SELECT job as 업무명, SUM(CASE deptno
+                            WHEN 10 THEN sal
+                            ELSE 0
+                            END) AS "10번부서"
+                    , SUM(CASE deptno
+                            WHEN 20 THEN sal
+                            ELSE 0
+                            END) AS "20번부서"
+                    , SUM(CASE deptno
+                            WHEN 30 THEN sal
+                            ELSE 0
+                            END) AS "30번부서"
+                     SUM(sal)
 FROM emp
 GROUP BY job;
