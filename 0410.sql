@@ -121,20 +121,94 @@ FROM ex_good g INNER JOIN ex_order o
 ON g.gno=o.gno
 WHERE o.status='배송중';
 
+--2. 주문한 상품 내역과 고객 정보 출력
+SELECT g.gno AS GNO, g.gname AS GNAME, g.price AS GPRICE, m.id AS MID, m.name AS MNAME, m.tel AS MTEL, m.addr AS MADDR
+FROM ex_order o, ex_good g, ex_member m
+WHERE o.gno=g.gno AND o.id=m.id;
 
+SELECT g.gno AS GNO, g.gname AS GNAME, g.price AS GPRICE, m.id AS MID, m.name AS MNAME, m.tel AS MTEL, m.addr AS MADDR
+FROM ex_order o 
+INNER JOIN ex_good g
+ON o.gno=g.gno
+INNER JOIN ex_member m
+ON o.id=m.id;
 
+--3. 주문번호별로 고객 정보(아이디)와 총합을 출력
+SELECT o.id AS ID, sum(o.count*g.price) AS SUM
+FROM ex_order o, ex_good g
+WHERE o.gno=g.gno
+GROUP BY o.orderno, o.id; -- group by에 들어가는 컬럼과 그룹함수만 select문에 사용가능
+                          -- group by o.ordername, o.id, ____ 넣고 싶은 것들을 어거지로 넣는 것을 subquery로 해결 가능
+                          -- group by 칼럼만 select문에 사용이 가능하지만 그룹함수안에는 대부분의? 칼럼을 넣는게 가능한 듯
+SELECT o.id AS ID, sum(o.count*g.price) AS SUM
+FROM ex_order o 
+INNER JOIN ex_good g
+ON o.gno=g.gno
+GROUP BY o.orderno, o.id;
 
-
-
-
-
-
-
+--GROUP BY 사용시에 select문으로 출력은 안되도 groupby함수에 사용은 가능한듯------------------------------
+--4. 3번에 주문 내역을 첫번째 상품명 외 몇 개로 출력 ex)  머리끈 외 2개 
+SELECT o.id AS ID, sum(o.count*g.price) AS SUM, min(g.gname)||' 외 '||(sum(o.count)-1)||'개' AS 주문내역
+FROM ex_order o, ex_good g
+WHERE o.gno=g.gno
+GROUP BY o.orderno, o.id;
 
 ----------------------------------------------------------------------------------------------------
-CREATE TABLE SAMPLE(
-sample_num number,
-sample_name varchar2(10)
-CONSTRAINT sample_sample_num
-);
-DROP TABLE SAMPLE
+--SubQuery
+/*----------------------------------------------------------------------------------------------------
+- 서브쿼리는 ( ) 로 묶는다 [권장]
+- 서브쿼리는 연산자의 오른쪽에 [권장]
+- 단일 행인 경우 비교 연산자 가능 ( >, >=, <, <=, =, !=(<>) ) ex) max, min, sum, avg => subquery의 결과가 하나인 것들..
+- 복수 행인 경우 IN, NOT IN, ANY, ALL, EXISTS
+- ORDER BY에선 사용 못한다
+*/----------------------------------------------------------------------------------------------------
+-- 문제
+-- 전체 사원들 중 평균급여보다 낮은 급여를 받는 사원의 명단을 조회
+-- 1) 평균급여
+SELECT round(avg(sal)) from emp ;
+-- 2) 그 평균급여보다 낮은 급여를 받는 사원의 명단을 조회
+SELECT ename, sal
+FROM emp
+WHERE sal< (SELECT round(avg(sal)) from emp) ; -- WHERE sal < (평균급여);
+
+--단일행인 경우 ( >, >=, <, <=, =, !=(<>) )
+
+-- 1_1) 최고 월급 구하기
+SELECT MAX(sal)
+FROM emp;
+-- 1_2) 월급 제일 많이 받는 사원 구하기
+SELECT *
+FROM emp
+WHERE sal=(SELECT MAX(sal)
+            FROM emp);
+            
+--2) 평균 급여보다 높고 최대 급여보다 낮은 월급을 받는 사원의 정보를조회
+SELECT *
+FROM emp
+WHERE sal<(SELECT MAX(sal) FROM emp) AND sal>(SELECT AVG(sal) FROM emp);
+--가상테이블 형식--------------------------------------------------------------------------------
+SELECT e.*
+FROM emp e,
+    (평균과 최고값) ext
+WHERE e.sal>평균 AND e.sal<최고값;
+--가상테이블 예시--------------------------------------------------------------------------------
+SELECT e.*
+FROM emp e,
+    (SELECT avg(sal) avg, max(sal) max FROM emp) ext -- 가상테이블 ext
+WHERE e.sal>ext.avg AND e.sal<ext.max;
+-----------------------------------------------------------------------------------------------
+--3) 월급순으로 상위 10명의명단을 출력 -- 가상테이블 사용
+SELECT *
+FROM emp
+WHERE ROWNUM <=10
+ORDER BY nvl(sal,0) desc nulls last; -- 정답아님 // rownum 조건이 order by보다 먼저 적용되서 제대로 된 정렬이 되지 않음
+
+SELECT * -- 3_1) 월급 순으로 정리
+FROM emp
+ORDER BY nvl(sal,0) desc nulls last;
+
+SELECT ext.* --3_2) 월급 순으로 정리된 테이블을 가져와서 10개까지 출력
+FROM (SELECT *
+      FROM emp
+      ORDER BY nvl(sal,0) desc nulls last) ext
+WHERE ROWNUM<=10;
