@@ -248,6 +248,6 @@ SELECT job as 업무명, SUM(CASE deptno
                             WHEN 30 THEN sal
                             ELSE 0
                             END) AS "30번부서"
-                     SUM(sal)
+                    ,SUM(sal) AS "급여합계"
 FROM emp
 GROUP BY job;
