@@ -329,7 +329,11 @@ WHERE not exists( SELECT * FROM emp ext WHERE e.empno=ext.mgr);
 SELECT e.last_name, e.hire_date, e.department_id
 FROM employees e
 WHERE e.department_id= ( SELECT e.department_id FROM employees e WHERE e.last_name='Zlotkey' ) AND e.last_name!='Zlotkey';
-
+--가상 테이블
+SELECT e.last_name, e.hire_date, e.department_id
+FROM employees e, (SELECT department_id FROM employees WHERE last_name='Zlotkey') d
+WHERE e.last_name!='Zlotkey' AND e.department_id=d.department_id;
+--'Zlotkey'의 id
 SELECT e.department_id
 FROM employees e
 WHERE e.last_name='Zlotkey';
@@ -338,7 +342,12 @@ SELECT e.employee_id ,e.first_name|| ' '||e.last_name as name, e.salary
 FROM employees e
 WHERE salary> ( SELECT round(avg(salary)) FROM employees e )
 ORDER BY salary;
-
+--가상 테이블
+SELECT e.employee_id ,e.first_name|| ' '||e.last_name as name, e.salary
+FROM employees e, (SELECT round(avg(salary)) as avgsal FROM employees e) avg_e
+WHERE salary> avg_e.avgsal
+ORDER BY salary;
+--평균 급여
 SELECT round(avg(salary))
 FROM employees e;
 --3. 이름에 u가 포함된 사원과 같은 부서에서 일하는 모든 사원의 사원 번호와 이름을 표시하는 질의를 작성하십시오.
@@ -382,10 +391,9 @@ SELECT d.department_id
 FROM departments d
 WHERE d.department_name='Executive';
 --7. 평균 급여보다 많은 급여를 받고 이름에 u가 포함된 사원과 같은 부서에서 근무하는 모든 사원의 사원 번호, 이름 및 급여를 표시하는 질의를 작성하십시오.
-SELECT e.employee_id, e.first_name|| ' '||e.last_name as name, e.department_id
+SELECT e.employee_id, e.first_name|| ' '||e.last_name as name, e.department_id, e.salary
 FROM employees e
 WHERE e.department_id IN( SELECT department_id FROM employees WHERE first_name|| ' '||last_name LIKE '%u%') AND e.salary> (SELECT round(avg(e2.salary)) FROM employees e2);
 --평균 급여
 SELECT round(avg(e2.salary))
 FROM employees e2;
-
