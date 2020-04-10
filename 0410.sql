@@ -231,19 +231,24 @@ select * from emp;
 SELECT empno, ename, job, sal
 FROM emp
 WHERE sal>( SELECT sal FROM emp WHERE ename='SCOTT' );
---2. 30번 부서의 최소 급여보다 각부서의 최소 급여가 높은 부서를 출력
+--2. 30번 부서의 최소 급여보다 각부서의 최소 급여가 높은 부서를 출력 ----------having 절에도 group함수 사용 가능
 SELECT deptno, min(sal)
 FROM emp
 GROUP BY deptno
 HAVING min(sal)>(SELECT min(sal) FROM emp GROUP BY deptno HAVING deptno=30);
 
---3. 업무별로 평균 급여 중에서 가장 적은 급여를 가진 직업을 출력
+--3. 업무별로 평균 급여 중에서 가장 적은 급여를 가진 직업을 출력 
+SELECT e.job, avg(e.sal)
+FROM emp e, (SELECT avg(sal) as avgsal  FROM emp GROUP BY job ORDER BY avg(sal)) ext
+group by e.job
+having avg(e.sal)=min(ext.avgsal);
+--rownum 이용
 SELECT e.job
 FROM (SELECT job, avg(sal) FROM emp GROUP BY job ORDER BY avg(sal)) e -- 업무별 평균급여를 구해서 정렬을 해둠
 WHERE rownum=1;                                                            -- 첫줄만 가져와서 급여를 가짐
 
 --업무별 평균 급여
-SELECT job, avg(sal)
+SELECT avg(sal)
 FROM emp
 GROUP BY job
 ORDER BY avg(sal);
