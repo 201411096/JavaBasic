@@ -148,11 +148,16 @@ GROUP BY o.orderno, o.id;
 
 --GROUP BY 사용시에 select문으로 출력은 안되도 groupby함수에 사용은 가능한듯------------------------------
 --4. 3번에 주문 내역을 첫번째 상품명 외 몇 개로 출력 ex)  머리끈 외 2개 
+--비슷하게 나오기는 하는데 주문한 순서대로 출력되는건 아닌듯
 SELECT o.id AS ID, sum(o.count*g.price) AS SUM, min(g.gname)||' 외 '||(sum(o.count)-1)||'개' AS 주문내역
 FROM ex_order o, ex_good g
 WHERE o.gno=g.gno
 GROUP BY o.orderno, o.id;
 
+SELECT o.id AS ID, sum(o.count*g.price) AS SUM, min(g.gname)||' 외 '||(sum(o.count)-1)||'개' AS 주문내역
+FROM ex_order o INNER JOIN ex_good g
+ON o.gno=g.gno
+GROUP BY o.orderno, o.id;
 ----------------------------------------------------------------------------------------------------
 --SubQuery
 /*----------------------------------------------------------------------------------------------------
@@ -212,3 +217,43 @@ FROM (SELECT *
       FROM emp
       ORDER BY nvl(sal,0) desc nulls last) ext
 WHERE ROWNUM<=10;
+-----------------------------------------------------------------------------------------------
+/* 연습<서브쿼리>
+1. SCOTT의 급여보다 많은 사원의 정보를 사원번호, 이름, 담당업무, 급여를 출력
+2. 30번 부서의 최소 급여보다 각부서의 최소 급여가 높은 부서를 출력
+3. 업무별로 평균 급여 중에서 가장 적은 급여를 가진 직업을 출력
+4. 사원번호가 7521의 업무와 같고 사번 7934인 직원보다 급여를 많이 받는 사원의 정보를 출력
+5. 'WARD'와 부서와 업무가 같은 사원 명단 출력
+*/
+-----------------------------------------------------------------------------------------------
+select * from emp;
+-- 1. SCOTT의 급여보다 많은 사원의 정보를 사원번호, 이름, 담당업무, 급여를 출력
+SELECT empno, ename, job, sal
+FROM emp
+WHERE sal>( SELECT sal FROM emp WHERE ename='SCOTT' );
+--2. 30번 부서의 최소 급여보다 각부서의 최소 급여가 높은 부서를 출력
+SELECT deptno, min(sal)
+FROM emp
+GROUP BY deptno
+HAVING min(sal)>(SELECT min(sal) FROM emp GROUP BY deptno HAVING deptno=30);
+
+--3. 업무별로 평균 급여 중에서 가장 적은 급여를 가진 직업을 출력
+SELECT e.job
+FROM (SELECT job, avg(sal) FROM emp GROUP BY job ORDER BY avg(sal)) e -- 업무별 평균급여를 구해서 정렬을 해둠
+WHERE rownum=1;                                                            -- 첫줄만 가져와서 급여를 가짐
+
+--업무별 평균 급여
+SELECT job, avg(sal)
+FROM emp
+GROUP BY job
+ORDER BY avg(sal);
+
+--4. 사원번호가 7521의 업무와 같고 사번 7934인 직원보다 급여를 많이 받는 사원의 정보를 출력
+SELECT *
+FROM emp
+WHERE job=(SELECT job FROM emp WHERE empno=7521) AND sal>(SELECT sal FROM emp WHERE empno=7934);
+
+--5. 'WARD'와 부서와 업무가 같은 사원 명단 출력 -- as는 from절에 사용할 수 없음 <가상테이블 이름 붙일 때 헷갈릴 수 있을 듯)
+SELECT e.empno, e.ename, e.job, e.deptno
+FROM emp e, (SELECT job, deptno FROM emp WHERE ename='WARD') ext
+WHERE e.job=ext.job AND e.deptno=ext.deptno;
