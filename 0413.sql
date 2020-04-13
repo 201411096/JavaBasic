@@ -146,3 +146,70 @@ INSERT INTO v_emp_info VALUES(9999, '삼순이', 'SALES'); -- 두개의 테이블의 값들�
 INSERT INTO v_emp_info(empno, ename) VALUES(9999, '삼순이'); -- 하나의 테이블의 값들만 삽입하는 건 가능( 뷰에는 입력되지 않고, 원본테이블에만 들어갔음)
 DELETE FROM v__emp_info WHERE empno=9999; -- 뷰에는 값이 들어가있지 않아서 삭제가 되지 않음(한쪽 원본테이블에만 값이 들어가 있음)
 --> 일반적으로 읽기 전용으로 만들기 때문에 크게 신경쓰지 않아도 되는 듯
+--[ 연습 ] 부서별로 부서명, 최소급여, 최대급여, 부서의 평균 급여를 포함하는 DEPT_SUM 뷰를생성하여라.------------------------------------------------
+CREATE VIEW v_deptgroup(dept_name, minsal, maxsal, avgsal)
+AS SELECT d.dname, min(e.sal), max(e.sal), round(avg(e.sal))
+    FROM emp e, dept d
+    WHERE e.deptno=d.deptno
+    GROUP BY d.dname
+WITH read only;            -- view를 읽기 전용으로 생성
+--뷰에 사용할 서브쿼리
+SELECT d.dname, min(e.sal), max(e.sal), round(avg(e.sal))
+FROM emp e, dept d
+WHERE e.deptno=d.deptno
+GROUP BY d.dname;
+--원본테이블에 값을 입력한 후 뷰에서 확인------------------------------------------------------------------------------------------------------
+INSERT INTO emp(empno, ename, sal, deptno) VALUES(8899, '남생이', 2000, 20); -- 원본테이블에 값 입력
+select * from v_deptgroup; -- 뷰에도 변경된 원본테이블의 내용이 적용
+/*-------------------------------------------------------------------------------------------------------------------------------------------
+시퀀스(SEQUENCE)
+-------------------------------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------
+[연습 ]  테이블 생성후 연습 TEMP
+no        number         pk
+name    varchar2(20)
+indate   date
+*/-----------------------------
+CREATE TABLE TEMP(
+    no number,
+    name varchar2(20),
+    indate date,
+    CONSTRAINT temp_no_pk PRIMARY KEY(no)
+);
+--PK가 10000번부터 100씩 증가하는 번호(SEQUENCE 생성) -- 시퀀스 생성시 옵션 사이에는 ,가 들어가지 않음
+CREATE SEQUENCE seq_temp_no
+    START WITH 10000
+    INCREMENT BY 100;
+INSERT INTO temp VALUES(seq_temp_no.nextval, '홍길숙', sysdate); --10000부터가아니라 10100부터 들어감
+--sequence를 기본옵션으로 생성
+CREATE SEQUENCE seq_emp_empno;
+INSERT INTO emp_copy(empno, ename, sal)
+VALUES(seq_emp_empno.nextval, '홍홍이', 3000);
+
+/*------------------------------------------------
+dual 테이블
+    - 오라클 자체에서 제공되는 테이블
+    - 간단한 함수를 이용한 결과값을 확인할 때 사용
+    - dummy 테이블, 가상 테이블
+*/-------------------------------------------------
+SELECT seq_emp_empno.currval from dual; -- dual 가상테이블에서 sequence의 현재값(CURRVAL)을 확인 가능
+
+/*-------------------------------------------------------------------------------------------------------------------------------------------
+인덱스(INDEX) -- 검색 속도를 향상시킴
+ ㄴ pk는 기본적으로 메모리에 올라감
+ ㄴ 인덱스 설정시 설정된 인덱스도 메모리에 같이 올라감
+-------------------------------------------------------------------------------------------------------------------------------------------*/
+--select empno, ename, rowid from emp;
+--hr 계정의 인덱스 확인---------------------------
+SELECT index_name, index_type, uniqueness
+FROM user_indexes;
+------------------------------------------------
+------------------------------------------------
+--Oracle 자동추적(AutoTrace) 권한 부여
+grant SELECT_CATALOG_ROLE to HR
+grant SELECT ANY DICTIONARY to HR
+
+SELECT * FROM employees; --f6 사용시 자동추적
+------------------------------------------------
+
+
