@@ -59,15 +59,12 @@ public class Main {
 		Configuration config = Configuration.getInstance();
 		config.setCol_seat_num(4);
 		config.setRow_seat_num(4);
-		config.setInitialize(true);
+
 		System.out.println(config.getCol_seat_num());
 		System.out.println(config.getRow_seat_num());
-		System.out.println(config.getInitialize());
 		config.setTotalConfiguration();
 		config.getTotalConfiguration();
 		config.setCol_seat_num(3);
-		config.setTotalConfiguration();
-		config.getTotalConfiguration();
 		System.out.println(config.getCol_seat_num());
 		System.out.println(config.getRow_seat_num());
 	}

@@ -15,7 +15,7 @@ public class Configuration implements Serializable{
 	private static Configuration instance;
 	
 	private String configFilePath = "E:/eclipse-workspace/JavaBasic/JavaBasic/src/t_teamproject_02/config.txt";
-	private boolean isInitialize;
+//	private boolean isInitialize;
 	private int row_seat_num, col_seat_num;
 	
 	private Configuration() {
@@ -26,7 +26,6 @@ public class Configuration implements Serializable{
 		}
 		return instance;
 	}
-
 
 	public void getTotalConfiguration() // 파일에서 읽기
 	{
@@ -49,12 +48,12 @@ public class Configuration implements Serializable{
 			e.printStackTrace();
 		} 
 	}
-	public boolean getInitialize() {
-		return isInitialize;
-	}
-	public void setInitialize(boolean isInitialize) {
-		this.isInitialize = isInitialize;
-	}
+//	public boolean getInitialize() {
+//		return isInitialize;
+//	}
+//	public void setInitialize(boolean isInitialize) {
+//		this.isInitialize = isInitialize;
+//	}
 	public int getRow_seat_num() {
 		return row_seat_num;
 	}
