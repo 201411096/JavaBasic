@@ -15,8 +15,7 @@ public class TestSelect3 {
 			Connection con = DriverManager.getConnection("jdbc:oracle:thin:@192.168.0.17:1521:orcl", "hr", "hrhr");//url(ip, port, sid), user password
 			//3. sql문장
 //이전 방식		String sql = "SELECT e.employee_id id, e.first_name||' '||e.last_name ename, d.department_name dname FROM EMPLOYEES e, departments d WHERE salary>=3000 AND e.department_id=d.department_id"; // 함수나 연산이 있다면 별칭을 주기
-//ANSI 방식
-			String sql = "SELECT e.employee_id id, e.first_name||' '||e.last_name ename,d.department_name dname FROM EMPLOYEES e INNER JOIN departments d ON e.department_id=d.department_id WHERE salary>=3000";
+/*ANSI 방식*/String sql = "SELECT e.employee_id id, e.first_name||' '||e.last_name ename,d.department_name dname FROM EMPLOYEES e INNER JOIN departments d ON e.department_id=d.department_id WHERE salary>=3000";
 			//4. 전송객체 얻어오기
 			Statement st = con.createStatement();
 			//5. 결과를 받아옴
