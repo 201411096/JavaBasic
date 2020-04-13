@@ -1,0 +1,10 @@
+1. 프로젝트 buildpath로 연결
+-java build path - add external jars
+
+2. 자바 폴더 안에 심는법
+jre - java runtime environment
+C:\Program Files\Java\jdk1.8.0_241\jre\lib\ext
+C:\Program Files\Java\jre1.8.0_241\lib\ext
+
+jar - 자바 파일을 묶은것
+tar - ..?
