@@ -1,0 +1,2 @@
+row_seat_num 5
+col_seat_num 5
