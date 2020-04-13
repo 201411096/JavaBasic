@@ -6,19 +6,19 @@ import javax.swing.JLabel;
 인자 : 남은 요금, 시간
 오른쪽 패널에 표시해야되는값 
 */
-public class Main extends JFrame implements Runnable{
-	public Main() {
-		setVisible(true);
-		setSize(1920, 1080);
-		setExtendedState(JFrame.MAXIMIZED_BOTH); 			// 프로그램 시작시 mainFrame 최대화
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
-	}	
-	@Override
-	public void run() {		
-	}
-	public static void main(String[] args){
-	}
-}
+//public class Main extends JFrame implements Runnable{
+//	public Main() {
+//		setVisible(true);
+//		setSize(1920, 1080);
+//		setExtendedState(JFrame.MAXIMIZED_BOTH); 			// 프로그램 시작시 mainFrame 최대화
+//		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
+//	}	
+//	@Override
+//	public void run() {		
+//	}
+//	public static void main(String[] args){
+//	}
+//}
 /* timerFrame test코드
 public class Main extends JFrame implements Runnable{
 	JLabel j;
@@ -53,14 +53,22 @@ public class Main extends JFrame implements Runnable{
 }
  */
 
-/* config test코드
+//config test코드
 public class Main {
 	public static void main(String[] args) {
 		Configuration config = Configuration.getInstance();
-		config.getTotalConfiguration();
 		config.setCol_seat_num(4);
+		config.setRow_seat_num(4);
+		config.setInitialize(true);
+		System.out.println(config.getCol_seat_num());
+		System.out.println(config.getRow_seat_num());
+		System.out.println(config.getInitialize());
 		config.setTotalConfiguration();
 		config.getTotalConfiguration();
+		config.setCol_seat_num(3);
+		config.setTotalConfiguration();
+		config.getTotalConfiguration();
+		System.out.println(config.getCol_seat_num());
+		System.out.println(config.getRow_seat_num());
 	}
 } 
- */
