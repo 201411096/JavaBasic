@@ -199,17 +199,35 @@ SELECT seq_emp_empno.currval from dual; -- dual 가상테이블에서 sequence의 현재값
  ㄴ pk는 기본적으로 메모리에 올라감
  ㄴ 인덱스 설정시 설정된 인덱스도 메모리에 같이 올라감
 -------------------------------------------------------------------------------------------------------------------------------------------*/
---select empno, ename, rowid from emp;
+--scott계정에서 확인-----------------------------
+select empno, ename, rowid from emp;
 --hr 계정의 인덱스 확인---------------------------
 SELECT index_name, index_type, uniqueness
 FROM user_indexes;
 ------------------------------------------------
 ------------------------------------------------
 --Oracle 자동추적(AutoTrace) 권한 부여
-grant SELECT_CATALOG_ROLE to HR
-grant SELECT ANY DICTIONARY to HR
+grant SELECT_CATALOG_ROLE to HR;
+grant SELECT ANY DICTIONARY to HR;
 
 SELECT * FROM employees; --f6 사용시 자동추적
-------------------------------------------------
+-- 1. pk의 시간 COST------------------------------------------------------
+SELECT * FROM employees
+WHERE employee_id=130; -- f6의 COST=1 (시간 COST)
+-- 2. 인덱스의 시간 COST---------------------------------------------------
+SELECT * FROM employees
+WHERE email='MROGERS'; -- pk가 아니지만 인덱스여서 PK와 COST가 같음
+--3. pk와 인덱스가 아닌 것의 COST-------------------------------------------
+SELECT * FROM employees
+WHERE salary=3000; -- 시간 COST=3 + OPTIONS=FULL(full - scans)
+-- 월급의 사용빈도가 높다면 -> 인덱스를 사용해서 월급도 메모리에 같이 올림
+CREATE INDEX idx_employees_sal ON employees(salary); -- employees의 테이블의 salary를 인덱스로 만듬
+SELECT * FROM employees WHERE salary=3000; -- 인덱스를 만든 후 자동추적 --> COST=2 + OPTIONS : BY INDEX
+/*------------------------------------------------------------------------------------------------
+인덱스에 대한 가이드라인
+    ㄴ 자주 조회되는 컬럼을 인덱스 컬럼으로 선택(where절의 조건이나 조인시 자주 사용되는 컬럼)
+    ㄴ 데이터 량이 많은 테이블에서 15%이하의 데이터를 조회할 경우(이 조건이 아닐 경우 인덱스를 사용하는 것이 더 늦어질 수도 있음)
+    ㄴ 테이블이 자주 갱신되거나 작은 경우 생성하지 않는 것이 좋음
+------------------------------------------------------------------------------------------------*/
 
 
