@@ -169,17 +169,38 @@ class InfoView implements ActionListener{
 	// JVM에 의해 호출되는 메소드
 	//-------------------------------------------------
 	public void actionPerformed( ActionEvent ev ){
+		Object evt = ev.getSource();
 		
-		if( ev.getSource() == b_add ){
+		if( evt == b_add ){
 			addRecord();
-		} else if( ev.getSource() == b_show ){
+		} else if( evt == b_show ){
 			showRecord();
-		} else 	if( ev.getSource() == b_modify ){
+		} else 	if( evt == b_modify ){
 			modifyRecord();
-		} else if( ev.getSource() == b_delete ){
-
+		} else if( evt == b_delete ){
+			deleteRecord();
+		} else if( evt == tf_tel) {
+			selectByTel();
 		}
 		
+	}
+	void selectByTel() {
+		// 1. 사용자가 입력한 전화번호 값을 얻어오기
+		String tel = tf_tel.getText();
+		// 2. 모델의 selectByTel()함수의 인자로 1번 보냄
+		InfoVO vo=null;
+		try {
+			vo = model.selectByTel(tel);
+		} catch (SQLException e) {
+			System.out.println("전화번호 검색 실패 :"+e.getMessage());
+			e.printStackTrace();
+		}
+		// 3. 2번 객체의 각각의 값을 텍스트필드에 지정
+		tf_name.setText(vo.getName());
+		tf_age.setText(Integer.toString(vo.getAge()));
+		tf_gender.setText(vo.getGender());
+		tf_home.setText(vo.getHome());
+		tf_id.setText(vo.getJumin());
 	}
 	
 	void addRecord() {
@@ -233,9 +254,28 @@ class InfoView implements ActionListener{
 		//######################################################
 		// Modify 버튼이 눌렸을 때		
 		// 1. 각 텍스트필드에서 값을 얻어옴
-		// 3. Database 파일의 modify() 함수의 인자로 값을 넘겨줌
-			JOptionPane.showMessageDialog( frame,  "수정버튼 눌림");					
-
+		// 3. Database 파일의 modify() 함수의 인자로 값을 넘겨줌				
+			try {
+				// 1. 각 텍스트필드에서 값을 얻어옴
+				String name = tf_name.getText();
+				String id = tf_id.getText();
+				String tel = tf_tel.getText();
+				int age = Integer.parseInt(tf_age.getText());
+				String gender = tf_gender.getText();
+				String home = tf_home.getText();
+				// 2. 각각의 값들을 InfoVO에 값으로 지정
+				InfoVO infoVO = new InfoVO(name, id, tel, age, gender, home);
+				// 3. 각 텍스트 필드 초기화
+				model.modify(infoVO);
+				tf_name.setText("");
+				tf_id.setText("");
+				tf_tel.setText("");
+				tf_age.setText("");
+				tf_gender.setText("");
+				tf_home.setText("");
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 	}
 	
 	void deleteRecord() {
@@ -243,7 +283,17 @@ class InfoView implements ActionListener{
 		// 삭제버튼 눌렸을 때
 		//	1. 주민번호 텍스트 필드의 입력값 얻어옴
 		//  2. Database의 delete() 함수의 인자로 넘겨줌
-			JOptionPane.showMessageDialog( frame ,  "삭제버튼 눌림");					
+			try {
+				model.delete(tf_tel.getText());
+				tf_name.setText("");
+				tf_id.setText("");
+				tf_tel.setText("");
+				tf_age.setText("");
+				tf_gender.setText("");
+				tf_home.setText("");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}				
 
 	}
 	

@@ -39,11 +39,36 @@ public class InfoModelImpl implements InfoModel{
 			st.close();			
 		}finally {
 			con.close();
-		}
-		
-		
-		
+		}		
 	}
+	
+	@Override
+	public void modify(InfoVO vo) throws SQLException {
+		Connection con = null;
+		try {
+			//2. 연결 객체 얻어오기
+			 con = DriverManager.getConnection(url, user, password);
+			//3. sql 문장
+			String sql = "UPDATE info_tab SET name=?, jumin=?, gender=?, age=?, home=? WHERE tel=?";
+			//4. 전송객체 얻어오기
+			PreparedStatement st = con.prepareStatement(sql);
+			st.setString(1, vo.getName());
+			st.setString(2, vo.getJumin());
+			st.setString(3, vo.getGender());
+			st.setInt(4, vo.getAge());
+			st.setString(5, vo.getHome());
+			st.setString(6, vo.getTel());
+			//5. 전송하기
+			st.executeUpdate();
+			
+			st.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			con.close();
+		}
+	}
+
 	@Override
 	public ArrayList<InfoVO> selectAll() throws SQLException {
 		Connection con = null;
@@ -71,6 +96,7 @@ public class InfoModelImpl implements InfoModel{
 				list.add(vo);
 			}
 			//6. 닫기
+			rs.close();
 			st.close();
 		}catch(Exception E) {			
 		}finally {
@@ -79,7 +105,57 @@ public class InfoModelImpl implements InfoModel{
 		return list;
 	}
 	@Override
-	public void delete() throws SQLException {	
+	public void delete(String tel) throws SQLException {
+		Connection con = null;
+		try {
+			con = DriverManager.getConnection(url, user, password);
+			
+			String sql = "DELETE FROM info_tab WHERE tel=?";
+			PreparedStatement st = con.prepareStatement(sql);
+			st.setString(1, tel);
+			
+			int result = st.executeUpdate();
+			
+			System.out.println(result + "행이 변경되었습니다.");
+			
+			st.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			con.close();
+		}
 	}
-	
+
+	@Override
+	public InfoVO selectByTel(String tel) throws SQLException{
+		Connection con = null;
+		InfoVO vo = null;
+		try {
+			con=DriverManager.getConnection(url, user, password);
+			
+			String sql = "SELECT * FROM info_tab WHERE tel=?";
+			
+			PreparedStatement st = con.prepareStatement(sql);
+			
+			st.setString(1, tel);
+			ResultSet rs = st.executeQuery();
+			if(rs.next()) 					//결과값이 하나여도 한번은 실행해야함
+			{
+				vo = new InfoVO();
+				vo.setAge(rs.getInt("AGE"));
+				vo.setGender(rs.getString("Gender"));
+				vo.setHome(rs.getString("HOME"));
+				vo.setJumin(rs.getString("JUMIN"));
+				vo.setName(rs.getString("NAME"));
+				vo.setTel(rs.getString("TEL"));
+			}
+			rs.close();
+			st.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}finally {
+			con.close();
+		}
+		return vo;
+	}
 }
