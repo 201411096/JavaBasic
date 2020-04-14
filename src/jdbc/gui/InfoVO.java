@@ -17,6 +17,10 @@ public class InfoVO { // value object
 		this.gender = gender;
 		this.home = home;
 	}
+	public String toString() {
+		return name + "\t" + jumin + "\t" + tel + "\t" + gender + "\t" + age + "\t" + home  + "\n";
+	}
+	
 	public String getName() {
 		return name;
 	}

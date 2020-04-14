@@ -205,19 +205,28 @@ class InfoView implements ActionListener{
 			tf_gender.setText("");
 			tf_home.setText("");
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	
 	}
 	
 	void showRecord() {
 		//######################################################
 		// 전체 보기 버튼이 눌렸을 때
-		// 1. Database 파일의 selectAll() 호출하여 Vector로 리턴받음
+		// 1. Database 파일의 selectAll() 호출하여 ArrayList로 리턴받음
 		// 2. 리턴받은 Vector에서 Record 객체를 하나씩 얻어온후
 		// 3. 그 Record 객체 안의 toString() 메소드 호출하여 TextArea에 출력
-			JOptionPane.showMessageDialog( frame,  "전체보기버튼 눌림");
+		try {
+			ArrayList<InfoVO> list = model.selectAll();
+			ta.setText("");
+			for(int i=0; i<list.size(); i++) {
+				InfoVO vo = list.get(i);
+				ta.append(vo.toString());
+			}
+				
+		} catch (SQLException e) {
+			ta.setText("전체보기 실패:" + e.getMessage());
+			e.printStackTrace();
+		}
 	}
 	
 	void modifyRecord() {

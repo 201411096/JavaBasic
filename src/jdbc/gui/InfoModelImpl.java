@@ -3,7 +3,9 @@ package jdbc.gui;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class InfoModelImpl implements InfoModel{
 	String url = "jdbc:oracle:thin:@192.168.0.17:1521:orcl";
@@ -43,7 +45,38 @@ public class InfoModelImpl implements InfoModel{
 		
 	}
 	@Override
-	public void selectAll() throws SQLException {
+	public ArrayList<InfoVO> selectAll() throws SQLException {
+		Connection con = null;
+		ArrayList<InfoVO> list= null;
+		try {
+			//2. connection 만들기
+			con=DriverManager.getConnection(url, user, password);
+			//3.sql 만들기
+			String sql = "SELECT * FROM info_tab";
+			//4.전송객체 얻어오기
+			PreparedStatement st = con.prepareStatement(sql);
+			//5.전송
+			//	ㄴ int executeUpdate() : INSERT, DELETE, UPDATE
+			//	ㄴ ResultSet executeQuery() : SELECT
+			ResultSet rs = st.executeQuery();
+			list = new ArrayList<InfoVO>();
+			while(rs.next()) {
+				InfoVO vo = new InfoVO();
+				vo.setName(rs.getString("NAME"));
+				vo.setJumin(rs.getString("JUMIN"));
+				vo.setTel(rs.getString("TEL"));
+				vo.setGender(rs.getString("GENDER"));
+				vo.setHome(rs.getString("HOME"));
+				vo.setAge(rs.getInt("AGE"));
+				list.add(vo);
+			}
+			//6. 닫기
+			st.close();
+		}catch(Exception E) {			
+		}finally {
+			con.close();
+		}
+		return list;
 	}
 	@Override
 	public void delete() throws SQLException {	
