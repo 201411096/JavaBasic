@@ -15,7 +15,7 @@ public class Configuration implements Serializable{
 	private static Configuration instance;
 	
 	private String configFilePath = "E:/eclipse-workspace/JavaBasic/JavaBasic/src/t_teamproject_02/config.txt";
-//	private boolean isInitialize;
+	private int isInitialize;
 	private int row_seat_num, col_seat_num;
 	
 	private Configuration() {
@@ -26,13 +26,28 @@ public class Configuration implements Serializable{
 		}
 		return instance;
 	}
-
+	public void initialize() {
+		try {
+			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(configFilePath));
+			Configuration con = Configuration.getInstance();
+			con.setCol_seat_num(5);
+			con.setRow_seat_num(5);
+			con.setInitialize(1);
+			oos.writeObject(con);
+			oos.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+	}
 	public void getTotalConfiguration() // 파일에서 읽기
 	{
 		try {
 			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(configFilePath));
 			Configuration con = Configuration.getInstance();
 			con = (Configuration)ois.readObject();
+			this.col_seat_num=con.getCol_seat_num();
+			this.row_seat_num=con.getRow_seat_num();
+			this.isInitialize=con.getInitialize();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -48,12 +63,12 @@ public class Configuration implements Serializable{
 			e.printStackTrace();
 		} 
 	}
-//	public boolean getInitialize() {
-//		return isInitialize;
-//	}
-//	public void setInitialize(boolean isInitialize) {
-//		this.isInitialize = isInitialize;
-//	}
+	public int getInitialize() {
+		return isInitialize;
+	}
+	public void setInitialize(int isInitialize) {
+		this.isInitialize = isInitialize;
+	}
 	public int getRow_seat_num() {
 		return row_seat_num;
 	}
