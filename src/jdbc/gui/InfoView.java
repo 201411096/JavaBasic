@@ -18,6 +18,8 @@ package jdbc.gui;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.SQLException;
+
 import javax.swing.*;
 import javax.swing.border.*;
 import java.util.*;
@@ -183,10 +185,29 @@ class InfoView implements ActionListener{
 	void addRecord() {
 		//######################################################
 		// Add 버튼이 눌렸을 때		
-		// 1. 각 텍스트필드에서 값을 얻어옴
-		// 3. Database 파일의 insert() 함수의 인자로 값을 넘겨줌
-			JOptionPane.showMessageDialog( frame,  "추가버튼 눌림");					
 
+		try {
+			// 1. 각 텍스트필드에서 값을 얻어옴
+			String name = tf_name.getText();
+			String id = tf_id.getText();
+			String tel = tf_tel.getText();
+			int age = Integer.parseInt(tf_age.getText());
+			String gender = tf_gender.getText();
+			String home = tf_home.getText();
+			// 2. 각각의 값들을 InfoVO에 값으로 지정
+			InfoVO infoVO = new InfoVO(name, id, tel, age, gender, home);
+			// 3. 각 텍스트 필드 초기화
+			model.insert(infoVO);
+			tf_name.setText("");
+			tf_id.setText("");
+			tf_tel.setText("");
+			tf_age.setText("");
+			tf_gender.setText("");
+			tf_home.setText("");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	
 	}
 	
