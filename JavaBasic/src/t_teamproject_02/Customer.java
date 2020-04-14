@@ -9,6 +9,13 @@ public class Customer {
 	private String customer_money;
 	private String customer_address;
 	private String customer_is_member; //1 회원, 0 비회원
+	private int customer_age;
+	public int getCustomer_age() {
+		return customer_age;
+	}
+	public void setCustomer_age(int customer_age) {
+		this.customer_age = customer_age;
+	}
 	public int getCustomer_id() {
 		return customer_id;
 	}
