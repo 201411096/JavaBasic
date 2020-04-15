@@ -24,7 +24,7 @@ public class Ex1002 {
 			return 2;
 		
 		return -2; //오류
-		
+
 	}
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
