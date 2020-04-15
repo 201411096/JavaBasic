@@ -18,7 +18,7 @@ public class ClientChatPanel extends JPanel{
 	public ClientChatPanel() {
 		sendTF = new JTextField(16);
 		sendB = new JButton("확 인");
-		ta = new JTextArea(15,40);
+		ta = new JTextArea(16, 28);
 		
 		JPanel p = new JPanel();
 		p.setLayout( new BorderLayout() );
@@ -30,6 +30,6 @@ public class ClientChatPanel extends JPanel{
 		add("South", p);
 		
 		setBackground(Color.white);
-		setPreferredSize(new Dimension(300, 1080));
+		setPreferredSize(new Dimension(320, 1080));
 	}
 }
