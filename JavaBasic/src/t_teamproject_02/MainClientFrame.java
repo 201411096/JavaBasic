@@ -12,12 +12,14 @@ import java.net.Socket;
 
 import javax.swing.JFrame;
 
-public class MainClientFrame extends JFrame{	
+public class MainClientFrame extends JFrame implements ActionListener{	
 	ClientChatPanel clientChatPanel;
-
+	CliSocket clisocket;
 	
 	public MainClientFrame(){
 		Configuration config = Configuration.getInstance();
+		clisocket = new CliSocket(this);
+		new Thread(clisocket).start();
 		
 		clientChatPanel = new ClientChatPanel();
 		
@@ -28,4 +30,16 @@ public class MainClientFrame extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 	}
+	@Override
+	//말치면 보내는 부분
+	public void actionPerformed(ActionEvent e) {
+		String msg = clisocket.name+ ":" + clientChatPanel.sendTF.getText()+"\n";
+		clisocket.sendMessage(msg);
+		clientChatPanel.sendTF.setText("");
+	}
+
+	public void appendMsg(String msg) {
+		clientChatPanel.ta.append(msg);
+	}
+	
 }

@@ -19,15 +19,16 @@ import javax.swing.JTabbedPane;
 
 
 
-public class MainServerFrame extends JFrame{
-
+public class MainServerFrame extends JFrame implements ActionListener{
+	SevSocket sevsocket=null;
 	
 	SeatViewPanel seatViewPanel;
 	ServerChatPanel serverChatPanel;
 	JPanel testPanel;
 	JTabbedPane jtabbedPane = new JTabbedPane();
 	public MainServerFrame() {
-		
+		sevsocket = new SevSocket(this);
+		new Thread(sevsocket).start();
 		Configuration config = Configuration.getInstance();
 		seatViewPanel = new SeatViewPanel();
 		serverChatPanel = new ServerChatPanel();
@@ -43,7 +44,19 @@ public class MainServerFrame extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		
+		serverChatPanel.sendB.addActionListener(this);
+		serverChatPanel.sendTF.addActionListener(this);
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		String msg = "서버 : "+ serverChatPanel.sendTF.getText() + "\n";
+		System.out.print(msg);
+		sevsocket.sendMessage(msg);
+		serverChatPanel.sendTF.setText("");
+	}
 
+	public void appendMsg(String msg) {
+		serverChatPanel.ta.append(msg);
 	}
 
 }
