@@ -39,5 +39,4 @@ public class CliSocketInServer extends Thread{
 				
 		}
 	}
-
 }
