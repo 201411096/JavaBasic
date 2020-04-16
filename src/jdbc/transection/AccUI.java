@@ -3,10 +3,20 @@ package jdbc.transection;
 /******************************************************
 *  @ 트랙잭션 예제
 */
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
-import javax.swing.border.*;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.BevelBorder;
 
 public class AccUI implements ActionListener
 {
@@ -20,6 +30,9 @@ public class AccUI implements ActionListener
 	JDialog confirmDia;
 	JLabel l_sendCust, l_recvCust, l_moveMoney, l_gainMoney;
 	JButton b_diaConfirm;
+	
+	//모델단 변수 선언
+	AccLogic logic;
 
 	//===================================================
 	// 전역 변수의 객체 생성
@@ -39,6 +52,13 @@ public class AccUI implements ActionListener
 		l_moveMoney		= new JLabel();
 		l_gainMoney		= new JLabel();
 		b_diaConfirm	= new JButton(" 정상처리되었습니다!!! ");
+		
+		try {
+			logic = new AccLogic();
+		} catch (Exception e) {
+			System.out.println("드라이버 로딩 실패");
+			e.printStackTrace();
+		}
 
 	}
 
@@ -126,12 +146,19 @@ public class AccUI implements ActionListener
 			try{
 			////////////////////////////////////////////////////////
 			// 1. 화면에서 입력값 얻어오기
-			// 2. Business Logic 객체 생성 ( ex. AccLogic )
+			// 2. Business Logic 객체 생성 ( ex. AccLogic ) - 윗부분에서 생성되어 있음
 			// 3. BL객체에서 계좌 이체하는 함수 호출 ( ex. moveAccount() )
 			//		- 1번의 입력값을 인자로 넘김
 			//		- 호출 후 넘겨받는 리턴값으로는 0이면 정상처리이고 
 			//			-1이면 잘못된 경우이므로 메세지박스 출력
-
+				String sendAcc = tf_sendAccNum.getText();
+				String recvAcc = tf_recvAccNum.getText();
+				int amount = Integer.parseInt(tf_moveMoney.getText());
+				int result = logic.moveAccount(sendAcc, recvAcc, amount);
+				if(result ==0)
+					JOptionPane.showMessageDialog(null, "정상적으로 이체가 성공하였습니다.");
+				else if(result==-1)
+					JOptionPane.showMessageDialog(null, "이체가 되지 않았습니다.");
 
 
 
