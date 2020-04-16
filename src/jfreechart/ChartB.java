@@ -30,7 +30,7 @@ public class ChartB {
         //------------------------------------------------------------------
         // 데이터 입력 ( 값, 범례, 카테고리 )
         Database db = new Database();
-        ArrayList<ArrayList> data = db.getData();
+        ArrayList<ArrayList> data = db.getData(); //2차원 배열?..
         for(ArrayList temp : data) {
         	int value = (Integer) temp.get(0);
         	String cate = (String) temp.get(1);
