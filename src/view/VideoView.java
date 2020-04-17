@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -73,13 +75,31 @@ public class VideoView extends JPanel
 		cbMultiInsert.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-//				if(cbMultiInsert.isSelected())
-//					tfInsertCount.setEditable(true); // enable disable이랑 헷갈리지 말기
-//				else
-//					tfInsertCount.setEditable(false);
 				tfInsertCount.setEditable(cbMultiInsert.isSelected());
 			}
 		});
+		//JTable에서 마우스 클릭시 (영화 선택 시)
+		tableVideo.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int row = tableVideo.getSelectedRow();
+				int vnum = (Integer)tableVideo.getValueAt(row, 0); //0열의 값(VideoID)값만 받아옴
+				Video v = new Video();
+				try {
+					v = model.selectVideoByPK(vnum);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+				//video 클래스 각각의 멤버변수를 화면에 출력
+				tfVideoNum.setText(Integer.toString(v.getVideoNo()));
+				tfVideoActor.setText(v.getActor());
+				tfVideoDirector.setText(v.getDirector());
+				taVideoContent.setText(v.getExp());
+				tfVideoTitle.setText(v.getVideoName());
+				comVideoJanre.setSelectedItem(v.getGenre());
+			}
+		});
+		
 	}		
 	
 	// 버튼 이벤트 핸들러 만들기

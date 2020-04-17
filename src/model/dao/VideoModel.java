@@ -82,4 +82,28 @@ public class VideoModel implements VideoDao{
 			}
 		return videoList;
 	}
+	@Override
+	public Video selectVideoByPK(int vnum) throws Exception {
+		Video vo = new Video();
+		Connection con = null;
+		con = DriverManager.getConnection(url, user, pass);
+		String sql = "SELECT * FROM VIDEO_SHOP_VIDEO WHERE VID = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, vnum);
+		ResultSet rs =ps.executeQuery();
+		while(rs.next())
+		{
+			vo.setVideoNo(rs.getInt("VID"));;
+			vo.setActor(rs.getString("VACTOR"));
+			vo.setDirector(rs.getString("VDIRECTOR"));
+			vo.setExp(rs.getString("VDETAIL"));
+			vo.setGenre(rs.getString("VGENRE"));
+			vo.setVideoName(rs.getString("VNAME"));
+		}
+		rs.close();
+		ps.close();
+		con.close();
+		return vo;
+	}
+	
 }
