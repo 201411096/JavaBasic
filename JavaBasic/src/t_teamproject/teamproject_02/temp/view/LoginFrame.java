@@ -31,6 +31,7 @@ public class LoginFrame extends JFrame{
 	JPanel totalPanel;
 	private JPanel contentPane;
 	public LoginFrame() {
+		employeedao=null;
 		display();
 		connectDB();
 		eventProc();

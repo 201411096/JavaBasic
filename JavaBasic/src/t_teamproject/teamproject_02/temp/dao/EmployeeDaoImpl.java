@@ -6,13 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import t_teamproject.teamproject_02.temp.config.Configuration;
 import t_teamproject.teamproject_02.temp.vo.Employee;
 
 public class EmployeeDaoImpl implements EmployeeDao{
-	private String url = "jdbc:oracle:thin:@192.168.0.17:1521:orcl";
-//	private String url = "jdbc:oracle:thin:@192.168.56.1:1521:xe";
-	private String user = "tp2";
-	private String password = "tp2";
 	public EmployeeDaoImpl() throws ClassNotFoundException {
 		Class.forName("oracle.jdbc.driver.OracleDriver");
 	}
@@ -20,7 +17,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 		Employee e = new Employee();
 		Connection con;
 		try {
-			con = DriverManager.getConnection(url, user, password);
+			con = DriverManager.getConnection(Configuration.url, Configuration.user, Configuration.password);
 			String sql = "SELECT e.eid AS eid, e.epassword AS epassword, e.ename AS ename, e.tel AS tel, e.sal AS sal, e.hire_date AS hire_date, p.posname AS posname FROM EMPLOYEE e INNER JOIN POS p ON e.POSID=p.POSID WHERE e.eid=?";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, id);
