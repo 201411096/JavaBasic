@@ -34,8 +34,6 @@ public class EmployeeDaoImpl implements EmployeeDao{
 				e.setSal(rs.getInt("sal"));
 				e.setHire_date(rs.getString("hire_date"));
 				e.setPosition(rs.getString("posname"));
-				System.out.println(e.getId());
-				System.out.println(e.getPassword());
 			}
 			rs.close();
 			ps.close();
