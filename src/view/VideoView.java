@@ -99,9 +99,7 @@ public class VideoView extends JPanel
 				comVideoJanre.setSelectedItem(v.getGenre());
 			}
 		});
-		
 	}		
-	
 	// 버튼 이벤트 핸들러 만들기
 	class ButtonEventHandler implements ActionListener{
 		public void actionPerformed(ActionEvent ev){
