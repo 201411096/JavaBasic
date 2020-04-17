@@ -5,10 +5,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JTabbedPane;
 
+import t_teamproject.teamproject_02.temp.view.panel.EmployeeManageMentPanel;
 import t_teamproject.teamproject_02.temp.vo.Employee;
 
 public class ManagementFrame extends JFrame{
@@ -17,6 +20,9 @@ public class ManagementFrame extends JFrame{
 	JMenu menu;
 	JMenuItem jmenuitem1;
 	JMenuItem jmenuitem2;
+	JTabbedPane jtabbepedPane;
+	String jtabbedPaneItem [] = {"직원관리"};
+	EmployeeManageMentPanel employeeManageMentPanel;
 	public ManagementFrame(Employee employee) {
 		this.employee = employee;
 		display();
@@ -31,7 +37,14 @@ public class ManagementFrame extends JFrame{
 		menu.add(jmenuitem2);
 		jmenubar.add(menu);
 		setJMenuBar(jmenubar);
-
+		
+		jtabbepedPane = new JTabbedPane();
+		employeeManageMentPanel = new EmployeeManageMentPanel(this);
+		jtabbepedPane.addTab(jtabbedPaneItem[0], employeeManageMentPanel);
+		/*
+		 	jtabbedPane에 붙어야할 내용
+		 */
+		add(jtabbepedPane);
 		setTitle("매장 관리 창");
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setVisible(true);
