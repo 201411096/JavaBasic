@@ -7,10 +7,10 @@ public class Employee {
 	private String tel;
 	private int sal;
 	private String hire_date;
-	private int isManager;
+	private String position;
 	
 	public Employee() {}
-	public Employee(String id, String password, String name, String tel, int sal, String hire_date, int isManager) {
+	public Employee(String id, String password, String name, String tel, int sal, String hire_date, String position) {
 		super();
 		this.id = id;
 		this.password = password;
@@ -18,7 +18,7 @@ public class Employee {
 		this.tel = tel;
 		this.sal = sal;
 		this.hire_date = hire_date;
-		this.isManager = isManager;
+		this.position = position;
 	}
 
 
@@ -58,10 +58,10 @@ public class Employee {
 	public void setHire_date(String hire_date) {
 		this.hire_date = hire_date;
 	}
-	public int getIsManager() {
-		return isManager;
+	public String getPostion() {
+		return position;
 	}
-	public void setIsManager(int isManager) {
-		this.isManager = isManager;
+	public void setPosition(String position) {
+		this.position = position;
 	}
 }
