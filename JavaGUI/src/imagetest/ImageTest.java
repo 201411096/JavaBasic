@@ -12,20 +12,25 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 public class ImageTest extends JFrame{
 	ImageIcon i = new ImageIcon("src\\imagetest\\image\\employee\\abc123.jpg");
 	JButton image=null;
+	JLabel label = null;
 	public ImageTest() {
-		setLayout(new GridLayout(3,1));
+		setLayout(new GridLayout(4,1));
 		image = new JButton("");
 		image.setIcon(i);
+		label = new JLabel();
+		label.setIcon(i);
 		JTextField jt = new JTextField();
 		JButton bfilechooser = new JButton("a");
 		add(image);
 		add(jt);
 		add(bfilechooser);
+		add(label);
 		setVisible(true);
 		setSize(1920, 1080);
 		jt.addActionListener(new ActionListener() {
@@ -35,6 +40,7 @@ public class ImageTest extends JFrame{
 				String path ="src\\imagetest\\image\\employee\\"+temp;
 				ImageIcon i2 = new ImageIcon(path);
 				image.setIcon(i2);
+				label.setIcon(i2);
 			}
 		});
 		image.addActionListener(new ActionListener() {
