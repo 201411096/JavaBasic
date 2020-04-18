@@ -36,6 +36,7 @@ public class CalculationFrame extends JFrame{
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setVisible(true);
 		setBackground(Color.white);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	public void eventProc() {
 		jmenuitem1.addActionListener(new ActionListener() {

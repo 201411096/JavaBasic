@@ -89,6 +89,7 @@ public class LoginFrame extends JFrame{
 		contentPane.add(tfPassword);
 		setResizable(false);
 		setVisible(true);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	public void eventProc() {
 		LoginFrameButtonEvent l = new LoginFrameButtonEvent();

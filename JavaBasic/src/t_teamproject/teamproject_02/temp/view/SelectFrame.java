@@ -31,6 +31,7 @@ public class SelectFrame extends JFrame{
 		setBounds(750, 400, 450, 300);
 		setVisible(true);
 		setBackground(Color.white);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	public void eventProc() {
 		lb.addActionListener(new ActionListener() {
