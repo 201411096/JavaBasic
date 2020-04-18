@@ -46,6 +46,8 @@ public class ProductManagementPanel extends JPanel{
 	JTable productTable;
 	MyProductTableModel myProductTableModel;
 	
+	JButton productPurchaseButton;
+	
 	JTextField jtextFieldProductId;
 	JComboBox jcomboBoxProductGroupName;
 	JTextField jtextFieldProductName;
@@ -88,6 +90,11 @@ public class ProductManagementPanel extends JPanel{
 		right_panel.setLayout(new BorderLayout());
 		right_panel.setBorder(new TitledBorder("제품 정보"));
 			//오른쪽 위 화면
+			JPanel right_panel_north = new JPanel();
+			right_panel_north.setLayout(new GridLayout(1, 1));
+			productPurchaseButton = new JButton("제품 주문");
+			right_panel_north.add(productPurchaseButton);
+			//오른쪽 가운데 화면
 			JPanel right_panel_main = new JPanel();
 			right_panel_main.setLayout(new GridLayout(3, 1));
 				JPanel right_panel_main_north = new JPanel(); //이미지들어갈곳
@@ -114,18 +121,17 @@ public class ProductManagementPanel extends JPanel{
 				right_panel_main_center.add(new JLabel("제품가격"));
 				jtextFieldProductPrice = new JTextField();
 				right_panel_main_center.add(jtextFieldProductPrice);
-				
-				
+							
 				JPanel right_panel_main_south = new JPanel(); //설명 들어갈 곳
 				right_panel_main_south.setLayout(new GridLayout(1,1));
 				jtextAreaProductDetail = new JTextArea();
 
 				right_panel_main_south.add(new JScrollPane(jtextAreaProductDetail));
-			
-			
 			right_panel_main.add(right_panel_main_north);
 			right_panel_main.add(right_panel_main_center);
 			right_panel_main.add(right_panel_main_south);
+			
+			//오른쪽 아래 화면
 			JPanel right_panel_south = new JPanel(); // 버튼 들어갈 패널
 			right_panel_south.setLayout(new GridLayout(1,4));
 			imageUploadButton = new JButton("이미지 등록");
@@ -136,7 +142,8 @@ public class ProductManagementPanel extends JPanel{
 			right_panel_south.add(registerProductButton);
 			right_panel_south.add(updateProductButton);
 			right_panel_south.add(deleteProductButton);
-	
+			
+		right_panel.add(right_panel_north, BorderLayout.NORTH);
 		right_panel.add(right_panel_main, BorderLayout.CENTER);
 		right_panel.add(right_panel_south, BorderLayout.SOUTH);	
 			

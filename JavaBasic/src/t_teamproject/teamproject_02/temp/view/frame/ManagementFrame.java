@@ -36,6 +36,8 @@ public class ManagementFrame extends JFrame{
 		jmenuitem2 = new JMenuItem("로그아웃");
 		menu.add(jmenuitem1);
 		menu.add(jmenuitem2);
+		
+		
 		jmenubar.add(menu);
 		setJMenuBar(jmenubar);
 		
