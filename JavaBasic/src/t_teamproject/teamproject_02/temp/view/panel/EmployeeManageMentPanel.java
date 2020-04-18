@@ -8,10 +8,15 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -38,8 +43,7 @@ public class EmployeeManageMentPanel extends JPanel{
 	JTextField jtextFieldEmployeeTel;
 	JTextField jtextFieldEmployeeId;
 	JTextField jtextFieldHire_date;
-	JTextField jtextFieldSal;
-	
+	JTextField jtextFieldSal;	
 	
 	ImageIcon imageIcon = new ImageIcon("src\\t_teamproject\\teamproject_02\\temp\\imgs\\employee\\default.jpg");
 //	ImageIcon imageIcon = new ImageIcon("src\\t_teamproject\\teamproject_02\\temp\\imgs\\employee\\abc123.jpg");
@@ -137,14 +141,33 @@ public class EmployeeManageMentPanel extends JPanel{
 
 	}
 	public void eventProc() {
-		imageUploadButton.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("살려줘 야발");
-				
-			}
-		});
+		ImageButtonUploadActionEvent imageButtonUploadActionEvent = new ImageButtonUploadActionEvent();
+		
+		imageUploadButton.addActionListener(imageButtonUploadActionEvent);
 	}
-
+	
+	class ImageButtonUploadActionEvent implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			JFileChooser jfc = new JFileChooser();
+			int result = jfc.showSaveDialog(null);
+			if(result==0)
+			{
+				File file = jfc.getSelectedFile();
+				try {
+					System.out.println("???");
+					byte [] bytes = new byte[(int)file.length()];
+					DataInputStream in = new DataInputStream(new FileInputStream(file));
+					in.readFully(bytes);
+					in.close();
+	
+					FileOutputStream out = new FileOutputStream("src\\t_teamproject\\teamproject_02\\temp\\imgs\\employee\\"+jfc.getSelectedFile().getName());
+					out.write(bytes);
+					out.close();
+				}catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+		}
+	}
 }
