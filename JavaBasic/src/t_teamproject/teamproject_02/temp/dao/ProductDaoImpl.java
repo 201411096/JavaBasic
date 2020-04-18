@@ -83,17 +83,78 @@ public class ProductDaoImpl implements ProductDao{
 
 	@Override
 	public int insertProduct(Product vo) {
-		return 0;
+		int result=0; 
+		Connection con = null;
+		try {
+			con = DriverManager.getConnection(Configuration.url, Configuration.user, Configuration.password);
+			String sql = "INSERT INTO product(pid, pgroupid, pname, pdetail, pprice) VALUES(PRODUCT_PID_SEQ.NEXTVAL, ?, ?, ?, ?)";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, vo.changeGroupNametoPGID(vo.getGroupName())); // 그룹이름을 그룹번호로 변경
+			ps.setString(2, vo.getName());
+			ps.setString(3, vo.getDetail());
+			ps.setInt(4, vo.getPrice());
+			ps.executeUpdate();
+			
+			ps.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return -1; // 관리 패널에 오류임을 알림
+		}finally {
+			try {
+				con.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return result;
 	}
 
 	@Override
 	public int updateProduct(Product vo) {
-		return 0;
+		int result=0;
+		Connection con = null;
+		try {
+			con = DriverManager.getConnection(Configuration.url, Configuration.user, Configuration.password);
+			String sql = "UPDATE product SET pgroupid=?, pdetail=?, pname=?, pprice=? WHERE PID=?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, vo.changeGroupNametoPGID(vo.getGroupName()));
+			ps.setString(2, vo.getDetail());
+			ps.setString(3, vo.getName());
+			ps.setInt(4, vo.getPrice());
+			ps.setInt(5, vo.getId());
+			result = ps.executeUpdate();			
+			ps.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				con.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}		
+		return result;
 	}
 
 	@Override
 	public int deleteProduct(int id) {
-		return 0;
-	}
-	
+		int result=0;
+		Connection con = null;
+		try {
+			con = DriverManager.getConnection(Configuration.url, Configuration.user, Configuration.password);
+			String sql = "DELETE FROM PRODUCT WHERE pid=?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, id);
+			result = ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				con.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}	
+		return result;
+	}	
 }

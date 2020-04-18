@@ -289,8 +289,7 @@ public class EmployeeManageMentPanel extends JPanel{
 			vo.setHire_date(jtextFieldHire_date.getText());
 			vo.setSal(Integer.parseInt(jtextFieldSal.getText()));
 			vo.setAge(Integer.parseInt(jtextFieldAge.getText()));
-			try {
-				
+			try {				
 				int result = employeeDaomodel.updateEmployee(vo);
 				if(result==0) {
 					JOptionPane.showMessageDialog(null, "변경사항이 없습니다.");

@@ -27,6 +27,15 @@ public class Product {
 		}
 		return "-1";
 	}
+	public int changeGroupNametoPGID(String groupName) {
+		switch(groupName) {
+		case "메인메뉴" : return 0;
+		case "사이드메뉴" : return 1;
+		case "음료수" : return 2;
+		case "세트메뉴" : return 3;
+		}
+		return -1;
+	}
 	public String getGroupName() {
 		return groupName;
 	}

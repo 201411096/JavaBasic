@@ -34,7 +34,7 @@ CREATE TABLE PRODUCT(
     CONSTRAINT product_pk PRIMARY KEY(PID),
     CONSTRAINT product_fk_pgroupname FOREIGN KEY(PGROUPID) REFERENCES PRODUCTGROUP(PGROUPID)
 );
-CREATE SEQUENCE PRODUCT_PID_SEQ;
+CREATE SEQUENCE PRODUCT_PID_SEQ MAXVALUE 1000 CYCLE;
 /***** PRODUCTMANAGEMENT TABLE *****/
 CREATE TABLE PRODUCTMANAGEMENT(
     PMANAGEMENTID NUMBER(10),
@@ -47,6 +47,7 @@ DROP TABLE EMPLOYEE;
 DROP TABLE POS;
 DROP TABLE PRODUCTGROUP;
 DROP TABLE PRODUCT;
+DROP SEQUENCE PRODUCT_PID_SEQ;
 DROP TABLE PRODUCTMANAGEMENT;
 /****************************** TEST ******************************/
 /***** EMPLOYEE TABLE TEST *****/
@@ -105,8 +106,9 @@ INSERT INTO product(pid, pgroupid, pname, pdetail, pprice) VALUES(PRODUCT_PID_SE
 INSERT INTO product(pid, pgroupid, pname, pdetail, pprice) VALUES(PRODUCT_PID_SEQ.NEXTVAL, 3, '세트01', '메인메뉴00과 사이드메뉴02 음료수03으로 구성되어있습니다.', 10000);
 INSERT INTO product(pid, pgroupid, pname, pdetail, pprice) VALUES(PRODUCT_PID_SEQ.NEXTVAL, 3, '세트02', '메인메뉴02과 사이드메뉴02 음료수00으로 구성되어있습니다.', 9500);
 INSERT INTO product(pid, pgroupid, pname, pdetail, pprice) VALUES(PRODUCT_PID_SEQ.NEXTVAL, 3, '세트03', '메인메뉴02과 사이드메뉴02 음료수03으로 구성되어있습니다.', 12000);
+UPDATE product SET pgroupid=?, pdetail=?, pname=?, pprice=? WHERE PID=?;
 
-
+SELECT p.pid AS PID, p.pgroupid AS PGROUPID, p.pname AS PNAME, p.pprice AS PPRICE, p.pdetail AS PDETAIL FROM PRODUCT P WHERE PID = 1;
 
 
 
