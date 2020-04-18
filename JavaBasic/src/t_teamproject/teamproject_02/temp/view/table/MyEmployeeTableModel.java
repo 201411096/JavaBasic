@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
 public class MyEmployeeTableModel extends AbstractTableModel{
-	String columnName [] = {"아이디", "이름", "직책", "전화번호", "급여", "입사일"};
+	String columnName [] = {"아이디", "이름", "직책", "전화번호", "나이" , "급여", "입사일"};
 	ArrayList data = new ArrayList();
 	@Override
 	public int getRowCount() {
