@@ -11,6 +11,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JTabbedPane;
 
 import t_teamproject.teamproject_02.temp.view.panel.EmployeeManageMentPanel;
+import t_teamproject.teamproject_02.temp.view.panel.ProductManagementPanel;
 import t_teamproject.teamproject_02.temp.vo.Employee;
 
 public class ManagementFrame extends JFrame{
@@ -20,8 +21,9 @@ public class ManagementFrame extends JFrame{
 	JMenuItem jmenuitem1;
 	JMenuItem jmenuitem2;
 	JTabbedPane jtabbepedPane;
-	String jtabbedPaneItem [] = {"직원관리"};
+	String jtabbedPaneItem [] = {"직원관리", "제품관리"};
 	EmployeeManageMentPanel employeeManageMentPanel;
+	ProductManagementPanel productManagementPanel;
 	public ManagementFrame(Employee employee) {
 		this.employee = employee;
 		display();
@@ -39,7 +41,9 @@ public class ManagementFrame extends JFrame{
 		
 		jtabbepedPane = new JTabbedPane();
 		employeeManageMentPanel = new EmployeeManageMentPanel(this);
+		productManagementPanel = new ProductManagementPanel(this);
 		jtabbepedPane.addTab(jtabbedPaneItem[0], employeeManageMentPanel);
+		jtabbepedPane.addTab(jtabbedPaneItem[1], productManagementPanel);
 		/*
 		 	jtabbedPane에 붙어야할 내용
 		 */

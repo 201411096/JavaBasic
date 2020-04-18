@@ -62,6 +62,7 @@ public class EmployeeManageMentPanel extends JPanel{
 		display();
 		eventProc();
 		connectDB();
+		searchEmployee(); // 프레임을 생성하자마자 검색을 해서 모든값이 나와있는상태로 시작하게 만듬
 	}
 	public void display() {
 		//왼쪽 전체 화면
@@ -161,8 +162,7 @@ public class EmployeeManageMentPanel extends JPanel{
 		}catch (Exception e) {
 			e.printStackTrace();
 		}		
-	}
-	
+	}	
 	public void eventProc() {
 		EventHandler eventHandler = new EventHandler();
 		imageUploadButton.addActionListener(eventHandler); // 이미지버튼 연결
@@ -225,7 +225,6 @@ public class EmployeeManageMentPanel extends JPanel{
 		{
 			File file = jfc.getSelectedFile();
 			try {
-				System.out.println("???");
 				byte [] bytes = new byte[(int)file.length()];
 				DataInputStream in = new DataInputStream(new FileInputStream(file));
 				in.readFully(bytes);
