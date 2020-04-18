@@ -29,6 +29,7 @@ import javax.swing.border.TitledBorder;
 import t_teamproject.teamproject_02.temp.dao.ProductDao;
 import t_teamproject.teamproject_02.temp.dao.ProductDaoImpl;
 import t_teamproject.teamproject_02.temp.view.frame.ManagementFrame;
+import t_teamproject.teamproject_02.temp.view.frame.ProductPurchaseFrame;
 import t_teamproject.teamproject_02.temp.view.table.MyProductTableModel;
 import t_teamproject.teamproject_02.temp.vo.Employee;
 import t_teamproject.teamproject_02.temp.vo.Product;
@@ -161,7 +162,7 @@ public class ProductManagementPanel extends JPanel{
 		registerProductButton.addActionListener(eventHandler);
 		updateProductButton.addActionListener(eventHandler);
 		deleteProductButton.addActionListener(eventHandler);
-		
+		productPurchaseButton.addActionListener(eventHandler);
 		productTable.addMouseListener(new MouseAdapter() {			
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -211,6 +212,8 @@ public class ProductManagementPanel extends JPanel{
 				updateProduct();
 			}else if(e.getSource()==deleteProductButton) {
 				deleteProduct();
+			}else if(e.getSource()==productPurchaseButton) {
+				openPurchaseFrame();
 			}
 		}		
 	}
@@ -304,6 +307,13 @@ public class ProductManagementPanel extends JPanel{
 			}
 		}else {
 			JOptionPane.showMessageDialog(null, "제품 정보 삭제는 관리자만 할 수 있습니다.");
+		}
+	}
+	public void openPurchaseFrame() {
+		if(managementFrame.getEmployee().getPosition().equals("ADMIN")) {
+			new ProductPurchaseFrame();
+		}else {
+			JOptionPane.showMessageDialog(null, "제품 주문은 관리자만 할 수 있습니다.");
 		}
 	}
 }

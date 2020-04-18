@@ -10,4 +10,6 @@ public interface ProductDao {
 	public int insertProduct(Product vo);
 	public int updateProduct(Product vo);
 	public int deleteProduct(int id);
+	
+	public ArrayList<String> selectProductNameOrderByName();
 }

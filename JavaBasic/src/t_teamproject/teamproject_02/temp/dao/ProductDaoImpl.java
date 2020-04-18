@@ -156,5 +156,29 @@ public class ProductDaoImpl implements ProductDao{
 			}
 		}	
 		return result;
-	}	
+	}
+	public ArrayList<String> selectProductNameOrderByName() {
+		ArrayList<String>  resultArrayList = new ArrayList<String>();
+		Connection con = null;
+		try {
+			con = DriverManager.getConnection(Configuration.url, Configuration.user, Configuration.password);
+			String sql = "SELECT PNAME FROM PRODUCT ORDER BY PNAME";
+			PreparedStatement ps = con.prepareStatement(sql);
+			
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				String temp = rs.getString("PNAME");
+				resultArrayList.add(temp);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				con.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}	
+		return resultArrayList;
+	}
 }
