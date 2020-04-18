@@ -118,6 +118,37 @@ public class EmployeeDaoImpl implements EmployeeDao{
 		}
 		return 0;
 	}
+	public int insertEmployeeWithOutDate(Employee vo) {
+		int result=0; 
+		Connection con = null;
+		try {
+			con = DriverManager.getConnection(Configuration.url, Configuration.user, Configuration.password);
+			String sql = "INSERT INTO EMPLOYEE(EID, EPASSWORD, ENAME, TEL, SAL, HIRE_DATE, AGE, POSID) VALUES(?, ?, ?, ?, ?, SYSDATE, ?, ?)";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, vo.getId());
+			ps.setString(2, vo.getPassword());
+			ps.setString(3, vo.getName());
+			ps.setString(4, vo.getTel());
+			ps.setInt(5, vo.getSal());
+			ps.setInt(6, vo.getAge());
+			ps.setInt(7, vo.changePosNameToPosId(vo.getPosition()));
+			
+			ps.executeUpdate();
+			
+			ps.close();
+
+		}catch(Exception e) {
+			e.printStackTrace();
+			return -1;
+		}finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return 0;
+	}
 	public int updateEmployee(Employee vo) {
 		int result=0;
 		Connection con = null;

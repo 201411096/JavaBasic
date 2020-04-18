@@ -126,7 +126,7 @@ public class RegisterFrame extends JFrame{
 			emp.setAge(Integer.parseInt(jtextFieldAge.getText()));
 			emp.setPosition("SALESMAN"); // 전부 salesman으로 시작
 			try {
-				int result = employeeDaomodel.insertEmployee(emp);
+				int result = employeeDaomodel.insertEmployeeWithOutDate(emp);
 				if(result == 0) {
 					JOptionPane.showMessageDialog(null, "직원 정보가 등록되었습니다.");
 					dispose();
