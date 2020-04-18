@@ -24,12 +24,11 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
 import t_teamproject.teamproject_02.temp.dao.EmployeeDao;
 import t_teamproject.teamproject_02.temp.dao.EmployeeDaoImpl;
-import t_teamproject.teamproject_02.temp.view.ManagementFrame;
+import t_teamproject.teamproject_02.temp.view.frame.ManagementFrame;
 import t_teamproject.teamproject_02.temp.view.table.MyEmployeeTableModel;
 import t_teamproject.teamproject_02.temp.vo.Employee;
 
@@ -279,41 +278,50 @@ public class EmployeeManageMentPanel extends JPanel{
 
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		}	
 	}
 	public void updateEmployee() {
-		Employee vo = new Employee();
-		vo.setId(jtextFieldEmployeeId.getText());
-		vo.setName(jtextFieldEmployeeName.getText());
-		vo.setPosition(jComboBoxEmployeePosition.getSelectedItem().toString());
-		vo.setTel(jtextFieldEmployeeTel.getText());
-		vo.setHire_date(jtextFieldHire_date.getText());
-		vo.setSal(Integer.parseInt(jtextFieldSal.getText()));
-		vo.setAge(Integer.parseInt(jtextFieldAge.getText()));
-		try {
-			int result = employeeDaomodel.updateEmployee(vo);
-			if(result==0) {
-				JOptionPane.showMessageDialog(null, "변경사항이 없습니다.");
-			}else {
-				searchEmployee(); // 그대로 검색을 다시해서 새로고침 효과를 얻음
-				JOptionPane.showMessageDialog(null, "직원 정보가 업데이트 되었습니다.");
+		if(managementFrame.getEmployee().getPosition().equals("ADMIN")) {
+			Employee vo = new Employee();
+			vo.setId(jtextFieldEmployeeId.getText());
+			vo.setName(jtextFieldEmployeeName.getText());
+			vo.setPosition(jComboBoxEmployeePosition.getSelectedItem().toString());
+			vo.setTel(jtextFieldEmployeeTel.getText());
+			vo.setHire_date(jtextFieldHire_date.getText());
+			vo.setSal(Integer.parseInt(jtextFieldSal.getText()));
+			vo.setAge(Integer.parseInt(jtextFieldAge.getText()));
+			try {
+				
+				int result = employeeDaomodel.updateEmployee(vo);
+				if(result==0) {
+					JOptionPane.showMessageDialog(null, "변경사항이 없습니다.");
+				}else {
+					searchEmployee(); // 그대로 검색을 다시해서 새로고침 효과를 얻음
+					JOptionPane.showMessageDialog(null, "직원 정보가 업데이트 되었습니다.");
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
+		}else {
+			JOptionPane.showMessageDialog(null, "직원 정보 수정은 관리자만 할 수 있습니다.");
 		}
 	}
 	public void deleteEmployee() {
-		String eid = jtextFieldEmployeeId.getText();
-		try {
-			int result = employeeDaomodel.deleteEmployee(eid);
-			if(result==0) {
-				JOptionPane.showMessageDialog(null, "변경사항이 없습니다.");
-			}else {
-				searchEmployee(); // 그대로 검색을 다시해서 새로고침 효과를 얻음
-				JOptionPane.showMessageDialog(null, "직원 정보가 업데이트 되었습니다.");
-			}	
-		} catch (Exception e) {
-			e.printStackTrace();
+		if(managementFrame.getEmployee().getPosition().equals("ADMIN")) {
+			String eid = jtextFieldEmployeeId.getText();
+			try {
+				int result = employeeDaomodel.deleteEmployee(eid);
+				if(result==0) {
+					JOptionPane.showMessageDialog(null, "변경사항이 없습니다.");
+				}else {
+					searchEmployee(); // 그대로 검색을 다시해서 새로고침 효과를 얻음
+					JOptionPane.showMessageDialog(null, "직원 정보가 업데이트 되었습니다.");
+				}	
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else {
+			JOptionPane.showMessageDialog(null, "직원 정보 삭제는 관리자만 할 수 있습니다.");
 		}
 	}
 }

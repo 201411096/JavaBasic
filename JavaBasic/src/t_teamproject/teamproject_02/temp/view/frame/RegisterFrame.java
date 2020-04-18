@@ -1,4 +1,4 @@
-package t_teamproject.teamproject_02.temp.view;
+package t_teamproject.teamproject_02.temp.view.frame;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

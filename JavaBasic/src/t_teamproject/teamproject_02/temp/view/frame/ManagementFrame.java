@@ -1,4 +1,4 @@
-package t_teamproject.teamproject_02.temp.view;
+package t_teamproject.teamproject_02.temp.view.frame;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -8,16 +8,21 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JTabbedPane;
 
+import t_teamproject.teamproject_02.temp.view.panel.EmployeeManageMentPanel;
 import t_teamproject.teamproject_02.temp.vo.Employee;
 
-public class CalculationFrame extends JFrame{
+public class ManagementFrame extends JFrame{
 	Employee employee;
 	JMenuBar jmenubar;
 	JMenu menu;
 	JMenuItem jmenuitem1;
 	JMenuItem jmenuitem2;
-	public CalculationFrame(Employee employee) {
+	JTabbedPane jtabbepedPane;
+	String jtabbedPaneItem [] = {"직원관리"};
+	EmployeeManageMentPanel employeeManageMentPanel;
+	public ManagementFrame(Employee employee) {
 		this.employee = employee;
 		display();
 		eventProc();
@@ -32,7 +37,14 @@ public class CalculationFrame extends JFrame{
 		jmenubar.add(menu);
 		setJMenuBar(jmenubar);
 		
-		setTitle("계산 화면");
+		jtabbepedPane = new JTabbedPane();
+		employeeManageMentPanel = new EmployeeManageMentPanel(this);
+		jtabbepedPane.addTab(jtabbedPaneItem[0], employeeManageMentPanel);
+		/*
+		 	jtabbedPane에 붙어야할 내용
+		 */
+		add(jtabbepedPane);
+		setTitle("매장 관리 창");
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setVisible(true);
 		setBackground(Color.white);
@@ -54,4 +66,11 @@ public class CalculationFrame extends JFrame{
 			}
 		});
 	}
+	public Employee getEmployee() {
+		return employee;
+	}
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+	
 }
