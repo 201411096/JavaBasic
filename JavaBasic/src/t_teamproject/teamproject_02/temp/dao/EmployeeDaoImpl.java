@@ -18,7 +18,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 		Connection con;
 		try {
 			con = DriverManager.getConnection(Configuration.url, Configuration.user, Configuration.password);
-			String sql = "SELECT e.eid AS eid, e.epassword AS epassword, e.ename AS ename, e.tel AS tel, e.sal AS sal, e.hire_date AS hire_date, p.posname AS posname FROM EMPLOYEE e INNER JOIN POS p ON e.POSID=p.POSID WHERE e.eid=?";
+			String sql = "SELECT e.eid AS eid, e.epassword AS epassword, e.ename AS ename, e.tel AS tel, e.sal AS sal, e.hire_date AS hire_date, p.posname AS posname, e.age AS age FROM EMPLOYEE e INNER JOIN POS p ON e.POSID=p.POSID WHERE e.eid=?";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, id);
 			
@@ -31,6 +31,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 				e.setSal(rs.getInt("sal"));
 				e.setHire_date(rs.getString("hire_date"));
 				e.setPosition(rs.getString("posname"));
+				e.setAge(Integer.parseInt(rs.getString("age")));
 			}
 			rs.close();
 			ps.close();

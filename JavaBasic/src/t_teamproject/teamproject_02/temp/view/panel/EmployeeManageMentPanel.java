@@ -1,10 +1,13 @@
 package t_teamproject.teamproject_02.temp.view.panel;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -16,16 +19,19 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
 import t_teamproject.teamproject_02.temp.dao.EmployeeDao;
 import t_teamproject.teamproject_02.temp.dao.EmployeeDaoImpl;
 import t_teamproject.teamproject_02.temp.view.ManagementFrame;
 import t_teamproject.teamproject_02.temp.view.table.MyEmployeeTableModel;
+import t_teamproject.teamproject_02.temp.vo.Employee;
 
 public class EmployeeManageMentPanel extends JPanel{
 	EmployeeDao employeeDaomodel;
@@ -45,7 +51,8 @@ public class EmployeeManageMentPanel extends JPanel{
 	JTextField jtextFieldEmployeeTel;
 	JTextField jtextFieldEmployeeId;
 	JTextField jtextFieldHire_date;
-	JTextField jtextFieldSal;	
+	JTextField jtextFieldSal;
+	JTextField jtextFieldAge;
 	
 	ImageIcon imageIcon = new ImageIcon("src\\t_teamproject\\teamproject_02\\temp\\imgs\\employee\\default.jpg");
 //	ImageIcon imageIcon = new ImageIcon("src\\t_teamproject\\teamproject_02\\temp\\imgs\\employee\\abc123.jpg");
@@ -91,7 +98,9 @@ public class EmployeeManageMentPanel extends JPanel{
 				JPanel right_panel_north = new JPanel();
 	
 				employeeImageLabel = new JLabel();
+				employeeImageLabel.setPreferredSize(new Dimension(300, 300));
 				employeeImageLabel.setIcon(imageIcon);
+				employeeImageLabel.setHorizontalAlignment(JLabel.CENTER);
 				right_panel_north.add(employeeImageLabel);
 				//오른쪽 가운데 화면
 				JPanel right_panel_center = new JPanel();
@@ -102,7 +111,7 @@ public class EmployeeManageMentPanel extends JPanel{
 					jtextFieldEmployeeName = new JTextField();
 					right_panel_center_wrapper.add(jtextFieldEmployeeName);
 					right_panel_center_wrapper.add(new JLabel("직책"));
-					String positionStringArray [] = {"MANAGER", "SALESMAN"};
+					String positionStringArray [] = {"ADMIN", "MANAGER", "SALESMAN"};
 					jComboBoxEmployeePosition = new JComboBox(positionStringArray);
 					right_panel_center_wrapper.add(jComboBoxEmployeePosition);
 					right_panel_center_wrapper.add(new JLabel("전화번호"));
@@ -117,6 +126,9 @@ public class EmployeeManageMentPanel extends JPanel{
 					right_panel_center_wrapper.add(new JLabel("급여"));
 					jtextFieldSal = new JTextField();
 					right_panel_center_wrapper.add(jtextFieldSal);
+					right_panel_center_wrapper.add(new JLabel("나이"));
+					jtextFieldAge = new JTextField();
+					right_panel_center_wrapper.add(jtextFieldAge);
 				right_panel_center.add(right_panel_center_wrapper);
 			right_panel_north_wrapper.add(right_panel_north);
 			right_panel_north_wrapper.add(right_panel_center_wrapper);
@@ -155,6 +167,37 @@ public class EmployeeManageMentPanel extends JPanel{
 		EventHandler eventHandler = new EventHandler();
 		imageUploadButton.addActionListener(eventHandler);
 		jtextFieldSearch.addActionListener(eventHandler);
+		
+		employeeTable.addMouseListener(new MouseAdapter() {			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int row = employeeTable.getSelectedRow();
+				String eid = (String)employeeTable.getValueAt(row, 0); // 첫번째 아이디값만 가져옴
+				Employee emp = new Employee();
+				try {
+					emp = employeeDaomodel.selectByID(eid);
+				}catch(Exception e1) {
+					e1.printStackTrace();
+				}
+				jtextFieldEmployeeId.setText(emp.getId());
+				jtextFieldEmployeeName.setText(emp.getName());
+				jtextFieldEmployeeTel.setText(emp.getTel());
+				jtextFieldHire_date.setText(emp.getHire_date());
+				jtextFieldSal.setText(Integer.toString(emp.getSal()));
+				jtextFieldAge.setText(Integer.toString(emp.getAge()));
+				jComboBoxEmployeePosition.setSelectedItem(emp.getPosition());
+				System.out.println(emp.getPosition());
+				imageIcon = new ImageIcon("src\\t_teamproject\\teamproject_02\\temp\\imgs\\employee\\" + emp.getId() + ".jpg");
+				if(new File("src\\t_teamproject\\teamproject_02\\temp\\imgs\\employee\\" + emp.getId() + ".jpg").exists()) {
+					employeeImageLabel.setIcon(imageIcon);
+				}
+				else {
+					imageIcon = new ImageIcon("src\\t_teamproject\\teamproject_02\\temp\\imgs\\employee\\default.jpg");
+					employeeImageLabel.setIcon(imageIcon);
+				}
+					
+			}
+		});
 	}
 	
 	class EventHandler implements ActionListener{
@@ -165,7 +208,6 @@ public class EmployeeManageMentPanel extends JPanel{
 			}else if(e.getSource()==jtextFieldSearch) {
 				searchEmployee();
 			}
-			
 		}
 		
 	}
@@ -183,15 +225,19 @@ public class EmployeeManageMentPanel extends JPanel{
 				in.close();
 
 				FileOutputStream out = new FileOutputStream("src\\t_teamproject\\teamproject_02\\temp\\imgs\\employee\\"+jfc.getSelectedFile().getName());
+				JOptionPane.showMessageDialog(null, "이미지 업로드는 프로그램 재 실행 후 적용됩니다.");
 				out.write(bytes);
 				out.close();
+				// 왜 적용이 안되는지 모름
+//				imageIcon = new ImageIcon("src\\t_teamproject\\teamproject_02\\temp\\imgs\\employee\\"+jfc.getSelectedFile().getName());
+//				System.out.println(jfc.getSelectedFile().getName());
+//				employeeImageLabel.setIcon(imageIcon);
 			}catch (Exception e1) {
 				e1.printStackTrace();
 			}
 		}
 	}
 	public void searchEmployee() {
-		System.out.println("야발");
 		int searchOption = jcomboBoxSearchOption.getSelectedIndex();
 		String searchWord = jtextFieldSearch.getText();
 		try {

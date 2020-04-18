@@ -43,7 +43,7 @@ public class SelectFrame extends JFrame{
 		rb.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(employee.getPostion().equals("ADMIN") || employee.getPostion().equals("MANAGER"))
+				if(employee.getPosition().equals("ADMIN") || employee.getPosition().equals("MANAGER"))
 				{
 					new ManagementFrame(employee);
 					dispose();
