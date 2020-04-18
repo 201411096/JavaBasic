@@ -57,7 +57,7 @@ public class EmployeeManageMentPanel extends JPanel{
 	ImageIcon imageIcon = new ImageIcon("src\\t_teamproject\\teamproject_02\\temp\\imgs\\employee\\default.jpg");
 //	ImageIcon imageIcon = new ImageIcon("src\\t_teamproject\\teamproject_02\\temp\\imgs\\employee\\abc123.jpg");
 	JLabel employeeImageLabel;
-	JButton imageUploadButton, updateEmployeeButton, deleteEmployeeButton;
+	JButton imageUploadButton, registerEmployeeButton, updateEmployeeButton, deleteEmployeeButton;
 	public EmployeeManageMentPanel(ManagementFrame managementFrame) {
 		this.managementFrame = managementFrame;
 		display();
@@ -98,7 +98,7 @@ public class EmployeeManageMentPanel extends JPanel{
 				JPanel right_panel_north = new JPanel();
 	
 				employeeImageLabel = new JLabel();
-				employeeImageLabel.setPreferredSize(new Dimension(300, 300));
+				employeeImageLabel.setPreferredSize(new Dimension(400, 300));
 				employeeImageLabel.setIcon(imageIcon);
 				employeeImageLabel.setHorizontalAlignment(JLabel.CENTER);
 				right_panel_north.add(employeeImageLabel);
@@ -132,15 +132,16 @@ public class EmployeeManageMentPanel extends JPanel{
 				right_panel_center.add(right_panel_center_wrapper);
 			right_panel_north_wrapper.add(right_panel_north);
 			right_panel_north_wrapper.add(right_panel_center_wrapper);
-
 			
 			//오른쪽 아래 화면
 			JPanel right_panel_south = new JPanel();
-			right_panel_south.setLayout(new GridLayout(1, 3));
+			right_panel_south.setLayout(new GridLayout(1, 4));
 			imageUploadButton = new JButton("이미지 등록");
-			updateEmployeeButton = new JButton("직원정보 수정");
-			deleteEmployeeButton = new JButton("직원정보 삭제");
+			registerEmployeeButton = new JButton("직원 등록");
+			updateEmployeeButton = new JButton("직원 수정");
+			deleteEmployeeButton = new JButton("직원 삭제");
 			right_panel_south.add(imageUploadButton);
+			right_panel_south.add(registerEmployeeButton);
 			right_panel_south.add(updateEmployeeButton);
 			right_panel_south.add(deleteEmployeeButton);
 			
@@ -149,8 +150,8 @@ public class EmployeeManageMentPanel extends JPanel{
 		right_panel.add(right_panel_south, BorderLayout.SOUTH);
 		
 		setLayout(null);
-		left_panel.setBounds(0, 0, 1600, 960);
-		right_panel.setBounds(1600, 0, 320, 960);
+		left_panel.setBounds(0, 0, 1500, 960);
+		right_panel.setBounds(1500, 0, 420, 960);
 		add(left_panel);
 		add(right_panel);
 
@@ -165,9 +166,12 @@ public class EmployeeManageMentPanel extends JPanel{
 	
 	public void eventProc() {
 		EventHandler eventHandler = new EventHandler();
-		imageUploadButton.addActionListener(eventHandler);
-		jtextFieldSearch.addActionListener(eventHandler);
-		
+		imageUploadButton.addActionListener(eventHandler); // 이미지버튼 연결
+		jtextFieldSearch.addActionListener(eventHandler); // 검색 텍스트필드 연결
+		registerEmployeeButton.addActionListener(eventHandler); // 정복 등록 버튼 연결
+		updateEmployeeButton.addActionListener(eventHandler); // 정보 업데이트 버튼 연결
+		deleteEmployeeButton.addActionListener(eventHandler); // 직원정보 삭제 버튼 연결
+ 		
 		employeeTable.addMouseListener(new MouseAdapter() {			
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -182,11 +186,11 @@ public class EmployeeManageMentPanel extends JPanel{
 				jtextFieldEmployeeId.setText(emp.getId());
 				jtextFieldEmployeeName.setText(emp.getName());
 				jtextFieldEmployeeTel.setText(emp.getTel());
-				jtextFieldHire_date.setText(emp.getHire_date());
+				jtextFieldHire_date.setText(emp.getHire_date().substring(0, 11));
 				jtextFieldSal.setText(Integer.toString(emp.getSal()));
 				jtextFieldAge.setText(Integer.toString(emp.getAge()));
 				jComboBoxEmployeePosition.setSelectedItem(emp.getPosition());
-				System.out.println(emp.getPosition());
+				
 				imageIcon = new ImageIcon("src\\t_teamproject\\teamproject_02\\temp\\imgs\\employee\\" + emp.getId() + ".jpg");
 				if(new File("src\\t_teamproject\\teamproject_02\\temp\\imgs\\employee\\" + emp.getId() + ".jpg").exists()) {
 					employeeImageLabel.setIcon(imageIcon);
@@ -194,8 +198,7 @@ public class EmployeeManageMentPanel extends JPanel{
 				else {
 					imageIcon = new ImageIcon("src\\t_teamproject\\teamproject_02\\temp\\imgs\\employee\\default.jpg");
 					employeeImageLabel.setIcon(imageIcon);
-				}
-					
+				}				
 			}
 		});
 	}
@@ -207,9 +210,14 @@ public class EmployeeManageMentPanel extends JPanel{
 				imageUpload();
 			}else if(e.getSource()==jtextFieldSearch) {
 				searchEmployee();
+			}else if(e.getSource()==registerEmployeeButton){
+				registerEmployee();
+			}else if(e.getSource()==updateEmployeeButton) {
+				updateEmployee();
+			}else if(e.getSource()==deleteEmployeeButton) {
+				deleteEmployee();
 			}
-		}
-		
+		}		
 	}
 	public void imageUpload() {
 		JFileChooser jfc = new JFileChooser();
@@ -228,7 +236,7 @@ public class EmployeeManageMentPanel extends JPanel{
 				JOptionPane.showMessageDialog(null, "이미지 업로드는 프로그램 재 실행 후 적용됩니다.");
 				out.write(bytes);
 				out.close();
-				// 왜 적용이 안되는지 모름
+				// 왜 적용이 안되는지 모름 //이미지가 런타임상에서 잡히질 않음
 //				imageIcon = new ImageIcon("src\\t_teamproject\\teamproject_02\\temp\\imgs\\employee\\"+jfc.getSelectedFile().getName());
 //				System.out.println(jfc.getSelectedFile().getName());
 //				employeeImageLabel.setIcon(imageIcon);
@@ -247,6 +255,64 @@ public class EmployeeManageMentPanel extends JPanel{
 			myEmployeeTableModel.fireTableDataChanged();
 		}catch(Exception e){
 			System.out.println("EmployeeManageMentPanel_searchEmployee 에러");
+			e.printStackTrace();
+		}
+	}
+	public void registerEmployee() {
+		Employee vo = new Employee();
+		vo.setId(jtextFieldEmployeeId.getText());
+		vo.setPassword(jtextFieldEmployeeId.getText()); // 직원관리 창에서 등록시 비밀번호는 아이디와 같은 string으로 등록되게 됨
+		vo.setName(jtextFieldEmployeeName.getText());
+		vo.setPosition(jComboBoxEmployeePosition.getSelectedItem().toString());
+		vo.setTel(jtextFieldEmployeeTel.getText());
+		vo.setHire_date(jtextFieldHire_date.getText());
+		vo.setSal(Integer.parseInt(jtextFieldSal.getText()));
+		vo.setAge(Integer.parseInt(jtextFieldAge.getText()));
+		try {
+			int result = employeeDaomodel.insertEmployee(vo);
+			if(result==0) {
+				searchEmployee(); // 그대로 검색을 다시해서 새로고침 효과를 얻음
+				JOptionPane.showMessageDialog(null, "직원 정보가 등록되었습니다.");
+			}else {
+				JOptionPane.showMessageDialog(null, "직원 정보 등록에 오류가 발생하였습니다.");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void updateEmployee() {
+		Employee vo = new Employee();
+		vo.setId(jtextFieldEmployeeId.getText());
+		vo.setName(jtextFieldEmployeeName.getText());
+		vo.setPosition(jComboBoxEmployeePosition.getSelectedItem().toString());
+		vo.setTel(jtextFieldEmployeeTel.getText());
+		vo.setHire_date(jtextFieldHire_date.getText());
+		vo.setSal(Integer.parseInt(jtextFieldSal.getText()));
+		vo.setAge(Integer.parseInt(jtextFieldAge.getText()));
+		try {
+			int result = employeeDaomodel.updateEmployee(vo);
+			if(result==0) {
+				JOptionPane.showMessageDialog(null, "변경사항이 없습니다.");
+			}else {
+				searchEmployee(); // 그대로 검색을 다시해서 새로고침 효과를 얻음
+				JOptionPane.showMessageDialog(null, "직원 정보가 업데이트 되었습니다.");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void deleteEmployee() {
+		String eid = jtextFieldEmployeeId.getText();
+		try {
+			int result = employeeDaomodel.deleteEmployee(eid);
+			if(result==0) {
+				JOptionPane.showMessageDialog(null, "변경사항이 없습니다.");
+			}else {
+				searchEmployee(); // 그대로 검색을 다시해서 새로고침 효과를 얻음
+				JOptionPane.showMessageDialog(null, "직원 정보가 업데이트 되었습니다.");
+			}	
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

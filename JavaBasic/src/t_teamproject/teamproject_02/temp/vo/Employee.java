@@ -22,6 +22,14 @@ public class Employee {
 		this.position = position;
 		this.age = age;
 	}
+	public int changePosNameToPosId(String position) {
+		switch(position) {
+		case "ADMIN" : return 0;
+		case "MANAGER" : return 1;
+		case "SALESMAN" : return 2;
+		}
+		return -1;
+	}
 
 
 	public int getAge() {
