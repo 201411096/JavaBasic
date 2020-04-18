@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
 public class MyEmployeeTableModel extends AbstractTableModel{
-	String columnName [] = {"아이디", "이름", "직책", "전화번호", "나이" , "급여", "입사일"};
-	ArrayList data = new ArrayList();
+	private String columnName [] = {"아이디", "이름", "직책", "전화번호", "나이" , "급여", "입사일"};
+	private ArrayList data = new ArrayList();
 	@Override
 	public int getRowCount() {
 		return data.size();
@@ -29,6 +29,18 @@ public class MyEmployeeTableModel extends AbstractTableModel{
 		ArrayList temp = (ArrayList)data.get(rowIndex);
 		temp.set(rowIndex, columnIndex);
 		fireTableCellUpdated(rowIndex, columnIndex);
+	}
+	public String[] getColumnName() {
+		return columnName;
+	}
+	public void setColumnName(String[] columnName) {
+		this.columnName = columnName;
+	}
+	public ArrayList getData() {
+		return data;
+	}
+	public void setData(ArrayList data) {
+		this.data = data;
 	}
 	
 	

@@ -1,10 +1,7 @@
 package t_teamproject.teamproject_02.temp.view.panel;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,6 +9,7 @@ import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -24,10 +22,14 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
+import t_teamproject.teamproject_02.temp.dao.EmployeeDao;
+import t_teamproject.teamproject_02.temp.dao.EmployeeDaoImpl;
 import t_teamproject.teamproject_02.temp.view.ManagementFrame;
 import t_teamproject.teamproject_02.temp.view.table.MyEmployeeTableModel;
 
 public class EmployeeManageMentPanel extends JPanel{
+	EmployeeDao employeeDaomodel;
+	
 	ManagementFrame managementFrame;
 	
 	JPanel left_panel, right_panel;
@@ -53,6 +55,7 @@ public class EmployeeManageMentPanel extends JPanel{
 		this.managementFrame = managementFrame;
 		display();
 		eventProc();
+		connectDB();
 	}
 	public void display() {
 		//왼쪽 전체 화면
@@ -61,7 +64,7 @@ public class EmployeeManageMentPanel extends JPanel{
 		left_panel.setBorder(new TitledBorder("직원 검색"));
 			//왼쪽 위 화면
 			JPanel left_panel_up = new JPanel();
-			String searchOption [] = {"이름", "급여"};
+			String searchOption [] = {"이름", "아이디"};
 			jcomboBoxSearchOption = new JComboBox(searchOption);
 			jtextFieldSearch = new JTextField(30);
 			left_panel_up.add(jcomboBoxSearchOption);
@@ -140,34 +143,65 @@ public class EmployeeManageMentPanel extends JPanel{
 		add(right_panel);
 
 	}
-	public void eventProc() {
-		ImageButtonUploadActionEvent imageButtonUploadActionEvent = new ImageButtonUploadActionEvent();
-		
-		imageUploadButton.addActionListener(imageButtonUploadActionEvent);
+	public void connectDB() {
+		try {
+			employeeDaomodel = new EmployeeDaoImpl();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}		
 	}
 	
-	class ImageButtonUploadActionEvent implements ActionListener{
+	public void eventProc() {
+		EventHandler eventHandler = new EventHandler();
+		imageUploadButton.addActionListener(eventHandler);
+		jtextFieldSearch.addActionListener(eventHandler);
+	}
+	
+	class EventHandler implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			JFileChooser jfc = new JFileChooser();
-			int result = jfc.showSaveDialog(null);
-			if(result==0)
-			{
-				File file = jfc.getSelectedFile();
-				try {
-					System.out.println("???");
-					byte [] bytes = new byte[(int)file.length()];
-					DataInputStream in = new DataInputStream(new FileInputStream(file));
-					in.readFully(bytes);
-					in.close();
-	
-					FileOutputStream out = new FileOutputStream("src\\t_teamproject\\teamproject_02\\temp\\imgs\\employee\\"+jfc.getSelectedFile().getName());
-					out.write(bytes);
-					out.close();
-				}catch (Exception e1) {
-					e1.printStackTrace();
-				}
+			if(e.getSource()==imageUploadButton) {
+				imageUpload();
+			}else if(e.getSource()==jtextFieldSearch) {
+				searchEmployee();
 			}
+			
+		}
+		
+	}
+	public void imageUpload() {
+		JFileChooser jfc = new JFileChooser();
+		int result = jfc.showSaveDialog(null);
+		if(result==0)
+		{
+			File file = jfc.getSelectedFile();
+			try {
+				System.out.println("???");
+				byte [] bytes = new byte[(int)file.length()];
+				DataInputStream in = new DataInputStream(new FileInputStream(file));
+				in.readFully(bytes);
+				in.close();
+
+				FileOutputStream out = new FileOutputStream("src\\t_teamproject\\teamproject_02\\temp\\imgs\\employee\\"+jfc.getSelectedFile().getName());
+				out.write(bytes);
+				out.close();
+			}catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		}
+	}
+	public void searchEmployee() {
+		System.out.println("야발");
+		int searchOption = jcomboBoxSearchOption.getSelectedIndex();
+		String searchWord = jtextFieldSearch.getText();
+		try {
+			ArrayList data = employeeDaomodel.searchEmployee(searchOption, searchWord);
+			myEmployeeTableModel.setData(data);
+			employeeTable.setModel(myEmployeeTableModel);
+			myEmployeeTableModel.fireTableDataChanged();
+		}catch(Exception e){
+			System.out.println("EmployeeManageMentPanel_searchEmployee 에러");
+			e.printStackTrace();
 		}
 	}
 }

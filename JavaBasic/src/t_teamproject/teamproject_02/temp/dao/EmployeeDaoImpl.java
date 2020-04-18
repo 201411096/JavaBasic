@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.ArrayList;
 
 import t_teamproject.teamproject_02.temp.config.Configuration;
 import t_teamproject.teamproject_02.temp.vo.Employee;
@@ -41,6 +41,37 @@ public class EmployeeDaoImpl implements EmployeeDao{
 		}
 		
 		return e;
+	}
+	public ArrayList searchEmployee(int option, String searchWord) {
+		ArrayList resultList = new ArrayList();
+		Connection con = null;
+		try {
+			con = DriverManager.getConnection(Configuration.url, Configuration.user, Configuration.password);
+			String [] columNames = {"E.ENAME", "E.EID"};
+			String sql ="";
+			sql="SELECT E.ENAME AS ENAME, E.EID AS EID, E.TEL AS ETEL, P.POSNAME AS POSNAME, E.AGE AS EAGE, E.SAL AS SAL, TO_CHAR(E.HIRE_DATE, 'YYYY/MM/DD') AS HIRE_DATE  FROM EMPLOYEE E INNER JOIN POS P ON E.POSID=P.POSID WHERE " + columNames[option] + " LIKE '%' || ? || '%' ";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, searchWord);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				ArrayList temp = new ArrayList();
+				temp.add(rs.getString("EID"));
+				temp.add(rs.getString("ENAME"));
+				temp.add(rs.getString("POSNAME"));
+				temp.add(rs.getString("ETEL"));
+				temp.add(Integer.toString(rs.getInt("EAGE")));
+				temp.add(Integer.toString(rs.getInt("SAL")));
+				temp.add(rs.getString("HIRE_DATE"));
+				resultList.add(temp);
+			}
+			rs.close();
+			ps.close();
+			con.close();			
+		} catch (Exception e) {
+			System.out.println("EmployeeDaoImpl_searchEmployee 오류");
+			e.printStackTrace();
+		}
+		return resultList;		
 	}
 	public int insertEmployee(Employee vo) {
 		int result=0;
