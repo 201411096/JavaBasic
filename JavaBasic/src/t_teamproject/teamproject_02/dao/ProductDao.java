@@ -12,4 +12,6 @@ public interface ProductDao {
 	public int deleteProduct(int id);
 	
 	public ArrayList<String> selectProductNameOrderByName();
+	
+	public ArrayList<Product> searchProductByGroupNameAsc(String searchWord);
 }

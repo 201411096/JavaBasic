@@ -181,4 +181,36 @@ public class ProductDaoImpl implements ProductDao{
 		}	
 		return resultArrayList;
 	}
+	@Override
+	public ArrayList<Product> searchProductByGroupNameAsc(String searchWord) { //그룹이름으로 찾아서 PID순으로 정렬 후 가져옴
+		ArrayList<Product> resultList = new ArrayList();
+		Connection con = null;
+		try {
+			con = DriverManager.getConnection(Configuration.url, Configuration.user, Configuration.password);
+			String sql = "SELECT P.PID AS PID, P.PGROUPID AS PGID, P.PNAME AS PNAME, P.PDETAIL AS PDETAIL, P.PPRICE AS PPRICE FROM PRODUCT P INNER JOIN PRODUCTGROUP PG ON P.PGROUPID=PG.PGROUPID WHERE PG.PGROUPNAME=? ORDER BY P.PID";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, searchWord);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				Product temp = new Product();
+				temp.setId(rs.getInt("PID"));
+				temp.setGroupName(temp.changePGIDtoGroupName(rs.getInt("PGID")));
+				temp.setName(rs.getString("PNAME"));
+				temp.setDetail(rs.getString("PDETAIL"));
+				temp.setPrice(rs.getInt("PPRICE"));
+				resultList.add(temp);
+			}
+			rs.close();
+			ps.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				con.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return resultList;
+	}
 }

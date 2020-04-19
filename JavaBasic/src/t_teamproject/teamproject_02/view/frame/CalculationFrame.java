@@ -11,7 +11,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
-import t_teamproject.teamproject_02.view.panel.ProductMainMenuListPanel;
+import t_teamproject.teamproject_02.view.panel.ProductMenuListPanel;
 import t_teamproject.teamproject_02.vo.Employee;
 
 public class CalculationFrame extends JFrame{
@@ -24,7 +24,7 @@ public class CalculationFrame extends JFrame{
 	
 	JTabbedPane jtabbepedPane;
 	String jtabbedPaneItem [] = {"메인메뉴", "사이드메뉴", "음료수", "세트메뉴"}; //tabbedpane에 들어갈 이름
-	ProductMainMenuListPanel mainMenuPanel; // 메인메뉴 판넬
+	ProductMenuListPanel mainMenuPanel; // 메인메뉴 판넬
 	
 	JPanel right_panel;
 	
@@ -44,7 +44,7 @@ public class CalculationFrame extends JFrame{
 		setJMenuBar(jmenubar);
 		
 		jtabbepedPane = new JTabbedPane();
-		mainMenuPanel = new ProductMainMenuListPanel(this);
+		mainMenuPanel = new ProductMenuListPanel(this, jtabbedPaneItem[0]);
 		jtabbepedPane.addTab(jtabbedPaneItem[0], mainMenuPanel);
 		
 		right_panel = new JPanel();
