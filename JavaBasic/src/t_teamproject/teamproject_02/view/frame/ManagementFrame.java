@@ -9,8 +9,12 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JTabbedPane;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
+import t_teamproject.teamproject_02.jfreechart.BarChartProductCount;
 import t_teamproject.teamproject_02.view.panel.EmployeeManageMentPanel;
+import t_teamproject.teamproject_02.view.panel.ProductCountGraphPanel;
 import t_teamproject.teamproject_02.view.panel.ProductManagementPanel;
 import t_teamproject.teamproject_02.vo.Employee;
 
@@ -21,9 +25,10 @@ public class ManagementFrame extends JFrame{
 	JMenuItem jmenuitem1;
 	JMenuItem jmenuitem2;
 	JTabbedPane jtabbepedPane;
-	String jtabbedPaneItem [] = {"직원관리", "제품관리"};
+	String jtabbedPaneItem [] = {"직원관리", "제품관리", "재고관리"};
 	EmployeeManageMentPanel employeeManageMentPanel;
 	ProductManagementPanel productManagementPanel;
+	ProductCountGraphPanel productCountGraphPanel;
 	public ManagementFrame(Employee employee) {
 		this.employee = employee;
 		display();
@@ -44,8 +49,10 @@ public class ManagementFrame extends JFrame{
 		jtabbepedPane = new JTabbedPane();
 		employeeManageMentPanel = new EmployeeManageMentPanel(this);
 		productManagementPanel = new ProductManagementPanel(this);
+		productCountGraphPanel = new ProductCountGraphPanel(this);
 		jtabbepedPane.addTab(jtabbedPaneItem[0], employeeManageMentPanel);
 		jtabbepedPane.addTab(jtabbedPaneItem[1], productManagementPanel);
+		jtabbepedPane.addTab(jtabbedPaneItem[2], productCountGraphPanel);
 		/*
 		 	jtabbedPane에 붙어야할 내용
 		 */
@@ -71,7 +78,17 @@ public class ManagementFrame extends JFrame{
 				dispose();
 			}
 		});
+		jtabbepedPane.addChangeListener(new ChangeListener() { //탭 선택 시 새로고침 효과			
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				if(jtabbepedPane.getSelectedIndex() ==2 )
+				{
+					productCountGraphPanel.renewal();
+				}	
+			}
+		});
 	}
+	
 	public Employee getEmployee() {
 		return employee;
 	}

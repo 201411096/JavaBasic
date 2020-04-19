@@ -1,6 +1,7 @@
 package t_teamproject.teamproject_02.jfreechart.example;
 
 import javax.swing.JFrame;
+import javax.swing.JScrollPane;
 
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -18,7 +19,7 @@ public class MyFrame extends JFrame {
          				// JFreeChart는 ChartPanel이나 ChartFrame에만 붙일 수 있다.
          				// 차트만 출력하려면 ChartFrame에 붙여서 바로 출력하거나
          				// 기존의 화면에 보이게 하려면 ChartPanel에 붙이고 다시 우리 화면 JPanel에 붙인다. 
-         add(chartPanel);
+         add(new JScrollPane(chartPanel));
          setSize(800,400); 
          setVisible(true);
          setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

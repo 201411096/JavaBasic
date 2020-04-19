@@ -1,4 +1,4 @@
-package t_teamproject.teamproject_02.jfreechart.example;
+package t_teamproject.teamproject_02.jfreechart;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -21,7 +21,10 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.ui.HorizontalAlignment;
 import org.jfree.ui.TextAnchor;
 
-public class ChartB {
+import t_teamproject.teamproject_02.dao.ProductManagementDao;
+import t_teamproject.teamproject_02.dao.ProductManagementDaoImpl;
+
+public class BarChartProductCount {
     public JFreeChart getChart() {
         
         // 데이터 생성
@@ -29,13 +32,21 @@ public class ChartB {
  
         //------------------------------------------------------------------
         // 데이터 입력 ( 값, 범례, 카테고리 )
-        Database db = new Database(); //ArrayList의 ArrayList 2차원배열 형태로 데이터를 담아옴
-        ArrayList<ArrayList> data = db.getData(); //2차원 배열?..
+//        Database db = new Database(); //ArrayList의 ArrayList 2차원배열 형태로 데이터를 담아옴
+//        ArrayList<ArrayList> data = db.getData(); //2차원 배열?..
+        ProductManagementDao productManagementDaoModel = null;
+		try {
+			productManagementDaoModel = new ProductManagementDaoImpl();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         
+        ArrayList<ArrayList> data = productManagementDaoModel.productCount();
         for(ArrayList temp : data) {
         	int value = (Integer) temp.get(0);
         	String cate = (String) temp.get(1);
-        	dataset.addValue(value, "월별",  cate);
+        	dataset.addValue(value, "재고별",  cate);
         }
         //------------------------------------------------------------------
         
@@ -51,8 +62,8 @@ public class ChartB {
         final ItemLabelPosition p_below = new ItemLabelPosition(
                      ItemLabelAnchor.OUTSIDE6, TextAnchor.TOP_LEFT
                      );
-        Font f = new Font("Gulim", Font.BOLD, 14);
-        Font axisF = new Font("Gulim", Font.PLAIN, 14);
+        Font f = new Font("Gulim", Font.BOLD, 10);
+        Font axisF = new Font("Gulim", Font.PLAIN, 8);
        
         // 렌더링 세팅
         // 그래프 1
@@ -88,8 +99,8 @@ public class ChartB {
        
         // 세팅된 plot을 바탕으로 chart 생성
         final JFreeChart chart = new JFreeChart(plot);
-        chart.setTitle(" 우리들의 차트 "); 
-        TextTitle copyright = new TextTitle("월별 입사 현황 ", new Font("SansSerif", Font.PLAIN, 9));
+        chart.setTitle("재고 현황 "); 
+        TextTitle copyright = new TextTitle("상품별 재고 현황 ", new Font("SansSerif", Font.PLAIN, 9));
         copyright.setHorizontalAlignment(HorizontalAlignment.RIGHT);
         chart.addSubtitle(copyright);  
         return chart;
