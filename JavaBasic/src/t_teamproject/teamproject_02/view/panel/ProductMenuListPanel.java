@@ -56,4 +56,17 @@ public class ProductMenuListPanel extends JPanel{
 			e.printStackTrace();
 		}
 	}
+	public MenuButton[] getMenuButtonList() {
+		return menuButtonList;
+	}
+	public void setMenuButtonList(MenuButton[] menuButtonList) {
+		this.menuButtonList = menuButtonList;
+	}
+	public ArrayList<Product> getProductList() {
+		return productList;
+	}
+	public void setProductList(ArrayList<Product> productList) {
+		this.productList = productList;
+	}
+	
 }

@@ -1,4 +1,4 @@
-package t_teamproject.teamproject_02.example_jfreechart;
+package t_teamproject.teamproject_02.jfreechart.example;
 
 import java.awt.Color;
 import java.awt.Font;

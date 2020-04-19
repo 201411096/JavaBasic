@@ -31,7 +31,7 @@ public class Product {
 		return result.toString();
 	}
 	
-	public String changePGIDtoGroupName(int pgid) {
+	public String changePGIDtoGroupName(int pgid) { //오라클에서 pgid를 받으면 pgroupname으로 변경
 		switch(pgid) {
 		case 0 : return "메인메뉴";
 		case 1 : return "사이드메뉴";
@@ -40,7 +40,7 @@ public class Product {
 		}
 		return "-1";
 	}
-	public int changeGroupNametoPGID(String groupName) {
+	public int changeGroupNametoPGID(String groupName) { //오라클로 전송시에 pgroupname을 pgid로 변환
 		switch(groupName) {
 		case "메인메뉴" : return 0;
 		case "사이드메뉴" : return 1;
