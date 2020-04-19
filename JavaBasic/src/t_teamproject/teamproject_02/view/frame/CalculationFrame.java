@@ -24,7 +24,7 @@ public class CalculationFrame extends JFrame{
 	
 	JTabbedPane jtabbepedPane;
 	String jtabbedPaneItem [] = {"메인메뉴", "사이드메뉴", "음료수", "세트메뉴"}; //tabbedpane에 들어갈 이름
-	ProductMenuListPanel mainMenuPanel; // 메인메뉴 판넬
+	ProductMenuListPanel menuPanelList [] = new ProductMenuListPanel[4];
 	
 	JPanel right_panel;
 	
@@ -44,8 +44,11 @@ public class CalculationFrame extends JFrame{
 		setJMenuBar(jmenubar);
 		
 		jtabbepedPane = new JTabbedPane();
-		mainMenuPanel = new ProductMenuListPanel(this, jtabbedPaneItem[0]);
-		jtabbepedPane.addTab(jtabbedPaneItem[0], mainMenuPanel);
+		for(int i=0; i<menuPanelList.length; i++)
+		{
+			menuPanelList[i] = new ProductMenuListPanel(this, jtabbedPaneItem[i]);
+			jtabbepedPane.addTab(jtabbedPaneItem[i], menuPanelList[i]);
+		}
 		
 		right_panel = new JPanel();
 		
