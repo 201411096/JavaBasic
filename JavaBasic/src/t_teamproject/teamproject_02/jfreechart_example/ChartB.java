@@ -1,17 +1,27 @@
-package t_teamproject.teamproject_02.jfreechart;
+package t_teamproject.teamproject_02.jfreechart_example;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.util.ArrayList;
 
-import org.jfree.chart.*; // org로 시작하는 건 자바 기본 라이브러리가 아님
-import org.jfree.chart.axis.*;
-import org.jfree.chart.labels.*;
-import org.jfree.chart.plot.*;
-import org.jfree.chart.renderer.category.*;
-import org.jfree.chart.title.*;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.CategoryAxis;
+import org.jfree.chart.axis.CategoryLabelPositions;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.labels.CategoryItemLabelGenerator;
+import org.jfree.chart.labels.ItemLabelAnchor;
+import org.jfree.chart.labels.ItemLabelPosition;
+import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.DatasetRenderingOrder;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.renderer.category.BarRenderer;
+import org.jfree.chart.title.TextTitle;
 import org.jfree.data.category.DefaultCategoryDataset;
-import org.jfree.ui.*;
+import org.jfree.ui.HorizontalAlignment;
+import org.jfree.ui.TextAnchor;
 
-public class ChartA {
+public class ChartB {
     public JFreeChart getChart() {
         
         // 데이터 생성
@@ -19,19 +29,13 @@ public class ChartA {
  
         //------------------------------------------------------------------
         // 데이터 입력 ( 값, 범례, 카테고리 )
-        dataset.addValue(1.0, "S1", "1월");
-        dataset.addValue(4.0, "S1", "2월");
-        dataset.addValue(3.0, "S1", "3월");
-        dataset.addValue(5.0, "S1", "4월");
-        dataset.addValue(5.0, "S1", "5월");
-        dataset.addValue(7.0, "S1", "6월");
-        dataset.addValue(7.0, "S1", "7월");
-        dataset.addValue(8.0, "S1", "8월");
-        dataset.addValue(5.0, "S1", "9월");
-        dataset.addValue(0, "S1", "10월");
-        dataset.addValue(6.0, "S1", "11월");
-        dataset.addValue(3.0, "S1", "12월");
-        // 위 부분을 반복문으로 만들었으면 좋겠다는 강한 느낌 ^^
+        Database db = new Database(); //ArrayList의 ArrayList 2차원배열 형태로 데이터를 담아옴
+        ArrayList<ArrayList> data = db.getData(); //2차원 배열?..
+        for(ArrayList temp : data) {
+        	int value = (Integer) temp.get(0);
+        	String cate = (String) temp.get(1);
+        	dataset.addValue(value, "월별",  cate);
+        }
         //------------------------------------------------------------------
         
         // 렌더링 생성 및 세팅
