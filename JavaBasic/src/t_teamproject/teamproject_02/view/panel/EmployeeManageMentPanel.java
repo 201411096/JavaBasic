@@ -232,6 +232,7 @@ public class EmployeeManageMentPanel extends JPanel{
 
 				FileOutputStream out = new FileOutputStream("src\\t_teamproject\\teamproject_02\\imgs\\employee\\"+jfc.getSelectedFile().getName());
 				JOptionPane.showMessageDialog(null, "이미지 업로드는 프로그램 재 실행 후 적용됩니다.");
+				
 				out.write(bytes);
 				out.close();
 				// 왜 적용이 안되는지 모름 //이미지가 런타임상에서 잡히질 않음

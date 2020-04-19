@@ -1,4 +1,4 @@
-package t_teamproject.teamproject_02.jfreechart_example;
+package t_teamproject.teamproject_02.example_jfreechart;
 
 import javax.swing.JFrame;
 

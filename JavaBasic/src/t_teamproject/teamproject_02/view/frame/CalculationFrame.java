@@ -8,15 +8,26 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 
+import t_teamproject.teamproject_02.view.panel.ProductMainMenuListPanel;
 import t_teamproject.teamproject_02.vo.Employee;
 
 public class CalculationFrame extends JFrame{
-	Employee employee;
+	Employee employee; // 로그인한 정보
+	
 	JMenuBar jmenubar;
 	JMenu menu;
 	JMenuItem jmenuitem1;
 	JMenuItem jmenuitem2;
+	
+	JTabbedPane jtabbepedPane;
+	String jtabbedPaneItem [] = {"메인메뉴", "사이드메뉴", "음료수", "세트메뉴"}; //tabbedpane에 들어갈 이름
+	ProductMainMenuListPanel mainMenuPanel; // 메인메뉴 판넬
+	
+	JPanel right_panel;
+	
 	public CalculationFrame(Employee employee) {
 		this.employee = employee;
 		display();
@@ -31,6 +42,19 @@ public class CalculationFrame extends JFrame{
 		menu.add(jmenuitem2);
 		jmenubar.add(menu);
 		setJMenuBar(jmenubar);
+		
+		jtabbepedPane = new JTabbedPane();
+		mainMenuPanel = new ProductMainMenuListPanel(this);
+		jtabbepedPane.addTab(jtabbedPaneItem[0], mainMenuPanel);
+		
+		right_panel = new JPanel();
+		
+		jtabbepedPane.setBounds(0, 0, 1500, 960);
+		right_panel.setBounds(1500, 0, 420, 960);
+		
+		setLayout(null);
+		add(jtabbepedPane);
+		add(right_panel);
 		
 		setTitle("계산 화면");
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -53,5 +77,11 @@ public class CalculationFrame extends JFrame{
 				dispose();
 			}
 		});
+	}
+	public Employee getEmployee() {
+		return employee;
+	}
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
 	}
 }
