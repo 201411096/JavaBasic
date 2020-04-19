@@ -18,6 +18,19 @@ public class Product {
 		this.price = price;
 		this.detail = detail;
 	}
+	@Override
+	public String toString() {
+		StringBuffer result = new StringBuffer("");
+		
+		result.append("제품 이름 :" + this.name +"\n");
+		result.append("제품 그룹 :" + this.groupName +"\n");
+		result.append("제품 가격 :" + this.price +"\n");
+		result.append("제품 설명 \n" + this.detail +"\n");
+		
+		
+		return result.toString();
+	}
+	
 	public String changePGIDtoGroupName(int pgid) {
 		switch(pgid) {
 		case 0 : return "메인메뉴";

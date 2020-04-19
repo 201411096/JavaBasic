@@ -14,10 +14,11 @@ public class MenuButton extends JButton{
 	public MenuButton(Product p) {
 		this.p=p;
 		display();
-		setImageIcon();
+		eventProc();
 	}
 	public void display() {
 		setBackground(Color.white);
+		setImageIcon();
 	}
 	public void setImageIcon() {
 		if(new File("src\\t_teamproject\\teamproject_02\\imgs\\food\\" + p.getId() + ".jpg").exists()) {
@@ -28,5 +29,8 @@ public class MenuButton extends JButton{
 			imageIcon = new ImageIcon("src\\t_teamproject\\teamproject_02\\imgs\\food\\default.jpg");
 			setIcon(imageIcon);
 		}
+	}
+	public void eventProc() {
+		this.setToolTipText(p.getDetail());
 	}
 }
