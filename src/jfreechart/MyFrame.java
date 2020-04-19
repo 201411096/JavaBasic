@@ -11,7 +11,8 @@ public class MyFrame extends JFrame {
 	MyFrame(){
 		 // *******************************************************
 		 //ChartA demo = new ChartA();   		 // (1) 정해진 값으로 차트
-		 ChartB demo = new ChartB();			 // (2) DB에서 가져온 값으로 차트 
+		 ChartB demo = new ChartB();			 // (2) DB에서 가져온 값으로 차트
+//		 PolylineBarChart demo  = new PolylineBarChart();
          JFreeChart chart = demo.getChart();     
          ChartPanel chartPanel=new ChartPanel(chart); 
          				// JFreeChart는 ChartPanel이나 ChartFrame에만 붙일 수 있다.

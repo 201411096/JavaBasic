@@ -5,9 +5,12 @@ import java.util.*;
 
 public class Database {
 
-	String URL = "jdbc:oracle:thin:@192.168.0.17:1521:orcl";
-	String USER ="scott";
-	String PASS = "scottscott";
+//	String URL = "jdbc:oracle:thin:@192.168.0.17:1521:orcl";
+//	String USER ="scott";
+//	String PASS = "scottscott";
+	public static final String URL = "jdbc:oracle:thin:@192.168.56.1:1521:xe";
+	public static final  String USER = "scott";
+	public static final  String PASS = "tiger";
 
 	public ArrayList<ArrayList> getData() {
 
@@ -45,6 +48,7 @@ public class Database {
 			con.close();
 		} catch(Exception ex){
 			System.out.println("에러 : " + ex.getMessage() );
+			ex.printStackTrace();
 		}
 		return data;
 	}
