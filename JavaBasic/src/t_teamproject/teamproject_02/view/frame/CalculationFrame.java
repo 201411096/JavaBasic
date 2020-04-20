@@ -5,13 +5,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 import t_teamproject.teamproject_02.dao.ProductDao;
@@ -35,8 +35,8 @@ public class CalculationFrame extends JFrame{
 	String jtabbedPaneItem [] = {"메인메뉴", "사이드메뉴", "음료수", "세트메뉴"}; //tabbedpane에 들어갈 이름
 	ProductMenuListPanel menuPanelList [] = new ProductMenuListPanel[4];
 
-	HashMap<Integer, Integer> productCart2 = new HashMap<Integer, Integer>(); //장바구니(제품, 개수)
-	HashMap<Product, Integer> productCart = new HashMap<Product, Integer>(); //장바구니(제품, 개수)
+	HashMap<Integer, Integer> productCart = new HashMap<Integer, Integer>(); //장바구니(제품, 개수)
+
 	HashMap<String, Integer> productCount = new HashMap<String, Integer>(); //재고(이름, 개수)
 	ProductManagementDao pmimpl;
 	ProductDao pimpl;
@@ -49,8 +49,7 @@ public class CalculationFrame extends JFrame{
 		display();
 		connectDB();
 		getProductCountFromDB(productCount); // 재고량 초기화
-		initiallizeProductCart(productCart); // 쇼핑카트 초기화
-		initiallizeProductCart2(productCart2);
+		initiallizeProductCart(productCart);
 		eventProc();
 	}
 	public void display() {
@@ -124,26 +123,11 @@ public class CalculationFrame extends JFrame{
 //			System.out.println(key + " " + value);	
 //		}
 	}
-	public void initiallizeProductCart2(HashMap<Integer, Integer> productCart) {
+	public void initiallizeProductCart(HashMap<Integer, Integer> productCart) {
 		ArrayList<Product> list = pmimpl.getAllProduct();
 		for(int i=0; i<list.size(); i++)
 		{
 			productCart.put(list.get(i).getId(), 0);		// product의 값들을 전부 0으로 초기화
-		}
-//		테스트 해보는 부분
-//		Iterator it = productCart.keySet().iterator();
-//		while(it.hasNext()) {
-//			Product p = (Product)it.next();
-//			int value = (int)productCart.get(p);
-//			System.out.println(p.toString() + "\n 값 확인-------------\n " + value);
-//		}
-	}
-	
-	public void initiallizeProductCart(HashMap<Product, Integer> productCart) {
-		ArrayList<Product> list = pmimpl.getAllProduct();
-		for(int i=0; i<list.size(); i++)
-		{
-			productCart.put(list.get(i), 0);		// product의 값들을 전부 0으로 초기화
 		}
 //		테스트 해보는 부분
 //		Iterator it = productCart.keySet().iterator();
@@ -160,17 +144,12 @@ public class CalculationFrame extends JFrame{
 	public void setEmployee(Employee employee) { //로그인 세션 관리에 사용
 		this.employee = employee;
 	}
-	public HashMap<Product, Integer> getProductCart() {
+
+	public HashMap<Integer, Integer> getProductCart() {
 		return productCart;
 	}
-	public void setProductCart(HashMap<Product, Integer> productCart) {
-		this.productCart = productCart;
-	}
-	public HashMap<Integer, Integer> getProductCart2() {
-		return productCart2;
-	}
-	public void setProductCart2(HashMap<Integer, Integer> productCart2) {
-		this.productCart2 = productCart2;
+	public void setProductCart(HashMap<Integer, Integer> productCart2) {
+		this.productCart = productCart2;
 	}
 	
 }

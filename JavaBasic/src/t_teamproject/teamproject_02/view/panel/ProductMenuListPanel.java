@@ -63,12 +63,11 @@ public class ProductMenuListPanel extends JPanel{
 			
 			System.out.println(button.getP().toString()); // 메뉴버튼의 product 정보 확인
 			System.out.println(button.getP().getId()+""); // 메뉴버튼의 product id가져옴 
-			
-			HashMap<Product, Integer> productCart = calculationFrame.getProductCart();
-			HashMap<Integer, Integer> productCart2 = calculationFrame.getProductCart2();
-			calculationFrame.getProductCart2().put(button.getP().getId(), calculationFrame.getProductCart2().get(button.getP().getId())+1); // CalculationFrame에 있는 HashMap<Product, Integer>
-//			calculationFrame.getProductCart().put(button.getP(), calculationFrame.getProductCart().get(button.getP())+1); // CalculationFrame에 있는 HashMap<Product, Integer>
-			System.out.println(calculationFrame.getProductCart2().get(button.getP().getId()));
+
+			HashMap<Integer, Integer> productCart2 = calculationFrame.getProductCart();
+			calculationFrame.getProductCart().put(button.getP().getId(), calculationFrame.getProductCart().get(button.getP().getId())+1); // CalculationFrame에 있는 HashMap<Product, Integer>
+
+			System.out.println(calculationFrame.getProductCart().get(button.getP().getId()));
 
 		}
 	}
