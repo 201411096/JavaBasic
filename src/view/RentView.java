@@ -56,8 +56,45 @@ public class RentView extends JPanel
 	
 	/*	객체 생성 및 화면 구성   */
 	void addLayout(){
-
+		setLayout(new BorderLayout());
+		tfRentTel = new JTextField();
+		tfRentCustName = new JTextField();
+		tfRentVideoNum = new JTextField();
+		bRent = new JButton("대여");
+		tfReturnVideoNum = new JTextField(15);
+		bReturn = new JButton("반납");
+		rentTM = new RentTableModel();
+		tableRecentList = new JTable(rentTM);
 		
+		JPanel north_panel = new JPanel();
+		north_panel.setLayout(new GridLayout(1,2));
+			JPanel north_left_panel = new JPanel();
+			north_left_panel.setBorder(new TitledBorder("대여"));
+			north_left_panel.setLayout(new GridLayout(4,2));
+			north_left_panel.add(new JLabel("전 화 번 호"));
+			north_left_panel.add(tfRentTel);
+			north_left_panel.add(new JLabel("고 객 명"));
+			north_left_panel.add(tfRentCustName);
+			north_left_panel.add(new JLabel("비디오 번호"));
+			north_left_panel.add(tfRentVideoNum);
+			north_left_panel.add(bRent);
+			
+			JPanel north_right_panel = new JPanel();
+			north_right_panel.setBorder(new TitledBorder("반납"));
+			north_right_panel.add(new JLabel("비디오 번호"));
+			north_right_panel.add(tfReturnVideoNum);
+			north_right_panel.add(bReturn);
+		
+		north_panel.add(north_left_panel);
+		north_panel.add(north_right_panel);
+		
+		JPanel center_panel = new JPanel();
+		center_panel.setLayout(new GridLayout(1, 1));
+		center_panel.add(new JScrollPane(tableRecentList));
+		
+		
+		add(north_panel, BorderLayout.NORTH);
+		add(center_panel, BorderLayout.CENTER);
 	}
 
 	class RentTableModel extends AbstractTableModel { 
