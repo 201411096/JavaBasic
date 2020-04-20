@@ -56,13 +56,13 @@ public class ProductMenuListPanel extends JPanel{
 			e.printStackTrace();
 		}
 	}
-	public MenuButton[] getMenuButtonList() {
+	public MenuButton[] getMenuButtonList() { //메뉴버튼 리스트 반환
 		return menuButtonList;
 	}
 	public void setMenuButtonList(MenuButton[] menuButtonList) {
 		this.menuButtonList = menuButtonList;
 	}
-	public ArrayList<Product> getProductList() {
+	public ArrayList<Product> getProductList() { //메뉴 리스트 반환(사실상 메뉴버튼 리스트에 정보가 다 포함되어 있음)
 		return productList;
 	}
 	public void setProductList(ArrayList<Product> productList) {
