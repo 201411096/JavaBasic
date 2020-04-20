@@ -59,15 +59,6 @@ public class ProductMenuListPanel extends JPanel{
 	class EventHandler implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			MenuButton button = (MenuButton)e.getSource();
-			
-			System.out.println(button.getP().toString()); // 메뉴버튼의 product 정보 확인
-			System.out.println(button.getP().getId()+""); // 메뉴버튼의 product id가져옴 
-
-			HashMap<Integer, Integer> productCart2 = calculationFrame.getProductCart();
-			calculationFrame.getProductCart().put(button.getP().getId(), calculationFrame.getProductCart().get(button.getP().getId())+1); // CalculationFrame에 있는 HashMap<Product, Integer>
-
-			System.out.println(calculationFrame.getProductCart().get(button.getP().getId()));
 
 		}
 	}

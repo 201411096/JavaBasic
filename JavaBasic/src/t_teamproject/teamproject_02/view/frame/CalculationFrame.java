@@ -1,24 +1,29 @@
 package t_teamproject.teamproject_02.view.frame;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import javax.swing.SwingConstants;
 
 import t_teamproject.teamproject_02.dao.ProductDao;
 import t_teamproject.teamproject_02.dao.ProductDaoImpl;
 import t_teamproject.teamproject_02.dao.ProductManagementDao;
 import t_teamproject.teamproject_02.dao.ProductManagementDaoImpl;
-import t_teamproject.teamproject_02.view.panel.CalculationPanel;
 import t_teamproject.teamproject_02.view.panel.ProductMenuListPanel;
 import t_teamproject.teamproject_02.vo.Employee;
 import t_teamproject.teamproject_02.vo.Product;
@@ -35,21 +40,16 @@ public class CalculationFrame extends JFrame{
 	String jtabbedPaneItem [] = {"메인메뉴", "사이드메뉴", "음료수", "세트메뉴"}; //tabbedpane에 들어갈 이름
 	ProductMenuListPanel menuPanelList [] = new ProductMenuListPanel[4];
 
-	HashMap<Integer, Integer> productCart = new HashMap<Integer, Integer>(); //장바구니(제품, 개수)
-
-	HashMap<String, Integer> productCount = new HashMap<String, Integer>(); //재고(이름, 개수)
 	ProductManagementDao pmimpl;
 	ProductDao pimpl;
-	CalculationPanel calculationPanel;
-//	JPanel rightPanel;
+	JPanel rightPanel;
 	JList calculationList;
+	JButton orderButton, cancelButton;
 	
 	public CalculationFrame(Employee employee) {
 		this.employee = employee;
 		display();
 		connectDB();
-		getProductCountFromDB(productCount); // 재고량 초기화
-		initiallizeProductCart(productCart);
 		eventProc();
 	}
 	public void display() {
@@ -70,13 +70,30 @@ public class CalculationFrame extends JFrame{
 			jtabbepedPane.addTab(jtabbedPaneItem[i], menuPanelList[i]);
 		}
 		
-//		right_panel = new JPanel();
-		calculationPanel = new CalculationPanel();
-		calculationPanel.setBounds(1500, 0, 420, 960);
-				
+		rightPanel = new JPanel();
+		rightPanel.setLayout(new BorderLayout());
+		rightPanel.setBounds(1500, 0, 420, 960);
+		
+			JPanel right_north_panel = new JPanel();
+			right_north_panel.setLayout(new GridLayout(1, 3));
+			right_north_panel.add(new JLabel("메뉴", SwingConstants.CENTER));
+			right_north_panel.add(new JLabel("수량", SwingConstants.CENTER));
+			right_north_panel.add(new JLabel("가격", SwingConstants.CENTER));
+			JPanel right_center_panel = new JPanel();
+			calculationList = new JList();
+			JPanel right_south_panel = new JPanel();
+			right_south_panel.setLayout(new GridLayout(1,2));
+			orderButton = new JButton("주문");
+			cancelButton = new JButton("전체취소");
+			right_south_panel.add(orderButton);
+			right_south_panel.add(cancelButton);
+		rightPanel.add(right_north_panel, BorderLayout.NORTH);
+		rightPanel.add(right_center_panel, BorderLayout.CENTER);
+		rightPanel.add(right_south_panel, BorderLayout.SOUTH);
+						
 		setLayout(null);
 		add(jtabbepedPane);
-		add(calculationPanel);
+		add(rightPanel);		
 		
 		setTitle("계산 화면");
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -108,48 +125,11 @@ public class CalculationFrame extends JFrame{
 			e.printStackTrace();
 		}
 	}
-	public void getProductCountFromDB(HashMap<String, Integer> productCount) { //현재 재고를 받아옴
-		ArrayList<ArrayList> list = pmimpl.productCount();
-		for(int i=0; i<list.size(); i++) {
-			int cnt = (int)(list.get(i).get(0)); //count값
-			String productName = (String)(list.get(i).get(1)); //제품이름값			
-			productCount.put(productName, cnt);
-		}
-//		테스트 해보는 부분
-//		Iterator it = productCount.keySet().iterator();
-//		while(it.hasNext()) {
-//			String key = (String)it.next();
-//			int value = (int)productCount.get(key);
-//			System.out.println(key + " " + value);	
-//		}
-	}
-	public void initiallizeProductCart(HashMap<Integer, Integer> productCart) {
-		ArrayList<Product> list = pmimpl.getAllProduct();
-		for(int i=0; i<list.size(); i++)
-		{
-			productCart.put(list.get(i).getId(), 0);		// product의 값들을 전부 0으로 초기화
-		}
-//		테스트 해보는 부분
-//		Iterator it = productCart.keySet().iterator();
-//		while(it.hasNext()) {
-//			Product p = (Product)it.next();
-//			int value = (int)productCart.get(p);
-//			System.out.println(p.toString() + "\n 값 확인-------------\n " + value);
-//		}
-	}
 
 	public Employee getEmployee() { //로그인 세션 관리에 사용
 		return employee;
 	}
 	public void setEmployee(Employee employee) { //로그인 세션 관리에 사용
 		this.employee = employee;
-	}
-
-	public HashMap<Integer, Integer> getProductCart() {
-		return productCart;
-	}
-	public void setProductCart(HashMap<Integer, Integer> productCart2) {
-		this.productCart = productCart2;
-	}
-	
+	}	
 }
