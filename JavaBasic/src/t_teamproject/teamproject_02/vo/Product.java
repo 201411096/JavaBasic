@@ -31,6 +31,15 @@ public class Product {
 		return result.toString();
 	}
 	
+	public String toStringForOrderList(int cnt) {
+		StringBuffer result = new StringBuffer("");
+		result.append("\t" + this.name +"\t");
+		result.append("" + cnt +"\t");
+		result.append("" + cnt*this.price +"\t");
+		
+		return result.toString();
+	}
+	
 	public String changePGIDtoGroupName(int pgid) { //오라클에서 pgid를 받으면 pgroupname으로 변경
 		switch(pgid) {
 		case 0 : return "메인메뉴";

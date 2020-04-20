@@ -25,9 +25,11 @@ import t_teamproject.teamproject_02.dao.ProductManagementDaoImpl;
 import t_teamproject.teamproject_02.view.button.MenuButton;
 import t_teamproject.teamproject_02.view.panel.ProductMenuListPanel;
 import t_teamproject.teamproject_02.vo.Employee;
+import t_teamproject.teamproject_02.vo.Product;
 
 public class CalculationFrame extends JFrame{
 	Employee employee; // 로그인한 정보
+	ArrayList<Product> calProductList;
 	
 	JMenuBar jmenubar;
 	JMenu menu;
@@ -152,6 +154,7 @@ public class CalculationFrame extends JFrame{
 	
 	public void initializeProductCountAndshoppingCart() {
 		try {
+			calProductList = pmimpl.getAllProduct();							//제품리스트도 가져옴
 			ArrayList<ArrayList> arrayList = pmimpl.getPidCountFromproduct();
 			productCount = new int[2][arrayList.size()];
 			shoppingCart = new int[2][arrayList.size()];
@@ -163,8 +166,8 @@ public class CalculationFrame extends JFrame{
 			}
 		for(int i=0; i<arrayList.size(); i++)
 			{
-//				System.out.println(productCount[0][i] + " : " + productCount[1][i]);
-				System.out.println(shoppingCart[0][i] + " : " + shoppingCart[1][i]);
+				System.out.println(productCount[0][i] + " : " + productCount[1][i]);
+//				System.out.println(shoppingCart[0][i] + " : " + shoppingCart[1][i]);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
