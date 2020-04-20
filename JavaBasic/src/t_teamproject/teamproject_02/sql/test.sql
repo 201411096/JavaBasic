@@ -1,6 +1,6 @@
 /****************************** TABLE STRUCTURE START ******************************/
---테이블 5개
---시퀀스 2개
+--테이블 5개 + 3개
+--시퀀스 2개 + 3개
 /***** POSITION TABLE *****/
 CREATE TABLE POS(
     POSID NUMBER(2),
