@@ -5,9 +5,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 
 import javax.swing.JFrame;
+import javax.swing.JList;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -18,6 +18,7 @@ import t_teamproject.teamproject_02.dao.ProductDao;
 import t_teamproject.teamproject_02.dao.ProductDaoImpl;
 import t_teamproject.teamproject_02.dao.ProductManagementDao;
 import t_teamproject.teamproject_02.dao.ProductManagementDaoImpl;
+import t_teamproject.teamproject_02.view.panel.CalculationPanel;
 import t_teamproject.teamproject_02.view.panel.ProductMenuListPanel;
 import t_teamproject.teamproject_02.vo.Employee;
 import t_teamproject.teamproject_02.vo.Product;
@@ -33,12 +34,15 @@ public class CalculationFrame extends JFrame{
 	JTabbedPane jtabbepedPane;
 	String jtabbedPaneItem [] = {"메인메뉴", "사이드메뉴", "음료수", "세트메뉴"}; //tabbedpane에 들어갈 이름
 	ProductMenuListPanel menuPanelList [] = new ProductMenuListPanel[4];
-	
+
+	HashMap<Integer, Integer> productCart2 = new HashMap<Integer, Integer>(); //장바구니(제품, 개수)
 	HashMap<Product, Integer> productCart = new HashMap<Product, Integer>(); //장바구니(제품, 개수)
 	HashMap<String, Integer> productCount = new HashMap<String, Integer>(); //재고(이름, 개수)
 	ProductManagementDao pmimpl;
 	ProductDao pimpl;
-	JPanel calculationPanel;
+	CalculationPanel calculationPanel;
+//	JPanel rightPanel;
+	JList calculationList;
 	
 	public CalculationFrame(Employee employee) {
 		this.employee = employee;
@@ -46,6 +50,7 @@ public class CalculationFrame extends JFrame{
 		connectDB();
 		getProductCountFromDB(productCount); // 재고량 초기화
 		initiallizeProductCart(productCart); // 쇼핑카트 초기화
+		initiallizeProductCart2(productCart2);
 		eventProc();
 	}
 	public void display() {
@@ -59,17 +64,17 @@ public class CalculationFrame extends JFrame{
 		setJMenuBar(jmenubar);
 		
 		jtabbepedPane = new JTabbedPane();
+		jtabbepedPane.setBounds(0, 0, 1500, 960);
 		for(int i=0; i<menuPanelList.length; i++)
 		{
 			menuPanelList[i] = new ProductMenuListPanel(this, jtabbedPaneItem[i]);
 			jtabbepedPane.addTab(jtabbedPaneItem[i], menuPanelList[i]);
 		}
 		
-		calculationPanel = new JPanel();
-		
-		jtabbepedPane.setBounds(0, 0, 1500, 960);
+//		right_panel = new JPanel();
+		calculationPanel = new CalculationPanel();
 		calculationPanel.setBounds(1500, 0, 420, 960);
-		
+				
 		setLayout(null);
 		add(jtabbepedPane);
 		add(calculationPanel);
@@ -104,12 +109,6 @@ public class CalculationFrame extends JFrame{
 			e.printStackTrace();
 		}
 	}
-	public Employee getEmployee() { //로그인 세션 관리에 사용
-		return employee;
-	}
-	public void setEmployee(Employee employee) { //로그인 세션 관리에 사용
-		this.employee = employee;
-	}
 	public void getProductCountFromDB(HashMap<String, Integer> productCount) { //현재 재고를 받아옴
 		ArrayList<ArrayList> list = pmimpl.productCount();
 		for(int i=0; i<list.size(); i++) {
@@ -125,6 +124,21 @@ public class CalculationFrame extends JFrame{
 //			System.out.println(key + " " + value);	
 //		}
 	}
+	public void initiallizeProductCart2(HashMap<Integer, Integer> productCart) {
+		ArrayList<Product> list = pmimpl.getAllProduct();
+		for(int i=0; i<list.size(); i++)
+		{
+			productCart.put(list.get(i).getId(), 0);		// product의 값들을 전부 0으로 초기화
+		}
+//		테스트 해보는 부분
+//		Iterator it = productCart.keySet().iterator();
+//		while(it.hasNext()) {
+//			Product p = (Product)it.next();
+//			int value = (int)productCart.get(p);
+//			System.out.println(p.toString() + "\n 값 확인-------------\n " + value);
+//		}
+	}
+	
 	public void initiallizeProductCart(HashMap<Product, Integer> productCart) {
 		ArrayList<Product> list = pmimpl.getAllProduct();
 		for(int i=0; i<list.size(); i++)
@@ -139,4 +153,24 @@ public class CalculationFrame extends JFrame{
 //			System.out.println(p.toString() + "\n 값 확인-------------\n " + value);
 //		}
 	}
+
+	public Employee getEmployee() { //로그인 세션 관리에 사용
+		return employee;
+	}
+	public void setEmployee(Employee employee) { //로그인 세션 관리에 사용
+		this.employee = employee;
+	}
+	public HashMap<Product, Integer> getProductCart() {
+		return productCart;
+	}
+	public void setProductCart(HashMap<Product, Integer> productCart) {
+		this.productCart = productCart;
+	}
+	public HashMap<Integer, Integer> getProductCart2() {
+		return productCart2;
+	}
+	public void setProductCart2(HashMap<Integer, Integer> productCart2) {
+		this.productCart2 = productCart2;
+	}
+	
 }

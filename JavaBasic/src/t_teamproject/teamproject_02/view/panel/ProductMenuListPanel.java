@@ -1,7 +1,10 @@
 package t_teamproject.teamproject_02.view.panel;
 
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.JPanel;
 
@@ -46,7 +49,28 @@ public class ProductMenuListPanel extends JPanel{
 		}
 	}
 	public void eventProc() {
+		EventHandler eventHandler = new EventHandler();
+		for(int i=0; i<menuButtonList.length; i++)
+		{
+			menuButtonList[i].addActionListener(eventHandler);
+		}
 		
+	}
+	class EventHandler implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			MenuButton button = (MenuButton)e.getSource();
+			
+			System.out.println(button.getP().toString()); // 메뉴버튼의 product 정보 확인
+			System.out.println(button.getP().getId()+""); // 메뉴버튼의 product id가져옴 
+			
+			HashMap<Product, Integer> productCart = calculationFrame.getProductCart();
+			HashMap<Integer, Integer> productCart2 = calculationFrame.getProductCart2();
+			calculationFrame.getProductCart2().put(button.getP().getId(), calculationFrame.getProductCart2().get(button.getP().getId())+1); // CalculationFrame에 있는 HashMap<Product, Integer>
+//			calculationFrame.getProductCart().put(button.getP(), calculationFrame.getProductCart().get(button.getP())+1); // CalculationFrame에 있는 HashMap<Product, Integer>
+			System.out.println(calculationFrame.getProductCart2().get(button.getP().getId()));
+
+		}
 	}
 	public void connectDB() {
 		try {

@@ -33,4 +33,11 @@ public class MenuButton extends JButton{
 	public void eventProc() {
 		this.setToolTipText(p.getDetail());
 	}
+	public Product getP() {
+		return p;
+	}
+	public void setP(Product p) {
+		this.p = p;
+	}
+	
 }
