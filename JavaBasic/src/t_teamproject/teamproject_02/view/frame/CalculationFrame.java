@@ -6,8 +6,6 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -24,9 +22,9 @@ import t_teamproject.teamproject_02.dao.ProductDao;
 import t_teamproject.teamproject_02.dao.ProductDaoImpl;
 import t_teamproject.teamproject_02.dao.ProductManagementDao;
 import t_teamproject.teamproject_02.dao.ProductManagementDaoImpl;
+import t_teamproject.teamproject_02.view.button.MenuButton;
 import t_teamproject.teamproject_02.view.panel.ProductMenuListPanel;
 import t_teamproject.teamproject_02.vo.Employee;
-import t_teamproject.teamproject_02.vo.Product;
 
 public class CalculationFrame extends JFrame{
 	Employee employee; // 로그인한 정보
@@ -46,10 +44,14 @@ public class CalculationFrame extends JFrame{
 	JList calculationList;
 	JButton orderButton, cancelButton;
 	
+	int shoppingCart [][]; //0부분이 pid 1부분이 개수
+	int productCount [][]; //0부분이 pid 1부분이 개수
+	
 	public CalculationFrame(Employee employee) {
 		this.employee = employee;
 		display();
 		connectDB();
+		initializeProductCountAndshoppingCart();
 		eventProc();
 	}
 	public void display() {
@@ -116,11 +118,54 @@ public class CalculationFrame extends JFrame{
 				dispose();
 			}
 		});
+		MenuButtonHandler me = new MenuButtonHandler();
+		for(int i=0; i<menuPanelList.length ; i++) {
+			for(int j=0; j<menuPanelList[i].getMenuButtonList().length; j++) {
+				menuPanelList[i].getMenuButtonList()[j].addActionListener(me);
+			}
+		}
+	}
+	class MenuButtonHandler implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			MenuButton b = (MenuButton) e.getSource();
+			int pid = b.getP().getId();
+			for(int i=0; i<shoppingCart[0].length; i++)
+			{
+				if(shoppingCart[0][i]==pid)
+				{
+					shoppingCart[1][i]++;
+					System.out.println(shoppingCart[0][i] + " : " + shoppingCart[1][i]);
+				}
+					
+			}
+		}
 	}
 	public void connectDB() {
 		try {
 			pmimpl = new ProductManagementDaoImpl();
 			pimpl = new ProductDaoImpl();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void initializeProductCountAndshoppingCart() {
+		try {
+			ArrayList<ArrayList> arrayList = pmimpl.getPidCountFromproduct();
+			productCount = new int[2][arrayList.size()];
+			shoppingCart = new int[2][arrayList.size()];
+			for(int i=0; i<arrayList.size(); i++)
+			{
+				productCount[0][i]=(int)arrayList.get(i).get(0);
+				productCount[1][i]=(int)arrayList.get(i).get(1);
+				shoppingCart[0][i]=(int)arrayList.get(i).get(0);
+			}
+		for(int i=0; i<arrayList.size(); i++)
+			{
+//				System.out.println(productCount[0][i] + " : " + productCount[1][i]);
+				System.out.println(shoppingCart[0][i] + " : " + shoppingCart[1][i]);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -30,7 +30,6 @@ public class ProductMenuListPanel extends JPanel{
 		connectDB();
 		displayComponentLoad();
 		display();
-		eventProc();
 		
 	}
 	public void displayComponentLoad() {
@@ -46,20 +45,6 @@ public class ProductMenuListPanel extends JPanel{
 		for(int i=0; i<menuButtonList.length; i++)
 		{
 			add(menuButtonList[i]);
-		}
-	}
-	public void eventProc() {
-		EventHandler eventHandler = new EventHandler();
-		for(int i=0; i<menuButtonList.length; i++)
-		{
-			menuButtonList[i].addActionListener(eventHandler);
-		}
-		
-	}
-	class EventHandler implements ActionListener{
-		@Override
-		public void actionPerformed(ActionEvent e) {
-
 		}
 	}
 	public void connectDB() {

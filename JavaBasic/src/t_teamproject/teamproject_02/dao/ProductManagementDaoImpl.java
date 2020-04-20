@@ -67,6 +67,33 @@ public class ProductManagementDaoImpl implements ProductManagementDao{
 		}
 		return resultList;
 	}
+	public ArrayList<ArrayList> getPidCountFromproduct(){
+		ArrayList resultList = new ArrayList();
+		Connection con = null;
+		try {
+			con = DriverManager.getConnection(Configuration.url, Configuration.user, Configuration.password);
+			String sql = "SELECT P.PID AS PID , P.PNAME AS PNAME, COUNT(*) AS COUNT FROM PRODUCTMANAGEMENT PM INNER JOIN PRODUCT P ON p.pid=pm.pid  GROUP BY P.PID, P.PNAME ORDER BY P.PID";
+			PreparedStatement ps = con.prepareStatement(sql);
+			
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				ArrayList temp = new ArrayList();
+				temp.add(rs.getInt("PID"));
+				temp.add(rs.getInt("COUNT"));
+				resultList.add(temp);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				con.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return resultList;
+	}
 	public ArrayList<Product> getAllProduct(){
 		ArrayList resultList = new ArrayList();
 		Connection con = null;

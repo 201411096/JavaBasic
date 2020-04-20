@@ -8,4 +8,5 @@ public interface ProductManagementDao {
 	public int purchaseProductByName(String name, int cnt);
 	public ArrayList<ArrayList> productCount();
 	public ArrayList<Product> getAllProduct();
+	public ArrayList<ArrayList> getPidCountFromproduct();
 }
