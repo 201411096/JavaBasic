@@ -44,8 +44,8 @@ public class CalculationFrame extends JFrame{
 		this.employee = employee;
 		display();
 		connectDB();
-		getProductCountFromDB(productCount);
-		initiallizeProductCart(productCart);
+		getProductCountFromDB(productCount); // 재고량 초기화
+		initiallizeProductCart(productCart); // 쇼핑카트 초기화
 		eventProc();
 	}
 	public void display() {
@@ -112,7 +112,6 @@ public class CalculationFrame extends JFrame{
 	}
 	public void getProductCountFromDB(HashMap<String, Integer> productCount) { //현재 재고를 받아옴
 		ArrayList<ArrayList> list = pmimpl.productCount();
-//		System.out.println("list의 길이: " + list.size());
 		for(int i=0; i<list.size(); i++) {
 			int cnt = (int)(list.get(i).get(0)); //count값
 			String productName = (String)(list.get(i).get(1)); //제품이름값			
