@@ -26,7 +26,7 @@ public class CalculationFrame extends JFrame{
 	String jtabbedPaneItem [] = {"메인메뉴", "사이드메뉴", "음료수", "세트메뉴"}; //tabbedpane에 들어갈 이름
 	ProductMenuListPanel menuPanelList [] = new ProductMenuListPanel[4];
 	
-	JPanel right_panel;
+	JPanel calculationPanel;
 	
 	public CalculationFrame(Employee employee) {
 		this.employee = employee;
@@ -50,14 +50,14 @@ public class CalculationFrame extends JFrame{
 			jtabbepedPane.addTab(jtabbedPaneItem[i], menuPanelList[i]);
 		}
 		
-		right_panel = new JPanel();
+		calculationPanel = new JPanel();
 		
 		jtabbepedPane.setBounds(0, 0, 1500, 960);
-		right_panel.setBounds(1500, 0, 420, 960);
+		calculationPanel.setBounds(1500, 0, 420, 960);
 		
 		setLayout(null);
 		add(jtabbepedPane);
-		add(right_panel);
+		add(calculationPanel);
 		
 		setTitle("계산 화면");
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
