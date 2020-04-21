@@ -19,6 +19,8 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 
+import t_teamproject.teamproject_02.dao.OrderDao;
+import t_teamproject.teamproject_02.dao.OrderDaoImpl;
 import t_teamproject.teamproject_02.dao.ProductDao;
 import t_teamproject.teamproject_02.dao.ProductDaoImpl;
 import t_teamproject.teamproject_02.dao.ProductManagementDao;
@@ -43,6 +45,8 @@ public class CalculationFrame extends JFrame{
 
 	ProductManagementDao pmimpl;
 	ProductDao pimpl;
+	OrderDao orderDaoImpl;
+	
 	JPanel rightPanel;
 	JList calculationList;
 	JButton orderButton, cancelButton;
@@ -143,7 +147,9 @@ public class CalculationFrame extends JFrame{
 				int result = JOptionPane.showConfirmDialog(null, "주문하시겠습니까?", "확인", JOptionPane.YES_NO_OPTION);
 				if(result == JOptionPane.YES_OPTION)
 				{
-					
+					//계산 내용 관리
+					//화면의 재고와 db재고 동기화
+					orderDaoImpl.insertOrder(productStringList, calProductList);
 					subProductCountFromShoppingCart();
 					initializeList(); //마지막에 쇼핑카트와 jlist내용을 초기화함 (주문버튼에서는 초기화하기 전에 재고 배열도 계산을 해줘야됨)
 				}
@@ -181,6 +187,7 @@ public class CalculationFrame extends JFrame{
 		try {
 			pmimpl = new ProductManagementDaoImpl();
 			pimpl = new ProductDaoImpl();
+			orderDaoImpl = new OrderDaoImpl();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
