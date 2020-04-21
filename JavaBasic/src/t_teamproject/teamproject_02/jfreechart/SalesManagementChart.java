@@ -24,8 +24,8 @@ import org.jfree.ui.TextAnchor;
 import t_teamproject.teamproject_02.dao.ProductManagementDao;
 import t_teamproject.teamproject_02.dao.ProductManagementDaoImpl;
 
-public class BarChartProductCount {
-    public JFreeChart getChart() {
+public class SalesManagementChart {
+    public JFreeChart getChart(int option) { //년도별 월별 일별
         
         // 데이터 생성
         DefaultCategoryDataset dataset = new DefaultCategoryDataset(); 
@@ -40,7 +40,7 @@ public class BarChartProductCount {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-        
+        //여기서부터 옵션 주면 되는 듯
         ArrayList<ArrayList> data = productManagementDaoModel.productCount();
         for(ArrayList temp : data) {
         	int value = (Integer) temp.get(0);

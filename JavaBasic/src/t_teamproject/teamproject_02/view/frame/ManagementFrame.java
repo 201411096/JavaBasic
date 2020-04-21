@@ -16,6 +16,7 @@ import t_teamproject.teamproject_02.jfreechart.BarChartProductCount;
 import t_teamproject.teamproject_02.view.panel.EmployeeManageMentPanel;
 import t_teamproject.teamproject_02.view.panel.ProductCountGraphPanel;
 import t_teamproject.teamproject_02.view.panel.ProductManagementPanel;
+import t_teamproject.teamproject_02.view.panel.SalesManagementGraphPanel;
 import t_teamproject.teamproject_02.vo.Employee;
 
 public class ManagementFrame extends JFrame{
@@ -29,6 +30,7 @@ public class ManagementFrame extends JFrame{
 	EmployeeManageMentPanel employeeManageMentPanel;
 	ProductManagementPanel productManagementPanel;
 	ProductCountGraphPanel productCountGraphPanel;
+	SalesManagementGraphPanel salesManagementGraphPanel;
 	public ManagementFrame(Employee employee) {
 		this.employee = employee;
 		display();
@@ -50,9 +52,11 @@ public class ManagementFrame extends JFrame{
 		employeeManageMentPanel = new EmployeeManageMentPanel(this);
 		productManagementPanel = new ProductManagementPanel(this);
 		productCountGraphPanel = new ProductCountGraphPanel(this);
+		salesManagementGraphPanel = new SalesManagementGraphPanel();
 		jtabbepedPane.addTab(jtabbedPaneItem[0], employeeManageMentPanel);
 		jtabbepedPane.addTab(jtabbedPaneItem[1], productManagementPanel);
 		jtabbepedPane.addTab(jtabbedPaneItem[2], productCountGraphPanel);
+		jtabbepedPane.addTab(jtabbedPaneItem[3], salesManagementGraphPanel);
 		/*
 		 	jtabbedPane에 붙어야할 내용
 		 */
@@ -84,7 +88,10 @@ public class ManagementFrame extends JFrame{
 				if(jtabbepedPane.getSelectedIndex() ==2 )
 				{
 					productCountGraphPanel.renewal();
-				}	
+				}else if(jtabbepedPane.getSelectedIndex() ==3 )
+				{
+					salesManagementGraphPanel.renewal();
+				} 	
 			}
 		});
 	}
