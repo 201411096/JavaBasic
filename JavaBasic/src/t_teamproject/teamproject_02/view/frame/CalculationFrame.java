@@ -149,9 +149,11 @@ public class CalculationFrame extends JFrame{
 				{
 					//계산 내용 관리
 					//화면의 재고와 db재고 동기화
+					new OrderListFrame(productStringList);
 					orderDaoImpl.insertOrder(productStringList, calProductList);
 					subProductCountFromShoppingCart();
 					initializeList(); //마지막에 쇼핑카트와 jlist내용을 초기화함 (주문버튼에서는 초기화하기 전에 재고 배열도 계산을 해줘야됨)
+					
 				}
 			}
 		});
@@ -172,7 +174,6 @@ public class CalculationFrame extends JFrame{
 						JOptionPane.showMessageDialog(null, "재고가 부족합니다.");
 					}else {
 						shoppingCart[1][i]++;
-//						System.out.println("이벤트핸들러 테스트 : " + shoppingCart[0][i] + " : " + shoppingCart[1][i]);
 						calculationList.setListData(makeListStringArray(shoppingCart, productCount));
 						productStringList=makeListStringArray(shoppingCart, productCount); //외부적으로 관리할 배열	
 					}
@@ -227,7 +228,7 @@ public class CalculationFrame extends JFrame{
 					if(calProductList.get(j).getId()==shoppingCart[0][i]) //쇼핑카드의 pid와 일치하는 product정보를 가져옴
 						p=calProductList.get(j);
 				}
-				array[arrayCnt]=new String(p.getName() + "                               " + shoppingCart[1][i] + "                                        " + p.getPrice()*shoppingCart[1][i]);
+				array[arrayCnt]=new String(p.getName() + "                                    " + shoppingCart[1][i] + "                                     " + p.getPrice()*shoppingCart[1][i]);
 				arrayCnt++;
 			}
 		}
