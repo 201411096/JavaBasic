@@ -182,11 +182,24 @@ public class CalculationFrame extends JFrame{
 			System.out.println(shoppingCart[1][i]);
 			if(shoppingCart[1][i]!=0)
 				arrayLength++;
-		}
+		} //리스트에 들어갈 배열 길이를 정함
 		String array [] = new String[arrayLength];
-		for(int i=0; i<array.length; i++)
+		int arrayCnt=0;
+		for(int i=0; i<shoppingCart[0].length; i++)
 		{
-			array[i]= new String("aa");
+			if(shoppingCart[1][i]!=0)
+			{
+				Product p = null;
+				for(int j=0; j<calProductList.size(); j++)
+				{
+					if(calProductList.get(j).getId()==shoppingCart[0][i]) //쇼핑카드의 pid와 일치하는 product정보를 가져옴
+						p=calProductList.get(j);
+				}
+				array[arrayCnt]=new String(p.getName() + "                               " + shoppingCart[1][i] + "                                        " + p.getPrice()*shoppingCart[1][i]);
+				System.out.println(array[arrayCnt]);
+				arrayCnt++;
+			
+			}
 		}
 		
 		
