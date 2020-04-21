@@ -3,6 +3,7 @@ package t_teamproject.teamproject_02.view.frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -18,7 +19,6 @@ import t_teamproject.teamproject_02.vo.Employee;
 
 public class LoginFrame extends JFrame{
 	EmployeeDao employeedao;
-	
 	JTextField tfId;
 	JPasswordField tfPassword;
 	JLabel labelId, labelPassword;
@@ -50,7 +50,6 @@ public class LoginFrame extends JFrame{
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
 		signIn = new JButton("로그인");
 		signIn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
