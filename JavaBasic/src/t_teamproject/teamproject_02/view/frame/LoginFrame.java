@@ -1,5 +1,6 @@
 package t_teamproject.teamproject_02.view.frame;
 
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -11,21 +12,19 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
 
 import t_teamproject.teamproject_02.dao.EmployeeDao;
 import t_teamproject.teamproject_02.dao.EmployeeDaoImpl;
+import t_teamproject.teamproject_02.view.panel.BackgroundPanel;
 import t_teamproject.teamproject_02.vo.Employee;
 
 public class LoginFrame extends JFrame{
 	EmployeeDao employeedao;
 	JTextField tfId;
 	JPasswordField tfPassword;
-	JLabel labelId, labelPassword;
 	JButton signUp, signIn;
-	JPanel panelList[] = new JPanel[3];
-	JPanel totalPanel;
-	private JPanel contentPane;
+	BackgroundPanel panel;
+	ImageIcon imageIcon = new ImageIcon("src\\t_teamproject\\teamproject_02\\imgs\\background\\loginFrameBackground.png");
 	public LoginFrame() {
 		employeedao=null;
 		display();
@@ -43,45 +42,29 @@ public class LoginFrame extends JFrame{
 	}
 	
 	public void display() {
-		setTitle("로그인화면");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(750, 400, 450, 300);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		signIn = new JButton("로그인");
-		signIn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		signIn.setBounds(227, 150, 97, 23);
-		contentPane.add(signIn);
+		panel = new BackgroundPanel(imageIcon.getImage());
+		JPanel wrapperPanel = new JPanel();
 		
-		signUp = new JButton("회원가입");
-		signUp.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		signUp.setBounds(118, 150, 97, 23);
-		contentPane.add(signUp);
-		
+		wrapperPanel.setLayout(new GridLayout(3,2));
+		wrapperPanel.add(new JLabel("    ID"));
 		tfId = new JTextField();
-		tfId.setBounds(208, 70, 116, 21);
-		contentPane.add(tfId);
-		tfId.setColumns(10);
-		
-		JLabel lblNewLabel = new JLabel("ID");
-		lblNewLabel.setBounds(118, 73, 57, 15);
-		contentPane.add(lblNewLabel);
-		
-		JLabel lblNewLabel_1 = new JLabel("PW");
-		lblNewLabel_1.setBounds(118, 100, 57, 15);
-		contentPane.add(lblNewLabel_1);
-		
+		wrapperPanel.add(tfId);
+		wrapperPanel.add(new JLabel("   PASSWORD"));
 		tfPassword = new JPasswordField();
-		tfPassword.setBounds(208, 101, 116, 21);
-		contentPane.add(tfPassword);
+		wrapperPanel.add(tfPassword);
+		signUp = new JButton("회원가입");
+		signIn = new JButton("로그인");
+		wrapperPanel.add(signUp);
+		wrapperPanel.add(signIn);
+		
+		panel.setLayout(null);
+		wrapperPanel.setBounds(75, 70, 300, 100);
+		panel.add(wrapperPanel);
+		
+		setLayout(new GridLayout());
+		add(panel);
+		setTitle("로그인화면");
+		setBounds(750, 400, 450, 300);
 		setResizable(false);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -119,3 +102,49 @@ public class LoginFrame extends JFrame{
 		dispose();
 	}
 }
+/*
+public void display() {
+setTitle("로그인화면");
+setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+setBounds(750, 400, 450, 300);
+contentPane = new JPanel();
+contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+setContentPane(contentPane);
+contentPane.setLayout(null);
+signIn = new JButton("로그인");
+signIn.addActionListener(new ActionListener() {
+	public void actionPerformed(ActionEvent e) {
+	}
+});
+signIn.setBounds(227, 150, 97, 23);
+contentPane.add(signIn);
+
+signUp = new JButton("회원가입");
+signUp.addActionListener(new ActionListener() {
+	public void actionPerformed(ActionEvent e) {
+	}
+});
+signUp.setBounds(118, 150, 97, 23);
+contentPane.add(signUp);
+
+tfId = new JTextField();
+tfId.setBounds(208, 70, 116, 21);
+contentPane.add(tfId);
+tfId.setColumns(10);
+
+JLabel lblNewLabel = new JLabel("ID");
+lblNewLabel.setBounds(118, 73, 57, 15);
+contentPane.add(lblNewLabel);
+
+JLabel lblNewLabel_1 = new JLabel("PW");
+lblNewLabel_1.setBounds(118, 100, 57, 15);
+contentPane.add(lblNewLabel_1);
+
+tfPassword = new JPasswordField();
+tfPassword.setBounds(208, 101, 116, 21);
+contentPane.add(tfPassword);
+setResizable(false);
+setVisible(true);
+setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+}
+*/
