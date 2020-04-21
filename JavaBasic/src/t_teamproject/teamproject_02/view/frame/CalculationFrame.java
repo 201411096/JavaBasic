@@ -129,6 +129,14 @@ public class CalculationFrame extends JFrame{
 				menuPanelList[i].getMenuButtonList()[j].addActionListener(me);
 			}
 		}
+		cancelButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int result = JOptionPane.showConfirmDialog(null, "전체 취소하시겠습니까?", "확인", JOptionPane.YES_NO_OPTION);
+				if(result == JOptionPane.YES_OPTION)
+					initializeList();
+			}
+		});
 	}
 	class MenuButtonHandler implements ActionListener{
 		@Override
@@ -146,7 +154,7 @@ public class CalculationFrame extends JFrame{
 						JOptionPane.showMessageDialog(null, "재고가 부족합니다.");
 					}else {
 						shoppingCart[1][i]++;
-						System.out.println("이벤트핸들러 테스트 : " + shoppingCart[0][i] + " : " + shoppingCart[1][i]);
+//						System.out.println("이벤트핸들러 테스트 : " + shoppingCart[0][i] + " : " + shoppingCart[1][i]);
 						calculationList.setListData(makeListStringArray(shoppingCart, productCount));
 						productStringList=makeListStringArray(shoppingCart, productCount); //외부적으로 관리할 배열	
 					}
@@ -164,9 +172,8 @@ public class CalculationFrame extends JFrame{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-	
-	public void initializeProductCountAndshoppingCart() {
+	}	
+	public void initializeProductCountAndshoppingCart() { //처음 프레임 화면을 만들기전에만 실행
 		try {
 			calProductList = pmimpl.getAllProduct();							//제품리스트도 가져옴
 			ArrayList<ArrayList> arrayList = pmimpl.getPidCountFromproduct();
@@ -214,7 +221,14 @@ public class CalculationFrame extends JFrame{
 		}
 		return array;
 	}
-
+	public void initializeList() { //쇼핑카트와 jlist의 data를 비워줌
+		for(int i=0; i<shoppingCart[1].length; i++)
+		{
+			shoppingCart[1][i]=0; //쇼핑카트를 0으로 전부 초기화
+			productStringList = new String[0]; //쇼핑리스트를 담은 스트링을 초기화
+			calculationList.setListData(productStringList);
+		}
+	}
 	public Employee getEmployee() { //로그인 세션 관리에 사용
 		return employee;
 	}
