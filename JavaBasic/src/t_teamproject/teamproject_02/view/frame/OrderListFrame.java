@@ -2,6 +2,8 @@ package t_teamproject.teamproject_02.view.frame;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.StringTokenizer;
 
 import javax.swing.JButton;
@@ -59,7 +61,13 @@ public class OrderListFrame extends JFrame{
 		setVisible(true);
 	}
 	public void eventProc() {
-		
+		sendOrderListButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new SendMailFrame(productNameList, productCountList, productPriceList, totalPrice);
+				dispose();
+			}
+		});
 	}
 	public void decodeProductStringList() {
 		productNameList = new String[productStringList.length];

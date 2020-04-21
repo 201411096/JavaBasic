@@ -1,4 +1,4 @@
-package t_teamproject.teamproject_02.sendmail;
+package t_teamproject.teamproject_02.sendmail.sample;
 
 import java.util.Properties;
 
@@ -11,9 +11,11 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 public class SendMail {
-	public SendMail() {}
-	public void sendMail(String user, String password, String mainContent) {
-		String host = "smtp.naver.com";		
+	public static void main(String[] args) {
+		String host = "smtp.naver.com";
+		String user = args[0];
+		String password = args[1];
+		
 		String to ="korea5781@naver.com";		
 		 // Get the session object
 		  Properties props = new Properties();
