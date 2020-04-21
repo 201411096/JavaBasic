@@ -1,8 +1,10 @@
 package t_teamproject.teamproject_02.view.frame;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.MalformedURLException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -15,7 +17,7 @@ import javax.swing.JTextField;
 
 import t_teamproject.teamproject_02.dao.EmployeeDao;
 import t_teamproject.teamproject_02.dao.EmployeeDaoImpl;
-import t_teamproject.teamproject_02.view.panel.BackgroundPanel;
+import t_teamproject.teamproject_02.view.panel.BackgroundAnimatedPanel;
 import t_teamproject.teamproject_02.vo.Employee;
 
 public class LoginFrame extends JFrame{
@@ -23,7 +25,8 @@ public class LoginFrame extends JFrame{
 	JTextField tfId;
 	JPasswordField tfPassword;
 	JButton signUp, signIn;
-	BackgroundPanel panel;
+//	BackgroundPanel panel;
+	BackgroundAnimatedPanel panel;
 	ImageIcon imageIcon = new ImageIcon("src\\t_teamproject\\teamproject_02\\imgs\\background\\loginFrameBackground.png");
 	public LoginFrame() {
 		employeedao=null;
@@ -42,14 +45,25 @@ public class LoginFrame extends JFrame{
 	}
 	
 	public void display() {
-		panel = new BackgroundPanel(imageIcon.getImage());
+//		panel = new BackgroundPanel(imageIcon.getImage());
+		try {
+			panel = new BackgroundAnimatedPanel();
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
 		JPanel wrapperPanel = new JPanel();
 		
 		wrapperPanel.setLayout(new GridLayout(3,2));
-		wrapperPanel.add(new JLabel("    ID"));
+		JLabel idLabel = new JLabel("    ID");
+		idLabel.setOpaque(true);
+		idLabel.setBackground(new Color(255, 255, 255));
+		wrapperPanel.add(idLabel);
 		tfId = new JTextField();
 		wrapperPanel.add(tfId);
-		wrapperPanel.add(new JLabel("   PASSWORD"));
+		JLabel pwLabel = new JLabel("   PASSWORD");
+		pwLabel.setOpaque(true);
+		pwLabel.setBackground(new Color(255, 255, 255));
+		wrapperPanel.add(pwLabel);
 		tfPassword = new JPasswordField();
 		wrapperPanel.add(tfPassword);
 		signUp = new JButton("회원가입");
