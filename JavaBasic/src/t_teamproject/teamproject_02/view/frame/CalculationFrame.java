@@ -47,8 +47,8 @@ public class CalculationFrame extends JFrame{
 	JList calculationList;
 	JButton orderButton, cancelButton;
 	
-	int shoppingCart [][]; //0부분이 pid 1부분이 개수
-	int productCount [][]; //0부분이 pid 1부분이 개수
+	int shoppingCart [][]; //맨앞 0부분이 pid 1부분이 개수
+	int productCount [][]; //맨앞 0부분이 pid 1부분이 개수
 	String productStringList [];
 	
 	public CalculationFrame(Employee employee) {
@@ -129,12 +129,24 @@ public class CalculationFrame extends JFrame{
 				menuPanelList[i].getMenuButtonList()[j].addActionListener(me);
 			}
 		}
-		cancelButton.addActionListener(new ActionListener() {
+		cancelButton.addActionListener(new ActionListener() { //취소버튼 구현
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int result = JOptionPane.showConfirmDialog(null, "전체 취소하시겠습니까?", "확인", JOptionPane.YES_NO_OPTION);
 				if(result == JOptionPane.YES_OPTION)
 					initializeList();
+			}
+		});
+		orderButton.addActionListener(new ActionListener() { //주문버튼 구현
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int result = JOptionPane.showConfirmDialog(null, "주문하시겠습니까?", "확인", JOptionPane.YES_NO_OPTION);
+				if(result == JOptionPane.YES_OPTION)
+				{
+					
+					subProductCountFromShoppingCart();
+					initializeList(); //마지막에 쇼핑카트와 jlist내용을 초기화함 (주문버튼에서는 초기화하기 전에 재고 배열도 계산을 해줘야됨)
+				}
 			}
 		});
 	}
@@ -185,11 +197,6 @@ public class CalculationFrame extends JFrame{
 				productCount[1][i]=(int)arrayList.get(i).get(1);
 				shoppingCart[0][i]=(int)arrayList.get(i).get(0);
 			}
-		for(int i=0; i<arrayList.size(); i++) //테스트 부분
-			{
-//				System.out.println(productCount[0][i] + " : " + productCount[1][i]);
-//				System.out.println(shoppingCart[0][i] + " : " + shoppingCart[1][i]);
-			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -198,7 +205,6 @@ public class CalculationFrame extends JFrame{
 		int arrayLength=0;
 		for(int i=0; i<shoppingCart[0].length; i++) //리스트에 들어갈 배열 길이를 정함
 		{
-			System.out.println(shoppingCart[1][i]);
 			if(shoppingCart[1][i]!=0)
 				arrayLength++;
 		}
@@ -215,7 +221,6 @@ public class CalculationFrame extends JFrame{
 						p=calProductList.get(j);
 				}
 				array[arrayCnt]=new String(p.getName() + "                               " + shoppingCart[1][i] + "                                        " + p.getPrice()*shoppingCart[1][i]);
-				System.out.println(array[arrayCnt]);
 				arrayCnt++;
 			}
 		}
@@ -228,7 +233,13 @@ public class CalculationFrame extends JFrame{
 			productStringList = new String[0]; //쇼핑리스트를 담은 스트링을 초기화
 			calculationList.setListData(productStringList);
 		}
-	}
+	}	
+	public void subProductCountFromShoppingCart(){ //주문시에 재고를 관리하는 배열에서 쇼핑카트의 개수만큼 -를 해줌
+		for(int i=0; i<shoppingCart[1].length; i++)
+		{
+			productCount[1][i]-=shoppingCart[1][i]; //재고에서 쇼핑카트의 개수만큼 빼줌
+		}
+	}	
 	public Employee getEmployee() { //로그인 세션 관리에 사용
 		return employee;
 	}
