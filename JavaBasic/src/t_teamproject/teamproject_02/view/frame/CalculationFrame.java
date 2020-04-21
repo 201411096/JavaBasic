@@ -134,11 +134,13 @@ public class CalculationFrame extends JFrame{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			MenuButton b = (MenuButton) e.getSource();
+			Boolean check = false;
 			int pid = b.getP().getId();
 			for(int i=0; i<shoppingCart[0].length; i++)
 			{
 				if(shoppingCart[0][i]==pid)
 				{
+					check=true;
 					if(shoppingCart[1][i]==productCount[1][i])
 					{
 						JOptionPane.showMessageDialog(null, "재고가 부족합니다.");
@@ -149,9 +151,10 @@ public class CalculationFrame extends JFrame{
 						productStringList=makeListStringArray(shoppingCart, productCount); //외부적으로 관리할 배열	
 					}
 					
-				}
-					
+				}	
 			}
+			if(check==false) // 계산화면을 처음 켯을때부터 재고가 없는 경우
+				JOptionPane.showMessageDialog(null, "재고가 부족합니다.");
 		}
 	}
 	public void connectDB() {
@@ -175,9 +178,9 @@ public class CalculationFrame extends JFrame{
 				productCount[1][i]=(int)arrayList.get(i).get(1);
 				shoppingCart[0][i]=(int)arrayList.get(i).get(0);
 			}
-		for(int i=0; i<arrayList.size(); i++)
+		for(int i=0; i<arrayList.size(); i++) //테스트 부분
 			{
-				System.out.println(productCount[0][i] + " : " + productCount[1][i]);
+//				System.out.println(productCount[0][i] + " : " + productCount[1][i]);
 //				System.out.println(shoppingCart[0][i] + " : " + shoppingCart[1][i]);
 			}
 		} catch (Exception e) {
