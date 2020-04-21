@@ -77,7 +77,7 @@ public class OrderDaoImpl implements OrderDao{
 		Connection con = null;
 		try {
 			con = DriverManager.getConnection(Configuration.url, Configuration.user, Configuration.password);
-			String sql ="SELECT TO_CHAR(ODATE) AS DAY, SUM(OL.TOTALPRICE) AS PRICE FROM ORDERED O INNER JOIN ORDERLIST OL ON O.OLID=OL.OLID WHERE TO_CHAR(ODATE, 'YYMM')=TO_CHAR(SYSDATE, 'YYMM') GROUP BY TO_CHAR(ODATE)";
+			String sql ="SELECT TO_CHAR(ODATE) AS DAY, SUM(OL.TOTALPRICE) AS PRICE FROM ORDERED O INNER JOIN ORDERLIST OL ON O.OLID=OL.OLID WHERE TO_CHAR(ODATE, 'YYMM')=TO_CHAR(SYSDATE, 'YYMM') GROUP BY TO_CHAR(ODATE) ORDER BY TO_CHAR(ODATE)";
 			PreparedStatement ps = con.prepareStatement(sql);
 			
 			ResultSet rs = ps.executeQuery();
@@ -86,7 +86,6 @@ public class OrderDaoImpl implements OrderDao{
 				temp.add(rs.getInt("PRICE"));
 				temp.add(rs.getString("DAY"));
 				resultList.add(temp);
-				System.out.println("aa");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -105,7 +104,7 @@ public class OrderDaoImpl implements OrderDao{
 		Connection con = null;
 		try {
 			con = DriverManager.getConnection(Configuration.url, Configuration.user, Configuration.password);
-			String sql ="SELECT TO_CHAR(ODATE, 'YYMM') AS MONTH, SUM(OL.TOTALPRICE) AS PRICE FROM ORDERED O INNER JOIN ORDERLIST OL ON O.OLID=OL.OLID WHERE TO_CHAR(ODATE, 'YY')=TO_CHAR(SYSDATE, 'YY') GROUP BY TO_CHAR(ODATE, 'YYMM')";
+			String sql ="SELECT TO_CHAR(ODATE, 'YY.MM') AS MONTH, SUM(OL.TOTALPRICE) AS PRICE FROM ORDERED O INNER JOIN ORDERLIST OL ON O.OLID=OL.OLID WHERE TO_CHAR(ODATE, 'YY')=TO_CHAR(SYSDATE, 'YY') GROUP BY TO_CHAR(ODATE, 'YY.MM') ORDER BY TO_CHAR(ODATE, 'YY.MM')";
 			PreparedStatement ps = con.prepareStatement(sql);
 			
 			ResultSet rs = ps.executeQuery();
@@ -132,7 +131,7 @@ public class OrderDaoImpl implements OrderDao{
 		Connection con = null;
 		try {
 			con = DriverManager.getConnection(Configuration.url, Configuration.user, Configuration.password);
-			String sql ="SELECT TO_CHAR(ODATE, 'YY') AS YEAR, SUM(OL.TOTALPRICE) AS PRICE FROM ORDERED O INNER JOIN ORDERLIST OL ON O.OLID=OL.OLID GROUP BY TO_CHAR(ODATE, 'YY')";
+			String sql ="SELECT TO_CHAR(ODATE, 'YYYY') AS YEAR, SUM(OL.TOTALPRICE) AS PRICE FROM ORDERED O INNER JOIN ORDERLIST OL ON O.OLID=OL.OLID GROUP BY TO_CHAR(ODATE, 'YYYY') ORDER BY TO_CHAR(ODATE, 'YYYY')";
 			PreparedStatement ps = con.prepareStatement(sql);
 			
 			ResultSet rs = ps.executeQuery();

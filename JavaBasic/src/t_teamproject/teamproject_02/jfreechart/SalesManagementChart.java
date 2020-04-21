@@ -38,7 +38,15 @@ public class SalesManagementChart {
 			e.printStackTrace();
 		}
         //여기서부터 옵션 주면 되는 듯
-        ArrayList<ArrayList> data = orderDaoImpl.getSalesPerformanceGroupByMonth();
+		ArrayList<ArrayList> data = null;
+		if(option==0){
+			data = orderDaoImpl.getSalesPerformanceGroupByDay();
+		}else if(option ==1) {
+			data = orderDaoImpl.getSalesPerformanceGroupByMonth();
+		}else if(option==2) {
+			data = orderDaoImpl.getSalesPerformanceGroupByYear();
+		}
+        
         for(ArrayList temp : data) {
         	int value = (Integer) temp.get(0);
         	String cate = (String) temp.get(1);
