@@ -51,7 +51,14 @@ public class OrderDaoImpl implements OrderDao{
 				ps2.setInt(2, productCountList[i]);
 				ps2.executeUpdate();
 				ps2.close();
+				
+				String sqlToProductManagement = " DELETE FROM PRODUCTMANAGEMENT WHERE PMANAGEMENTID IN ( SELECT ext.PMANAGEMENTID FROM (SELECT * FROM PRODUCTMANAGEMENT WHERE PID=? ORDER BY pdate DESC, PMANAGEMENTID ASC) ext WHERE ROWNUM <= " + Integer.toString(productCountList[i]) + " ) ";
+				PreparedStatement ps3 = con.prepareStatement(sqlToProductManagement);
+				ps3.setInt(1, productIdList[i]);
+				ps3.executeUpdate();
+				ps3.close();
 			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
