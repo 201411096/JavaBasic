@@ -3,6 +3,7 @@ package t_teamproject.teamproject_02.dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
@@ -69,5 +70,87 @@ public class OrderDaoImpl implements OrderDao{
 			}
 		}
 		return result;
+	}
+	@Override
+	public ArrayList<ArrayList> getSalesPerformanceGroupByDay() {
+		ArrayList resultList = new ArrayList();
+		Connection con = null;
+		try {
+			con = DriverManager.getConnection(Configuration.url, Configuration.user, Configuration.password);
+			String sql ="SELECT TO_CHAR(ODATE) AS DAY, SUM(OL.TOTALPRICE) AS PRICE FROM ORDERED O INNER JOIN ORDERLIST OL ON O.OLID=OL.OLID WHERE TO_CHAR(ODATE, 'YYMM')=TO_CHAR(SYSDATE, 'YYMM') GROUP BY TO_CHAR(ODATE)";
+			PreparedStatement ps = con.prepareStatement(sql);
+			
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				ArrayList temp = new ArrayList();
+				temp.add(rs.getInt("PRICE"));
+				temp.add(rs.getString("DAY"));
+				resultList.add(temp);
+				System.out.println("aa");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				con.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return resultList;
+	}
+	@Override
+	public ArrayList<ArrayList> getSalesPerformanceGroupByMonth() {
+		ArrayList resultList = new ArrayList();
+		Connection con = null;
+		try {
+			con = DriverManager.getConnection(Configuration.url, Configuration.user, Configuration.password);
+			String sql ="SELECT TO_CHAR(ODATE, 'YYMM') AS MONTH, SUM(OL.TOTALPRICE) AS PRICE FROM ORDERED O INNER JOIN ORDERLIST OL ON O.OLID=OL.OLID WHERE TO_CHAR(ODATE, 'YY')=TO_CHAR(SYSDATE, 'YY') GROUP BY TO_CHAR(ODATE, 'YYMM')";
+			PreparedStatement ps = con.prepareStatement(sql);
+			
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				ArrayList temp = new ArrayList();
+				temp.add(rs.getInt("PRICE"));
+				temp.add(rs.getString("MONTH"));
+				resultList.add(temp);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				con.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return resultList;
+	}
+	@Override
+	public ArrayList<ArrayList> getSalesPerformanceGroupByYear() {
+		ArrayList resultList = new ArrayList();
+		Connection con = null;
+		try {
+			con = DriverManager.getConnection(Configuration.url, Configuration.user, Configuration.password);
+			String sql ="SELECT TO_CHAR(ODATE, 'YY') AS YEAR, SUM(OL.TOTALPRICE) AS PRICE FROM ORDERED O INNER JOIN ORDERLIST OL ON O.OLID=OL.OLID GROUP BY TO_CHAR(ODATE, 'YY')";
+			PreparedStatement ps = con.prepareStatement(sql);
+			
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				ArrayList temp = new ArrayList();
+				temp.add(rs.getInt("PRICE"));
+				temp.add(rs.getString("YEAR"));
+				resultList.add(temp);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				con.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return resultList;
 	}
 }

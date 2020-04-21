@@ -26,7 +26,7 @@ public class ManagementFrame extends JFrame{
 	JMenuItem jmenuitem1;
 	JMenuItem jmenuitem2;
 	JTabbedPane jtabbepedPane;
-	String jtabbedPaneItem [] = {"직원관리", "제품관리", "재고관리"};
+	String jtabbedPaneItem [] = {"직원관리", "제품관리", "재고관리", "매출관리"};
 	EmployeeManageMentPanel employeeManageMentPanel;
 	ProductManagementPanel productManagementPanel;
 	ProductCountGraphPanel productCountGraphPanel;

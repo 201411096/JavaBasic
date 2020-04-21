@@ -21,8 +21,8 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.ui.HorizontalAlignment;
 import org.jfree.ui.TextAnchor;
 
-import t_teamproject.teamproject_02.dao.ProductManagementDao;
-import t_teamproject.teamproject_02.dao.ProductManagementDaoImpl;
+import t_teamproject.teamproject_02.dao.OrderDao;
+import t_teamproject.teamproject_02.dao.OrderDaoImpl;
 
 public class SalesManagementChart {
     public JFreeChart getChart(int option) { //년도별 월별 일별
@@ -31,21 +31,18 @@ public class SalesManagementChart {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset(); 
  
         //------------------------------------------------------------------
-        // 데이터 입력 ( 값, 범례, 카테고리 )
-//        Database db = new Database(); //ArrayList의 ArrayList 2차원배열 형태로 데이터를 담아옴
-//        ArrayList<ArrayList> data = db.getData(); //2차원 배열?..
-        ProductManagementDao productManagementDaoModel = null;
+        OrderDao orderDaoImpl = null;
 		try {
-			productManagementDaoModel = new ProductManagementDaoImpl();
+			orderDaoImpl = new OrderDaoImpl();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
         //여기서부터 옵션 주면 되는 듯
-        ArrayList<ArrayList> data = productManagementDaoModel.productCount();
+        ArrayList<ArrayList> data = orderDaoImpl.getSalesPerformanceGroupByMonth();
         for(ArrayList temp : data) {
         	int value = (Integer) temp.get(0);
         	String cate = (String) temp.get(1);
-        	dataset.addValue(value, "재고별",  cate);
+        	dataset.addValue(value, "일별",  cate);
         }
         //------------------------------------------------------------------
         
@@ -98,8 +95,8 @@ public class SalesManagementChart {
        
         // 세팅된 plot을 바탕으로 chart 생성
         final JFreeChart chart = new JFreeChart(plot);
-        chart.setTitle("재고 현황 "); 
-        TextTitle copyright = new TextTitle("상품별 재고 현황 ", new Font("SansSerif", Font.PLAIN, 9));
+        chart.setTitle("매출 현황 "); 
+        TextTitle copyright = new TextTitle("매출 현황 ", new Font("SansSerif", Font.PLAIN, 9));
         copyright.setHorizontalAlignment(HorizontalAlignment.RIGHT);
         chart.addSubtitle(copyright);  
         return chart;

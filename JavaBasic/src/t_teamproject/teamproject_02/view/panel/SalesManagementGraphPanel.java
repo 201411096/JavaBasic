@@ -46,5 +46,8 @@ public class SalesManagementGraphPanel extends JPanel{
 		wrapperPanel.add(chartPanel);
 		add(wrapperPanel);
 	}
+	public void renewalInPage() {
+		
+	}
 
 }
