@@ -8,10 +8,13 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
+import t_teamproject.teamproject_02.sendmail.SendMail;
 
 public class SendMailFrame extends JFrame{
 	String productNameList [];
@@ -19,9 +22,12 @@ public class SendMailFrame extends JFrame{
 	int productPriceList [];
 	int totalPrice=0;
 	
-	JTextField idTextField;
+	JTextField idTextField; // from 보내는 사람 주소
 	JPasswordField passwordField;
+	JTextField toIdTextField; // to 받는 사람 메일 주소
 	JButton sendButton;
+	
+	SendMail sendMail = null;
 	
 	public SendMailFrame(String[] productNameList, int[] productCountList, int[] productPriceList, int totalPrice) {
 
@@ -29,14 +35,14 @@ public class SendMailFrame extends JFrame{
 		this.productCountList = productCountList;
 		this.productPriceList = productPriceList;
 		this.totalPrice = totalPrice;
-		
+		sendMail = new SendMail();
 		display();
 		eventProc();
 	}
 	public void display() {
 		setLayout(null);
 		JPanel wrapperPanel = new JPanel();
-		wrapperPanel.setLayout(new GridLayout(2,2));
+		wrapperPanel.setLayout(new GridLayout(3,2));
 		wrapperPanel.add(new JLabel("메일id "));
 		idTextField = new JTextField();
 		wrapperPanel.add(idTextField);
@@ -44,6 +50,10 @@ public class SendMailFrame extends JFrame{
 		wrapperPanel.add(new JLabel("메일pw "));
 		passwordField = new JPasswordField();
 		wrapperPanel.add(passwordField);
+		
+		wrapperPanel.add(new JLabel("받는 사람 메일 주소"));
+		toIdTextField = new JTextField();
+		wrapperPanel.add(toIdTextField);
 		
 		sendButton = new JButton("메일 전송");
 		
@@ -61,11 +71,28 @@ public class SendMailFrame extends JFrame{
 		sendButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				sendMail.sendMail(idTextField.getText(), String.valueOf(passwordField.getPassword()), toIdTextField.getText(), makeMainContent());
+				JOptionPane.showMessageDialog(null, "메일이 전송됬습니다.");
+				dispose();
 			}
 		});
 	}
-	
-	
-
+	public String makeMainContent() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("------------------------------\n");
+		sb.append("Subway 영수증 메일 안내\n");
+		sb.append("------------------------------\n");
+		for(int i=0; i<productNameList.length; i++)
+		{
+			sb.append(i + "번쨰 상품\n 이름 : " + productNameList[i] +"\n");
+			sb.append("가격 : "  + productCountList[i] +"\n");
+			sb.append("제품 가격 총합 : " + productPriceList[i] +"\n");
+			sb.append("------------------------------\n");
+		}
+		sb.append("------------------------------\n");
+		sb.append("구매내역 가격 총합 : " + totalPrice +"\n");
+		sb.append("------------------------------");
+		
+		return sb.toString();
+	}
 }

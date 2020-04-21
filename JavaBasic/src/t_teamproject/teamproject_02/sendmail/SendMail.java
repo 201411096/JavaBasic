@@ -12,9 +12,9 @@ import javax.mail.internet.MimeMessage;
 
 public class SendMail {
 	public SendMail() {}
-	public void sendMail(String user, String password, String mainContent) {
+	public void sendMail(String user, String password, String to, String mainContent) {
 		String host = "smtp.naver.com";		
-		String to ="korea5781@naver.com";		
+//		String to ="korea5781@naver.com";		
 		 // Get the session object
 		  Properties props = new Properties();
 		  props.put("mail.smtp.host", host);
@@ -30,12 +30,11 @@ public class SendMail {
 		   message.setFrom(new InternetAddress(user));
 		   message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 		   // Subject
-		   message.setSubject("[Subject] Java Mail Test");
+		   message.setSubject("subway.. Java Mail Test");
 		   // Text
-		   message.setText("Simple mail test..");
+		   message.setText(mainContent);
 		   // send the message
 		   Transport.send(message);
-		   System.out.println("message sent successfully...");
 		  } catch (MessagingException e) {
 		   e.printStackTrace();
 		  }
