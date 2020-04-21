@@ -51,9 +51,9 @@ public class CalculationFrame extends JFrame{
 	
 	public CalculationFrame(Employee employee) {
 		this.employee = employee;
-		display();
 		connectDB();
 		initializeProductCountAndshoppingCart();
+		display();
 		eventProc();
 	}
 	public void display() {
@@ -84,7 +84,8 @@ public class CalculationFrame extends JFrame{
 			right_north_panel.add(new JLabel("수량", SwingConstants.CENTER));
 			right_north_panel.add(new JLabel("가격", SwingConstants.CENTER));
 			JPanel right_center_panel = new JPanel();
-			calculationList = new JList();
+			calculationList = new JList(makeListStringArray(shoppingCart, productCount));
+			right_center_panel.add(calculationList);
 			JPanel right_south_panel = new JPanel();
 			right_south_panel.setLayout(new GridLayout(1,2));
 			orderButton = new JButton("주문");
@@ -137,7 +138,8 @@ public class CalculationFrame extends JFrame{
 				if(shoppingCart[0][i]==pid)
 				{
 					shoppingCart[1][i]++;
-					System.out.println(shoppingCart[0][i] + " : " + shoppingCart[1][i]);
+					System.out.println("이벤트핸들러 테스트 : " + shoppingCart[0][i] + " : " + shoppingCart[1][i]);
+					calculationList.setListData(makeListStringArray(shoppingCart, productCount));
 				}
 					
 			}
@@ -172,6 +174,23 @@ public class CalculationFrame extends JFrame{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	public String[] makeListStringArray(int [][] shoppingCart, int[][] productCount) {
+		int arrayLength=0;
+		for(int i=0; i<shoppingCart[0].length; i++)
+		{
+			System.out.println(shoppingCart[1][i]);
+			if(shoppingCart[1][i]!=0)
+				arrayLength++;
+		}
+		String array [] = new String[arrayLength];
+		for(int i=0; i<array.length; i++)
+		{
+			array[i]= new String("aa");
+		}
+		
+		
+		return array;
 	}
 
 	public Employee getEmployee() { //로그인 세션 관리에 사용
