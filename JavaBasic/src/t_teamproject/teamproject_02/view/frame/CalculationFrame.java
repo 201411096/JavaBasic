@@ -14,6 +14,7 @@ import javax.swing.JList;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
@@ -48,6 +49,7 @@ public class CalculationFrame extends JFrame{
 	
 	int shoppingCart [][]; //0부분이 pid 1부분이 개수
 	int productCount [][]; //0부분이 pid 1부분이 개수
+	String productStringList [];
 	
 	public CalculationFrame(Employee employee) {
 		this.employee = employee;
@@ -137,9 +139,16 @@ public class CalculationFrame extends JFrame{
 			{
 				if(shoppingCart[0][i]==pid)
 				{
-					shoppingCart[1][i]++;
-					System.out.println("이벤트핸들러 테스트 : " + shoppingCart[0][i] + " : " + shoppingCart[1][i]);
-					calculationList.setListData(makeListStringArray(shoppingCart, productCount));
+					if(shoppingCart[1][i]==productCount[1][i])
+					{
+						JOptionPane.showMessageDialog(null, "재고가 부족합니다.");
+					}else {
+						shoppingCart[1][i]++;
+						System.out.println("이벤트핸들러 테스트 : " + shoppingCart[0][i] + " : " + shoppingCart[1][i]);
+						calculationList.setListData(makeListStringArray(shoppingCart, productCount));
+						productStringList=makeListStringArray(shoppingCart, productCount); //외부적으로 관리할 배열	
+					}
+					
 				}
 					
 			}
@@ -177,12 +186,12 @@ public class CalculationFrame extends JFrame{
 	}
 	public String[] makeListStringArray(int [][] shoppingCart, int[][] productCount) {
 		int arrayLength=0;
-		for(int i=0; i<shoppingCart[0].length; i++)
+		for(int i=0; i<shoppingCart[0].length; i++) //리스트에 들어갈 배열 길이를 정함
 		{
 			System.out.println(shoppingCart[1][i]);
 			if(shoppingCart[1][i]!=0)
 				arrayLength++;
-		} //리스트에 들어갈 배열 길이를 정함
+		}
 		String array [] = new String[arrayLength];
 		int arrayCnt=0;
 		for(int i=0; i<shoppingCart[0].length; i++)
@@ -198,11 +207,8 @@ public class CalculationFrame extends JFrame{
 				array[arrayCnt]=new String(p.getName() + "                               " + shoppingCart[1][i] + "                                        " + p.getPrice()*shoppingCart[1][i]);
 				System.out.println(array[arrayCnt]);
 				arrayCnt++;
-			
 			}
 		}
-		
-		
 		return array;
 	}
 
