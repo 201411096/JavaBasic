@@ -152,4 +152,32 @@ public class OrderDaoImpl implements OrderDao{
 		}
 		return resultList;
 	}
+	@Override
+	public ArrayList<ArrayList> getSalesPerformanceGroupByName() {
+		ArrayList resultList = new ArrayList();
+		Connection con = null;
+		try {
+			con = DriverManager.getConnection(Configuration.url, Configuration.user, Configuration.password);
+			String sql ="SELECT P.PNAME AS PNAME, SUM(OL.TOTALPRICE) AS PRICE FROM ORDERED O INNER JOIN ORDERLIST OL ON O.OLID=OL.OLID INNER JOIN PRODUCT P ON O.PID=P.PID GROUP BY O.PID, P.PNAME order by O.PID";
+			PreparedStatement ps = con.prepareStatement(sql);
+			
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				ArrayList temp = new ArrayList();
+				temp.add(rs.getInt("PRICE"));
+				temp.add(rs.getString("PNAME"));
+				resultList.add(temp);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				con.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return resultList;
+	}
+	
 }

@@ -22,7 +22,7 @@ public class SalesManagementGraphPanel extends JPanel{
 	ChartPanel chartPanel;
 
 	JComboBox comboboxOption;
-	String optionList [] = {"일별", "월별", "연도별"};
+	String optionList [] = {"일별", "월별", "연도별", "제품별"};
 	JPanel upPanel;
 	JPanel wrapperPanel;
 	
@@ -53,24 +53,9 @@ public class SalesManagementGraphPanel extends JPanel{
 	}
 	public void eventProc() {
 		EventHandler eventHandler = new EventHandler();
-//		comboboxOption.addActionListener(eventHandler);
 		comboboxOption.addItemListener(eventHandler);
 	}
 	
-//	class EventHandler implements ActionListener{
-//		@Override
-//		public void actionPerformed(ActionEvent e) {
-//			remove(wrapperPanel);
-//			wrapperPanel = new JPanel();
-//			wrapperPanel.setLayout(new GridLayout(1, 1));
-//			
-//			demo = new SalesManagementChart();
-//			chart = demo.getChart(comboboxOption.getSelectedIndex());
-//			chartPanel=new ChartPanel(chart);
-//			wrapperPanel.add(chartPanel);
-//			add(wrapperPanel);
-//		}
-//	}
 	class EventHandler implements ItemListener{
 		@Override
 		public void itemStateChanged(ItemEvent e) {

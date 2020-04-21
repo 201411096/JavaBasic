@@ -41,17 +41,33 @@ public class SalesManagementChart {
 		ArrayList<ArrayList> data = null;
 		if(option==0){
 			data = orderDaoImpl.getSalesPerformanceGroupByDay();
+	        for(ArrayList temp : data) {
+	        	int value = (Integer) temp.get(0);
+	        	String cate = (String) temp.get(1);
+	        	dataset.addValue(value, "일별",  cate);
+	        }
 		}else if(option ==1) {
 			data = orderDaoImpl.getSalesPerformanceGroupByMonth();
+			for(ArrayList temp : data) {
+	        	int value = (Integer) temp.get(0);
+	        	String cate = (String) temp.get(1);
+	        	dataset.addValue(value, "월별",  cate);
+	        }
 		}else if(option==2) {
 			data = orderDaoImpl.getSalesPerformanceGroupByYear();
+			for(ArrayList temp : data) {
+	        	int value = (Integer) temp.get(0);
+	        	String cate = (String) temp.get(1);
+	        	dataset.addValue(value, "연도별",  cate);
+	        }
+		}else if(option==3) {
+			data = orderDaoImpl.getSalesPerformanceGroupByName();
+			for(ArrayList temp : data) {
+	        	int value = (Integer) temp.get(0);
+	        	String cate = (String) temp.get(1);
+	        	dataset.addValue(value, "제품별",  cate);
+	        }
 		}
-        
-        for(ArrayList temp : data) {
-        	int value = (Integer) temp.get(0);
-        	String cate = (String) temp.get(1);
-        	dataset.addValue(value, "일별",  cate);
-        }
         //------------------------------------------------------------------
         
         // 렌더링 생성 및 세팅

@@ -9,4 +9,5 @@ public interface OrderDao {
 	public ArrayList<ArrayList> getSalesPerformanceGroupByDay();
 	public ArrayList<ArrayList> getSalesPerformanceGroupByMonth();
 	public ArrayList<ArrayList> getSalesPerformanceGroupByYear();
+	public ArrayList<ArrayList> getSalesPerformanceGroupByName();
 }
