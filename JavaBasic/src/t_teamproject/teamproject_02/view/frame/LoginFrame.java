@@ -47,7 +47,7 @@ public class LoginFrame extends JFrame{
 	public void display() {
 //		panel = new BackgroundPanel(imageIcon.getImage());
 		try {
-			panel = new BackgroundAnimatedPanel();
+			panel = new BackgroundAnimatedPanel("src\\t_teamproject\\teamproject_02\\imgs\\background\\loginFrameBackground.gif");
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
