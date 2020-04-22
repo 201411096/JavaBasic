@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -157,6 +159,23 @@ public class CalculationFrame extends JFrame{
 				}
 			}
 		});
+		//200422
+//		calculationList.addMouseListener(new MouseAdapter() {
+//			@Override
+//			public void mouseClicked(MouseEvent e) {
+//				int result = JOptionPane.showConfirmDialog(null, "취소하시겠습니까?", "확인", JOptionPane.YES_NO_OPTION);
+//				if(result == JOptionPane.YES_OPTION)
+//				{
+//					int selectedIndex = calculationList.getSelectedIndex();
+//					shoppingCart[1][selectedIndex]=0; // 장바구니에서 인덱스 부분의 요소의 개수를 0으로 만듬
+//					calculationList.remove(selectedIndex); //jlist의 선택된 요소값을 지움
+//					makeListStringArray(shoppingCart, productCount);
+//					
+//				}
+//				
+//				
+//			}
+//		});
 	}
 	class MenuButtonHandler implements ActionListener{
 		@Override

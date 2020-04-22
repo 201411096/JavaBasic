@@ -21,8 +21,8 @@ public class MenuButton extends JButton{
 		setImageIcon();
 	}
 	public void setImageIcon() {
-		if(new File("src\\t_teamproject\\teamproject_02\\imgs\\food\\" + p.getId() + ".jpg").exists()) {
-			imageIcon = new ImageIcon("src\\t_teamproject\\teamproject_02\\imgs\\food\\" + p.getId() + ".jpg");
+		if(new File("src\\t_teamproject\\teamproject_02\\imgs\\food\\" + p.getId() + ".gif").exists()) {
+			imageIcon = new ImageIcon("src\\t_teamproject\\teamproject_02\\imgs\\food\\" + p.getId() + ".gif");
 			setIcon(imageIcon);
 		}
 		else {

@@ -190,8 +190,8 @@ public class EmployeeManageMentPanel extends JPanel{
 				jtextFieldAge.setText(Integer.toString(emp.getAge()));
 				jComboBoxEmployeePosition.setSelectedItem(emp.getPosition());
 				
-				imageIcon = new ImageIcon("src\\t_teamproject\\teamproject_02\\imgs\\employee\\" + emp.getId() + ".jpg");
-				if(new File("src\\t_teamproject\\teamproject_02\\imgs\\employee\\" + emp.getId() + ".jpg").exists()) {
+				imageIcon = new ImageIcon("src\\t_teamproject\\teamproject_02\\imgs\\employee\\" + emp.getId() + ".gif");
+				if(new File("src\\t_teamproject\\teamproject_02\\imgs\\employee\\" + emp.getId() + ".gif").exists()) {
 					employeeImageLabel.setIcon(imageIcon);
 				}
 				else {
