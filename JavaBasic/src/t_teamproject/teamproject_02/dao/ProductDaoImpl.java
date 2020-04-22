@@ -55,7 +55,7 @@ public class ProductDaoImpl implements ProductDao{
 		try {
 			con = DriverManager.getConnection(Configuration.url, Configuration.user, Configuration.password);
 			String [] columNames = {"P.PNAME", "P.PDETAIL"};
-			String sql="SELECT P.PID AS PID, PG.PGROUPNAME AS PGROUPNAME, P.PNAME AS PNAME, P.PPRICE AS PPRICE FROM PRODUCT P INNER JOIN PRODUCTGROUP PG ON P.PGROUPID=PG.PGROUPID  WHERE " + columNames[option] + " LIKE '%' || ? || '%' ";
+			String sql="SELECT P.PID AS PID, PG.PGROUPNAME AS PGROUPNAME, P.PNAME AS PNAME, P.PPRICE AS PPRICE FROM PRODUCT P INNER JOIN PRODUCTGROUP PG ON P.PGROUPID=PG.PGROUPID  WHERE " + columNames[option] + " LIKE '%' || ? || '%'  ORDER BY p.pgroupid, p.pid";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, searchWord);
 			ResultSet rs = ps.executeQuery();

@@ -170,10 +170,7 @@ public class CalculationFrame extends JFrame{
 //					shoppingCart[1][selectedIndex]=0; // 장바구니에서 인덱스 부분의 요소의 개수를 0으로 만듬
 //					calculationList.remove(selectedIndex); //jlist의 선택된 요소값을 지움
 //					makeListStringArray(shoppingCart, productCount);
-//					
 //				}
-//				
-//				
 //			}
 //		});
 	}

@@ -62,7 +62,7 @@ public class BarChartProductCount {
                      ItemLabelAnchor.OUTSIDE6, TextAnchor.TOP_LEFT
                      );
         Font f = new Font("Gulim", Font.BOLD, 10);
-        Font axisF = new Font("Gulim", Font.PLAIN, 8);
+        Font axisF = new Font("Gulim", Font.PLAIN, 6);
        
         // 렌더링 세팅
         // 그래프 1
