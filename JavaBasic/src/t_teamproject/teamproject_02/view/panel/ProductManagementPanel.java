@@ -302,8 +302,6 @@ public class ProductManagementPanel extends JPanel{
 		if(managementFrame.getEmployee().getPosition().equals("ADMIN")) {
 			int pid = Integer.parseInt(jtextFieldProductId.getText());
 			try {
-
-				
 				int result = productDaoModel.deleteProduct(pid); //product에서 pid에 해당하는 값 삭제
 				if(result==0) {
 					JOptionPane.showMessageDialog(null, "변경사항이 없습니다.");
