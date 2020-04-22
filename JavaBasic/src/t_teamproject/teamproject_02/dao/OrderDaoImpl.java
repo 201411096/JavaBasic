@@ -14,21 +14,30 @@ public class OrderDaoImpl implements OrderDao{
 	public OrderDaoImpl() throws ClassNotFoundException {
 		Class.forName("oracle.jdbc.driver.OracleDriver");
 	}
+	/* 함수이름 : insertOrder
+	 * 인자값 : productStringList(제품의 이름과, 제품별 구매갯수, 제품별 가격합이 담긴 문자열 배열) , calProductList(db에 존재하는  판매가능한 제품 정보를 담은 배열)
+	 * 반환값 : 정상 종료시 0반환, 예외 발생시 -1 반환
+	 * 함수설명 : 제품 주문
+	 * 		  	ㄴ  판매항목들을 묶어줄수있는 영수증 테이블에  영수증식별번호와 총가격 삽입 (한 주문에 포함된 여러 메뉴들을 묶어줌)
+	 * 			ㄴ  주문한 메뉴의 개수만큼  각 판매항목당 판매내역을 삽입(제품 번호, 판매갯수, 판매날짜)
+	 * 			ㄴ  식재료 관리 테이블에서 각 판매항목당 판매된 갯수만큼 먼저 입고된 식재료를 삭제(오래된 식재료부터 판매)
+	 */
 	public int insertOrder(String productStringList [], ArrayList<Product> calProductList) {
 		int result=0;
 		Connection con = null;
-		String productNameList[] = new String[productStringList.length];
-		int productIdList[] = new int[productStringList.length];
-		int productCountList[] = new int[productStringList.length];
-		int totalPrice=0;
-		for(int i=0; i<productStringList.length; i++)
+		String productNameList[] = new String[productStringList.length];			//	productStringList에서 제품의 이름들을 받아올 배열(제품의 이름에 공백이 포함될 수 있다는 것을 생각하지 못한채 Stringtokenizer를 이용해서 에러가 발생할 수 있습니다. 
+		int productIdList[] = new int[productStringList.length];					//	calProductList에서 제품의 식별번호를 받아올 배열
+		int productCountList[] = new int[productStringList.length];					//	productStringList에서 제품의 판매 갯수들을 받아올 배열
+		int totalPrice=0;															// 	주문의 총가격을 담을 변수
+		
+		for(int i=0; i<productStringList.length; i++)								//  productStringList을 파싱하는 과정( 판매 물품과 물품별 개수, 총가격을 받아옴)
 		{
 			StringTokenizer st = new StringTokenizer(productStringList[i]);
-			productNameList[i] = st.nextToken(); //이걸 id로 바꿔야됨
+			productNameList[i] = st.nextToken(); 									
 			productCountList[i] = Integer.parseInt(st.nextToken());
 			totalPrice+=Integer.parseInt(st.nextToken());
 		}
-		for(int i=0; i<productNameList.length; i++) //제품이름리스트에서 제품 아이디리스트를 가져옴
+		for(int i=0; i<productNameList.length; i++) 								//productNameList에서 productIdList를 뽑아옴
 		{
 			for(int j=0; j<calProductList.size(); j++)
 			{
@@ -63,6 +72,7 @@ public class OrderDaoImpl implements OrderDao{
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+			return -1;
 		}finally {
 			try {
 				con.close();
@@ -72,6 +82,11 @@ public class OrderDaoImpl implements OrderDao{
 		}
 		return result;
 	}
+	/* 함수이름 : getSalesPerformanceGroupByDay
+	 * 인자값 : 없음
+	 * 반환값 : 정상 종료시 resultList 반환, 예외 발생시 null 반환
+	 * 함수설명 : 이번달의 일별 매출요약을 가져오는 함수(1월 31일이면 1월1일부터 1월31일까지, 2월2일이면 2월1일부터 2월 2일까지의 매출)
+	 */
 	@Override
 	public ArrayList<ArrayList> getSalesPerformanceGroupByDay() {
 		ArrayList resultList = new ArrayList();
@@ -99,6 +114,11 @@ public class OrderDaoImpl implements OrderDao{
 		}
 		return resultList;
 	}
+	/* 함수이름 : getSalesPerformanceGroupByMonth
+	 * 인자값 : 없음
+	 * 반환값 : 정상 종료시 resultList 반환, 예외 발생시 null 반환
+	 * 함수설명 : 이번년의 월별 매출요약을 가져오는 함수(2월이면 1월부터 2월까지, 12일이면 1월부터 12월까지의 매출)
+	 */
 	@Override
 	public ArrayList<ArrayList> getSalesPerformanceGroupByMonth() {
 		ArrayList resultList = new ArrayList();
@@ -126,6 +146,11 @@ public class OrderDaoImpl implements OrderDao{
 		}
 		return resultList;
 	}
+	/* 함수이름 : getSalesPerformanceGroupByYear
+	 * 인자값 : 없음
+	 * 반환값 : 정상 종료시 resultList 반환, 예외 발생시 null 반환
+	 * 함수설명 : 연도별 매출요약을 가져오는 함수
+	 */
 	@Override
 	public ArrayList<ArrayList> getSalesPerformanceGroupByYear() {
 		ArrayList resultList = new ArrayList();
@@ -153,6 +178,11 @@ public class OrderDaoImpl implements OrderDao{
 		}
 		return resultList;
 	}
+	/* 함수이름 : getSalesPerformanceGroupByName
+	 * 인자값 : 없음
+	 * 반환값 : 정상 종료시 resultList 반환, 예외 발생시 null 반환
+	 * 함수설명 : 제품별 매출요약을 가져오는 함수
+	 */
 	@Override
 	public ArrayList<ArrayList> getSalesPerformanceGroupByName() {
 		ArrayList resultList = new ArrayList();

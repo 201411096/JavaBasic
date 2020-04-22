@@ -14,7 +14,11 @@ public class ProductDaoImpl implements ProductDao{
 	public ProductDaoImpl() throws ClassNotFoundException {
 		Class.forName("oracle.jdbc.driver.OracleDriver");
 	}
-
+	/* 함수이름 : selectByID
+	 * 인자값 : 제품id
+	 * 반환값 : 정상 종료시 Product 반환, 예외 발생시 null 반환
+	 * 함수설명 : 제품의 id로 제품검색
+	 */
 	@Override
 	public Product selectByID(int id) {
 		Product p = new Product();
@@ -47,7 +51,11 @@ public class ProductDaoImpl implements ProductDao{
 		}
 		return p;
 	}
-
+	/* 함수이름 : searchProduct
+	 * 인자값 : 검색옵션(제품의 이름, 제품의 상세정보)과 검색할 단어
+	 * 반환값 : 정상 종료시 Product가 담긴 리스트 반환, 예외 발생시 null 반환
+	 * 함수설명 : 검색옵션과 검색할 단어에 해당되는 제품정보들을 검색
+	 */
 	@Override
 	public ArrayList searchProduct(int option, String searchWord) {
 		ArrayList resultList = new ArrayList();
@@ -80,7 +88,11 @@ public class ProductDaoImpl implements ProductDao{
 		}
 		return resultList;
 	}
-
+	/* 함수이름 : searchProduct
+	 * 인자값 : 제품의 정보
+	 * 반환값 : 정상 종료시 0반환, 예외 발생시 -1 반환
+	 * 함수설명 : 제품 정보 삽입
+	 */
 	@Override
 	public int insertProduct(Product vo) {
 		int result=0; 
@@ -108,7 +120,11 @@ public class ProductDaoImpl implements ProductDao{
 		}
 		return result;
 	}
-
+	/* 함수이름 : updateProduct
+	 * 인자값 : 제품의 정보
+	 * 반환값 : 정상 종료시 수정한 개수를 반환, 예외 발생시 0 반환
+	 * 함수설명 : 제품 정보 수정
+	 */
 	@Override
 	public int updateProduct(Product vo) {
 		int result=0;
@@ -135,7 +151,11 @@ public class ProductDaoImpl implements ProductDao{
 		}		
 		return result;
 	}
-
+	/* 함수이름 : deleteProduct
+	 * 인자값 : 제품의 id
+	 * 반환값 : 정상 종료시 삭제한 개수를 반환, 예외 발생시 0 반환
+	 * 함수설명 : 제품 정보 삭제
+	 */
 	@Override
 	public int deleteProduct(int id) {
 		int result=0;
@@ -157,6 +177,11 @@ public class ProductDaoImpl implements ProductDao{
 		}	
 		return result;
 	}
+	/* 함수이름 : selectProductNameOrderByName
+	 * 인자값 : 없음
+	 * 반환값 : 정상 종료시 resultArrayList를 반환, 예외 발생시 null 반환
+	 * 함수설명 : 제품의 이름을 오름차순 순으로 배열로 가져옴
+	 */
 	public ArrayList<String> selectProductNameOrderByName() {
 		ArrayList<String>  resultArrayList = new ArrayList<String>();
 		Connection con = null;
@@ -181,6 +206,11 @@ public class ProductDaoImpl implements ProductDao{
 		}	
 		return resultArrayList;
 	}
+	/* 함수이름 : selectProductNameOrderByName
+	 * 인자값 : 검색할 단어
+	 * 반환값 : 정상 종료시 resultList를 반환, 예외 발생시 null 반환
+	 * 함수설명 : 제품을 그룹별로 묶어서 검색(메인메뉴, 사이드메뉴, 음료수)
+	 */
 	@Override
 	public ArrayList<Product> searchProductByGroupNameAsc(String searchWord) { //그룹이름으로 찾아서 PID순으로 정렬 후 가져옴
 		ArrayList<Product> resultList = new ArrayList();

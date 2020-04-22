@@ -14,6 +14,11 @@ public class ProductManagementDaoImpl implements ProductManagementDao{
 	public ProductManagementDaoImpl() throws ClassNotFoundException{
 		Class.forName("oracle.jdbc.driver.OracleDriver");
 	}
+	/* 함수이름 : purchaseProductByName
+	 * 인자값 : 도매점으로부터 구매할 제품의 이름과 갯수
+	 * 반환값 : 정상 종료시 0반환 예외발생시 -1 반환
+	 * 함수설명 : 제품 입고(도매점에서 구매)
+	 */
 	@Override
 	public int purchaseProductByName(String name, int cnt) {
 		int result = 0;
@@ -40,6 +45,11 @@ public class ProductManagementDaoImpl implements ProductManagementDao{
 		}
 		return result;
 	}
+	/* 함수이름 : productCount
+	 * 인자값 : 없음
+	 * 반환값 : 정상 종료시 resultList 반환 예외발생시 null 반환
+	 * 함수설명 : 제품별 제품이름과 재고 개수를 가져옴
+	 */
 	public ArrayList<ArrayList> productCount(){
 		ArrayList resultList = new ArrayList();
 		Connection con = null;
@@ -67,6 +77,11 @@ public class ProductManagementDaoImpl implements ProductManagementDao{
 		}
 		return resultList;
 	}
+	/* 함수이름 : getPidCountFromproduct
+	 * 인자값 : 없음
+	 * 반환값 : 정상 종료시 resultList 반환 예외발생시 null 반환
+	 * 함수설명 : 제품별 제품아이다와 재고 개수를 가져옴
+	 */
 	public ArrayList<ArrayList> getPidCountFromproduct(){
 		ArrayList resultList = new ArrayList();
 		Connection con = null;
@@ -94,6 +109,11 @@ public class ProductManagementDaoImpl implements ProductManagementDao{
 		}
 		return resultList;
 	}
+	/* 함수이름 : getAllProduct
+	 * 인자값 : 없음
+	 * 반환값 : 정상 종료시 resultList 반환 예외발생시 null 반환
+	 * 함수설명 : 제품의 정보를 전부 가져옴
+	 */
 	public ArrayList<Product> getAllProduct(){
 		ArrayList resultList = new ArrayList();
 		Connection con = null;

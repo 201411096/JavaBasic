@@ -14,6 +14,12 @@ public class EmployeeDaoImpl implements EmployeeDao{
 	public EmployeeDaoImpl() throws ClassNotFoundException {
 		Class.forName("oracle.jdbc.driver.OracleDriver");
 	}
+	
+	/* 함수이름 : selectByID
+	 * 인자값 : 직원id
+	 * 반환값 : 직원정보
+	 */
+	
 	public Employee selectByID(String id) {
 		Employee e = new Employee();
 		Connection con = null;
@@ -50,6 +56,10 @@ public class EmployeeDaoImpl implements EmployeeDao{
 		
 		return e;
 	}
+	/* 함수이름 : searchEmployee
+	 * 인자값 : 검색옵션(직원이름, 직원아이디), 검색에 사용할 단어
+	 * 반환값 : 직원정보가 담겨있는 ArrayList
+	 */
 	public ArrayList searchEmployee(int option, String searchWord) {
 		ArrayList resultList = new ArrayList();
 		Connection con = null;
@@ -86,6 +96,11 @@ public class EmployeeDaoImpl implements EmployeeDao{
 		}
 		return resultList;		
 	}
+	/* 함수이름 : insertEmployee
+	 * 인자값 : 직원정보
+	 * 반환값 : 예외 발생시 -1, 정상종료시 0
+	 * 함수설명 : 직원관리 창에서 admin이 직원을 등록할 경우에 사용 <입사일 지정 가능>
+	 */
 	public int insertEmployee(Employee vo) {
 		int result=0; 
 		Connection con = null;
@@ -118,6 +133,11 @@ public class EmployeeDaoImpl implements EmployeeDao{
 		}
 		return 0;
 	}
+	/* 함수이름 : insertEmployeeWithOutDate
+	 * 인자값 : 직원정보
+	 * 반환값 : 예외 발생시 -1, 정상종료시 0
+	 * 함수설명 : 회원가입창에서 직원이 직접 회원가입하는 경우(입사일자로 현재 날짜가 들어감)
+	 */
 	public int insertEmployeeWithOutDate(Employee vo) {
 		int result=0; 
 		Connection con = null;
@@ -149,6 +169,11 @@ public class EmployeeDaoImpl implements EmployeeDao{
 		}
 		return 0;
 	}
+	/* 함수이름 : updateEmployee
+	 * 인자값 : 직원정보
+	 * 반환값 : 아무것도 update 되지 않았을 경우 0, update가 된 경우는 update된 행의 갯수를 반환
+	 * 함수설명 : 수정할 직원정보를 받아와서 update함
+	 */
 	public int updateEmployee(Employee vo) {
 		int result=0;
 		Connection con = null;
@@ -179,6 +204,11 @@ public class EmployeeDaoImpl implements EmployeeDao{
 		}
 		return result;
 	}
+	/* 함수이름 : deleteEmployee
+	 * 인자값 : 직원정보
+	 * 반환값 : 아무것도 delete 되지 않았을 경우 0, delete가 된 경우는 delete된 행의 갯수를 반환
+	 * 함수설명 : 삭제할 직원정보의 id를 받아와서 삭제
+	 */
 	public int deleteEmployee(String id) {
 		int result=0;
 		Connection con = null;
