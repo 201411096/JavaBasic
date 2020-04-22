@@ -48,6 +48,7 @@ public class OrderDaoImpl implements OrderDao{
 			for(int i=0; i<productStringList.length; i++) {
 				String sqlToOrdered = "INSERT INTO ORDERED(OID, PID, OCNT, ODATE, OLID) VALUES(ORDERED_OID.NEXTVAL, ?, ?, SYSDATE, ORDERLIST_OLID.CURRVAL)";
 				PreparedStatement ps2 = con.prepareStatement(sqlToOrdered);
+				System.out.println(productIdList[i]);
 				ps2.setInt(1, productIdList[i]);
 				ps2.setInt(2, productCountList[i]);
 				ps2.executeUpdate();

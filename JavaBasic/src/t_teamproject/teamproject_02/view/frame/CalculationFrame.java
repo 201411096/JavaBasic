@@ -152,6 +152,7 @@ public class CalculationFrame extends JFrame{
 					//계산 내용 관리
 					//화면의 재고와 db재고 동기화
 					new OrderListFrame(productStringList);
+
 					orderDaoImpl.insertOrder(productStringList, calProductList);
 					subProductCountFromShoppingCart();
 					initializeList(); //마지막에 쇼핑카트와 jlist내용을 초기화함 (주문버튼에서는 초기화하기 전에 재고 배열도 계산을 해줘야됨)
