@@ -179,8 +179,8 @@ public class ProductManagementPanel extends JPanel{
 				jtextAreaProductDetail.setText(p.getDetail());
 				jcomboBoxProductGroupName.setSelectedItem(p.getGroupName());
 				
-				imageIcon = new ImageIcon("src\\t_teamproject\\teamproject_02\\imgs\\food\\" + p.getId() + ".jpg");
-				if(new File("src\\t_teamproject\\teamproject_02\\imgs\\food\\" + p.getId() + ".jpg").exists()) {
+				imageIcon = new ImageIcon("src\\t_teamproject\\teamproject_02\\imgs\\food\\" + p.getId() + ".gif");
+				if(new File("src\\t_teamproject\\teamproject_02\\imgs\\food\\" + p.getId() + ".gif").exists()) {
 					producteImageLabel.setIcon(imageIcon);
 				}
 				else {
