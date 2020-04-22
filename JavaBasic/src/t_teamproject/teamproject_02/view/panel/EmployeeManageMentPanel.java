@@ -229,16 +229,21 @@ public class EmployeeManageMentPanel extends JPanel{
 				DataInputStream in = new DataInputStream(new FileInputStream(file));
 				in.readFully(bytes);
 				in.close();
-
-				FileOutputStream out = new FileOutputStream("src\\t_teamproject\\teamproject_02\\imgs\\employee\\"+jfc.getSelectedFile().getName());
+				String fileName = jfc.getSelectedFile().getName();//
+//				FileOutputStream out = new FileOutputStream("src\\t_teamproject\\teamproject_02\\imgs\\employee\\"+jfc.getSelectedFile().getName());
+				FileOutputStream out = new FileOutputStream("src\\t_teamproject\\teamproject_02\\imgs\\employee\\"+fileName);
 				JOptionPane.showMessageDialog(null, "이미지 업로드는 프로그램 재 실행 후 적용됩니다.");
 				
 				out.write(bytes);
 				out.close();
 				// 왜 적용이 안되는지 모름 //이미지가 런타임상에서 잡히질 않음
-//				imageIcon = new ImageIcon("src\\t_teamproject\\teamproject_02\\temp\\imgs\\employee\\"+jfc.getSelectedFile().getName());
+				
+//				imageIcon = new ImageIcon(getClass().getResource("src\\t_teamproject\\teamproject_02\\temp\\imgs\\employee\\" + fileName));
+//				imageIcon = new ImageIcon("src\\t_teamproject\\teamproject_02\\temp\\imgs\\employee\\"+fileName);
 //				System.out.println(jfc.getSelectedFile().getName());
 //				employeeImageLabel.setIcon(imageIcon);
+//				managementFrame.repaint();
+//				managementFrame.revalidate();
 			}catch (Exception e1) {
 				e1.printStackTrace();
 			}
