@@ -62,15 +62,16 @@ INSERT INTO video_shop_rental(VRID, RENTALDATE, VMID, ID) VALUES(video_shop_vr_v
 SELECT ID FROM video_shop_customer WHERE name=?;
 
 UPDATE video_shop_rental SET returndate=SYSDATE WHERE VMID=? AND returndate IS NULL;
-select to_char(returndate, 'yyyy/mm/dd hh24:mi:ss') from video_shop_rental;
+select to_char(rentaldate, 'yyyy/mm/dd hh24:mi:ss') from video_shop_rental;
 
 select * from video_shop_rental; --비디오번호 제목 고객명 전화번호 반납예정일(대여날짜에 +3) 반납여부
 
-SELECT R.VMID, V.VNAME, VC.NAME, vc.tel_1, r.rentaldate+3, case 반납여부 when (r.returndate is null) then 'no'
+SELECT R.VMID, V.VNAME, VC.NAME, vc.tel_1, r.rentaldate+3, '미납'
 FROM VIDEO_SHOP_RENTAL R
 INNER JOIN VIDEO_SHOP_VIDEO_MANAGEMENT VM
 ON R.vmid=vm.vmid
 INNER JOIN VIDEO_SHOP_VIDEO V
 ON VM.VID = V.vid
 INNER JOIN video_shop_customer VC
-ON VC.ID = R.ID;
+ON VC.ID = R.ID
+WHERE r.returndate is null;
