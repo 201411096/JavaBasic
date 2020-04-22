@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
 
-public class MyProductTableModel extends AbstractTableModel{
-	private String columNames [] = {"메뉴번호", "메뉴그룹", "메뉴이름", "메뉴가격"};
+public class MyProductTableModel extends AbstractTableModel{				//제품 테이블을 구성하는 모델 테이블
+	private String columNames [] = {"메뉴번호", "메뉴그룹", "메뉴이름", "메뉴가격"};	//컬럼 이름 지정
 	ArrayList data = new ArrayList();
 	@Override
 	public int getRowCount() {
