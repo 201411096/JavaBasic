@@ -12,10 +12,8 @@ import javax.mail.internet.MimeMessage;
 
 public class SendMail {
 	public SendMail() {}
-	public void sendMail(String user, String password, String to, String mainContent) {
+	public void sendMail(String user, String password, String to, String mainContent) {		//메일, 메일 비밀번호, 받는 사람 메일 주소, 메일 내용을 받아와서 메일 전송
 		String host = "smtp.naver.com";		
-//		String to ="korea5781@naver.com";		
-		 // Get the session object
 		  Properties props = new Properties();
 		  props.put("mail.smtp.host", host);
 		  props.put("mail.smtp.auth", "true");

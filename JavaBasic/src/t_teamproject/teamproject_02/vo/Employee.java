@@ -1,6 +1,6 @@
 package t_teamproject.teamproject_02.vo;
 
-public class Employee {
+public class Employee {		//사원 정보를 담는 객체
 	private String id;
 	private String password;
 	private String name;
@@ -22,7 +22,7 @@ public class Employee {
 		this.position = position;
 		this.age = age;
 	}
-	public int changePosNameToPosId(String position) {
+	public int changePosNameToPosId(String position) {		//직급이름을 받아서 직급id로 변환하는 함수
 		switch(position) {
 		case "ADMIN" : return 0;
 		case "MANAGER" : return 1;

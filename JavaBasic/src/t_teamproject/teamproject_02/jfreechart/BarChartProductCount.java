@@ -32,20 +32,18 @@ public class BarChartProductCount {
  
         //------------------------------------------------------------------
         // 데이터 입력 ( 값, 범례, 카테고리 )
-//        Database db = new Database(); //ArrayList의 ArrayList 2차원배열 형태로 데이터를 담아옴
-//        ArrayList<ArrayList> data = db.getData(); //2차원 배열?..
-        ProductManagementDao productManagementDaoModel = null;
+        ProductManagementDao productManagementDaoModel = null;			
 		try {
-			productManagementDaoModel = new ProductManagementDaoImpl();
+			productManagementDaoModel = new ProductManagementDaoImpl();	
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
         
-        ArrayList<ArrayList> data = productManagementDaoModel.productCount();
+        ArrayList<ArrayList> data = productManagementDaoModel.productCount();	//제품별 제품이름과 재고 개수를 가져와서 그래프의 데이터로 사용
         for(ArrayList temp : data) {
         	int value = (Integer) temp.get(0);
         	String cate = (String) temp.get(1);
-        	dataset.addValue(value, "재고별",  cate);
+        	dataset.addValue(value, "재고별",  cate);							
         }
         //------------------------------------------------------------------
         

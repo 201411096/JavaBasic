@@ -1,6 +1,6 @@
 package t_teamproject.teamproject_02.vo;
 
-public class OrderList {
+public class OrderList {	//	영수증 관리시 사용하는 객체
 	private int id;
 	private int totalPrice;
 	

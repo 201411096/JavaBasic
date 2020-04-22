@@ -1,6 +1,6 @@
 package t_teamproject.teamproject_02.vo;
 
-public class Ordered {
+public class Ordered {	//판매시 제품 하나와 관련된 정보를 담는 객체
 	private int oid;
 	private int pid;
 	private int count;

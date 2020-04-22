@@ -25,7 +25,7 @@ import t_teamproject.teamproject_02.dao.OrderDao;
 import t_teamproject.teamproject_02.dao.OrderDaoImpl;
 
 public class SalesManagementChart {
-    public JFreeChart getChart(int option) { //년도별 월별 일별
+    public JFreeChart getChart(int option) {				 		// 옵션을 인자로 받아옴(0:일별, 1:월별, 2:연도별)
         
         // 데이터 생성
         DefaultCategoryDataset dataset = new DefaultCategoryDataset(); 
@@ -40,28 +40,28 @@ public class SalesManagementChart {
         //여기서부터 옵션 주면 되는 듯
 		ArrayList<ArrayList> data = null;
 		if(option==0){
-			data = orderDaoImpl.getSalesPerformanceGroupByDay();
+			data = orderDaoImpl.getSalesPerformanceGroupByDay();	// 이번달의 일별 매출요약을 가져오는 함수(1월 31일이면 1월1일부터 1월31일까지, 2월2일이면 2월1일부터 2월 2일까지의 매출)
 	        for(ArrayList temp : data) {
 	        	int value = (Integer) temp.get(0);
 	        	String cate = (String) temp.get(1);
 	        	dataset.addValue(value, "일별",  cate);
 	        }
 		}else if(option ==1) {
-			data = orderDaoImpl.getSalesPerformanceGroupByMonth();
+			data = orderDaoImpl.getSalesPerformanceGroupByMonth();	// 이번년의 월별 매출요약을 가져오는 함수(2월이면 1월부터 2월까지, 12일이면 1월부터 12월까지의 매출)
 			for(ArrayList temp : data) {
 	        	int value = (Integer) temp.get(0);
 	        	String cate = (String) temp.get(1);
 	        	dataset.addValue(value, "월별",  cate);
 	        }
 		}else if(option==2) {
-			data = orderDaoImpl.getSalesPerformanceGroupByYear();
+			data = orderDaoImpl.getSalesPerformanceGroupByYear();	// 연도별 매출요약을 가져오는 함수
 			for(ArrayList temp : data) {
 	        	int value = (Integer) temp.get(0);
 	        	String cate = (String) temp.get(1);
 	        	dataset.addValue(value, "연도별",  cate);
 	        }
 		}else if(option==3) {
-			data = orderDaoImpl.getSalesPerformanceGroupByName();
+			data = orderDaoImpl.getSalesPerformanceGroupByName();	// 제품별 매출요약을 가져오는 함수
 			for(ArrayList temp : data) {
 	        	int value = (Integer) temp.get(0);
 	        	String cate = (String) temp.get(1);

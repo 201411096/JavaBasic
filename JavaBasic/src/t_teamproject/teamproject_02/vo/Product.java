@@ -19,7 +19,7 @@ public class Product {
 		this.detail = detail;
 	}
 	@Override
-	public String toString() {
+	public String toString() {							//제품 정보를 string으로 담는 함수
 		StringBuffer result = new StringBuffer("");
 		
 		result.append("제품 이름 :" + this.name +"\n");
@@ -31,7 +31,7 @@ public class Product {
 		return result.toString();
 	}
 	
-	public String toStringForOrderList(int cnt) {
+	public String toStringForOrderList(int cnt) {		//영수증 출력에 사용할 함수
 		StringBuffer result = new StringBuffer("");
 		result.append("\t" + this.name +"\t");
 		result.append("" + cnt +"\t");
