@@ -177,12 +177,15 @@ INSERT INTO ORDERLIST(OLID, TOTALPRICE) VALUES(ORDERLIST_OLID.NEXTVAL, ?);
 INSERT INTO ORDERED(OID, PID, OCNT, ODATE, OLID) VALUES(ORDERED_OID.NEXTVAL, ?, ?, SYSDATE, ORDERLIST_OLID.CURRVAL);
 INSERT INTO ORDERED(OID, PID, OCNT, ODATE, OLID) VALUES(ORDERED_OID.NEXTVAL, 5, 30, SYSDATE, ORDERLIST_OLID.CURRVAL);
 
+-------------------------------------------------------------------------------------------------------------------------------
+select pid, to_char(pdate,'yyyy/mm/dd hh24:mi:ss') from productmanagement order by pid, pdate; --재료를 pid pdate 순서대로 검색
+-------------------------------------------------------------------------------------------------------------------------------
 
-/* ORDERED TABLE TESTCASE  */
+* ORDERED TABLE TESTCASE  */
 INSERT INTO ORDERLIST(OLID, TOTALPRICE) VALUES(ORDERLIST_OLID.NEXTVAL, 10000);
 
-INSERT INTO ORDERED(OID, PID, OCNT, ODATE, OLID) VALUES(105, 5, 30, '180301', 103);
-INSERT INTO ORDERLIST(OLID, TOTALPRICE) VALUES(103, 4000000);
+INSERT INTO ORDERLIST(OLID, TOTALPRICE) VALUES(5, 22000000);
+INSERT INTO ORDERED(OID, PID, OCNT, ODATE, OLID) VALUES(5, 2, 1000, '200101', 5);
 
 
 --일별 매출
