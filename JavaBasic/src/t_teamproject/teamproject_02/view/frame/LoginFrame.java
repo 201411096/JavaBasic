@@ -25,28 +25,26 @@ public class LoginFrame extends JFrame{
 	JTextField tfId;
 	JPasswordField tfPassword;
 	JButton signUp, signIn;
-//	BackgroundPanel panel;
 	BackgroundAnimatedPanel panel;
 	ImageIcon imageIcon = new ImageIcon("src\\t_teamproject\\teamproject_02\\imgs\\background\\loginFrameBackground.png");
 	public LoginFrame() {
 		employeedao=null;
-		display();
-		connectDB();
-		eventProc();
+		display();			//화면 배치
+		connectDB();		//db 연결
+		eventProc();		//이벤트 리스너 연결
 	}
 	class LoginFrameButtonEvent implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if(e.getSource()==signUp)
+			if(e.getSource()==signUp)		//signup버튼 클릭시 회원가입 창으로 이동
 				moveToRegisterFrame();
-			else if(e.getSource()==signIn)
+			else if(e.getSource()==signIn)	//signin버튼 클릭시 로그인 확인 절차 진행
 				loginProcess();
 		}		
 	}
 	
 	public void display() {
-//		panel = new BackgroundPanel(imageIcon.getImage());
-		try {
+		try {	//움직이는 이미지를 배경으로 사용할 수 있는 패널 생성
 			panel = new BackgroundAnimatedPanel("src\\t_teamproject\\teamproject_02\\imgs\\background\\loginFrameBackground.gif");
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
@@ -54,20 +52,20 @@ public class LoginFrame extends JFrame{
 		JPanel wrapperPanel = new JPanel();
 		
 		wrapperPanel.setLayout(new GridLayout(3,2));
-		JLabel idLabel = new JLabel("    ID");
-		idLabel.setOpaque(true);
-		idLabel.setBackground(new Color(255, 255, 255));
+			JLabel idLabel = new JLabel("    ID");
+			idLabel.setOpaque(true);
+			idLabel.setBackground(new Color(255, 255, 255));
 		wrapperPanel.add(idLabel);
-		tfId = new JTextField();
+			tfId = new JTextField();
 		wrapperPanel.add(tfId);
-		JLabel pwLabel = new JLabel("   PASSWORD");
-		pwLabel.setOpaque(true);
-		pwLabel.setBackground(new Color(255, 255, 255));
+			JLabel pwLabel = new JLabel("   PASSWORD");
+			pwLabel.setOpaque(true);
+			pwLabel.setBackground(new Color(255, 255, 255));
 		wrapperPanel.add(pwLabel);
-		tfPassword = new JPasswordField();
+			tfPassword = new JPasswordField();
 		wrapperPanel.add(tfPassword);
-		signUp = new JButton("회원가입");
-		signIn = new JButton("로그인");
+			signUp = new JButton("회원가입");
+			signIn = new JButton("로그인");
 		wrapperPanel.add(signUp);
 		wrapperPanel.add(signIn);
 		
@@ -85,10 +83,10 @@ public class LoginFrame extends JFrame{
 	}
 	public void eventProc() {
 		LoginFrameButtonEvent l = new LoginFrameButtonEvent();
-		signUp.addActionListener(l);
-		signIn.addActionListener(l);
+		signUp.addActionListener(l);	//signUp버튼에 이벤트리스너 연결
+		signIn.addActionListener(l);	//signUp버튼에 이벤트리스너 연결
 	}
-	public void connectDB() {
+	public void connectDB() {			//db연결
 		try {
 			employeedao= new EmployeeDaoImpl();
 		} catch (ClassNotFoundException e) {
@@ -101,64 +99,18 @@ public class LoginFrame extends JFrame{
 		String id = tfId.getText();
 		String pw = String.valueOf(tfPassword.getPassword());
 		try {
-			e = employeedao.selectByID(id);
+			e = employeedao.selectByID(id);								//	입력한 id값에 해당하는 직원 정보를 가져옴
 		}catch(Exception e1){}	
 		
-		if(e.getId() == null || e.getPassword() == null) {
+		if(e.getId() == null || e.getPassword() == null) {				//  입력한 id값에 해당하는 직원 정보가 없다면 dialog창 실행
 			JOptionPane.showMessageDialog(null, "로그인 실패");
-		}else if(e.getId().equals(id) && e.getPassword().equals(pw)) {
+		}else if(e.getId().equals(id) && e.getPassword().equals(pw)) {	//	입력한 id값에 해당하는 직원 정보가 존재하면서 직원정보의 비밀번호와 입력한 pw값이 동일하다면 현재 창을 종료하면서 다음 화면을 띄움(selectFrame)
 			dispose();
 			new SelectFrame(e);
 		}
 	}
 	public void moveToRegisterFrame() {
-		new RegisterFrame();
-		dispose();
+		new RegisterFrame();			//	회원가입 프레임 새엇ㅇ
+		dispose();						//	로그인 프레임 종료
 	}
 }
-/*
-public void display() {
-setTitle("로그인화면");
-setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-setBounds(750, 400, 450, 300);
-contentPane = new JPanel();
-contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-setContentPane(contentPane);
-contentPane.setLayout(null);
-signIn = new JButton("로그인");
-signIn.addActionListener(new ActionListener() {
-	public void actionPerformed(ActionEvent e) {
-	}
-});
-signIn.setBounds(227, 150, 97, 23);
-contentPane.add(signIn);
-
-signUp = new JButton("회원가입");
-signUp.addActionListener(new ActionListener() {
-	public void actionPerformed(ActionEvent e) {
-	}
-});
-signUp.setBounds(118, 150, 97, 23);
-contentPane.add(signUp);
-
-tfId = new JTextField();
-tfId.setBounds(208, 70, 116, 21);
-contentPane.add(tfId);
-tfId.setColumns(10);
-
-JLabel lblNewLabel = new JLabel("ID");
-lblNewLabel.setBounds(118, 73, 57, 15);
-contentPane.add(lblNewLabel);
-
-JLabel lblNewLabel_1 = new JLabel("PW");
-lblNewLabel_1.setBounds(118, 100, 57, 15);
-contentPane.add(lblNewLabel_1);
-
-tfPassword = new JPasswordField();
-tfPassword.setBounds(208, 101, 116, 21);
-contentPane.add(tfPassword);
-setResizable(false);
-setVisible(true);
-setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-}
-*/

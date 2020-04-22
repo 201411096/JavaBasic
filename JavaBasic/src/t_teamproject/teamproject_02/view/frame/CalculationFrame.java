@@ -53,36 +53,36 @@ public class CalculationFrame extends JFrame{
 	JList calculationList;
 	JButton orderButton, cancelButton;
 	
-	int shoppingCart [][]; //맨앞 0부분이 pid 1부분이 개수
-	int productCount [][]; //맨앞 0부분이 pid 1부분이 개수
+	int shoppingCart [][]; //맨앞 0부분이  pid 1부분이 개수	//shoppingCart[0][]에 pid(제품식별번호)를 담고 shoppingCart[1]은 그 제품을 장바구니에 몇개나 담았는지에 대해 저장
+	int productCount [][]; //맨앞 0부분이  pid 1부분이 개수	//productCount[0]에 pid(제품식별번호)를 담고 productCount[1]은 그 제품에 대한 재고의 갯수를 나타냄
 	String productStringList [];
 	
-	public CalculationFrame(Employee employee) {
+	public CalculationFrame(Employee employee) {	//	프레임 생성시에 로그인 할 때 받아왔던 직원정보를 그대로 넘겨받음
 		this.employee = employee;
-		connectDB();
-		initializeProductCountAndshoppingCart();
-		display();
-		eventProc();
+		connectDB();								//	db연결
+		initializeProductCountAndshoppingCart();	//	구매할 물품의 갯수를 셀 배열과 구매할 물품의 재고를 관리할 배열을 제품 목록에 있는 수만큼 배열 크기 할당 및 초기화 	>> 컴포넌트 동적 배치에도 사용
+		display();									//	화면 구성
+		eventProc();								//	이벤트 연결
 	}
 	public void display() {
-		jmenubar = new JMenuBar();
+		jmenubar = new JMenuBar();					//	jmenubar 구성 시작
 		menu = new JMenu("메뉴");
 		jmenuitem1 = new JMenuItem("선택 화면");
 		jmenuitem2 = new JMenuItem("로그아웃");
 		menu.add(jmenuitem1);
 		menu.add(jmenuitem2);
 		jmenubar.add(menu);
-		setJMenuBar(jmenubar);
+		setJMenuBar(jmenubar);						//	jmenubar 구성 끝
 		
 		jtabbepedPane = new JTabbedPane();
-		jtabbepedPane.setBounds(0, 0, 1500, 960);
-		for(int i=0; i<menuPanelList.length; i++)
+		jtabbepedPane.setBounds(0, 0, 1500, 960);	//	지정된 위치에 지정된 크기만큼 배치
+		for(int i=0; i<menuPanelList.length; i++)	//	tabbedPane에 붙일 ProductMenuListPanel들 생성해서 붙임
 		{
 			menuPanelList[i] = new ProductMenuListPanel(this, jtabbedPaneItem[i]);
 			jtabbepedPane.addTab(jtabbedPaneItem[i], menuPanelList[i]);
 		}
 		
-		rightPanel = new JPanel();
+		rightPanel = new JPanel();					//	오른쪽 장바구니 및 주문버튼이 들어갈 패널
 		rightPanel.setLayout(new BorderLayout());
 		rightPanel.setBounds(1500, 0, 420, 960);
 		
@@ -115,14 +115,14 @@ public class CalculationFrame extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	public void eventProc() {
-		jmenuitem1.addActionListener(new ActionListener() { //메뉴바의 메뉴아이템 이벤트
+		jmenuitem1.addActionListener(new ActionListener() { //메뉴바의 메뉴아이템 이벤트	-- 현재 창을 닫고 선택 화면으로 돌아감
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				new SelectFrame(employee);
 				dispose();
 			}
 		});
-		jmenuitem2.addActionListener(new ActionListener() { //메뉴바의 메뉴아이템 이벤트
+		jmenuitem2.addActionListener(new ActionListener() { //메뉴바의 메뉴아이템 이벤트	-- 현재 창을 닫고 로그인 화면으로 돌아감
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				new LoginFrame();
@@ -160,20 +160,6 @@ public class CalculationFrame extends JFrame{
 				}
 			}
 		});
-		//200422
-//		calculationList.addMouseListener(new MouseAdapter() {
-//			@Override
-//			public void mouseClicked(MouseEvent e) {
-//				int result = JOptionPane.showConfirmDialog(null, "취소하시겠습니까?", "확인", JOptionPane.YES_NO_OPTION);
-//				if(result == JOptionPane.YES_OPTION)
-//				{
-//					int selectedIndex = calculationList.getSelectedIndex();
-//					shoppingCart[1][selectedIndex]=0; // 장바구니에서 인덱스 부분의 요소의 개수를 0으로 만듬
-//					calculationList.remove(selectedIndex); //jlist의 선택된 요소값을 지움
-//					makeListStringArray(shoppingCart, productCount);
-//				}
-//			}
-//		});
 	}
 	class MenuButtonHandler implements ActionListener{
 		@Override
