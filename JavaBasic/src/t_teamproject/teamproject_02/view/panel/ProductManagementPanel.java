@@ -249,23 +249,28 @@ public class ProductManagementPanel extends JPanel{
 		}
 	}
 	public void registerProduct() {
-		Product p = new Product();
-		p.setDetail(jtextAreaProductDetail.getText());
-		p.setGroupName(jcomboBoxProductGroupName.getSelectedItem().toString());
-		p.setId(Integer.parseInt(jtextFieldProductId.getText()));
-		p.setName(jtextFieldProductName.getText());
-		p.setPrice(Integer.parseInt(jtextFieldProductPrice.getText()));
-		try {
-			int result = productDaoModel.insertProduct(p);
-			if(result==0) {
-				searchProduct(); // 그대로 검색해서 새로고침 효과를 얻음
-				JOptionPane.showMessageDialog(null, "제품 정보가 등록되었습니다. \n제품번호는 입력한번호와 관계없이 지정됩니다.");
-			}else {
-				JOptionPane.showMessageDialog(null, "제품 정보 등록에 오류가 발생했습니다.");
+		if(managementFrame.getEmployee().getPosition().equals("ADMIN")) {
+			Product p = new Product();
+			p.setDetail(jtextAreaProductDetail.getText());
+			p.setGroupName(jcomboBoxProductGroupName.getSelectedItem().toString());
+			p.setId(Integer.parseInt(jtextFieldProductId.getText()));
+			p.setName(jtextFieldProductName.getText());
+			p.setPrice(Integer.parseInt(jtextFieldProductPrice.getText()));
+			try {
+				int result = productDaoModel.insertProduct(p);
+				if(result==0) {
+					searchProduct(); // 그대로 검색해서 새로고침 효과를 얻음
+					JOptionPane.showMessageDialog(null, "제품 정보가 등록되었습니다. \n제품번호는 입력한번호와 관계없이 지정됩니다.");
+				}else {
+					JOptionPane.showMessageDialog(null, "제품 정보 등록에 오류가 발생했습니다.");
+				}
+			}catch(Exception e) {
+				e.printStackTrace();
 			}
-		}catch(Exception e) {
-			e.printStackTrace();
+		}else {
+			JOptionPane.showMessageDialog(null, "제품 정보 등록은 관리자만 할 수 있습니다.");
 		}
+
 	}
 	public void updateProduct() {
 		if(managementFrame.getEmployee().getPosition().equals("ADMIN")) {
@@ -309,10 +314,7 @@ public class ProductManagementPanel extends JPanel{
 		}
 	}
 	public void openPurchaseFrame() {
-		if(managementFrame.getEmployee().getPosition().equals("ADMIN")) {
-			new ProductPurchaseFrame();
-		}else {
-			JOptionPane.showMessageDialog(null, "제품 주문은 관리자만 할 수 있습니다.");
-		}
+		new ProductPurchaseFrame();
+
 	}
 }

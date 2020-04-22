@@ -258,27 +258,32 @@ public class EmployeeManageMentPanel extends JPanel{
 		}
 	}
 	public void registerEmployee() {
-		Employee vo = new Employee();
-		vo.setId(jtextFieldEmployeeId.getText());
-		vo.setPassword(jtextFieldEmployeeId.getText()); // 직원관리 창에서 등록시 비밀번호는 아이디와 같은 string으로 등록되게 됨
-		vo.setName(jtextFieldEmployeeName.getText());
-		vo.setPosition(jComboBoxEmployeePosition.getSelectedItem().toString());
-		vo.setTel(jtextFieldEmployeeTel.getText());
-		vo.setHire_date(jtextFieldHire_date.getText());
-		vo.setSal(Integer.parseInt(jtextFieldSal.getText()));
-		vo.setAge(Integer.parseInt(jtextFieldAge.getText()));
-		try {
-			int result = employeeDaomodel.insertEmployee(vo);
-			if(result==0) {
-				searchEmployee(); // 그대로 검색을 다시해서 새로고침 효과를 얻음
-				JOptionPane.showMessageDialog(null, "직원 정보가 등록되었습니다.");
-			}else {
-				JOptionPane.showMessageDialog(null, "직원 정보 등록에 오류가 발생하였습니다.");
-			}
+		if(managementFrame.getEmployee().getPosition().equals("ADMIN")) {
+			Employee vo = new Employee();
+			vo.setId(jtextFieldEmployeeId.getText());
+			vo.setPassword(jtextFieldEmployeeId.getText()); // 직원관리 창에서 등록시 비밀번호는 아이디와 같은 string으로 등록되게 됨
+			vo.setName(jtextFieldEmployeeName.getText());
+			vo.setPosition(jComboBoxEmployeePosition.getSelectedItem().toString());
+			vo.setTel(jtextFieldEmployeeTel.getText());
+			vo.setHire_date(jtextFieldHire_date.getText());
+			vo.setSal(Integer.parseInt(jtextFieldSal.getText()));
+			vo.setAge(Integer.parseInt(jtextFieldAge.getText()));
+			try {
+				int result = employeeDaomodel.insertEmployee(vo);
+				if(result==0) {
+					searchEmployee(); // 그대로 검색을 다시해서 새로고침 효과를 얻음
+					JOptionPane.showMessageDialog(null, "직원 정보가 등록되었습니다.");
+				}else {
+					JOptionPane.showMessageDialog(null, "직원 정보 등록에 오류가 발생하였습니다.");
+				}
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}	
+			} catch (Exception e) {
+				e.printStackTrace();
+			}	
+
+		}else {
+			JOptionPane.showMessageDialog(null, "직원 정보 등록은 관리자만 할 수 있습니다.");
+		}
 	}
 	public void updateEmployee() {
 		if(managementFrame.getEmployee().getPosition().equals("ADMIN")) {
