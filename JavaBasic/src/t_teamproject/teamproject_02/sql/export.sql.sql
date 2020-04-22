@@ -1,0 +1,2256 @@
+--------------------------------------------------------
+--  파일이 생성됨 - 수요일-4월-22-2020   
+--------------------------------------------------------
+--------------------------------------------------------
+--  DDL for Sequence ORDERED_OID
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "TP2"."ORDERED_OID"  MINVALUE 1 MAXVALUE 1000000 INCREMENT BY 1 START WITH 241 CACHE 20 NOORDER  CYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence ORDERLIST_OLID
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "TP2"."ORDERLIST_OLID"  MINVALUE 1 MAXVALUE 1000000 INCREMENT BY 1 START WITH 21 CACHE 20 NOORDER  CYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence PM_PMANAGEMENTID_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "TP2"."PM_PMANAGEMENTID_SEQ"  MINVALUE 1 MAXVALUE 1000000 INCREMENT BY 1 START WITH 1721 CACHE 20 NOORDER  CYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence PRODUCT_PID_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "TP2"."PRODUCT_PID_SEQ"  MINVALUE 1 MAXVALUE 1000 INCREMENT BY 1 START WITH 21 CACHE 20 NOORDER  CYCLE ;
+--------------------------------------------------------
+--  DDL for Table EMPLOYEE
+--------------------------------------------------------
+
+  CREATE TABLE "TP2"."EMPLOYEE" 
+   (	"EID" VARCHAR2(20 BYTE), 
+	"EPASSWORD" VARCHAR2(20 BYTE), 
+	"ENAME" VARCHAR2(20 BYTE), 
+	"TEL" VARCHAR2(20 BYTE), 
+	"SAL" NUMBER(20,0), 
+	"HIRE_DATE" DATE, 
+	"AGE" NUMBER(3,0), 
+	"POSID" NUMBER(2,0)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table ORDERED
+--------------------------------------------------------
+
+  CREATE TABLE "TP2"."ORDERED" 
+   (	"OID" NUMBER(10,0), 
+	"PID" NUMBER(10,0), 
+	"OCNT" NUMBER(10,0), 
+	"ODATE" DATE, 
+	"OLID" NUMBER(10,0)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table ORDERLIST
+--------------------------------------------------------
+
+  CREATE TABLE "TP2"."ORDERLIST" 
+   (	"OLID" NUMBER(10,0), 
+	"TOTALPRICE" NUMBER(20,0)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table POS
+--------------------------------------------------------
+
+  CREATE TABLE "TP2"."POS" 
+   (	"POSID" NUMBER(2,0), 
+	"POSNAME" VARCHAR2(20 BYTE)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table PRODUCT
+--------------------------------------------------------
+
+  CREATE TABLE "TP2"."PRODUCT" 
+   (	"PID" NUMBER(10,0), 
+	"PGROUPID" NUMBER(10,0), 
+	"PNAME" VARCHAR2(20 BYTE), 
+	"PDETAIL" VARCHAR2(200 BYTE), 
+	"PPRICE" NUMBER(10,0)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table PRODUCTGROUP
+--------------------------------------------------------
+
+  CREATE TABLE "TP2"."PRODUCTGROUP" 
+   (	"PGROUPID" NUMBER(10,0), 
+	"PGROUPNAME" VARCHAR2(20 BYTE)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table PRODUCTMANAGEMENT
+--------------------------------------------------------
+
+  CREATE TABLE "TP2"."PRODUCTMANAGEMENT" 
+   (	"PMANAGEMENTID" NUMBER(10,0), 
+	"PID" NUMBER(10,0), 
+	"PDATE" DATE
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+REM INSERTING into TP2.EMPLOYEE
+SET DEFINE OFF;
+Insert into TP2.EMPLOYEE (EID,EPASSWORD,ENAME,TEL,SAL,HIRE_DATE,AGE,POSID) values ('admin','admin','admin','00-000-0000',100000,to_date('20/04/15','RR/MM/DD'),45,0);
+Insert into TP2.EMPLOYEE (EID,EPASSWORD,ENAME,TEL,SAL,HIRE_DATE,AGE,POSID) values ('abc123','abc123','aname','111-1111',20000,to_date('20/04/16','RR/MM/DD'),30,1);
+Insert into TP2.EMPLOYEE (EID,EPASSWORD,ENAME,TEL,SAL,HIRE_DATE,AGE,POSID) values ('def456','def456','dname','222-2222',10000,to_date('20/04/17','RR/MM/DD'),22,2);
+Insert into TP2.EMPLOYEE (EID,EPASSWORD,ENAME,TEL,SAL,HIRE_DATE,AGE,POSID) values ('aaa111','aaa111','aname','333-3333',10000,to_date('20/04/17','RR/MM/DD'),20,2);
+REM INSERTING into TP2.ORDERED
+SET DEFINE OFF;
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (1,1,1,to_date('17/01/01','RR/MM/DD'),1);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (3,3,3,to_date('17/01/01','RR/MM/DD'),1);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (4,4,4,to_date('17/01/01','RR/MM/DD'),1);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (5,5,5,to_date('17/01/01','RR/MM/DD'),1);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (6,6,6,to_date('17/01/01','RR/MM/DD'),1);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (7,7,7,to_date('17/01/01','RR/MM/DD'),1);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (8,8,8,to_date('17/01/01','RR/MM/DD'),1);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (9,9,9,to_date('17/01/01','RR/MM/DD'),1);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (10,10,10,to_date('17/01/01','RR/MM/DD'),1);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (11,11,11,to_date('17/01/01','RR/MM/DD'),1);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (12,12,12,to_date('17/01/01','RR/MM/DD'),1);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (13,13,13,to_date('17/01/01','RR/MM/DD'),1);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (14,14,14,to_date('17/01/01','RR/MM/DD'),1);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (15,15,15,to_date('17/01/01','RR/MM/DD'),1);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (16,16,16,to_date('17/01/01','RR/MM/DD'),1);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (17,17,17,to_date('17/01/01','RR/MM/DD'),1);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (18,18,18,to_date('17/01/01','RR/MM/DD'),1);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (19,1,1,to_date('18/01/01','RR/MM/DD'),2);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (21,3,3,to_date('18/01/01','RR/MM/DD'),2);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (22,4,4,to_date('18/01/01','RR/MM/DD'),2);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (23,5,5,to_date('18/01/01','RR/MM/DD'),2);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (24,6,6,to_date('18/01/01','RR/MM/DD'),2);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (25,7,7,to_date('18/01/01','RR/MM/DD'),2);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (26,8,8,to_date('18/01/01','RR/MM/DD'),2);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (27,9,9,to_date('18/01/01','RR/MM/DD'),2);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (28,10,10,to_date('18/01/01','RR/MM/DD'),2);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (29,11,11,to_date('18/01/01','RR/MM/DD'),2);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (30,12,12,to_date('18/01/01','RR/MM/DD'),2);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (31,13,13,to_date('18/01/01','RR/MM/DD'),2);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (32,14,14,to_date('18/01/01','RR/MM/DD'),2);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (33,15,15,to_date('18/01/01','RR/MM/DD'),2);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (34,16,16,to_date('18/01/01','RR/MM/DD'),2);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (35,17,17,to_date('18/01/01','RR/MM/DD'),2);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (36,18,18,to_date('18/01/01','RR/MM/DD'),2);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (37,1,1,to_date('19/01/01','RR/MM/DD'),3);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (39,3,3,to_date('19/01/01','RR/MM/DD'),3);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (40,4,4,to_date('19/01/01','RR/MM/DD'),3);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (41,5,5,to_date('19/01/01','RR/MM/DD'),3);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (42,6,6,to_date('19/01/01','RR/MM/DD'),3);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (43,7,7,to_date('19/01/01','RR/MM/DD'),3);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (44,8,8,to_date('19/01/01','RR/MM/DD'),3);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (45,9,9,to_date('19/01/01','RR/MM/DD'),3);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (46,10,10,to_date('19/01/01','RR/MM/DD'),3);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (47,11,11,to_date('19/01/01','RR/MM/DD'),3);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (48,12,12,to_date('19/01/01','RR/MM/DD'),3);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (49,13,13,to_date('19/01/01','RR/MM/DD'),3);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (50,14,14,to_date('19/01/01','RR/MM/DD'),3);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (51,15,15,to_date('19/01/01','RR/MM/DD'),3);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (52,16,16,to_date('19/01/01','RR/MM/DD'),3);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (53,17,17,to_date('19/01/01','RR/MM/DD'),3);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (54,18,18,to_date('19/01/01','RR/MM/DD'),3);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (55,1,1,to_date('19/01/01','RR/MM/DD'),4);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (57,3,3,to_date('19/01/01','RR/MM/DD'),4);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (58,4,4,to_date('19/01/01','RR/MM/DD'),4);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (59,5,5,to_date('19/01/01','RR/MM/DD'),4);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (60,6,6,to_date('19/01/01','RR/MM/DD'),4);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (61,7,7,to_date('19/01/01','RR/MM/DD'),4);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (62,8,8,to_date('19/01/01','RR/MM/DD'),4);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (63,9,9,to_date('19/01/01','RR/MM/DD'),4);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (64,10,10,to_date('19/01/01','RR/MM/DD'),4);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (65,11,11,to_date('19/01/01','RR/MM/DD'),4);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (66,12,12,to_date('19/01/01','RR/MM/DD'),4);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (67,13,13,to_date('19/01/01','RR/MM/DD'),4);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (68,14,14,to_date('19/01/01','RR/MM/DD'),4);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (69,15,15,to_date('19/01/01','RR/MM/DD'),4);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (70,16,16,to_date('19/01/01','RR/MM/DD'),4);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (71,17,17,to_date('19/01/01','RR/MM/DD'),4);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (72,18,18,to_date('19/01/01','RR/MM/DD'),4);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (73,1,1,to_date('19/01/01','RR/MM/DD'),5);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (75,3,3,to_date('19/01/01','RR/MM/DD'),5);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (76,4,4,to_date('19/01/01','RR/MM/DD'),5);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (77,5,5,to_date('19/01/01','RR/MM/DD'),5);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (78,6,6,to_date('19/01/01','RR/MM/DD'),5);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (79,7,7,to_date('19/01/01','RR/MM/DD'),5);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (80,8,8,to_date('19/01/01','RR/MM/DD'),5);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (81,9,9,to_date('19/01/01','RR/MM/DD'),5);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (82,10,10,to_date('19/01/01','RR/MM/DD'),5);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (83,11,11,to_date('19/01/01','RR/MM/DD'),5);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (84,12,12,to_date('19/01/01','RR/MM/DD'),5);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (85,13,13,to_date('19/01/01','RR/MM/DD'),5);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (86,14,14,to_date('19/01/01','RR/MM/DD'),5);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (87,15,15,to_date('19/01/01','RR/MM/DD'),5);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (88,16,16,to_date('19/01/01','RR/MM/DD'),5);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (89,17,17,to_date('19/01/01','RR/MM/DD'),5);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (90,18,18,to_date('19/01/01','RR/MM/DD'),5);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (91,1,1,to_date('20/01/01','RR/MM/DD'),6);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (93,3,3,to_date('20/01/01','RR/MM/DD'),6);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (94,4,4,to_date('20/01/01','RR/MM/DD'),6);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (95,5,5,to_date('20/01/01','RR/MM/DD'),6);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (96,6,6,to_date('20/01/01','RR/MM/DD'),6);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (97,7,7,to_date('20/01/01','RR/MM/DD'),6);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (98,8,8,to_date('20/01/01','RR/MM/DD'),6);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (99,9,9,to_date('20/01/01','RR/MM/DD'),6);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (100,10,10,to_date('20/01/01','RR/MM/DD'),6);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (101,11,11,to_date('20/01/01','RR/MM/DD'),6);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (102,12,12,to_date('20/01/01','RR/MM/DD'),6);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (103,13,13,to_date('20/01/01','RR/MM/DD'),6);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (104,14,14,to_date('20/01/01','RR/MM/DD'),6);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (105,15,15,to_date('20/01/01','RR/MM/DD'),6);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (106,16,16,to_date('20/01/01','RR/MM/DD'),6);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (107,17,17,to_date('20/01/01','RR/MM/DD'),6);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (108,18,18,to_date('20/01/01','RR/MM/DD'),6);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (109,1,1,to_date('20/01/01','RR/MM/DD'),7);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (111,3,3,to_date('20/01/01','RR/MM/DD'),7);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (112,4,4,to_date('20/01/01','RR/MM/DD'),7);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (113,5,5,to_date('20/01/01','RR/MM/DD'),7);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (114,6,6,to_date('20/01/01','RR/MM/DD'),7);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (115,7,7,to_date('20/01/01','RR/MM/DD'),7);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (116,8,8,to_date('20/01/01','RR/MM/DD'),7);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (117,9,9,to_date('20/01/01','RR/MM/DD'),7);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (118,10,10,to_date('20/01/01','RR/MM/DD'),7);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (119,11,11,to_date('20/01/01','RR/MM/DD'),7);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (120,12,12,to_date('20/01/01','RR/MM/DD'),7);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (121,13,13,to_date('20/01/01','RR/MM/DD'),7);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (122,14,14,to_date('20/01/01','RR/MM/DD'),7);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (123,15,15,to_date('20/01/01','RR/MM/DD'),7);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (124,16,16,to_date('20/01/01','RR/MM/DD'),7);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (125,17,17,to_date('20/01/01','RR/MM/DD'),7);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (126,18,18,to_date('20/01/01','RR/MM/DD'),7);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (127,1,1,to_date('20/02/01','RR/MM/DD'),8);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (129,3,3,to_date('20/02/01','RR/MM/DD'),8);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (130,4,4,to_date('20/02/01','RR/MM/DD'),8);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (131,5,5,to_date('20/02/01','RR/MM/DD'),8);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (132,6,6,to_date('20/02/01','RR/MM/DD'),8);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (133,7,7,to_date('20/02/01','RR/MM/DD'),8);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (134,8,8,to_date('20/02/01','RR/MM/DD'),8);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (135,9,9,to_date('20/02/01','RR/MM/DD'),8);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (136,10,10,to_date('20/02/01','RR/MM/DD'),8);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (137,11,11,to_date('20/02/01','RR/MM/DD'),8);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (138,12,12,to_date('20/02/01','RR/MM/DD'),8);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (139,13,13,to_date('20/02/01','RR/MM/DD'),8);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (140,14,14,to_date('20/02/01','RR/MM/DD'),8);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (141,15,15,to_date('20/02/01','RR/MM/DD'),8);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (142,16,16,to_date('20/02/01','RR/MM/DD'),8);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (143,17,17,to_date('20/02/01','RR/MM/DD'),8);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (144,18,18,to_date('20/02/01','RR/MM/DD'),8);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (145,1,1,to_date('20/02/01','RR/MM/DD'),9);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (147,3,3,to_date('20/02/01','RR/MM/DD'),9);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (148,4,4,to_date('20/02/01','RR/MM/DD'),9);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (149,5,5,to_date('20/02/01','RR/MM/DD'),9);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (150,6,6,to_date('20/02/01','RR/MM/DD'),9);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (151,7,7,to_date('20/02/01','RR/MM/DD'),9);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (152,8,8,to_date('20/02/01','RR/MM/DD'),9);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (153,9,9,to_date('20/02/01','RR/MM/DD'),9);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (154,10,10,to_date('20/02/01','RR/MM/DD'),9);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (155,11,11,to_date('20/02/01','RR/MM/DD'),9);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (156,12,12,to_date('20/02/01','RR/MM/DD'),9);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (157,13,13,to_date('20/02/01','RR/MM/DD'),9);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (158,14,14,to_date('20/02/01','RR/MM/DD'),9);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (159,15,15,to_date('20/02/01','RR/MM/DD'),9);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (160,16,16,to_date('20/02/01','RR/MM/DD'),9);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (161,17,17,to_date('20/02/01','RR/MM/DD'),9);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (162,18,18,to_date('20/02/01','RR/MM/DD'),9);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (163,1,1,to_date('20/03/01','RR/MM/DD'),10);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (165,3,3,to_date('20/03/01','RR/MM/DD'),10);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (166,4,4,to_date('20/03/01','RR/MM/DD'),10);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (167,5,5,to_date('20/03/01','RR/MM/DD'),10);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (168,6,6,to_date('20/03/01','RR/MM/DD'),10);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (169,7,7,to_date('20/03/01','RR/MM/DD'),10);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (170,8,8,to_date('20/03/01','RR/MM/DD'),10);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (171,9,9,to_date('20/03/01','RR/MM/DD'),10);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (172,10,10,to_date('20/03/01','RR/MM/DD'),10);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (173,11,11,to_date('20/03/01','RR/MM/DD'),10);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (174,12,12,to_date('20/03/01','RR/MM/DD'),10);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (175,13,13,to_date('20/03/01','RR/MM/DD'),10);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (176,14,14,to_date('20/03/01','RR/MM/DD'),10);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (177,15,15,to_date('20/03/01','RR/MM/DD'),10);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (178,16,16,to_date('20/03/01','RR/MM/DD'),10);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (179,17,17,to_date('20/03/01','RR/MM/DD'),10);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (180,18,18,to_date('20/03/01','RR/MM/DD'),10);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (181,1,1,to_date('20/04/01','RR/MM/DD'),11);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (183,3,3,to_date('20/04/01','RR/MM/DD'),11);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (184,4,4,to_date('20/04/01','RR/MM/DD'),11);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (185,5,5,to_date('20/04/01','RR/MM/DD'),11);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (186,6,6,to_date('20/04/01','RR/MM/DD'),11);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (187,7,7,to_date('20/04/01','RR/MM/DD'),11);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (188,8,8,to_date('20/04/01','RR/MM/DD'),11);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (189,9,9,to_date('20/04/01','RR/MM/DD'),11);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (190,10,10,to_date('20/04/01','RR/MM/DD'),11);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (191,11,11,to_date('20/04/01','RR/MM/DD'),11);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (192,12,12,to_date('20/04/01','RR/MM/DD'),11);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (193,13,13,to_date('20/04/01','RR/MM/DD'),11);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (194,14,14,to_date('20/04/01','RR/MM/DD'),11);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (195,15,15,to_date('20/04/01','RR/MM/DD'),11);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (196,16,16,to_date('20/04/01','RR/MM/DD'),11);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (197,17,17,to_date('20/04/01','RR/MM/DD'),11);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (198,18,18,to_date('20/04/01','RR/MM/DD'),11);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (199,1,1,to_date('20/04/02','RR/MM/DD'),12);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (201,3,3,to_date('20/04/02','RR/MM/DD'),12);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (202,4,4,to_date('20/04/02','RR/MM/DD'),12);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (203,5,5,to_date('20/04/02','RR/MM/DD'),12);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (204,6,6,to_date('20/04/02','RR/MM/DD'),12);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (205,7,7,to_date('20/04/02','RR/MM/DD'),12);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (206,8,8,to_date('20/04/02','RR/MM/DD'),12);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (207,9,9,to_date('20/04/02','RR/MM/DD'),12);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (208,10,10,to_date('20/04/02','RR/MM/DD'),12);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (209,11,11,to_date('20/04/02','RR/MM/DD'),12);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (210,12,12,to_date('20/04/02','RR/MM/DD'),12);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (211,13,13,to_date('20/04/02','RR/MM/DD'),12);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (212,14,14,to_date('20/04/02','RR/MM/DD'),12);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (213,15,15,to_date('20/04/02','RR/MM/DD'),12);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (214,16,16,to_date('20/04/02','RR/MM/DD'),12);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (215,17,17,to_date('20/04/02','RR/MM/DD'),12);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (216,18,18,to_date('20/04/02','RR/MM/DD'),12);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (217,1,1,to_date('20/04/10','RR/MM/DD'),13);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (219,3,3,to_date('20/04/10','RR/MM/DD'),13);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (220,1,1,to_date('20/04/19','RR/MM/DD'),13);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (222,3,3,to_date('20/04/19','RR/MM/DD'),13);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (223,1,3,to_date('20/04/20','RR/MM/DD'),14);
+Insert into TP2.ORDERED (OID,PID,OCNT,ODATE,OLID) values (224,1,3,to_date('20/04/20','RR/MM/DD'),15);
+REM INSERTING into TP2.ORDERLIST
+SET DEFINE OFF;
+Insert into TP2.ORDERLIST (OLID,TOTALPRICE) values (1,86500);
+Insert into TP2.ORDERLIST (OLID,TOTALPRICE) values (2,86500);
+Insert into TP2.ORDERLIST (OLID,TOTALPRICE) values (3,86500);
+Insert into TP2.ORDERLIST (OLID,TOTALPRICE) values (4,86500);
+Insert into TP2.ORDERLIST (OLID,TOTALPRICE) values (5,86500);
+Insert into TP2.ORDERLIST (OLID,TOTALPRICE) values (6,86500);
+Insert into TP2.ORDERLIST (OLID,TOTALPRICE) values (7,86500);
+Insert into TP2.ORDERLIST (OLID,TOTALPRICE) values (8,86500);
+Insert into TP2.ORDERLIST (OLID,TOTALPRICE) values (9,86500);
+Insert into TP2.ORDERLIST (OLID,TOTALPRICE) values (10,86500);
+Insert into TP2.ORDERLIST (OLID,TOTALPRICE) values (11,86500);
+Insert into TP2.ORDERLIST (OLID,TOTALPRICE) values (12,86500);
+Insert into TP2.ORDERLIST (OLID,TOTALPRICE) values (13,22500);
+Insert into TP2.ORDERLIST (OLID,TOTALPRICE) values (14,18000);
+Insert into TP2.ORDERLIST (OLID,TOTALPRICE) values (15,18000);
+REM INSERTING into TP2.POS
+SET DEFINE OFF;
+Insert into TP2.POS (POSID,POSNAME) values (0,'ADMIN');
+Insert into TP2.POS (POSID,POSNAME) values (1,'MANAGER');
+Insert into TP2.POS (POSID,POSNAME) values (2,'SALESMAN');
+REM INSERTING into TP2.PRODUCT
+SET DEFINE OFF;
+Insert into TP2.PRODUCT (PID,PGROUPID,PNAME,PDETAIL,PPRICE) values (1,0,'쉬림프','쉬림프입니다.',6000);
+Insert into TP2.PRODUCT (PID,PGROUPID,PNAME,PDETAIL,PPRICE) values (3,0,'폴드포크','폴드포크 입니다.',8000);
+Insert into TP2.PRODUCT (PID,PGROUPID,PNAME,PDETAIL,PPRICE) values (4,0,'에그마요','에그마요 입니다.',8500);
+Insert into TP2.PRODUCT (PID,PGROUPID,PNAME,PDETAIL,PPRICE) values (5,0,'베엘티','베엘티 입니다.',9000);
+Insert into TP2.PRODUCT (PID,PGROUPID,PNAME,PDETAIL,PPRICE) values (6,0,'미트볼','미트볼 입니다.',7000);
+Insert into TP2.PRODUCT (PID,PGROUPID,PNAME,PDETAIL,PPRICE) values (7,1,'양상추','양상추 입니다.',500);
+Insert into TP2.PRODUCT (PID,PGROUPID,PNAME,PDETAIL,PPRICE) values (8,1,'토마토','토마토 입니다.',500);
+Insert into TP2.PRODUCT (PID,PGROUPID,PNAME,PDETAIL,PPRICE) values (9,1,'아보카도','아보카도 입니다.',500);
+Insert into TP2.PRODUCT (PID,PGROUPID,PNAME,PDETAIL,PPRICE) values (10,1,'오이','오이 입니다.',500);
+Insert into TP2.PRODUCT (PID,PGROUPID,PNAME,PDETAIL,PPRICE) values (11,1,'양파','양파 입니다.',500);
+Insert into TP2.PRODUCT (PID,PGROUPID,PNAME,PDETAIL,PPRICE) values (12,1,'피망','피망 입니다.',500);
+Insert into TP2.PRODUCT (PID,PGROUPID,PNAME,PDETAIL,PPRICE) values (13,2,'사이다','사이다입니다.',1000);
+Insert into TP2.PRODUCT (PID,PGROUPID,PNAME,PDETAIL,PPRICE) values (14,2,'콜라','콜라입니다.',1000);
+Insert into TP2.PRODUCT (PID,PGROUPID,PNAME,PDETAIL,PPRICE) values (15,2,'환타','환타입니다.',1000);
+Insert into TP2.PRODUCT (PID,PGROUPID,PNAME,PDETAIL,PPRICE) values (16,3,'세트메뉴01','쉬림프와 양상추 콜라로 구성되어있습니다.',14000);
+Insert into TP2.PRODUCT (PID,PGROUPID,PNAME,PDETAIL,PPRICE) values (17,3,'세트메뉴02','에그마요와 양파 환타로 구성되어있습니다.',14000);
+Insert into TP2.PRODUCT (PID,PGROUPID,PNAME,PDETAIL,PPRICE) values (18,3,'세트메뉴03','베엘티 피망 사이다로 구성되어있습니다.',14000);
+REM INSERTING into TP2.PRODUCTGROUP
+SET DEFINE OFF;
+Insert into TP2.PRODUCTGROUP (PGROUPID,PGROUPNAME) values (0,'메인메뉴');
+Insert into TP2.PRODUCTGROUP (PGROUPID,PGROUPNAME) values (1,'사이드메뉴');
+Insert into TP2.PRODUCTGROUP (PGROUPID,PGROUPNAME) values (2,'음료수');
+Insert into TP2.PRODUCTGROUP (PGROUPID,PGROUPNAME) values (3,'세트메뉴');
+REM INSERTING into TP2.PRODUCTMANAGEMENT
+SET DEFINE OFF;
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (2,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (3,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (4,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (5,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (6,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (7,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (8,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (9,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (10,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (11,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (12,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (13,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (14,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (15,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (16,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (17,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (18,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (19,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (20,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (21,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (22,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (23,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (24,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (25,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (26,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (27,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (28,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (29,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (30,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (31,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (32,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (33,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (34,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (35,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (36,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (37,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (38,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (39,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (40,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (41,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (42,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (43,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (44,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (45,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (46,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (47,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (48,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (49,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (50,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (51,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (52,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (53,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (54,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (55,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (56,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (57,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (58,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (59,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (60,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (61,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (62,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (63,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (64,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (65,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (66,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (67,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (68,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (69,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (70,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (71,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (72,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (73,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (74,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (75,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (76,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (77,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (78,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (79,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (80,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (81,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (82,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (83,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (84,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (85,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (86,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (87,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (88,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (89,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (90,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (91,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (92,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (93,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (94,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (95,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (96,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (97,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (98,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (99,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (100,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (101,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (102,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (103,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (104,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (105,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (106,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (107,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (108,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (109,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (110,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (111,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (112,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (113,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (114,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (115,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (116,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (117,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (118,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (119,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (120,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (121,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (122,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (123,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (124,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (125,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (126,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (127,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (128,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (129,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (130,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (131,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (132,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (133,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (134,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (135,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (136,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (137,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (138,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (139,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (140,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (141,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (142,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (143,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (144,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (145,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (146,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (147,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (148,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (149,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (150,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (151,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (152,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (153,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (154,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (155,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (156,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (157,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (158,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (159,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (160,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (161,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (162,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (163,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (164,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (165,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (166,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (167,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (168,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (169,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (170,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (171,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (172,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (173,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (174,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (175,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (176,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (177,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (178,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (179,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (180,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (181,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (182,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (183,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (184,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (185,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (186,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (187,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (188,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (189,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (190,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (191,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (192,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (193,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (194,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (195,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (196,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (197,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (198,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (199,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (200,5,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (201,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (202,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (203,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (204,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (205,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (206,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (207,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (208,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (209,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (210,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (211,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (212,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (213,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (214,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (215,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (216,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (217,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (218,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (219,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (220,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (221,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (222,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (223,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (224,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (225,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (226,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (227,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (228,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (229,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (230,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (231,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (232,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (233,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (234,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (235,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (236,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (237,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (238,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (239,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (240,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (241,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (242,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (243,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (244,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (245,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (246,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (247,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (248,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (249,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (250,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (251,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (252,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (253,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (254,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (255,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (256,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (257,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (258,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (259,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (260,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (261,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (262,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (263,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (264,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (265,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (266,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (267,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (268,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (269,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (270,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (271,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (272,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (273,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (274,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (275,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (276,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (277,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (278,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (279,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (280,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (281,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (282,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (283,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (284,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (285,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (286,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (287,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (288,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (289,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (290,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (291,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (292,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (293,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (294,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (295,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (296,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (297,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (298,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (299,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (300,13,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (301,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (302,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (303,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (304,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (305,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (306,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (307,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (308,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (309,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (310,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (311,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (312,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (313,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (314,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (315,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (316,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (317,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (318,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (319,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (320,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (321,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (322,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (323,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (324,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (325,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (326,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (327,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (328,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (329,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (330,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (331,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (332,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (333,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (334,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (335,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (336,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (337,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (338,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (339,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (340,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (341,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (342,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (343,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (344,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (345,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (346,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (347,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (348,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (349,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (350,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (351,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (352,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (353,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (354,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (355,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (356,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (357,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (358,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (359,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (360,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (361,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (362,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (363,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (364,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (365,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (366,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (367,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (368,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (369,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (370,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (371,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (372,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (373,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (374,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (375,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (376,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (377,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (378,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (379,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (380,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (381,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (382,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (383,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (384,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (385,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (386,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (387,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (388,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (389,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (390,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (391,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (392,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (393,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (394,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (395,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (396,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (397,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (398,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (399,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (400,16,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (401,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (402,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (403,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (404,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (405,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (406,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (407,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (408,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (409,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (410,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (411,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (412,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (413,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (414,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (415,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (416,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (417,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (418,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (419,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (420,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (421,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (422,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (423,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (424,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (425,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (426,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (427,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (428,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (429,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (430,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (431,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (432,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (433,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (434,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (435,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (436,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (437,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (438,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (439,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (440,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (441,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (442,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (443,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (444,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (445,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (446,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (447,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (448,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (449,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (450,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (451,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (452,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (453,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (454,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (455,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (456,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (457,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (458,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (459,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (460,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (461,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (462,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (463,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (464,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (465,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (466,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (467,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (468,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (469,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (470,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (471,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (472,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (473,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (474,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (475,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (476,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (477,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (478,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (479,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (480,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (481,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (482,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (483,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (484,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (485,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (486,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (487,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (488,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (489,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (490,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (491,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (492,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (493,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (494,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (495,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (496,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (497,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (498,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (499,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (500,17,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (501,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (502,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (503,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (504,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (505,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (506,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (507,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (508,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (509,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (510,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (511,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (512,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (513,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (514,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (515,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (516,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (517,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (518,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (519,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (520,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (521,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (522,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (523,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (524,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (525,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (526,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (527,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (528,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (529,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (530,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (531,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (532,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (533,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (534,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (535,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (536,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (537,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (538,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (539,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (540,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (541,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (542,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (543,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (544,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (545,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (546,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (547,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (548,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (549,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (550,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (551,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (552,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (553,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (554,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (555,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (556,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (557,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (558,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (559,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (560,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (561,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (562,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (563,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (564,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (565,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (566,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (567,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (568,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (569,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (570,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (571,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (572,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (573,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (574,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (575,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (576,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (577,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (578,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (579,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (580,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (581,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (582,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (583,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (584,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (585,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (586,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (587,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (588,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (589,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (590,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (591,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (592,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (593,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (594,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (595,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (596,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (597,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (598,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (599,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (600,18,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (601,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (602,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (603,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (604,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (605,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (606,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (607,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (608,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (609,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (610,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (611,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (612,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (613,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (614,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (615,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (616,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (617,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (618,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (619,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (620,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (621,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (622,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (623,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (624,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (625,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (626,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (627,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (628,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (629,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (630,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (631,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (632,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (633,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (634,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (635,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (636,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (637,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (638,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (639,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (640,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (641,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (642,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (643,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (644,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (645,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (646,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (647,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (648,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (649,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (650,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (651,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (652,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (653,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (654,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (655,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (656,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (657,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (658,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (659,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (660,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (661,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (662,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (663,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (664,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (665,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (666,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (667,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (668,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (669,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (670,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (671,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (672,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (673,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (674,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (675,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (676,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (677,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (678,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (679,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (680,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (681,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (682,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (683,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (684,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (685,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (686,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (687,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (688,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (689,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (690,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (691,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (692,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (693,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (694,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (695,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (696,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (697,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (698,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (699,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (700,1,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (701,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (702,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (703,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (704,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (705,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (706,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (707,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (708,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (709,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (710,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (711,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (712,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (713,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (714,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (715,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (716,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (717,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (718,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (719,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (720,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (721,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (722,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (723,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (724,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (725,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (726,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (727,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (728,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (729,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (730,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (731,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (732,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (733,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (734,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (735,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (736,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (737,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (738,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (739,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (740,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (741,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (742,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (743,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (744,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (745,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (746,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (747,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (748,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (749,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (750,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (751,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (752,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (753,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (754,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (755,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (756,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (757,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (758,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (759,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (760,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (761,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (762,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (763,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (764,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (765,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (766,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (767,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (768,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (769,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (770,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (771,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (772,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (773,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (774,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (775,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (776,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (777,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (778,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (779,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (780,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (781,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (782,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (783,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (784,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (785,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (786,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (787,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (788,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (789,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (790,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (791,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (792,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (793,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (794,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (795,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (796,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (797,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (798,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (799,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (800,9,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (801,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (802,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (803,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (804,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (805,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (806,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (807,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (808,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (809,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (810,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (811,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (812,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (813,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (814,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (815,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (816,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (817,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (818,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (819,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (820,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (821,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (822,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (823,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (824,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (825,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (826,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (827,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (828,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (829,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (830,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (831,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (832,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (833,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (834,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (835,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (836,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (837,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (838,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (839,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (840,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (841,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (842,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (843,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (844,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (845,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (846,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (847,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (848,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (849,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (850,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (851,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (852,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (853,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (854,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (855,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (856,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (857,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (858,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (859,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (860,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (861,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (862,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (863,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (864,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (865,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (866,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (867,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (868,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (869,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (870,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (871,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (872,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (873,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (874,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (875,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (876,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (877,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (878,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (879,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (880,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (881,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (882,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (883,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (884,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (885,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (886,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (887,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (888,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (889,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (890,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (891,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (892,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (893,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (894,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (895,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (896,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (897,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (898,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (899,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (900,7,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (901,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (902,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (903,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (904,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (905,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (906,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (907,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (908,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (909,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (910,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (911,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (912,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (913,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (914,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (915,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (916,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (917,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (918,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (919,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (920,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (921,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (922,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (923,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (924,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (925,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (926,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (927,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (928,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (929,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (930,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (931,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (932,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (933,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (934,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (935,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (936,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (937,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (938,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (939,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (940,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (941,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (942,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (943,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (944,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (945,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (946,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (947,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (948,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (949,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (950,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (951,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (952,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (953,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (954,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (955,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (956,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (957,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (958,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (959,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (960,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (961,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (962,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (963,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (964,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (965,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (966,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (967,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (968,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (969,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (970,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (971,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (972,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (973,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (974,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (975,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (976,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (977,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (978,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (979,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (980,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (981,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (982,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (983,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (984,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (985,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (986,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (987,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (988,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (989,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (990,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (991,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (992,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (993,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (994,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (995,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (996,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (997,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (998,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (999,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1000,11,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1001,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1002,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1003,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1004,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1005,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1006,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1007,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1008,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1009,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1010,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1011,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1012,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1013,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1014,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1015,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1016,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1017,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1018,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1019,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1020,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1021,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1022,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1023,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1024,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1025,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1026,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1027,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1028,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1029,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1030,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1031,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1032,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1033,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1034,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1035,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1036,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1037,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1038,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1039,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1040,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1041,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1042,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1043,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1044,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1045,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1046,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1047,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1048,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1049,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1050,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1051,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1052,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1053,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1054,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1055,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1056,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1057,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1058,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1059,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1060,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1061,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1062,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1063,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1064,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1065,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1066,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1067,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1068,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1069,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1070,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1071,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1072,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1073,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1074,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1075,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1076,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1077,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1078,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1079,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1080,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1081,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1082,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1083,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1084,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1085,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1086,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1087,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1088,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1089,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1090,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1091,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1092,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1093,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1094,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1095,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1096,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1097,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1098,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1099,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1100,4,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1101,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1102,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1103,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1104,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1105,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1106,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1107,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1108,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1109,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1110,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1111,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1112,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1113,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1114,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1115,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1116,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1117,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1118,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1119,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1120,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1121,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1122,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1123,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1124,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1125,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1126,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1127,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1128,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1129,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1130,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1131,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1132,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1133,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1134,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1135,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1136,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1137,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1138,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1139,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1140,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1141,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1142,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1143,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1144,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1145,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1146,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1147,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1148,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1149,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1150,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1151,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1152,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1153,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1154,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1155,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1156,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1157,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1158,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1159,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1160,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1161,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1162,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1163,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1164,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1165,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1166,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1167,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1168,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1169,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1170,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1171,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1172,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1173,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1174,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1175,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1176,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1177,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1178,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1179,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1180,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1181,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1182,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1183,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1184,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1185,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1186,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1187,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1188,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1189,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1190,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1191,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1192,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1193,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1194,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1195,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1196,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1197,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1198,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1199,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1200,10,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1201,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1202,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1203,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1204,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1205,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1206,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1207,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1208,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1209,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1210,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1211,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1212,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1213,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1214,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1215,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1216,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1217,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1218,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1219,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1220,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1221,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1222,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1223,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1224,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1225,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1226,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1227,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1228,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1229,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1230,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1231,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1232,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1233,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1234,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1235,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1236,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1237,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1238,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1239,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1240,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1241,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1242,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1243,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1244,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1245,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1246,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1247,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1248,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1249,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1250,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1251,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1252,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1253,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1254,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1255,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1256,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1257,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1258,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1259,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1260,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1261,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1262,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1263,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1264,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1265,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1266,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1267,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1268,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1269,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1270,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1271,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1272,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1273,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1274,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1275,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1276,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1277,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1278,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1279,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1280,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1281,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1282,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1283,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1284,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1285,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1286,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1287,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1288,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1289,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1290,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1291,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1292,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1293,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1294,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1295,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1296,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1297,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1298,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1299,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1300,14,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1301,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1302,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1303,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1304,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1305,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1306,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1307,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1308,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1309,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1310,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1311,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1312,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1313,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1314,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1315,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1316,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1317,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1318,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1319,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1320,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1321,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1322,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1323,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1324,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1325,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1326,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1327,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1328,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1329,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1330,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1331,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1332,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1333,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1334,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1335,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1336,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1337,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1338,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1339,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1340,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1341,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1342,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1343,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1344,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1345,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1346,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1347,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1348,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1349,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1350,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1351,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1352,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1353,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1354,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1355,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1356,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1357,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1358,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1359,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1360,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1361,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1362,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1363,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1364,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1365,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1366,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1367,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1368,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1369,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1370,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1371,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1372,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1373,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1374,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1375,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1376,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1377,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1378,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1379,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1380,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1381,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1382,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1383,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1384,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1385,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1386,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1387,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1388,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1389,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1390,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1391,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1392,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1393,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1394,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1395,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1396,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1397,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1398,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1399,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1400,8,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1401,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1402,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1403,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1404,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1405,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1406,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1407,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1408,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1409,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1410,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1411,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1412,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1413,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1414,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1415,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1416,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1417,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1418,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1419,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1420,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1421,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1422,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1423,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1424,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1425,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1426,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1427,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1428,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1429,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1430,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1431,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1432,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1433,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1434,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1435,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1436,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1437,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1438,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1439,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1440,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1441,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1442,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1443,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1444,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1445,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1446,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1447,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1448,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1449,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1450,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1451,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1452,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1453,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1454,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1455,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1456,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1457,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1458,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1459,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1460,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1461,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1462,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1463,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1464,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1465,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1466,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1467,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1468,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1469,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1470,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1471,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1472,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1473,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1474,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1475,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1476,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1477,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1478,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1479,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1480,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1481,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1482,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1483,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1484,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1485,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1486,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1487,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1488,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1489,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1490,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1491,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1492,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1493,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1494,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1495,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1496,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1497,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1498,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1499,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1500,3,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1501,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1502,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1503,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1504,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1505,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1506,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1507,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1508,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1509,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1510,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1511,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1512,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1513,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1514,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1515,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1516,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1517,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1518,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1519,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1520,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1521,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1522,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1523,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1524,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1525,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1526,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1527,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1528,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1529,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1530,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1531,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1532,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1533,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1534,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1535,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1536,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1537,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1538,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1539,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1540,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1541,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1542,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1543,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1544,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1545,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1546,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1547,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1548,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1549,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1550,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1551,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1552,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1553,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1554,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1555,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1556,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1557,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1558,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1559,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1560,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1561,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1562,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1563,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1564,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1565,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1566,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1567,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1568,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1569,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1570,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1571,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1572,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1573,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1574,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1575,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1576,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1577,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1578,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1579,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1580,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1581,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1582,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1583,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1584,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1585,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1586,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1587,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1588,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1589,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1590,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1591,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1592,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1593,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1594,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1595,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1596,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1597,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1598,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1599,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1600,12,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1601,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1602,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1603,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1604,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1605,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1606,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1607,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1608,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1609,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1610,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1611,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1612,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1613,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1614,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1615,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1616,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1617,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1618,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1619,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1620,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1621,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1622,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1623,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1624,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1625,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1626,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1627,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1628,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1629,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1630,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1631,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1632,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1633,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1634,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1635,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1636,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1637,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1638,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1639,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1640,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1641,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1642,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1643,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1644,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1645,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1646,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1647,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1648,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1649,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1650,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1651,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1652,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1653,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1654,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1655,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1656,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1657,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1658,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1659,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1660,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1661,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1662,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1663,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1664,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1665,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1666,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1667,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1668,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1669,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1670,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1671,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1672,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1673,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1674,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1675,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1676,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1677,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1678,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1679,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1680,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1681,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1682,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1683,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1684,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1685,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1686,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1687,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1688,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1689,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1690,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1691,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1692,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1693,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1694,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1695,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1696,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1697,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1698,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1699,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1700,15,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1701,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1702,6,to_date('20/04/22','RR/MM/DD'));
+Insert into TP2.PRODUCTMANAGEMENT (PMANAGEMENTID,PID,PDATE) values (1703,6,to_date('20/04/22','RR/MM/DD'));
+--------------------------------------------------------
+--  DDL for Index PRODUCTMANAGEMENT_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TP2"."PRODUCTMANAGEMENT_PK" ON "TP2"."PRODUCTMANAGEMENT" ("PMANAGEMENTID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Index ORDER_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TP2"."ORDER_PK" ON "TP2"."ORDERED" ("OID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Index EMPLOYEE_EID_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TP2"."EMPLOYEE_EID_PK" ON "TP2"."EMPLOYEE" ("EID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Index PRODUCT_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TP2"."PRODUCT_PK" ON "TP2"."PRODUCT" ("PID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Index PRODUCTGROUP_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TP2"."PRODUCTGROUP_PK" ON "TP2"."PRODUCTGROUP" ("PGROUPID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Index OLID_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TP2"."OLID_PK" ON "TP2"."ORDERLIST" ("OLID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Index POS_POSID_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "TP2"."POS_POSID_PK" ON "TP2"."POS" ("POSID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  Constraints for Table ORDERED
+--------------------------------------------------------
+
+  ALTER TABLE "TP2"."ORDERED" ADD CONSTRAINT "ORDER_PK" PRIMARY KEY ("OID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table PRODUCT
+--------------------------------------------------------
+
+  ALTER TABLE "TP2"."PRODUCT" ADD UNIQUE ("PNAME")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE;
+  ALTER TABLE "TP2"."PRODUCT" ADD CONSTRAINT "PRODUCT_PK" PRIMARY KEY ("PID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE;
+  ALTER TABLE "TP2"."PRODUCT" MODIFY ("PPRICE" NOT NULL ENABLE);
+  ALTER TABLE "TP2"."PRODUCT" MODIFY ("PNAME" NOT NULL ENABLE);
+  ALTER TABLE "TP2"."PRODUCT" MODIFY ("PGROUPID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table POS
+--------------------------------------------------------
+
+  ALTER TABLE "TP2"."POS" ADD CONSTRAINT "POS_POSID_PK" PRIMARY KEY ("POSID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table ORDERLIST
+--------------------------------------------------------
+
+  ALTER TABLE "TP2"."ORDERLIST" ADD CONSTRAINT "OLID_PK" PRIMARY KEY ("OLID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table PRODUCTMANAGEMENT
+--------------------------------------------------------
+
+  ALTER TABLE "TP2"."PRODUCTMANAGEMENT" ADD CONSTRAINT "PRODUCTMANAGEMENT_PK" PRIMARY KEY ("PMANAGEMENTID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table EMPLOYEE
+--------------------------------------------------------
+
+  ALTER TABLE "TP2"."EMPLOYEE" ADD UNIQUE ("TEL")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE;
+  ALTER TABLE "TP2"."EMPLOYEE" ADD CONSTRAINT "EMPLOYEE_EID_PK" PRIMARY KEY ("EID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table PRODUCTGROUP
+--------------------------------------------------------
+
+  ALTER TABLE "TP2"."PRODUCTGROUP" ADD CONSTRAINT "PRODUCTGROUP_PK" PRIMARY KEY ("PGROUPID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE;
+  ALTER TABLE "TP2"."PRODUCTGROUP" MODIFY ("PGROUPNAME" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Ref Constraints for Table EMPLOYEE
+--------------------------------------------------------
+
+  ALTER TABLE "TP2"."EMPLOYEE" ADD CONSTRAINT "EMPLOYEE_POSID_FK" FOREIGN KEY ("POSID")
+	  REFERENCES "TP2"."POS" ("POSID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table ORDERED
+--------------------------------------------------------
+
+  ALTER TABLE "TP2"."ORDERED" ADD CONSTRAINT "ORDER_OLID_FK" FOREIGN KEY ("OLID")
+	  REFERENCES "TP2"."ORDERLIST" ("OLID") ENABLE;
+  ALTER TABLE "TP2"."ORDERED" ADD CONSTRAINT "ORDER_PID_FK" FOREIGN KEY ("PID")
+	  REFERENCES "TP2"."PRODUCT" ("PID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table PRODUCT
+--------------------------------------------------------
+
+  ALTER TABLE "TP2"."PRODUCT" ADD CONSTRAINT "PRODUCT_FK_PGROUPNAME" FOREIGN KEY ("PGROUPID")
+	  REFERENCES "TP2"."PRODUCTGROUP" ("PGROUPID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table PRODUCTMANAGEMENT
+--------------------------------------------------------
+
+  ALTER TABLE "TP2"."PRODUCTMANAGEMENT" ADD CONSTRAINT "PRODUCTMANAGEMENT_FK_PID" FOREIGN KEY ("PID")
+	  REFERENCES "TP2"."PRODUCT" ("PID") ENABLE;

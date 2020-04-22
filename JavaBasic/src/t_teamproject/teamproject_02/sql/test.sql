@@ -135,22 +135,24 @@ INSERT INTO productgroup(pgroupid, pgroupname)  VALUES(3, '세트메뉴');
 
 /***** PRODUCT TABLE TEST *****/
 /* PRODUCT TABLE TEST CASE */
-INSERT INTO product(pid, pgroupid, pname, pdetail, pprice) VALUES(PRODUCT_PID_SEQ.NEXTVAL, 0, '메인메뉴00', '메인메뉴00 입니다.', 6000);
-INSERT INTO product(pid, pgroupid, pname, pdetail, pprice) VALUES(PRODUCT_PID_SEQ.NEXTVAL, 0, '메인메뉴01', '메인메뉴01 입니다.', 7000);
-INSERT INTO product(pid, pgroupid, pname, pdetail, pprice) VALUES(PRODUCT_PID_SEQ.NEXTVAL, 0, '메인메뉴02', '메인메뉴02 입니다.', 8000);
-INSERT INTO product(pid, pgroupid, pname, pdetail, pprice) VALUES(PRODUCT_PID_SEQ.NEXTVAL, 0, '메인메뉴03', '메인메뉴03 입니다.', 8500);
-INSERT INTO product(pid, pgroupid, pname, pdetail, pprice) VALUES(PRODUCT_PID_SEQ.NEXTVAL, 1, '사이드메뉴00', '사이드메뉴00 입니다.', 2000);
-INSERT INTO product(pid, pgroupid, pname, pdetail, pprice) VALUES(PRODUCT_PID_SEQ.NEXTVAL, 1, '사이드메뉴01', '사이드메뉴01 입니다.', 2500);
-INSERT INTO product(pid, pgroupid, pname, pdetail, pprice) VALUES(PRODUCT_PID_SEQ.NEXTVAL, 1, '사이드메뉴02', '사이드메뉴02 입니다.', 3000);
-INSERT INTO product(pid, pgroupid, pname, pdetail, pprice) VALUES(PRODUCT_PID_SEQ.NEXTVAL, 1, '사이드메뉴03', '사이드메뉴03 입니다.', 3000);
-INSERT INTO product(pid, pgroupid, pname, pdetail, pprice) VALUES(PRODUCT_PID_SEQ.NEXTVAL, 2, '음료수00', '음료수00 입니다.', 1000);
-INSERT INTO product(pid, pgroupid, pname, pdetail, pprice) VALUES(PRODUCT_PID_SEQ.NEXTVAL, 2, '음료수01', '음료수01 입니다.', 1000);
-INSERT INTO product(pid, pgroupid, pname, pdetail, pprice) VALUES(PRODUCT_PID_SEQ.NEXTVAL, 2, '음료수02', '음료수02 입니다.', 500);
-INSERT INTO product(pid, pgroupid, pname, pdetail, pprice) VALUES(PRODUCT_PID_SEQ.NEXTVAL, 2, '음료수03', '음료수03 입니다.', 1500);
-INSERT INTO product(pid, pgroupid, pname, pdetail, pprice) VALUES(PRODUCT_PID_SEQ.NEXTVAL, 3, '세트00', '메인메뉴00과 사이드메뉴00 음료수00으로 구성되어있습니다.', 9000);
-INSERT INTO product(pid, pgroupid, pname, pdetail, pprice) VALUES(PRODUCT_PID_SEQ.NEXTVAL, 3, '세트01', '메인메뉴00과 사이드메뉴02 음료수03으로 구성되어있습니다.', 10000);
-INSERT INTO product(pid, pgroupid, pname, pdetail, pprice) VALUES(PRODUCT_PID_SEQ.NEXTVAL, 3, '세트02', '메인메뉴02과 사이드메뉴02 음료수00으로 구성되어있습니다.', 9500);
-INSERT INTO product(pid, pgroupid, pname, pdetail, pprice) VALUES(PRODUCT_PID_SEQ.NEXTVAL, 3, '세트03', '메인메뉴02과 사이드메뉴02 음료수03으로 구성되어있습니다.', 12000);
+INSERT INTO product(pid, pgroupid, pname, pdetail, pprice) VALUES(PRODUCT_PID_SEQ.NEXTVAL, 0, '쉬림프', '쉬림프입니다.', 6000);
+INSERT INTO product(pid, pgroupid, pname, pdetail, pprice) VALUES(PRODUCT_PID_SEQ.NEXTVAL, 0, '로티세리바비큐치킨', '로티세리바비큐치킨 입니다.', 7000);
+INSERT INTO product(pid, pgroupid, pname, pdetail, pprice) VALUES(PRODUCT_PID_SEQ.NEXTVAL, 0, '폴드포크', '폴드포크 입니다.', 8000);
+INSERT INTO product(pid, pgroupid, pname, pdetail, pprice) VALUES(PRODUCT_PID_SEQ.NEXTVAL, 0, '에그마요', '에그마요 입니다.', 8500);
+INSERT INTO product(pid, pgroupid, pname, pdetail, pprice) VALUES(PRODUCT_PID_SEQ.NEXTVAL, 0, '베엘티', '베엘티 입니다.', 9000);
+INSERT INTO product(pid, pgroupid, pname, pdetail, pprice) VALUES(PRODUCT_PID_SEQ.NEXTVAL, 0, '미트볼', '미트볼 입니다.', 7000);
+INSERT INTO product(pid, pgroupid, pname, pdetail, pprice) VALUES(PRODUCT_PID_SEQ.NEXTVAL, 1, '양상추', '양상추 입니다.', 500);
+INSERT INTO product(pid, pgroupid, pname, pdetail, pprice) VALUES(PRODUCT_PID_SEQ.NEXTVAL, 1, '토마토', '토마토 입니다.', 500);
+INSERT INTO product(pid, pgroupid, pname, pdetail, pprice) VALUES(PRODUCT_PID_SEQ.NEXTVAL, 1, '아보카도', '아보카도 입니다.', 500);
+INSERT INTO product(pid, pgroupid, pname, pdetail, pprice) VALUES(PRODUCT_PID_SEQ.NEXTVAL, 1, '오이', '오이 입니다.', 500);
+INSERT INTO product(pid, pgroupid, pname, pdetail, pprice) VALUES(PRODUCT_PID_SEQ.NEXTVAL, 1, '양파', '양파 입니다.', 500);
+INSERT INTO product(pid, pgroupid, pname, pdetail, pprice) VALUES(PRODUCT_PID_SEQ.NEXTVAL, 1, '피망', '피망 입니다.', 500);
+INSERT INTO product(pid, pgroupid, pname, pdetail, pprice) VALUES(PRODUCT_PID_SEQ.NEXTVAL, 2, '사이다', '사이다입니다.', 1000);
+INSERT INTO product(pid, pgroupid, pname, pdetail, pprice) VALUES(PRODUCT_PID_SEQ.NEXTVAL, 2, '콜라', '콜라입니다.', 1000);
+INSERT INTO product(pid, pgroupid, pname, pdetail, pprice) VALUES(PRODUCT_PID_SEQ.NEXTVAL, 2, '환타', '환타입니다.', 1000);
+INSERT INTO product(pid, pgroupid, pname, pdetail, pprice) VALUES(PRODUCT_PID_SEQ.NEXTVAL, 3, '세트메뉴01', '쉬림프와 양상추 콜라로 구성되어있습니다.', 14000);
+INSERT INTO product(pid, pgroupid, pname, pdetail, pprice) VALUES(PRODUCT_PID_SEQ.NEXTVAL, 3, '세트메뉴02', '에그마요와 양파 환타로 구성되어있습니다.', 14000);
+INSERT INTO product(pid, pgroupid, pname, pdetail, pprice) VALUES(PRODUCT_PID_SEQ.NEXTVAL, 3, '세트메뉴03', '베엘티 피망 사이다로 구성되어있습니다.', 14000);
 UPDATE product SET pgroupid=?, pdetail=?, pname=?, pprice=? WHERE PID=?;
 /*search product by pid*/
 SELECT p.pid AS PID, p.pgroupid AS PGROUPID, p.pname AS PNAME, p.pprice AS PPRICE, p.pdetail AS PDETAIL FROM PRODUCT P WHERE PID = 1;
@@ -186,8 +188,28 @@ INSERT INTO ORDERLIST(OLID, TOTALPRICE) VALUES(ORDERLIST_OLID.NEXTVAL, 10000);
 
 INSERT INTO ORDERLIST(OLID, TOTALPRICE) VALUES(15, 22000000);
 INSERT INTO ORDERED(OID, PID, OCNT, ODATE, OLID) VALUES(15, 10, 500, '200402', 15);
-INSERT INTO ORDERLIST(OLID, TOTALPRICE) VALUES(ORDERLIST_OLID.NEXTVAL, 22000000);
-INSERT INTO ORDERED(OID, PID, OCNT, ODATE, OLID) VALUES(ORDERED_OID, 10, 500, '200402', ORDERLIST_OLID.NEXTVAL);
+
+select sum(pprice) from product;
+INSERT INTO ORDERLIST(OLID, TOTALPRICE) VALUES(ORDERLIST_OLID.NEXTVAL, 86500);
+INSERT INTO ORDERED(OID, PID, OCNT, ODATE, OLID) VALUES(ORDERED_OID.nextval, 1, 1, '180101', ORDERLIST_OLID.currval);
+INSERT INTO ORDERED(OID, PID, OCNT, ODATE, OLID) VALUES(ORDERED_OID.nextval, 2, 2, '180101', ORDERLIST_OLID.currval);
+INSERT INTO ORDERED(OID, PID, OCNT, ODATE, OLID) VALUES(ORDERED_OID.nextval, 3, 3, '180101', ORDERLIST_OLID.currval);
+INSERT INTO ORDERED(OID, PID, OCNT, ODATE, OLID) VALUES(ORDERED_OID.nextval, 4, 4, '180101', ORDERLIST_OLID.currval);
+INSERT INTO ORDERED(OID, PID, OCNT, ODATE, OLID) VALUES(ORDERED_OID.nextval, 5, 5, '180101', ORDERLIST_OLID.currval);
+INSERT INTO ORDERED(OID, PID, OCNT, ODATE, OLID) VALUES(ORDERED_OID.nextval, 6, 6, '180101', ORDERLIST_OLID.currval);
+INSERT INTO ORDERED(OID, PID, OCNT, ODATE, OLID) VALUES(ORDERED_OID.nextval, 7, 7, '180101', ORDERLIST_OLID.currval);
+INSERT INTO ORDERED(OID, PID, OCNT, ODATE, OLID) VALUES(ORDERED_OID.nextval, 8, 8, '180101', ORDERLIST_OLID.currval);
+INSERT INTO ORDERED(OID, PID, OCNT, ODATE, OLID) VALUES(ORDERED_OID.nextval, 9, 9, '180101', ORDERLIST_OLID.currval);
+INSERT INTO ORDERED(OID, PID, OCNT, ODATE, OLID) VALUES(ORDERED_OID.nextval, 10, 10, '180101', ORDERLIST_OLID.currval);
+INSERT INTO ORDERED(OID, PID, OCNT, ODATE, OLID) VALUES(ORDERED_OID.nextval, 11, 11, '180101', ORDERLIST_OLID.currval);
+INSERT INTO ORDERED(OID, PID, OCNT, ODATE, OLID) VALUES(ORDERED_OID.nextval, 12, 12, '180101', ORDERLIST_OLID.currval);
+INSERT INTO ORDERED(OID, PID, OCNT, ODATE, OLID) VALUES(ORDERED_OID.nextval, 13, 13, '180101', ORDERLIST_OLID.currval);
+INSERT INTO ORDERED(OID, PID, OCNT, ODATE, OLID) VALUES(ORDERED_OID.nextval, 14, 14, '180101', ORDERLIST_OLID.currval);
+INSERT INTO ORDERED(OID, PID, OCNT, ODATE, OLID) VALUES(ORDERED_OID.nextval, 15, 15, '180101', ORDERLIST_OLID.currval);
+INSERT INTO ORDERED(OID, PID, OCNT, ODATE, OLID) VALUES(ORDERED_OID.nextval, 16, 16, '180101', ORDERLIST_OLID.currval);
+INSERT INTO ORDERED(OID, PID, OCNT, ODATE, OLID) VALUES(ORDERED_OID.nextval, 17, 17, '180101', ORDERLIST_OLID.currval);
+INSERT INTO ORDERED(OID, PID, OCNT, ODATE, OLID) VALUES(ORDERED_OID.nextval, 18, 18, '180101', ORDERLIST_OLID.currval);
+
 
 --일별 매출
 SELECT SUM(OR) FROM ORDERED WHERE TO_CHAR(ODATE, 'YYMM')=TO_CHAR(SYSDATE, 'YYMM') GROUP BY TO_CHAR(SYSDATE, 'YYMMDD');
