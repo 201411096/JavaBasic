@@ -56,7 +56,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 		try {
 			con = DriverManager.getConnection(Configuration.url, Configuration.user, Configuration.password);
 			String [] columNames = {"E.ENAME", "E.EID"};
-			String sql="SELECT E.ENAME AS ENAME, E.EID AS EID, E.TEL AS ETEL, P.POSNAME AS POSNAME, E.AGE AS EAGE, E.SAL AS SAL, TO_CHAR(E.HIRE_DATE, 'YYYY/MM/DD') AS HIRE_DATE  FROM EMPLOYEE E INNER JOIN POS P ON E.POSID=P.POSID WHERE " + columNames[option] + " LIKE '%' || ? || '%' ";
+			String sql="SELECT E.ENAME AS ENAME, E.EID AS EID, E.TEL AS ETEL, P.POSNAME AS POSNAME, E.AGE AS EAGE, E.SAL AS SAL, TO_CHAR(E.HIRE_DATE, 'YYYY/MM/DD') AS HIRE_DATE  FROM EMPLOYEE E INNER JOIN POS P ON E.POSID=P.POSID WHERE " + columNames[option] + " LIKE '%' || ? || '%' ORDER BY TO_CHAR(E.HIRE_DATE)";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, searchWord);
 			ResultSet rs = ps.executeQuery();
