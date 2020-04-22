@@ -28,6 +28,8 @@ import javax.swing.border.TitledBorder;
 
 import t_teamproject.teamproject_02.dao.ProductDao;
 import t_teamproject.teamproject_02.dao.ProductDaoImpl;
+import t_teamproject.teamproject_02.dao.ProductManagementDao;
+import t_teamproject.teamproject_02.dao.ProductManagementDaoImpl;
 import t_teamproject.teamproject_02.view.frame.ManagementFrame;
 import t_teamproject.teamproject_02.view.frame.ProductPurchaseFrame;
 import t_teamproject.teamproject_02.view.table.MyProductTableModel;
@@ -35,7 +37,7 @@ import t_teamproject.teamproject_02.vo.Product;
 
 public class ProductManagementPanel extends JPanel{
 	ProductDao productDaoModel;
-	
+	ProductManagementDao productManagementDaoModel;
 	ManagementFrame managementFrame;
 	
 	JPanel left_panel, right_panel;
@@ -193,6 +195,7 @@ public class ProductManagementPanel extends JPanel{
 	public void connectDB() {
 		try {
 			productDaoModel = new ProductDaoImpl();
+			productManagementDaoModel = new ProductManagementDaoImpl();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -299,7 +302,9 @@ public class ProductManagementPanel extends JPanel{
 		if(managementFrame.getEmployee().getPosition().equals("ADMIN")) {
 			int pid = Integer.parseInt(jtextFieldProductId.getText());
 			try {
-				int result = productDaoModel.deleteProduct(pid);
+
+				
+				int result = productDaoModel.deleteProduct(pid); //product에서 pid에 해당하는 값 삭제
 				if(result==0) {
 					JOptionPane.showMessageDialog(null, "변경사항이 없습니다.");
 				}else {
