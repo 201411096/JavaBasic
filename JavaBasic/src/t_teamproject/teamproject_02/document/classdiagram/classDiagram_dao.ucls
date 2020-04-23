@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.4" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <interface id="1" language="java" name="t_teamproject.teamproject_02.dao.EmployeeDao" project="JavaBasic" 
+    file="/JavaBasic/src/t_teamproject/teamproject_02/dao/EmployeeDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="171" width="227" x="525" y="417"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="2" language="java" name="t_teamproject.teamproject_02.dao.ProductDaoImpl" project="JavaBasic" 
+    file="/JavaBasic/src/t_teamproject/teamproject_02/dao/ProductDaoImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="320" x="165" y="170"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="t_teamproject.teamproject_02.dao.EmployeeDaoImpl" project="JavaBasic" 
+    file="/JavaBasic/src/t_teamproject/teamproject_02/dao/EmployeeDaoImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="227" x="525" y="170"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="4" language="java" name="t_teamproject.teamproject_02.dao.OrderDao" project="JavaBasic" 
+    file="/JavaBasic/src/t_teamproject/teamproject_02/dao/OrderDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="315" x="792" y="417"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="5" language="java" name="t_teamproject.teamproject_02.dao.ProductManagementDao" project="JavaBasic" 
+    file="/JavaBasic/src/t_teamproject/teamproject_02/dao/ProductManagementDao.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="135" width="257" x="1147" y="417"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="6" language="java" name="t_teamproject.teamproject_02.dao.OrderDaoImpl" project="JavaBasic" 
+    file="/JavaBasic/src/t_teamproject/teamproject_02/dao/OrderDaoImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="171" width="315" x="792" y="170"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="7" language="java" name="t_teamproject.teamproject_02.dao.ProductDao" project="JavaBasic" 
+    file="/JavaBasic/src/t_teamproject/teamproject_02/dao/ProductDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="320" x="165" y="417"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="8" language="java" name="t_teamproject.teamproject_02.dao.ProductManagementDaoImpl" project="JavaBasic" 
+    file="/JavaBasic/src/t_teamproject/teamproject_02/dao/ProductManagementDaoImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="153" width="257" x="1147" y="170"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <realization id="9">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="1"/>  
+  </realization>  
+  <realization id="10">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="7"/>  
+  </realization>  
+  <realization id="11">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="4"/>  
+  </realization>  
+  <realization id="12">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="5"/>  
+  </realization>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
