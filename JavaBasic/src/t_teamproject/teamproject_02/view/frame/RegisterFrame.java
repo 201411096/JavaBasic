@@ -17,7 +17,7 @@ import t_teamproject.teamproject_02.dao.EmployeeDao;
 import t_teamproject.teamproject_02.dao.EmployeeDaoImpl;
 import t_teamproject.teamproject_02.vo.Employee;
 
-public class RegisterFrame extends JFrame{
+public class RegisterFrame extends JFrame{	// 직원등록창(직원이 직접 등록하는 경우)
 	EmployeeDao employeeDaomodel;
 	
 	JTextField jtextFieldEmployeeName;
@@ -102,13 +102,18 @@ public class RegisterFrame extends JFrame{
 			}
 		}		
 	}
+	/* 함수이름 : registerEmployee
+	 * 인자값 : 없음
+	 * 반환값 : 없음
+	 * 함수설명 : 입력한 내용대로 직원정보 등록(회원가입)
+	 */
 	public void registerEmployee(){
 		String pw1 = String.valueOf(jpasswordField.getPassword());
 		String pw2 = String.valueOf(jpasswordField2.getPassword());
 		if(jtextFieldEmployeeId.getText().isEmpty() || pw1.equals(null) || pw1.equals("") || jtextFieldEmployeeName.getText().isEmpty() || jtextFieldEmployeeTel.getText().isEmpty() || jtextFieldAge.getText().isEmpty()){
 			JOptionPane.showMessageDialog(null, "값을 모두 입력해주세요");
 		}
-		else if(!pw1.equals(pw2))
+		else if(!pw1.equals(pw2))			//비밀번호와 비밀번호확인이 같은지 확인
 		{
 			JOptionPane.showMessageDialog(null, "비밀번호와 비빌먼호확인이 일치하지 않습니다.");
 		}else{
@@ -118,7 +123,7 @@ public class RegisterFrame extends JFrame{
 			emp.setPassword(String.valueOf(jpasswordField.getPassword()));
 			emp.setTel(jtextFieldEmployeeTel.getText());
 			emp.setAge(Integer.parseInt(jtextFieldAge.getText()));
-			emp.setPosition("SALESMAN"); // 전부 salesman으로 시작
+			emp.setPosition("SALESMAN"); 	// 직접 직원정보 등록시(회원가입시) 직급은 salesman으로 고정
 			try {
 				int result = employeeDaomodel.insertEmployeeWithOutDate(emp);
 				if(result == 0) {
@@ -135,6 +140,11 @@ public class RegisterFrame extends JFrame{
 		}
 		
 	}
+	/* 함수이름 : registerCancel
+	 * 인자값 : 없음
+	 * 반환값 : 없음
+	 * 함수설명 : 로그인 창(LoginFrame)을 띄우면서 현재창을 닫음
+	 */
 	public void registerCancel(){
 		new LoginFrame();
 		dispose(); // 현재 창 비활성화

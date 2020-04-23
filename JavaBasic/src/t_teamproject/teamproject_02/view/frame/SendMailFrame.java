@@ -16,19 +16,20 @@ import javax.swing.SwingConstants;
 
 import t_teamproject.teamproject_02.sendmail.SendMail;
 
-public class SendMailFrame extends JFrame{
+public class SendMailFrame extends JFrame{	//	메일 전송 확인 화면
 	String productNameList [];
 	int productCountList [];
 	int productPriceList [];
 	int totalPrice=0;
 	
 	JTextField idTextField; // from 보내는 사람 주소
-	JPasswordField passwordField;
+	JPasswordField passwordField; // 보내는 사람 메일의 비밀번호
 	JTextField toIdTextField; // to 받는 사람 메일 주소
 	JButton sendButton;
 	
 	SendMail sendMail = null;
 	
+	//OrderListFrame으로부터 제품이름배열, 제품개수배열, 제품가격배열, 총가격을 받아옴
 	public SendMailFrame(String[] productNameList, int[] productCountList, int[] productPriceList, int totalPrice) {
 
 		this.productNameList = productNameList;
@@ -77,6 +78,11 @@ public class SendMailFrame extends JFrame{
 			}
 		});
 	}
+	/* 함수이름 : makeMainContent
+	 * 인자값 : 없음
+	 * 반환값 : 없음
+	 * 함수설명 : OrderListFrame으로부터 받은 값들로 메일의 내용에 들어갈 String을 구성해주는 함수
+	 */
 	public String makeMainContent() {
 		StringBuffer sb = new StringBuffer();
 		sb.append("------------------------------\n");

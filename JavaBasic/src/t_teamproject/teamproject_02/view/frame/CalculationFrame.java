@@ -225,7 +225,7 @@ public class CalculationFrame extends JFrame{
 	/* 함수이름 : makeListStringArray
 	 * 인자값 : shoppingCart(장바구니), productCount(재고 개수를 관리하는 배열)
 	 * 반환값 : JList 구성에 사용할 String 배열 (JList 내용)
-	 * 함수설명 : // 판매 할 물품들을 담은 배열인 shoppingCart와 jlist의 data를 비워줌
+	 * 함수설명 : JList 구성에 사용할 String 배열을 구성
 	 */
 	public String[] makeListStringArray(int [][] shoppingCart, int[][] productCount) {	
 		int arrayLength=0;
@@ -256,7 +256,7 @@ public class CalculationFrame extends JFrame{
 	/* 함수이름 : initializeList
 	 * 인자값 : 없음
 	 * 반환값 : 없음
-	 * 함수설명 : // 판매 할 물품들을 담은 배열인 shoppingCart와 jlist의 data를 비워줌
+	 * 함수설명 : 판매 할 물품들을 담은 배열인 shoppingCart와 jlist의 data를 비워줌
 	 */
 	public void initializeList() { //쇼핑카트와 jlist의 data를 비워줌
 		for(int i=0; i<shoppingCart[1].length; i++)
