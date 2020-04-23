@@ -198,8 +198,15 @@ public class CalculationFrame extends JFrame{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}	
-	public void initializeProductCountAndshoppingCart() { //처음 프레임 화면을 만들기전에만 실행
+	}
+	/* 함수이름 : initializeProductCountAndshoppingCart
+	 * 인자값 : 없음
+	 * 반환값 : 없음
+	 * 함수설명 :  모든 제품리스트를 가져와서 제품리스트의 크기만큼 productCount와 shoppingCart의 크기 할당 및 초기화
+	 * 			ㄴ 실행시기 : 처음 프레임 화면 구성시에 실행
+	 * 			ㄴ 제품의 개수만큼 컴포넌트 동적배치를 위해 사용
+	 */
+	public void initializeProductCountAndshoppingCart() {
 		try {
 			calProductList = pmimpl.getAllProduct();							//제품리스트도 가져옴
 			ArrayList<ArrayList> arrayList = pmimpl.getPidCountFromproduct();
@@ -215,18 +222,23 @@ public class CalculationFrame extends JFrame{
 			e.printStackTrace();
 		}
 	}
-	public String[] makeListStringArray(int [][] shoppingCart, int[][] productCount) {
+	/* 함수이름 : makeListStringArray
+	 * 인자값 : shoppingCart(장바구니), productCount(재고 개수를 관리하는 배열)
+	 * 반환값 : JList 구성에 사용할 String 배열 (JList 내용)
+	 * 함수설명 : // 판매 할 물품들을 담은 배열인 shoppingCart와 jlist의 data를 비워줌
+	 */
+	public String[] makeListStringArray(int [][] shoppingCart, int[][] productCount) {	
 		int arrayLength=0;
-		for(int i=0; i<shoppingCart[0].length; i++) //리스트에 들어갈 배열 길이를 정함
+		for(int i=0; i<shoppingCart[0].length; i++) // 장바구니에 갯수가 1개이상인 제품들의 개수를 세서 리스트에 들어갈 배열 길이를 정함(JLIst의 행갯수를 결정)
 		{
 			if(shoppingCart[1][i]!=0)
 				arrayLength++;
 		}
-		String array [] = new String[arrayLength];
+		String array [] = new String[arrayLength];	//	Jlist의 행갯수만큼 String 배열 할당(반환할 배열)
 		int arrayCnt=0;
 		for(int i=0; i<shoppingCart[0].length; i++)
 		{
-			if(shoppingCart[1][i]!=0)
+			if(shoppingCart[1][i]!=0)				//	장바구니에 갯수가 1개이상인 제품들에 대해서만 아래 내용 실행
 			{
 				Product p = null;
 				for(int j=0; j<calProductList.size(); j++)
@@ -235,11 +247,17 @@ public class CalculationFrame extends JFrame{
 						p=calProductList.get(j);
 				}
 				array[arrayCnt]=new String(p.getName() + "                                    " + shoppingCart[1][i] + "                                     " + p.getPrice()*shoppingCart[1][i]);
+				//	String 배열에 들어갈 String 구성
 				arrayCnt++;
 			}
 		}
 		return array;
 	}
+	/* 함수이름 : initializeList
+	 * 인자값 : 없음
+	 * 반환값 : 없음
+	 * 함수설명 : // 판매 할 물품들을 담은 배열인 shoppingCart와 jlist의 data를 비워줌
+	 */
 	public void initializeList() { //쇼핑카트와 jlist의 data를 비워줌
 		for(int i=0; i<shoppingCart[1].length; i++)
 		{
@@ -247,11 +265,16 @@ public class CalculationFrame extends JFrame{
 			productStringList = new String[0]; 				//	쇼핑리스트를 담은 스트링을 초기화
 			calculationList.setListData(productStringList);	//	 쇼핑리스트를 담는 jlist 재구성
 		}
-	}	
-	public void subProductCountFromShoppingCart(){ 	//주문시에 재고를 관리하는 배열에서 쇼핑카트의 개수만큼 -를 해줌
+	}
+	/* 함수이름 : subProductCountFromShoppingCart
+	 * 인자값 : 없음
+	 * 반환값 : 없음
+	 * 함수설명 : productCount(주문시에 재고를 관리하는 배열)에서 shoppingCart(판매 할 물품들을 담은 배열)만큼 -를 해줌
+	 */
+	public void subProductCountFromShoppingCart(){
 		for(int i=0; i<shoppingCart[1].length; i++)
 		{
-			productCount[1][i]-=shoppingCart[1][i]; //재고에서 쇼핑카트의 개수만큼 빼줌(제품의 품목과 각각의 품목에 대해 구매한 개수만큼)
+			productCount[1][i]-=shoppingCart[1][i]; 
 		}
 	}	
 	public Employee getEmployee() { 			//로그인 세션 관리에 사용
