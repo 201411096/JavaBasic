@@ -100,8 +100,7 @@ public class LoginFrame extends JFrame{
 		String pw = String.valueOf(tfPassword.getPassword());
 		try {
 			e = employeedao.selectByID(id);								//	입력한 id값에 해당하는 직원 정보를 가져옴
-		}catch(Exception e1){}	
-		
+		}catch(Exception e1){e1.printStackTrace();}	
 		if(e.getId() == null || e.getPassword() == null) {				//  입력한 id값에 해당하는 직원 정보가 없다면 dialog창 실행
 			JOptionPane.showMessageDialog(null, "로그인 실패");
 		}else if(e.getId().equals(id) && e.getPassword().equals(pw)) {	//	입력한 id값에 해당하는 직원 정보가 존재하면서 직원정보의 비밀번호와 입력한 pw값이 동일하다면 현재 창을 종료하면서 다음 화면을 띄움(selectFrame)
