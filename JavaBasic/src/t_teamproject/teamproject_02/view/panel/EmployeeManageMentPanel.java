@@ -54,7 +54,6 @@ public class EmployeeManageMentPanel extends JPanel{
 	JTextField jtextFieldAge;
 	
 	ImageIcon imageIcon = new ImageIcon("src\\t_teamproject\\teamproject_02\\imgs\\employee\\default.jpg");
-//	ImageIcon imageIcon = new ImageIcon("src\\t_teamproject\\teamproject_02\\temp\\imgs\\employee\\abc123.jpg");
 	JLabel employeeImageLabel;
 	JButton imageUploadButton, registerEmployeeButton, updateEmployeeButton, deleteEmployeeButton;
 	public EmployeeManageMentPanel(ManagementFrame managementFrame) {
