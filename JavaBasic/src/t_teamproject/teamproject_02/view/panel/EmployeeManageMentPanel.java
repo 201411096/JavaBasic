@@ -54,7 +54,6 @@ public class EmployeeManageMentPanel extends JPanel{
 	JTextField jtextFieldAge;
 	
 	ImageIcon imageIcon = new ImageIcon("src\\t_teamproject\\teamproject_02\\imgs\\employee\\default.jpg");
-//	ImageIcon imageIcon = new ImageIcon("src\\t_teamproject\\teamproject_02\\temp\\imgs\\employee\\abc123.jpg");
 	JLabel employeeImageLabel;
 	JButton imageUploadButton, registerEmployeeButton, updateEmployeeButton, deleteEmployeeButton;
 	public EmployeeManageMentPanel(ManagementFrame managementFrame) {
@@ -146,7 +145,6 @@ public class EmployeeManageMentPanel extends JPanel{
 			right_panel_south.add(deleteEmployeeButton);
 			
 		right_panel.add(right_panel_north_wrapper, BorderLayout.NORTH);
-//		right_panel.add(right_panel_center, BorderLayout.CENTER);
 		right_panel.add(right_panel_south, BorderLayout.SOUTH);
 		
 		setLayout(null);
@@ -165,37 +163,37 @@ public class EmployeeManageMentPanel extends JPanel{
 	}	
 	public void eventProc() {
 		EventHandler eventHandler = new EventHandler();
-		imageUploadButton.addActionListener(eventHandler); // 이미지버튼 연결
-		jtextFieldSearch.addActionListener(eventHandler); // 검색 텍스트필드 연결
-		registerEmployeeButton.addActionListener(eventHandler); // 정복 등록 버튼 연결
-		updateEmployeeButton.addActionListener(eventHandler); // 정보 업데이트 버튼 연결
-		deleteEmployeeButton.addActionListener(eventHandler); // 직원정보 삭제 버튼 연결
+		imageUploadButton.addActionListener(eventHandler);	 	 // 이미지버튼 연결
+		jtextFieldSearch.addActionListener(eventHandler);  		 // 검색 텍스트필드 연결
+		registerEmployeeButton.addActionListener(eventHandler);	 // 정복 등록 버튼 연결
+		updateEmployeeButton.addActionListener(eventHandler);	 // 정보 업데이트 버튼 연결
+		deleteEmployeeButton.addActionListener(eventHandler);	 // 직원정보 삭제 버튼 연결
  		
 		employeeTable.addMouseListener(new MouseAdapter() {			
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int row = employeeTable.getSelectedRow();
-				String eid = (String)employeeTable.getValueAt(row, 0); // 첫번째 아이디값만 가져옴
+				String eid = (String)employeeTable.getValueAt(row, 0); // 첫번째 직원의 아이디값만 가져옴
 				Employee emp = new Employee();
 				try {
-					emp = employeeDaomodel.selectByID(eid);
+					emp = employeeDaomodel.selectByID(eid);			   // 클릭한 행의 직원 식별번호(직원아이디)에 해당하는 직원정보를 가져옴
 				}catch(Exception e1) {
 					e1.printStackTrace();
 				}
-				jtextFieldEmployeeId.setText(emp.getId());
+				jtextFieldEmployeeId.setText(emp.getId());							//db에서 가져온 직원정보를 옆에 정보창에 띄우는 코드 시작
 				jtextFieldEmployeeName.setText(emp.getName());
 				jtextFieldEmployeeTel.setText(emp.getTel());
 				jtextFieldHire_date.setText(emp.getHire_date().substring(0, 11));
 				jtextFieldSal.setText(Integer.toString(emp.getSal()));
 				jtextFieldAge.setText(Integer.toString(emp.getAge()));
-				jComboBoxEmployeePosition.setSelectedItem(emp.getPosition());
+				jComboBoxEmployeePosition.setSelectedItem(emp.getPosition());		//db에서 가져온 직원정보를 옆에 정보창에 띄우는 코드 끝
 				
 				imageIcon = new ImageIcon("src\\t_teamproject\\teamproject_02\\imgs\\employee\\" + emp.getId() + ".gif");
-				if(new File("src\\t_teamproject\\teamproject_02\\imgs\\employee\\" + emp.getId() + ".gif").exists()) {
+				if(new File("src\\t_teamproject\\teamproject_02\\imgs\\employee\\" + emp.getId() + ".gif").exists()) {		//프로젝트 안의 지정된 경로에 직원의 eid.gif파일이 있다면 그 파일을 seticon()
 					employeeImageLabel.setIcon(imageIcon);
 				}
 				else {
-					imageIcon = new ImageIcon("src\\t_teamproject\\teamproject_02\\imgs\\employee\\default.jpg");
+					imageIcon = new ImageIcon("src\\t_teamproject\\teamproject_02\\imgs\\employee\\default.jpg");			//프로젝트 안의 지정된 경로에 직원의 eid.gif파일이 없다면 기본 이미지파일을 seticon()
 					employeeImageLabel.setIcon(imageIcon);
 				}				
 			}
@@ -218,6 +216,14 @@ public class EmployeeManageMentPanel extends JPanel{
 			}
 		}		
 	}
+	/* 함수이름 : imageUpload
+	 * 인자값 : 없음
+	 * 반환값 : 없음
+	 * 함수설명 : 이미지 업로드 버튼이 눌렸을 경우 JFileChooser를 띄움
+	 * 			ㄴ JFileChooser로 선택한 이미지를 프로젝트의 지정된 경로에 저장
+	 * 			ㄴ 직원정보의 경우 직원 식별번호(직원아이디)와 같은 이름일 경우 프로그램 재실행시 해당 직원에 대한 정보에서 이미지를 볼 수 있음
+	 * 함수 실행 시기 : 이미지 업로드 버튼을 클릭할경우 함수 실행
+	 */
 	public void imageUpload() {
 		JFileChooser jfc = new JFileChooser();
 		int result = jfc.showSaveDialog(null);
@@ -230,7 +236,6 @@ public class EmployeeManageMentPanel extends JPanel{
 				in.readFully(bytes);
 				in.close();
 				String fileName = jfc.getSelectedFile().getName();//
-//				FileOutputStream out = new FileOutputStream("src\\t_teamproject\\teamproject_02\\imgs\\employee\\"+jfc.getSelectedFile().getName());
 				FileOutputStream out = new FileOutputStream("src\\t_teamproject\\teamproject_02\\imgs\\employee\\"+fileName);
 				JOptionPane.showMessageDialog(null, "이미지 업로드는 프로그램 재 실행 후 적용됩니다.");
 				
@@ -249,6 +254,12 @@ public class EmployeeManageMentPanel extends JPanel{
 			}
 		}
 	}
+	/* 함수이름 : searchEmployee
+	 * 인자값 : 없음
+	 * 반환값 : 없음
+	 * 함수설명 : 검색옵션(직원이름, 직원아이디), 검색에 사용할 단어를 가져와서 그에 해당하는 직원정보들을 가져옴
+	 * 			ㄴ 직원검색 테이블의 정보가 바뀌었음을 abstractTableModel을 통해서 알려줌
+	 */
 	public void searchEmployee() {
 		int searchOption = jcomboBoxSearchOption.getSelectedIndex();
 		String searchWord = jtextFieldSearch.getText();
@@ -262,6 +273,13 @@ public class EmployeeManageMentPanel extends JPanel{
 			e.printStackTrace();
 		}
 	}
+	/* 함수이름 : registerEmployee
+	 * 인자값 : 없음
+	 * 반환값 : 없음
+	 * 함수설명 : 직원정보관리 화면에서 직원을 등록함 (<->회원가입과의 차이점 : 직원정보관리창에서 직원을 등록할 경우 아이디와 비밀번호가 동일하게 생성이 됨)
+	 * 함수추가설명 : loginFrame(로그인 화면에서부터 전달받아왔던 로그인한 직원의 직급이 ADMIN일 경우에만 등록이 가능
+	 * 			ㄴ DB 부분에서의 예외문제 발생시 오류 발생 처리(return값으로 0이 아닌 값을 받았을 경우)
+	 */
 	public void registerEmployee() {
 		if(managementFrame.getEmployee().getPosition().equals("ADMIN")) {
 			Employee vo = new Employee();
@@ -290,6 +308,13 @@ public class EmployeeManageMentPanel extends JPanel{
 			JOptionPane.showMessageDialog(null, "직원 정보 등록은 관리자만 할 수 있습니다.");
 		}
 	}
+	/* 함수이름 : updateEmployee
+	 * 인자값 : 없음
+	 * 반환값 : 없음
+	 * 함수설명 : 직원정보관리 화면에서 직원을 수정함
+	 * 함수추가설명 : loginFrame(로그인 화면에서부터 전달받아왔던 로그인한 직원의 직급이 ADMIN일 경우에만 등록이 가능
+	 * 	  			ㄴ 하나도 수정된 사항이 없을 경우 messageDialog 팝업(db부분의 함수의 return 값이 0일경우)
+	 */
 	public void updateEmployee() {
 		if(managementFrame.getEmployee().getPosition().equals("ADMIN")) {
 			Employee vo = new Employee();
@@ -315,6 +340,13 @@ public class EmployeeManageMentPanel extends JPanel{
 			JOptionPane.showMessageDialog(null, "직원 정보 수정은 관리자만 할 수 있습니다.");
 		}
 	}
+	/* 함수이름 : deleteEmployee
+	 * 인자값 : 없음
+	 * 반환값 : 없음
+	 * 함수설명 : 직원정보관리 화면에서 직원정보를 삭제함
+	 * 함수추가설명 : loginFrame(로그인 화면에서부터 전달받아왔던 로그인한 직원의 직급이 ADMIN일 경우에만 등록이 가능
+	 * 	  			ㄴ 하나도 수정된 사항이 없을 경우 messageDialog 팝업(db부분의 함수의 return 값이 0일경우)
+	 */
 	public void deleteEmployee() {
 		if(managementFrame.getEmployee().getPosition().equals("ADMIN")) {
 			String eid = jtextFieldEmployeeId.getText();

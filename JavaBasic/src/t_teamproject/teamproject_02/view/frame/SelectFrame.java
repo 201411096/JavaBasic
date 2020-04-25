@@ -14,7 +14,7 @@ import t_teamproject.teamproject_02.vo.Employee;
 public class SelectFrame extends JFrame{
 	JButton lb, rb;
 	Employee employee;
-	public SelectFrame(Employee employee) {
+	public SelectFrame(Employee employee) {	//Frame 생성시 LoginFrame(로그인 창)으로부터 로그인 정보(직원정보)를 받아옴
 		this.employee = employee;
 		display();
 		eventProc();
@@ -41,7 +41,7 @@ public class SelectFrame extends JFrame{
 				dispose();
 			}
 		});
-		rb.addActionListener(new ActionListener() {
+		rb.addActionListener(new ActionListener() { // 매장관리의 경우 로그인한 직원의 직급이 ADMIN이거나 MANAGER인 경우에만 접근이 가능
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(employee.getPosition().equals("ADMIN") || employee.getPosition().equals("MANAGER"))

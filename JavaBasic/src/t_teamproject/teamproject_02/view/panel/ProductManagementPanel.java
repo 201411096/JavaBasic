@@ -59,7 +59,7 @@ public class ProductManagementPanel extends JPanel{
 	ImageIcon imageIcon = new ImageIcon("src\\t_teamproject\\teamproject_02\\imgs\\food\\default.jpg");
 	JLabel producteImageLabel;
 	JButton imageUploadButton, registerProductButton, updateProductButton, deleteProductButton;
-	public ProductManagementPanel(ManagementFrame managementFrame) {
+	public ProductManagementPanel(ManagementFrame managementFrame) {	//상위 프레임의 다른 패널의 요소를 사용하기 위해 상위프레임의 객체 정보를 받아옴
 		this.managementFrame = managementFrame;
 		display();
 		eventProc();
@@ -158,12 +158,12 @@ public class ProductManagementPanel extends JPanel{
 	}
 	public void eventProc() {
 		EventHandler eventHandler = new EventHandler();
-		imageUploadButton.addActionListener(eventHandler);
-		jtextFieldSearch.addActionListener(eventHandler);
-		registerProductButton.addActionListener(eventHandler);
-		updateProductButton.addActionListener(eventHandler);
-		deleteProductButton.addActionListener(eventHandler);
-		productPurchaseButton.addActionListener(eventHandler);
+		imageUploadButton.addActionListener(eventHandler);		// 이미지버튼 연결
+		jtextFieldSearch.addActionListener(eventHandler);		// 검색 텍스트필드 연결
+		registerProductButton.addActionListener(eventHandler);	// 정복 등록 버튼 연결
+		updateProductButton.addActionListener(eventHandler);	// 정보 업데이트 버튼 연결
+		deleteProductButton.addActionListener(eventHandler);	// 직원정보 삭제 버튼 연결
+		productPurchaseButton.addActionListener(eventHandler);	// 제품 주문 버튼 연결
 		productTable.addMouseListener(new MouseAdapter() {			
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -171,22 +171,22 @@ public class ProductManagementPanel extends JPanel{
 				int pid = Integer.parseInt((String)productTable.getValueAt(row, 0)); //맨앞의 값만 가져옴
 				Product p = new Product();
 				try {
-					p=productDaoModel.selectByID(pid);
+					p=productDaoModel.selectByID(pid);								// 클릭한 행의 제품 식별번호(pid)에 해당하는 직원정보를 가져옴
 				}catch(Exception e1) {
 					e1.printStackTrace();
 				}
-				jtextFieldProductId.setText(Integer.toString(p.getId()));
+				jtextFieldProductId.setText(Integer.toString(p.getId()));			//db에서 가져온 제품정보를 옆에 정보창에 띄우는 코드 시작
 				jtextFieldProductName.setText(p.getName());
 				jtextFieldProductPrice.setText(Integer.toString(p.getPrice()));
 				jtextAreaProductDetail.setText(p.getDetail());
-				jcomboBoxProductGroupName.setSelectedItem(p.getGroupName());
+				jcomboBoxProductGroupName.setSelectedItem(p.getGroupName());		//db에서 가져온 제품정보를 옆에 정보창에 띄우는 코드 끝
 				
 				imageIcon = new ImageIcon("src\\t_teamproject\\teamproject_02\\imgs\\food\\" + p.getId() + ".gif");
-				if(new File("src\\t_teamproject\\teamproject_02\\imgs\\food\\" + p.getId() + ".gif").exists()) {
+				if(new File("src\\t_teamproject\\teamproject_02\\imgs\\food\\" + p.getId() + ".gif").exists()) {	//프로젝트 안의 지정된 경로에 제품의 pid.gif파일이 있다면 그 파일을 seticon()
 					producteImageLabel.setIcon(imageIcon);
 				}
 				else {
-					imageIcon = new ImageIcon("src\\t_teamproject\\teamproject_02\\imgs\\food\\default.jpg");
+					imageIcon = new ImageIcon("src\\t_teamproject\\teamproject_02\\imgs\\food\\default.jpg");		//프로젝트 안의 지정된 경로에 제품의 pid.gif파일이 없다면 기본 이미지파일을 seticon()
 					producteImageLabel.setIcon(imageIcon);
 				}
 			}
@@ -219,6 +219,14 @@ public class ProductManagementPanel extends JPanel{
 			}
 		}		
 	}
+	/* 함수이름 : imageUpload
+	 * 인자값 : 없음
+	 * 반환값 : 없음
+	 * 함수설명 : 이미지 업로드 버튼이 눌렸을 경우 JFileChooser를 띄움
+	 * 			ㄴ JFileChooser로 선택한 이미지를 프로젝트의 지정된 경로에 저장
+	 * 			ㄴ 제품정보의 경우 제품 식별번호(pid)와 같은 이름일 경우 프로그램 재실행시 해당 제품에 대한 정보에서 이미지를 볼 수 있음
+	 * 함수 실행 시기 : 이미지 업로드 버튼을 클릭할경우 함수 실행
+	 */
 	public void imageUpload() {
 		JFileChooser jfc = new JFileChooser();
 		int result = jfc.showSaveDialog(null);
@@ -240,6 +248,12 @@ public class ProductManagementPanel extends JPanel{
 			}
 		}
 	}
+	/* 함수이름 : searchProduct
+	 * 인자값 : 없음
+	 * 반환값 : 없음
+	 * 함수설명 : 검색옵션(제품이름, 제품내용), 검색에 사용할 단어를 가져와서 그에 해당하는 제품정보들을 가져옴
+	 * 			ㄴ 제품검색 테이블의 정보가 바뀌었음을 abstractTableModel을 통해서 알려줌
+	 */
 	public void searchProduct() {
 		int searchOption = jcomboBoxSearchOption.getSelectedIndex();
 		String searchWord = jtextFieldSearch.getText();
@@ -251,6 +265,13 @@ public class ProductManagementPanel extends JPanel{
 		} catch (Exception e) {
 		}
 	}
+	/* 함수이름 : registerProduct
+	 * 인자값 : 없음
+	 * 반환값 : 없음
+	 * 함수설명 : 제품정보관리 화면에서 제품을 등록함
+	 * 함수추가설명 : loginFrame(로그인 화면에서부터 전달받아왔던 로그인한 직원의 직급이 ADMIN일 경우에만 등록이 가능
+	 * 			ㄴ DB 부분에서의 예외문제 발생시 오류 발생 처리(return값으로 0이 아닌 값을 받았을 경우)
+	 */
 	public void registerProduct() {
 		if(managementFrame.getEmployee().getPosition().equals("ADMIN")) {
 			Product p = new Product();
@@ -275,6 +296,13 @@ public class ProductManagementPanel extends JPanel{
 		}
 
 	}
+	/* 함수이름 : updateProduct
+	 * 인자값 : 없음
+	 * 반환값 : 없음
+	 * 함수설명 : 제품정보관리 화면에서 직원을 수정함
+	 * 함수추가설명 : loginFrame(로그인 화면에서부터 전달받아왔던 로그인한 직원의 직급이 ADMIN일 경우에만 등록이 가능
+	 * 	  			ㄴ 하나도 수정된 사항이 없을 경우 messageDialog 팝업(db부분의 함수의 return 값이 0일경우)
+	 */
 	public void updateProduct() {
 		if(managementFrame.getEmployee().getPosition().equals("ADMIN")) {
 			Product p = new Product();
@@ -298,6 +326,13 @@ public class ProductManagementPanel extends JPanel{
 			JOptionPane.showMessageDialog(null, "제품 정보 수정은 관리자만 할 수 있습니다.");
 		}
 	}
+	/* 함수이름 : deleteProduct
+	 * 인자값 : 없음
+	 * 반환값 : 없음
+	 * 함수설명 : 제품정보관리 화면에서 제품정보를 삭제함
+	 * 함수추가설명 : loginFrame(로그인 화면에서부터 전달받아왔던 로그인한 직원의 직급이 ADMIN일 경우에만 등록이 가능
+	 * 	  			ㄴ 하나도 수정된 사항이 없을 경우 messageDialog 팝업(db부분의 함수의 return 값이 0일경우)
+	 */
 	public void deleteProduct() {
 		if(managementFrame.getEmployee().getPosition().equals("ADMIN")) {
 			int pid = Integer.parseInt(jtextFieldProductId.getText());
@@ -316,6 +351,11 @@ public class ProductManagementPanel extends JPanel{
 			JOptionPane.showMessageDialog(null, "제품 정보 삭제는 관리자만 할 수 있습니다.");
 		}
 	}
+	/* 함수이름 : openPurchaseFrame
+	 * 인자값 : 없음
+	 * 반환값 : 없음
+	 * 함수설명 : 제품 구매창을 띄움
+	 */
 	public void openPurchaseFrame() {
 		new ProductPurchaseFrame();
 

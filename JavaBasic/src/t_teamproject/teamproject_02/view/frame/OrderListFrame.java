@@ -13,7 +13,7 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-public class OrderListFrame extends JFrame{
+public class OrderListFrame extends JFrame{	//주문 버튼 확인 후 나오는 화면
 	JPanel rightPanel;
 	JList calculationList;
 	
@@ -25,8 +25,8 @@ public class OrderListFrame extends JFrame{
 	int productPriceList [];
 	int totalPrice=0;
 	
-	public OrderListFrame(String productStringList []) {
-		this.productStringList=productStringList;
+	public OrderListFrame(String productStringList []) { // 프레임 생성시 계산화면에서 JList의 내용이던 String 배열을 받아옴
+		this.productStringList=productStringList;		// 영수증에 출력할 제품의 이름과 제품당 갯수와 갯수*제품가격을 담은 배열을 가져옴
 
 		decodeProductStringList();
 		display();
@@ -63,12 +63,17 @@ public class OrderListFrame extends JFrame{
 	public void eventProc() {
 		sendOrderListButton.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e) {	// 영수증에 사용할 이름 배열, 개수 배열, 가격 배열, 총가격을 이메일 전송프레임으로 보내면서 현재프레임을 종료하면서 메일 전송 프레임 생성
 				new SendMailFrame(productNameList, productCountList, productPriceList, totalPrice);
 				dispose();
 			}
 		});
 	}
+	/* 함수이름 : decodeProductStringList
+	 * 인자값 : 없음
+	 * 반환값 : 없음
+	 * 함수설명 : 이전 프레임으로부터 받은 productStringList를 제품이름배열, 제품개수배열, 제품가격배열, 총가격으로 파싱하는 함수
+	 */
 	public void decodeProductStringList() {
 		productNameList = new String[productStringList.length];
 		productCountList = new int[productStringList.length];

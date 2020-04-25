@@ -92,7 +92,7 @@ public class CalculationFrame extends JFrame{
 			right_north_panel.add(new JLabel("수량", SwingConstants.CENTER));
 			right_north_panel.add(new JLabel("가격", SwingConstants.CENTER));
 			JPanel right_center_panel = new JPanel();
-			calculationList = new JList(makeListStringArray(shoppingCart, productCount));
+			calculationList = new JList(makeListStringArray(shoppingCart, productCount));	//shoppingcart와 productcount를 받아서 jlist의 내용으로 사용할 string 배열을 만들어서 삽ㅇ잉ㅂ
 			right_center_panel.add(calculationList);
 			JPanel right_south_panel = new JPanel();
 			right_south_panel.setLayout(new GridLayout(1,2));
@@ -109,41 +109,41 @@ public class CalculationFrame extends JFrame{
 		add(rightPanel);		
 		
 		setTitle("계산 화면");
-		setExtendedState(JFrame.MAXIMIZED_BOTH);
+		setExtendedState(JFrame.MAXIMIZED_BOTH);			//	창 최대화
 		setVisible(true);
 		setBackground(Color.white);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	public void eventProc() {
-		jmenuitem1.addActionListener(new ActionListener() { //메뉴바의 메뉴아이템 이벤트	-- 현재 창을 닫고 선택 화면으로 돌아감
+		jmenuitem1.addActionListener(new ActionListener() { //	메뉴바의 메뉴아이템 이벤트	-- 현재 창을 닫고 선택 화면으로 돌아감
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				new SelectFrame(employee);
 				dispose();
 			}
 		});
-		jmenuitem2.addActionListener(new ActionListener() { //메뉴바의 메뉴아이템 이벤트	-- 현재 창을 닫고 로그인 화면으로 돌아감
+		jmenuitem2.addActionListener(new ActionListener() { //	메뉴바의 메뉴아이템 이벤트	-- 현재 창을 닫고 로그인 화면으로 돌아감
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				new LoginFrame();
 				dispose();
 			}
 		});
-		MenuButtonHandler me = new MenuButtonHandler();
-		for(int i=0; i<menuPanelList.length ; i++) {
-			for(int j=0; j<menuPanelList[i].getMenuButtonList().length; j++) {
+		MenuButtonHandler me = new MenuButtonHandler();							//	메뉴버튼들에 붙일 이벤트 핸들러 생성
+		for(int i=0; i<menuPanelList.length ; i++) {							//	메뉴버튼을 붙이는 패널의 갯수만큼 반복
+			for(int j=0; j<menuPanelList[i].getMenuButtonList().length; j++) {	//	메뉴버튼의 패널에 붙어있는 메뉴버튼의 갯수만큼 해당 메뉴버튼패널에 이벤트 리스너 연결
 				menuPanelList[i].getMenuButtonList()[j].addActionListener(me);
 			}
 		}
-		cancelButton.addActionListener(new ActionListener() { //취소버튼 구현
+		cancelButton.addActionListener(new ActionListener() { 					//	취소버튼 클릭시 이벤트 추가
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int result = JOptionPane.showConfirmDialog(null, "전체 취소하시겠습니까?", "확인", JOptionPane.YES_NO_OPTION);
 				if(result == JOptionPane.YES_OPTION)
-					initializeList();
+					initializeList();											//	구매할 제품 개수를 담고 있는 배열을 초기화하고 jlist의 내용이 되는 배열과 jlist초기화 
 			}
 		});
-		orderButton.addActionListener(new ActionListener() { //주문버튼 구현
+		orderButton.addActionListener(new ActionListener() { 					//	주문버튼 구현
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int result = JOptionPane.showConfirmDialog(null, "주문하시겠습니까?", "확인", JOptionPane.YES_NO_OPTION);
@@ -151,11 +151,14 @@ public class CalculationFrame extends JFrame{
 				{
 					//계산 내용 관리
 					//화면의 재고와 db재고 동기화
-					new OrderListFrame(productStringList);
+					new OrderListFrame(productStringList);						//	주문 후 최종확인 창 시작
 
-					orderDaoImpl.insertOrder(productStringList, calProductList);
-					subProductCountFromShoppingCart();
-					initializeList(); //마지막에 쇼핑카트와 jlist내용을 초기화함 (주문버튼에서는 초기화하기 전에 재고 배열도 계산을 해줘야됨)
+					orderDaoImpl.insertOrder(productStringList, calProductList);//	제품 주문 완료(소비자에게)
+																				//	ㄴ1.	판매항목들을 묶어줄수있는 영수증 테이블에  영수증식별번호와 총가격 삽입 (한 주문에 포함된 여러 메뉴들을 묶어줌)
+																				//	ㄴ2.	주문한 메뉴의 개수만큼  각 판매항목당 판매내역을 삽입(제품 번호, 판매갯수, 판매날짜)
+																				//	ㄴ3.	식재료 관리 테이블에서 각 판매항목당 판매된 갯수만큼 먼저 입고된 식재료를 삭제(오래된 식재료부터 판매)
+					subProductCountFromShoppingCart();							//	화면상에서 관리하는 제품들에 대한 재고를 담는 배열을 판매한 제품만큼 빼줌
+					initializeList(); 											//마지막에 shoppingCart(구매할 제품 개수를 담고 있는 배열)와 jlist내용을 초기화함 (주문버튼에서는 초기화하기 전에 재고 배열도 계산을 해줘야됨)
 					
 				}
 			}
@@ -187,7 +190,7 @@ public class CalculationFrame extends JFrame{
 				JOptionPane.showMessageDialog(null, "재고가 부족합니다.");
 		}
 	}
-	public void connectDB() {
+	public void connectDB() {							//db연결
 		try {
 			pmimpl = new ProductManagementDaoImpl();
 			pimpl = new ProductDaoImpl();
@@ -195,8 +198,15 @@ public class CalculationFrame extends JFrame{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}	
-	public void initializeProductCountAndshoppingCart() { //처음 프레임 화면을 만들기전에만 실행
+	}
+	/* 함수이름 : initializeProductCountAndshoppingCart
+	 * 인자값 : 없음
+	 * 반환값 : 없음
+	 * 함수설명 :  모든 제품리스트를 가져와서 제품리스트의 크기만큼 productCount와 shoppingCart의 크기 할당 및 초기화
+	 * 			ㄴ 실행시기 : 처음 프레임 화면 구성시에 실행
+	 * 			ㄴ 제품의 개수만큼 컴포넌트 동적배치를 위해 사용
+	 */
+	public void initializeProductCountAndshoppingCart() {
 		try {
 			calProductList = pmimpl.getAllProduct();							//제품리스트도 가져옴
 			ArrayList<ArrayList> arrayList = pmimpl.getPidCountFromproduct();
@@ -212,18 +222,23 @@ public class CalculationFrame extends JFrame{
 			e.printStackTrace();
 		}
 	}
-	public String[] makeListStringArray(int [][] shoppingCart, int[][] productCount) {
+	/* 함수이름 : makeListStringArray
+	 * 인자값 : shoppingCart(장바구니), productCount(재고 개수를 관리하는 배열)
+	 * 반환값 : JList 구성에 사용할 String 배열 (JList 내용)
+	 * 함수설명 : JList 구성에 사용할 String 배열을 구성
+	 */
+	public String[] makeListStringArray(int [][] shoppingCart, int[][] productCount) {	
 		int arrayLength=0;
-		for(int i=0; i<shoppingCart[0].length; i++) //리스트에 들어갈 배열 길이를 정함
+		for(int i=0; i<shoppingCart[0].length; i++) // 장바구니에 갯수가 1개이상인 제품들의 개수를 세서 리스트에 들어갈 배열 길이를 정함(JLIst의 행갯수를 결정)
 		{
 			if(shoppingCart[1][i]!=0)
 				arrayLength++;
 		}
-		String array [] = new String[arrayLength];
+		String array [] = new String[arrayLength];	//	Jlist의 행갯수만큼 String 배열 할당(반환할 배열)
 		int arrayCnt=0;
 		for(int i=0; i<shoppingCart[0].length; i++)
 		{
-			if(shoppingCart[1][i]!=0)
+			if(shoppingCart[1][i]!=0)				//	장바구니에 갯수가 1개이상인 제품들에 대해서만 아래 내용 실행
 			{
 				Product p = null;
 				for(int j=0; j<calProductList.size(); j++)
@@ -232,26 +247,37 @@ public class CalculationFrame extends JFrame{
 						p=calProductList.get(j);
 				}
 				array[arrayCnt]=new String(p.getName() + "                                    " + shoppingCart[1][i] + "                                     " + p.getPrice()*shoppingCart[1][i]);
+				//	String 배열에 들어갈 String 구성
 				arrayCnt++;
 			}
 		}
 		return array;
 	}
+	/* 함수이름 : initializeList
+	 * 인자값 : 없음
+	 * 반환값 : 없음
+	 * 함수설명 : 판매 할 물품들을 담은 배열인 shoppingCart와 jlist의 data를 비워줌
+	 */
 	public void initializeList() { //쇼핑카트와 jlist의 data를 비워줌
 		for(int i=0; i<shoppingCart[1].length; i++)
 		{
-			shoppingCart[1][i]=0; //쇼핑카트를 0으로 전부 초기화
-			productStringList = new String[0]; //쇼핑리스트를 담은 스트링을 초기화
-			calculationList.setListData(productStringList);
+			shoppingCart[1][i]=0; 							//	쇼핑카트를 0으로 전부 초기화
+			productStringList = new String[0]; 				//	쇼핑리스트를 담은 스트링을 초기화
+			calculationList.setListData(productStringList);	//	 쇼핑리스트를 담는 jlist 재구성
 		}
-	}	
-	public void subProductCountFromShoppingCart(){ //주문시에 재고를 관리하는 배열에서 쇼핑카트의 개수만큼 -를 해줌
+	}
+	/* 함수이름 : subProductCountFromShoppingCart
+	 * 인자값 : 없음
+	 * 반환값 : 없음
+	 * 함수설명 : productCount(주문시에 재고를 관리하는 배열)에서 shoppingCart(판매 할 물품들을 담은 배열)만큼 -를 해줌
+	 */
+	public void subProductCountFromShoppingCart(){
 		for(int i=0; i<shoppingCart[1].length; i++)
 		{
-			productCount[1][i]-=shoppingCart[1][i]; //재고에서 쇼핑카트의 개수만큼 빼줌
+			productCount[1][i]-=shoppingCart[1][i]; 
 		}
 	}	
-	public Employee getEmployee() { //로그인 세션 관리에 사용
+	public Employee getEmployee() { 			//로그인 세션 관리에 사용
 		return employee;
 	}
 	public void setEmployee(Employee employee) { //로그인 세션 관리에 사용
