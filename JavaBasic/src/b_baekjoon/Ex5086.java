@@ -51,8 +51,7 @@ public class Ex5086{
 			StringTokenizer st = new StringTokenizer(br.readLine());
 			compNum1 = Integer.parseInt(st.nextToken());
 			compNum2 = Integer.parseInt(st.nextToken());
-			printRelationShip(compNum1, compNum2);
-			
+			printRelationShip(compNum1, compNum2);			
 		}
 	}
 }
