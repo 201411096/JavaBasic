@@ -23,7 +23,7 @@ select * from video_shop_customer;
 
 /***** CREATE TABLE VIDEO_SHOP_VIDEO START *****/
 CREATE TABLE video_shop_video(
-    vid int(10),
+    vid int(10)  AUTO_INCREMENT,
     vgenre varchar(20),
     vname varchar(20) not null,
     vdirector varchar(20),
@@ -35,7 +35,7 @@ CREATE TABLE video_shop_video(
 SELECT * FROM VIDEO_SHOP_VIDEO WHERE VNAME LIKE '%���%';
 /***** CREATE TABLE VIDEO_SHOP_MANAGEMENT START *****/
 CREATE TABLE video_shop_video_management(
-    vmid int(10),
+    vmid int(10)  AUTO_INCREMENT,
     vid int(10),
     CONSTRAINT video_shop_video_m_vmid primary key(vmid),
     CONSTRAINT video_shop_video_m_vid foreign key(vid) references video_shop_video(vid)
@@ -44,7 +44,7 @@ CREATE TABLE video_shop_video_management(
 /***** CREATE TABLE VIDEO_SHOP_MANAGEMENT END *****/
 /***** CREATE TABLE VIDEO_SHOP_RENTAL START *****/
 CREATE TABLE video_shop_rental(
-    vrid int(10),
+    vrid int(10)  AUTO_INCREMENT,
     rentaldate date,
     returndate date,
     vmid int(10),

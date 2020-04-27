@@ -22,8 +22,8 @@ public class VideoModel implements VideoDao{
 	/*				mysql버전					*/
 	String url = "jdbc:mysql://192.168.0.18:3306/videoshop?serverTimezone=UTC";
 //	String url = "jdbc:mysql://localhost:3306/videoshop?serverTimezone=UTC";
-	String user = "abcd";
-	String pass = "abcd";
+	String user = "root";
+	String pass = "root";
 	
 	
 	public VideoModel() throws Exception{
