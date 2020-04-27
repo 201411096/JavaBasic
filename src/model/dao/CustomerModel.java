@@ -22,7 +22,8 @@ public class CustomerModel implements CustomerDao{
 //	}
 /*				mysql버전					*/
 //	String url = "jdbc:mysql://localhost:3306/videoshop?serverTimezone=UTC"; localhost //localhost
-	String url = "jdbc:mysql://192.168.0.18:3306/videoshop?serverTimezone=UTC";
+//	String url = "jdbc:mysql://192.168.0.18:3306/videoshop?serverTimezone=UTC"; //학원
+	String url = "jdbc:mysql://192.168.56.1:3306/videoshop?serverTimezone=UTC"; //집
 
 	String user = "root";
 	String pass = "root";
