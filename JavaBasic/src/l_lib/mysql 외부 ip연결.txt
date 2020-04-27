@@ -44,3 +44,5 @@ Class.forName("com.mysql.cj.jdbc.Driver");
 default-time-zone='+9:00'
 
 4_3. mysql 서비스 재시작
+
+4_4. 위에 방식 사용시 global.time_zone과 session.time_zone은 설정이 되는데 system_time_zone이 설정이 안됨
