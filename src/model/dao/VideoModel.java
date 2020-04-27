@@ -11,15 +11,26 @@ import model.VideoDao;
 import model.vo.Video;
 
 public class VideoModel implements VideoDao{
-	String url = "jdbc:oracle:thin:@192.168.0.17:1521:orcl";
-	String user = "tp2";
-	String pass = "tp2";
+//	String url = "jdbc:oracle:thin:@192.168.0.17:1521:orcl";
+//	String user = "tp2";
+//	String pass = "tp2";
+//	
+//	public VideoModel() throws Exception{
+//		// 1. 드라이버로딩
+//		Class.forName("oracle.jdbc.driver.OracleDriver");
+//	}
+	/*				mysql버전					*/
+	String url = "jdbc:mysql://192.168.0.18:3306/videoshop?serverTimezone=UTC";
+//	String url = "jdbc:mysql://localhost:3306/videoshop?serverTimezone=UTC";
+	String user = "abcd";
+	String pass = "abcd";
+	
 	
 	public VideoModel() throws Exception{
-		// 1. 드라이버로딩
-		Class.forName("oracle.jdbc.driver.OracleDriver");
-	}
-	
+	 	// 1. 드라이버로딩
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		
+	}	
 	
 	public void insertVideo(Video vo, int count) throws Exception{
 		// 2. Connection 연결객체 얻어오기

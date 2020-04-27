@@ -10,17 +10,28 @@ import model.RentDao;
 
 
 public class RentModel implements RentDao{
-	String url = "jdbc:oracle:thin:@192.168.0.17:1521:orcl";
-	String user = "tp2";
-	String pass = "tp2";
-
-	Connection con;
+//	String url = "jdbc:oracle:thin:@192.168.0.17:1521:orcl";
+//	String user = "tp2";
+//	String pass = "tp2";
+//
+//	Connection con;
+//	
+//	public RentModel() throws Exception{
+//		// 1. 드라이버로딩
+//		Class.forName("oracle.jdbc.driver.OracleDriver");
+//	}
+	/*				mysql버전					*/
+	String url = "jdbc:mysql://192.168.0.18:3306/videoshop?serverTimezone=UTC";
+//	String url = "jdbc:mysql://localhost:3306/videoshop?serverTimezone=UTC";
+	String user = "abcd";
+	String pass = "abcd";
+	
 	
 	public RentModel() throws Exception{
-		// 1. 드라이버로딩
-		Class.forName("oracle.jdbc.driver.OracleDriver");
+	 	// 1. 드라이버로딩
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		
 	}
-
 	@Override
 	public String selectByTel(String tel) throws Exception { // throws를 해줘야 view에서 예외확인이 가능
 		String name=null;

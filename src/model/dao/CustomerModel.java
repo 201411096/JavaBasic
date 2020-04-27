@@ -9,14 +9,27 @@ import model.CustomerDao;
 import model.vo.Customer;
 
 public class CustomerModel implements CustomerDao{
-	String url = "jdbc:oracle:thin:@192.168.0.17:1521:orcl";
-	String user = "tp2";
-	String pass = "tp2";
+/*				오라클버전					*/
+//	String url = "jdbc:oracle:thin:@192.168.0.17:1521:orcl";
+//	String user = "tp2";
+//	String pass = "tp2";
+//	
+//	
+//	public CustomerModel() throws Exception{
+//	 	// 1. 드라이버로딩
+//		Class.forName("oracle.jdbc.driver.OracleDriver");
+//		
+//	}
+/*				mysql버전					*/
+	String url = "jdbc:mysql://192.168.0.18:3306/videoshop?serverTimezone=UTC";
+//	String url = "jdbc:mysql://localhost:3306/videoshop?serverTimezone=UTC";
+	String user = "abcd";
+	String pass = "abcd";
 	
 	
 	public CustomerModel() throws Exception{
 	 	// 1. 드라이버로딩
-		Class.forName("oracle.jdbc.driver.OracleDriver");
+		Class.forName("com.mysql.cj.jdbc.Driver");
 		
 	}
 	
@@ -24,7 +37,7 @@ public class CustomerModel implements CustomerDao{
 		// 2. Connection 연결객체 얻어오기
 		Connection con = DriverManager.getConnection(url, user, pass);
 		// 3. sql 문장 만들기
-		String sql = "INSERT INTO video_shop_customer(id, name, tel_1, tel_2, address, email) VALUES(video_shop_customer_id_seq.nextval, ?, ?, ?, ?, ?) ";
+		String sql = "INSERT INTO video_shop_customer(name, tel_1, tel_2, address, email) VALUES(?, ?, ?, ?, ?) ";
 		// 4. sql 전송객체 (PreparedStatement)
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, vo.getCustName());
