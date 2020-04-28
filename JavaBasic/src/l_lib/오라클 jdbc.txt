@@ -8,3 +8,9 @@ C:\Program Files\Java\jre1.8.0_241\lib\ext
 
 jar - 자바 파일을 묶은것
 tar - ..?
+
+3. ip 외부 접속
+- listener.ora : 클라이언트가 오라클 서버에 접속하기 위해서 서버 컴퓨터에 하는 설정
+- tnsnames.ora : 클라이언트에서 오라클 서버로 접속할 때 필요한 프로토콜 및 포트번호, 서버주소, 인스턴스등을 설정해주는 파일
+
+- 위에 두 파일에서 localhost부분과  port부분 service name부분 수정
