@@ -1,0 +1,27 @@
+Stack
+- import java.util.*;
+- Stack<T> stack = new Stack<>();
+- push() : 스택에 삽입
+- pop() : 스택에서 가장 위에 있는 값 반환하고 없앰
+- peek() : 스택에서 가장 위에 있는 값 반환
+- isEmpty() : 스택이 비어있는지를 반환
+- size() : 스택에 있는 요소의 크기 반환
+
+Queue
+- import java.util.*;
+- Queue<T> queue = new LinkedList<>();
+- add() : 큐에 삽입
+- peek() : 가장 먼저 큐에 들어간 요소 반환
+- remove() : 가장 먼저 큐에 들어간 요소 삭제하면서 반환
+- isEmpty() : 큐가 비어있는지 반환
+- size() : 큐에 있는 요소의 크기 반환
+
+Deque
+- import java.util.*;
+- Deque<T> deque = new LinkedList<>();
+- addFirst() : 앞에 요소 삽입
+- addLast() : 뒤에 요소 삽입
+- peekFirst() : 앞 요소 반환
+- peekLast() : 뒤 요소 반환
+- pollFirst() : 앞 요소 없애면서 반환
+- pollLast() : 뒤 요소 없애면서 반환
