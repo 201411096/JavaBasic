@@ -4,6 +4,9 @@ Stack
 - push() : 스택에 삽입
 - pop() : 스택에서 가장 위에 있는 값 반환하고 없앰
 - peek() : 스택에서 가장 위에 있는 값 반환
+	ㄴ peek
+		ㄴ (재빨리) 훔쳐보다
+		ㄴ 살짝[아주 조금] 보이다
 - isEmpty() : 스택이 비어있는지를 반환
 - size() : 스택에 있는 요소의 크기 반환
 
@@ -15,6 +18,11 @@ Queue
 - remove() : 가장 먼저 큐에 들어간 요소 삭제하면서 반환
 - isEmpty() : 큐가 비어있는지 반환
 - size() : 큐에 있는 요소의 크기 반환
+- 인터페이스 이기 떄문에 LinkedList를 사용해서 구현
+	ㄴ Queue<Integer> q = new ArrayDeque<Integer>();
+	ㄴ Queue<Integer> q = new LinkedList<Integer>();
+		ㄴ Ctrl + T를 누르면 해당 인터페이스를 구현한 클래스들을 보여줌
+		
 
 Deque
 - import java.util.*;
@@ -25,3 +33,13 @@ Deque
 - peekLast() : 뒤 요소 반환
 - pollFirst() : 앞 요소 없애면서 반환
 - pollLast() : 뒤 요소 없애면서 반환
+
+BufferedReader
+	ㄴ BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	ㄴ readLine()
+	ㄴ close()
+BufferedWriter
+	ㄴ BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+	ㄴ write()
+	ㄴ flush()
+	ㄴ close()
