@@ -25,5 +25,6 @@ Ex11068 : 회문(회문인 수)
 Ex11650 : 정렬(좌표 정렬하기, Arrays.sort(), Comparable compareTo 메소드 재정의
 Ex11651 : 정렬(좌표 정렬하기, Arrays.sort(), Comparable compareTo 메소드 재정의
 Ex14561 : 회문(회문)
+Ex15649 : 백트래킹(N과M_1)
 Ex15927 : 회문(회문은 회문아니야)
 
