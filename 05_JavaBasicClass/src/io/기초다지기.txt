@@ -1,0 +1,75 @@
+[[ 기초다지기 ]]
+
+ 
+
+1. DataInputStream 객체를 생성하는 방법으로 맞은 것은?  5
+
+           (1)new DataInputStream(“data.txt”);
+
+           (2)new DataInputStream( new File(“data.txt”));
+
+           (3)new DataInputStream( new FileReader(“data.txt”) );
+
+           (4)new DataInputStream( new InputStream(“data.txt”) ); //inputStream은 추상클래스
+
+           (5)new DataInputStream( new FileInputStream(“data.txt”) );
+
+ 
+
+2. 다음 중 맞는 코드는? 2,4
+
+           (1)OutputStream out = new FileInputStream(“data.txt”)); // 부모 자식 관계가 아님
+
+           (2)OutputStream out = new DataOutputStream( new FileOutputStream(“data.txt”) ) );
+
+           (3)OutputStream out = new FileOutputStream(“data.txt”, “rw”); .. ?
+
+           (4)OutputStream out = new ObjectOutputStream( new FileOutputStream( new File(“data.txt”)) ) );
+
+ 
+
+3. 현재 작업 경로가c:\work 인 경우 다음 프로그램을 실행한 출력 결과는? 3
+  
+ 
+import  java.io.*;
+
+class Test{
+
+   public static void main( String a[] args ) throws Exception {
+
+      File f  =  new File (“data.txt” );
+
+      System.out.println( f.getAbsolutePath() );
+
+   }
+
+}
+ 
+
+           (1)data.txt                                (2)work\data.txt
+
+           (3)c:\work\data.txt                    (4)c:\work
+
+ 
+
+4. RandomAccessFile 객체를 생성할 때 인자로 적합한것은?  2,4       //randomaccessfile은 입출력이 전부 가능한..?
+
+           (1)“w”              (2) “r”               (3) “wr”             (4) “rw”             (5)“rwx”
+
+ 
+
+5. RandomAccessFile 객체를 생성할 때 적당한 것은?  1
+
+           (1)new RandomAccessFile(“data.txt”, “r”);
+
+           (2)new RandomAccessFile(“r” , “data.txt”);
+
+           (3)new RandomAccessFile(“data.txt”, “w”); // 작성 권한 자체가 읽는 권한을 포함함
+
+           (4)new RandomAccessFile(“rw”, “data.txt”);
+
+ 
+
+6. 자바에서 파일이나 디렉토리를 관리할 수 있는 클래스는?  1 // directory 클래스는 존재하지 않음
+
+           (1)File              (2) Directory       (3) FileWriter      (4) FileChooser
