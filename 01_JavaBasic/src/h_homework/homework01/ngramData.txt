@@ -1,0 +1,14 @@
+3
+ngram gram, gr.
+gram. ram,amm am, mm a mm
+ngr ra n.g.r.a.m
+4
+a a. a,a.
+bc bc
+abcd abcd abcd
+abc bc.abc
+3
+by by,bye  bye
+bbbb,by.by bye
+good bye 
+0
